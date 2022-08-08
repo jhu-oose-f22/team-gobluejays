@@ -1,0 +1,6 @@
+framework module Pods_GoBlueJays_GoBlueJaysUITests {
+  umbrella header "Pods-GoBlueJays-GoBlueJaysUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
