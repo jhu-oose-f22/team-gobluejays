@@ -14,9 +14,7 @@ class HomeVC: UIViewController {
         title = "Home"
         navigationController?.additionalSafeAreaInsets.top = -5
     }
-    @IBAction func Brody(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://www.google.com/?client=safari")! as URL, options: [:],completionHandler: nil)
-    }
+
     
 }
 

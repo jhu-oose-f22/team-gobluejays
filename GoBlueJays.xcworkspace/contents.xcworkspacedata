@@ -5,6 +5,39 @@
       location = "group:GoBlueJays.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:">
+   </FileRef>
+   <FileRef
+      location = "group:GoBlueJays">
+   </FileRef>
+   <FileRef
+      location = "group:GoBlueJaysTests">
+   </FileRef>
+   <FileRef
+      location = "group:GoBlueJaysUITests">
+   </FileRef>
+   <FileRef
+      location = "group:Pods">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests.debug.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays.debug.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays.release.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.debug.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.release.xcconfig">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

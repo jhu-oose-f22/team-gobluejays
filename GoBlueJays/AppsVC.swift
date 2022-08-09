@@ -12,7 +12,29 @@ class AppsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    @IBAction func Transloc(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transloc/id1280444930")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func MobileOrder(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transact-mobile-ordering/id1494719529")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func CampusGroups(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://jhu.campusgroups.com/login_only?redirect=https%3a%2f%2fjhu.campusgroups.com%2fgroups")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func SIS(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func Semesterly(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func MyChart(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://mychart.hopkinsmedicine.org/MyChart/Authentication/Login?")! as URL, options: [:],completionHandler: nil)
+    }
     
 }
 

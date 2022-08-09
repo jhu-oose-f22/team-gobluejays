@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C7076A728A1E5A400312B30 /* Pods_GoBlueJays.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6E906198D9E4B355782AEE /* Pods_GoBlueJays.framework */; };
+		2C7076A828A1E5A400312B30 /* Pods_GoBlueJays.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6E906198D9E4B355782AEE /* Pods_GoBlueJays.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9277528A1D59000C45293 /* ResultsViewController.swift */; };
 		2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */; };
 		2CE790A0289F72BE00C3BB2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */; };
 		2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790A1289F72BE00C3BB2B /* ViewController.swift */; };
@@ -21,7 +24,6 @@
 		2CE790D2289F7EE100C3BB2B /* AppsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790D1289F7EE100C3BB2B /* AppsVC.swift */; };
 		2CE790D4289F7EED00C3BB2B /* ScheduleVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790D3289F7EED00C3BB2B /* ScheduleVS.swift */; };
 		2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790D5289F7F1A00C3BB2B /* MapVC.swift */; };
-		74A09608809F6C3E38E5B3D9 /* Pods_GoBlueJays.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6E906198D9E4B355782AEE /* Pods_GoBlueJays.framework */; };
 		DAAEF4742A91FF49FCB50E85 /* Pods_GoBlueJays_GoBlueJaysUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD9B133EB236C8AF75A957 /* Pods_GoBlueJays_GoBlueJaysUITests.framework */; };
 		E71B796FE7F6CD562851675E /* Pods_GoBlueJaysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6040C89B597304C671DA577C /* Pods_GoBlueJaysTests.framework */; };
 /* End PBXBuildFile section */
@@ -43,10 +45,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2C7076A928A1E5A400312B30 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2C7076A828A1E5A400312B30 /* Pods_GoBlueJays.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0245C633F07190E30FC9778D /* Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig"; path = "Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig"; sourceTree = "<group>"; };
 		07D32B27721C48AE6422CF64 /* Pods-GoBlueJaysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJaysTests.release.xcconfig"; path = "Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.release.xcconfig"; sourceTree = "<group>"; };
 		14533C29658D54E14AFC14FB /* Pods-GoBlueJaysTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJaysTests.debug.xcconfig"; path = "Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2CD9277528A1D59000C45293 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoBlueJays.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74A09608809F6C3E38E5B3D9 /* Pods_GoBlueJays.framework in Frameworks */,
+				2C7076A728A1E5A400312B30 /* Pods_GoBlueJays.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +169,7 @@
 				2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */,
 				2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */,
 				2CE790CD289F7D8E00C3BB2B /* CustomTabBarController.swift */,
+				2CD9277528A1D59000C45293 /* ResultsViewController.swift */,
 				2CE790A1289F72BE00C3BB2B /* ViewController.swift */,
 				2CE790D1289F7EE100C3BB2B /* AppsVC.swift */,
 				2CE790D3289F7EED00C3BB2B /* ScheduleVS.swift */,
@@ -194,6 +212,8 @@
 				2CE79097289F72BE00C3BB2B /* Frameworks */,
 				2CE79098289F72BE00C3BB2B /* Resources */,
 				DEDAC6A716FF9094E83BD10E /* [CP] Embed Pods Frameworks */,
+				99AA0ADD18D42BB8410AF7A4 /* [CP] Copy Pods Resources */,
+				2C7076A928A1E5A400312B30 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,6 +252,7 @@
 				2CE790B7289F72BF00C3BB2B /* Frameworks */,
 				2CE790B8289F72BF00C3BB2B /* Resources */,
 				49ADFE659909545A0B2F3B12 /* [CP] Embed Pods Frameworks */,
+				84508DCEA5987E56743BA833 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -375,6 +396,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		84508DCEA5987E56743BA833 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99AA0ADD18D42BB8410AF7A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DEDAC6A716FF9094E83BD10E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,6 +481,7 @@
 				2CE790D0289F7EBA00C3BB2B /* HomeVC.swift in Sources */,
 				2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */,
 				2CE790CE289F7D8E00C3BB2B /* CustomTabBarController.swift in Sources */,
+				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */,
 				2CE790D2289F7EE100C3BB2B /* AppsVC.swift in Sources */,
 				2CE790A0289F72BE00C3BB2B /* SceneDelegate.swift in Sources */,
@@ -488,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -534,7 +591,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -548,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -588,9 +646,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -607,6 +666,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9T2AWPNWG;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoBlueJays/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -637,6 +697,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9T2AWPNWG;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoBlueJays/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
