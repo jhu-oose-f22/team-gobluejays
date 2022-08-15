@@ -14,12 +14,12 @@ class AcademicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var tableView: UITableView!
     var tabs: [Detail] = [
         Detail(title: "Overview", link: "https://www.jhu.edu", icon: "overview"),
-        Detail(title: "Undergraduate Education", link: "https://www.jhu.edu/academics/undergraduate-studies/", icon: "overview"),
-        Detail(title: "Graduate Education", link: "https://www.jhu.edu/academics/graduate-studies/", icon: "overview"),
-        Detail(title: "Schools & Divisions", link: "https://www.jhu.edu/schools/", icon: "overview"),
-        Detail(title: "Programs & Majors", link: "https://e-catalogue.jhu.edu/programs/", icon: "overview"),
-        Detail(title: "Advanced Academic Programs", link: "https://advanced.jhu.edu", icon: "overview"),
-        Detail(title: "Study Abroad", link: "https://studyabroad.jhu.edu", icon: "overview"),
+        Detail(title: "Undergraduate Education", link: "https://www.jhu.edu/academics/undergraduate-studies/", icon: "undergrad"),
+        Detail(title: "Graduate Education", link: "https://www.jhu.edu/academics/graduate-studies/", icon: "grad"),
+        Detail(title: "Schools & Divisions", link: "https://www.jhu.edu/schools/", icon: "search"),
+        Detail(title: "Programs & Majors", link: "https://e-catalogue.jhu.edu/programs/", icon: "study"),
+        Detail(title: "Advanced Academic Programs", link: "https://advanced.jhu.edu", icon: "advanced"),
+        Detail(title: "Study Abroad", link: "https://studyabroad.jhu.edu", icon: "globe"),
     ]
     
     override func viewDidLoad() {
