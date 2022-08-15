@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		22B0E9D3A048733657E9DEE3 /* Pods_GoBlueJays.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49E0D70D0DD8F774F5A8C57 /* Pods_GoBlueJays.framework */; };
+		2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */; };
+		2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79C8F28A9DA1C00744FF8 /* Detail.swift */; };
+		2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79C9628A9E43900744FF8 /* IconCell.swift */; };
+		2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB79C9728A9E43900744FF8 /* IconCell.xib */; };
 		2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */; };
 		2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9277528A1D59000C45293 /* ResultsViewController.swift */; };
 		2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */; };
@@ -48,6 +52,10 @@
 /* Begin PBXFileReference section */
 		0B914C41BF9AD0A78A5B324E /* Pods_GoBlueJays_GoBlueJaysUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoBlueJays_GoBlueJaysUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F979D89DA04F7F3A600A58 /* Pods-GoBlueJays.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJays.debug.xcconfig"; path = "Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays.debug.xcconfig"; sourceTree = "<group>"; };
+		2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicsVC.swift; sourceTree = "<group>"; };
+		2CB79C8F28A9DA1C00744FF8 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		2CB79C9628A9E43900744FF8 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
+		2CB79C9728A9E43900744FF8 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		2CD9277528A1D59000C45293 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoBlueJays.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +126,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		2CB79C8E28A9D9FA00744FF8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2CB79C8F28A9DA1C00744FF8 /* Detail.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2CB79C9128A9E2F800744FF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CE790A3289F72BE00C3BB2B /* Main.storyboard */,
+				2CB79C9628A9E43900744FF8 /* IconCell.swift */,
+				2CB79C9728A9E43900744FF8 /* IconCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2CB79C9328A9E38500744FF8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2CE790D5289F7F1A00C3BB2B /* MapVC.swift */,
+				2CD9277528A1D59000C45293 /* ResultsViewController.swift */,
+				2CE790CD289F7D8E00C3BB2B /* CustomTabBarController.swift */,
+				2CE790D1289F7EE100C3BB2B /* AppsVC.swift */,
+				2CE790CF289F7EBA00C3BB2B /* HomeVC.swift */,
+				2CE790A1289F72BE00C3BB2B /* ViewController.swift */,
+				2CE790D3289F7EED00C3BB2B /* ScheduleVS.swift */,
+				2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		2CE79091289F72BE00C3BB2B = {
 			isa = PBXGroup;
 			children = (
@@ -145,15 +186,10 @@
 			children = (
 				2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */,
 				2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */,
-				2CE790CD289F7D8E00C3BB2B /* CustomTabBarController.swift */,
-				2CD9277528A1D59000C45293 /* ResultsViewController.swift */,
-				2CE790A1289F72BE00C3BB2B /* ViewController.swift */,
-				2CE790D1289F7EE100C3BB2B /* AppsVC.swift */,
+				2CB79C9128A9E2F800744FF8 /* Views */,
 				2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */,
-				2CE790D3289F7EED00C3BB2B /* ScheduleVS.swift */,
-				2CE790D5289F7F1A00C3BB2B /* MapVC.swift */,
-				2CE790CF289F7EBA00C3BB2B /* HomeVC.swift */,
-				2CE790A3289F72BE00C3BB2B /* Main.storyboard */,
+				2CB79C9328A9E38500744FF8 /* Controller */,
+				2CB79C8E28A9D9FA00744FF8 /* Models */,
 				2CE790A6289F72BF00C3BB2B /* Assets.xcassets */,
 				2CE790A8289F72BF00C3BB2B /* LaunchScreen.storyboard */,
 				2CE790AB289F72BF00C3BB2B /* Info.plist */,
@@ -301,6 +337,7 @@
 			files = (
 				2CE790AA289F72BF00C3BB2B /* LaunchScreen.storyboard in Resources */,
 				2CE790A7289F72BF00C3BB2B /* Assets.xcassets in Resources */,
+				2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */,
 				2CE790A5289F72BE00C3BB2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,10 +502,13 @@
 			files = (
 				2CE790D4289F7EED00C3BB2B /* ScheduleVS.swift in Sources */,
 				2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */,
+				2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */,
 				2CE790D0289F7EBA00C3BB2B /* HomeVC.swift in Sources */,
 				2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */,
 				2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */,
 				2CE790CE289F7D8E00C3BB2B /* CustomTabBarController.swift in Sources */,
+				2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */,
+				2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */,
 				2CE790D2289F7EE100C3BB2B /* AppsVC.swift in Sources */,
