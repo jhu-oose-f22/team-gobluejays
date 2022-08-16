@@ -16,6 +16,7 @@
 				AEFDF34EE70DBB5911196E1078BEBC7D /* PBXTargetDependency */,
 			);
 			name = GooglePlaces;
+			productName = GooglePlaces;
 		};
 		E5B4BBC6DD552AC8943C7E22772FC1D3 /* GoogleMaps */ = {
 			isa = PBXAggregateTarget;
@@ -25,6 +26,7 @@
 			dependencies = (
 			);
 			name = GoogleMaps;
+			productName = GoogleMaps;
 		};
 /* End PBXAggregateTarget section */
 
@@ -136,7 +138,7 @@
 		7C56A5A81159E78A047B6B9065768972 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		847D4A25E10BDF5EBF2C01C399E2BF67 /* Pods-GoBlueJays-GoBlueJaysUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJays-GoBlueJaysUITests-Info.plist"; sourceTree = "<group>"; };
 		95928761718CCEABB5E127A359E37153 /* Pods-GoBlueJays-GoBlueJaysUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GoBlueJays-GoBlueJaysUITests-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A1D5F637CB0A256D1C3FBBF7351A4D63 /* Pods-GoBlueJays-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GoBlueJays-umbrella.h"; sourceTree = "<group>"; };
 		A6A482F60F3588170A15ED361A6FFD9E /* GooglePlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.release.xcconfig; sourceTree = "<group>"; };
 		B22F7BE374DA15ED78CE48FAF173631D /* Pods-GoBlueJays-GoBlueJaysUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GoBlueJays-GoBlueJaysUITests.modulemap"; sourceTree = "<group>"; };
@@ -282,7 +284,6 @@
 				45AD9D656636B9C1800D93A37DB8E752 /* THLabel.m */,
 				7E57EEC6D3F9DE7C690C054B5D2BDEF7 /* Support Files */,
 			);
-			name = THLabel;
 			path = THLabel;
 			sourceTree = "<group>";
 		};
@@ -308,7 +309,6 @@
 				90F91FC3F809438E96EF2FAD4BBD8F55 /* Base */,
 				E00BFB86871557223F1C7447979EC601 /* Support Files */,
 			);
-			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
@@ -337,7 +337,6 @@
 				D9298F2CCF28600F3ACB1C5A44DCE99B /* Resources */,
 				DCF848D0A82B567BA46F29C6F7650E23 /* Support Files */,
 			);
-			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
@@ -996,6 +995,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1062,6 +1062,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
