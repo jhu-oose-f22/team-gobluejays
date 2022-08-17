@@ -83,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="tertiarySystemBackgroundColor"/>
                         <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" red="0.44705882349999998" green="0.67450980390000004" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" systemColor="labelColor"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -579,8 +579,8 @@
                                                                     <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </buttonConfiguration>
                                                             </button>
-                                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Explore our Programs" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sB9-3f-uRq">
-                                                                <rect key="frame" x="152" y="50" width="223" height="12.333333333333336"/>
+                                                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Explore our Programs" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sB9-3f-uRq">
+                                                                <rect key="frame" x="152" y="52" width="223" height="12.333333333333336"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Explore our Programs">
                                                                         <attributes>
@@ -613,7 +613,7 @@
                                                         <rect key="frame" x="0.0" y="137" width="415" height="115"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFo-ez-FPB">
-                                                                <rect key="frame" x="140" y="16" width="235" height="32"/>
+                                                                <rect key="frame" x="140" y="15" width="235" height="32"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain">
                                                                     <attributedString key="attributedTitle">
@@ -648,7 +648,7 @@
                                                                 </buttonConfiguration>
                                                             </button>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Complete coverage of Johns Hopkins varsity athletics" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yR3-Rr-R2P">
-                                                                <rect key="frame" x="147" y="38" width="230" height="39"/>
+                                                                <rect key="frame" x="147" y="37" width="230" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -911,9 +911,6 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="5xX-zg-13N" kind="relationship" relationship="rootViewController" id="Pig-o7-EmL"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tr4-ag-b8t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1079,27 +1076,198 @@
             </objects>
             <point key="canvasLocation" x="-1165.217391304348" y="-580.58035714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--ScheduleVC-->
         <scene sceneID="6cT-8c-wlc">
             <objects>
-                <viewController id="sKn-y0-tEi" sceneMemberID="viewController">
+                <viewController id="sKn-y0-tEi" customClass="ScheduleVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEJ-A3-mBd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssB-tT-TZH">
+                                <rect key="frame" x="0.0" y="88" width="414" height="100"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Today" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-7W-2u4">
+                                        <rect key="frame" x="20" y="16" width="49" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="ode-4d-Wtr">
+                                        <rect key="frame" x="339" y="10" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="4uk-ft-eXp"/>
+                                            <constraint firstAttribute="height" constant="50" id="vwO-gP-zCn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tuesday, 16 Aug 2022" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-Vd-PWU">
+                                        <rect key="frame" x="20" y="36" width="271" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4Yp-n9-qn3"/>
+                                    <constraint firstItem="ode-4d-Wtr" firstAttribute="top" secondItem="ssB-tT-TZH" secondAttribute="top" constant="10" id="IeG-aH-tnU"/>
+                                    <constraint firstAttribute="trailing" secondItem="ode-4d-Wtr" secondAttribute="trailing" constant="25" id="h6A-ee-LxY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XW0-aF-1P6">
+                                <rect key="frame" x="26" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Sun 28" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lwj-9U-Btn">
+                                        <rect key="frame" x="0.0" y="14" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bPM-b8-sIX">
+                                <rect key="frame" x="79" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Mon 29" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rfj-sz-Ima">
+                                        <rect key="frame" x="0.0" y="12" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.45098039215686275" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-8Z-BBc">
+                                <rect key="frame" x="133" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Tue 30" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hbZ-sC-0Vm">
+                                        <rect key="frame" x="0.0" y="14" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wbL-iY-pqz">
+                                <rect key="frame" x="187" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Wed 31" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1v-kG-naw">
+                                        <rect key="frame" x="0.0" y="14" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-BF-fyH">
+                                <rect key="frame" x="241" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Thu 1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3fb-DZ-08f">
+                                        <rect key="frame" x="0.0" y="14" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeE-b2-xyO">
+                                <rect key="frame" x="295" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Fri 2" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-Li-jpJ">
+                                        <rect key="frame" x="3" y="14" width="32" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nXR-wu-z59">
+                                <rect key="frame" x="349" y="196" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Sat 3" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ydo-EI-Dkl">
+                                        <rect key="frame" x="0.0" y="14" width="40" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.72156862745098038" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group 17" translatesAutoresizingMaskIntoConstraints="NO" id="oN2-8n-JJd">
+                                <rect key="frame" x="19" y="284" width="377" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Pc-XCP">
+                                <rect key="frame" x="20" y="308" width="369" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.83137255909999996" green="0.9098039269" blue="0.9098039269" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="hi"/>
+                                <connections>
+                                    <action selector="KTap:" destination="sKn-y0-tEi" eventType="touchUpInside" id="Ioi-45-cqI"/>
+                                    <segue destination="5xX-zg-13N" kind="show" id="kDS-ai-wrs"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ujZ-ep-xXu"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="systemGray3Color"/>
+                        <constraints>
+                            <constraint firstItem="ssB-tT-TZH" firstAttribute="leading" secondItem="ujZ-ep-xXu" secondAttribute="leading" id="bcS-0h-Q6b"/>
+                            <constraint firstItem="ssB-tT-TZH" firstAttribute="top" secondItem="ujZ-ep-xXu" secondAttribute="top" id="m4c-e8-FSk"/>
+                            <constraint firstItem="ssB-tT-TZH" firstAttribute="trailing" secondItem="ujZ-ep-xXu" secondAttribute="trailing" id="qOt-T6-aIN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UBu-Cq-JCt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfM-Wn-MPL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1162" y="142"/>
+            <point key="canvasLocation" x="-1162.3188405797102" y="141.96428571428569"/>
         </scene>
     </scenes>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="FFC" width="279" height="181"/>
+        <image name="Group 17" width="2468" height="512"/>
         <image name="Levering" width="275" height="183"/>
         <image name="Nolans" width="275" height="183"/>
         <image name="academics" width="275" height="183"/>
@@ -1109,12 +1277,13 @@
         <image name="canvas" width="452" height="512"/>
         <image name="charMar" width="457" height="316"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="frontpage" width="274" height="184"/>
+        <image name="frontpage" width="3822" height="2027"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="housing" width="294" height="172"/>
         <image name="leveringCafe" width="474" height="316"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="mobileorder" width="667" height="755"/>
+        <image name="profile" width="512" height="512"/>
         <image name="semesterly" width="568" height="645"/>
         <image name="sis" width="568" height="644"/>
         <image name="social media" width="225" height="225"/>
@@ -1138,9 +1307,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

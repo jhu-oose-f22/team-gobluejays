@@ -38,16 +38,17 @@ class MapVC: UIViewController, UISearchResultsUpdating{
         view.addSubview(mapView)
         let hopkins = MKPointAnnotation()
         //39.3299° N, 76.6205° W
+        //39.3286989694527, -76.61996674457579
         hopkins.coordinate = CLLocationCoordinate2D(latitude: 39.3299, longitude: -76.6205)
-        mapView.addAnnotation(hopkins)
+        //mapView.addAnnotation(hopkins)
         
         let brody = MKPointAnnotation()
-        brody.coordinate = CLLocationCoordinate2D(latitude: 39.32854936102123, longitude: -76.61937490046321)
-        brody.title = "Brody Learning Commons"
-        brody.subtitle = "Library"
-//        mapView.addAnnotation(brody)
+        brody.coordinate = CLLocationCoordinate2D(latitude: 39.3286989694527, longitude: -76.61996674457579)
+        brody.title = "Krieger Hall"
+        brody.subtitle = "University department"
+        mapView.addAnnotation(brody)
         
-        let region = MKCoordinateRegion(center: hopkins.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+        let region = MKCoordinateRegion(center: brody.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
         mapView.setRegion(region, animated: true)
 //        searchVC.searchBar.backgroundColor = .secondarySystemBackground
         searchVC.searchResultsUpdater = self
