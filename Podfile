@@ -7,6 +7,7 @@ target 'GoBlueJays' do
 
   pod 'THLabel', '~> 1.4.0'
   pod 'GooglePlaces', '4.2.0'
+  pod 'GoogleMaps'
 
   target 'GoBlueJaysTests' do
     inherit! :search_paths

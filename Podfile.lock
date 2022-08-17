@@ -1,10 +1,15 @@
 PODS:
+  - GoogleMaps (4.2.0):
+    - GoogleMaps/Maps (= 4.2.0)
   - GoogleMaps/Base (4.2.0)
+  - GoogleMaps/Maps (4.2.0):
+    - GoogleMaps/Base
   - GooglePlaces (4.2.0):
     - GoogleMaps/Base (= 4.2.0)
   - THLabel (1.4.10)
 
 DEPENDENCIES:
+  - GoogleMaps
   - GooglePlaces (= 4.2.0)
   - THLabel (~> 1.4.0)
 
@@ -19,6 +24,6 @@ SPEC CHECKSUMS:
   GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
   THLabel: 3fc93a0f01f74e4eec7574df2819e576d57150b3
 
-PODFILE CHECKSUM: 946402f2bb7c78ba896daf178cf8c107802edaaf
+PODFILE CHECKSUM: d47eb05a65c855d16ac9d702fef162c752b11d20
 
 COCOAPODS: 1.11.3

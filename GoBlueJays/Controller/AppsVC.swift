@@ -21,7 +21,7 @@ class AppsVC: UIViewController {
     }
     
     @IBAction func CampusGroups(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://jhu.campusgroups.com/login_only?redirect=https%3a%2f%2fjhu.campusgroups.com%2fgroups")! as URL, options: [:],completionHandler: nil)
+        UIApplication.shared.open(URL(string: "https://canvas.jhu.edu")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func SIS(_ sender: UIButton) {
@@ -33,7 +33,7 @@ class AppsVC: UIViewController {
     }
     
     @IBAction func MyChart(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://mychart.hopkinsmedicine.org/MyChart/Authentication/Login?")! as URL, options: [:],completionHandler: nil)
+        UIApplication.shared.open(URL(string: "https://jhu.campusgroups.com/login_only?redirect=https%3a%2f%2fjhu.campusgroups.com%2fgroups")! as URL, options: [:],completionHandler: nil)
     }
     
 }
