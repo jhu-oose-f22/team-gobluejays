@@ -106,7 +106,7 @@
                                 <rect key="frame" x="0.0" y="140" width="415" height="1081"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-gv-1YH">
-                                        <rect key="frame" x="0.0" y="0.0" width="415" height="1100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="415" height="1050"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="frontpage" translatesAutoresizingMaskIntoConstraints="NO" id="a2F-uz-hAG">
                                                 <rect key="frame" x="0.0" y="5" width="414" height="186"/>
@@ -911,6 +911,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="5xX-zg-13N" kind="relationship" relationship="rootViewController" id="h2U-fc-sLB"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tr4-ag-b8t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1232,21 +1235,21 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Pc-XCP">
+                                <rect key="frame" x="20" y="308" width="369" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="  "/>
+                                <connections>
+                                    <action selector="KTap:" destination="sKn-y0-tEi" eventType="touchUpInside" id="Ioi-45-cqI"/>
+                                    <segue destination="5xX-zg-13N" kind="show" id="1vA-Zv-d4N"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group 17" translatesAutoresizingMaskIntoConstraints="NO" id="oN2-8n-JJd">
                                 <rect key="frame" x="19" y="284" width="377" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Pc-XCP">
-                                <rect key="frame" x="20" y="308" width="369" height="79"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.83137255909999996" green="0.9098039269" blue="0.9098039269" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="hi"/>
-                                <connections>
-                                    <action selector="KTap:" destination="sKn-y0-tEi" eventType="touchUpInside" id="Ioi-45-cqI"/>
-                                    <segue destination="5xX-zg-13N" kind="show" id="kDS-ai-wrs"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ujZ-ep-xXu"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1264,6 +1267,9 @@
             <point key="canvasLocation" x="-1162.3188405797102" y="141.96428571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1vA-Zv-d4N"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="FFC" width="279" height="181"/>
