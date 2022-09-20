@@ -1,0 +1,73 @@
+## Problem Statement: A few sentences to describe the problem you are trying to solve, i.e., justify why this software is needed.
+Mobile Applications play a vital role in our daily life. However, the rapid development of mobile applications also contributes to their proliferation and functional discreteness. Take JHU for example, for communication, students would use Slack, Teams and Piazza at the same time for different courses. Not to mention applications for school life like TransLoc, Hop-Rec, Semesterly, etc.
+
+Moreover, it also paves a new way to improve upon the flaws in the existing mobile applications used 
+frequently by JHU students, which are stated below:
+
+Problems:
+- Functions of every application are too discrete so that students have to switch among various applications to check academic calendar, homework, transportation and so on.
+- Details of courses, like where to submit assignments and when to take a midterm-exam, could not be added and showed in calendars
+
+## Potential Clients: Who are influenced by this problem and would benefit from the proposed solution? (i.e. the potential users)
+-JHU Students
+-Students across different college campuses
+
+## Proposed Solution: Write a few sentences that describe how a software solution will solve the problem described above.
+In this app we design, we will corporate all the websites and applications that Hopkins provides to students, along with to-do-list and calendar feature which could help users better take charge of the school online resources and their schedule. 
+
+On the homepage, there will be some icons of these applications, including SIS, transloc, Canvas, and Hopkins Map, etc, which users could use by clicking the icons and our app could redirect to the websites or applications. We will also include some websites, which center around athletics, dining, housing or library and allow users to get all of these information within our app.
+
+Also, our calendar could extract the student course schedule from SIS so students could also view that with our app. Last but not least, we will build a to-do-list page which allows students to add their homework deadlines. It’s also acceptable for users to categorize their to-do-list, for example, via different courses.
+
+## Functional Requirements: List the (functional) requirements that software needs to have in order to solve the problem stated above. List these in role-goal-benefit format. It is useful to try to group the requirements into those that are essential (must have), and those which are non-essential (but nice to have).
+# Must have
+1. Make schedule: as a user of the app, I want to make my own schedule including all the courses and my personal events so that I can check them out conveniently on the app. 
+2. Make To-Do list: as a user of the app, I want to make a To-Do list with specific due dates and various categories so that I can know what to do by just checking the app and better organize my time.
+3. Obtain course information: as a user of the app, I want to be able to organize all the detailed information about my enrolled courses, including classroom location, homework submission portals, etc. in the app so that I can find all information in one place.
+4. Find buildings and classrooms: as a user of the app, I want to be able to find classrooms and buildings so that I can just check the app whenever I forget the location.
+5. Log-in: as a user of the app, I want to be able to sign up/login to the app so that I can access to my personal data securely and don’t need to re-enter every time.
+6. Know operating hours: as a user of the app, I want to know the operating hours of recreational center, library, dining halls, etc. so that I won’t waste my time.
+7. Access school apps and websites: as a user of the app, I want to access to different campus apps and websites, such as TransLoc, SIS, and Canvas, so that I can enjoy various services and obtain different information easily from an integrated platform.
+8. Subscribe to campus news and events: as a user of the app, I want to get notified of different school events and campus news so that I won’t miss out anything that’s important or interests me.
+9. Check menu: as a user of the app, I want to be able to check daily menus of campus dining places so that I can decide where to go in advance.
+10. Post ads: as a user of the app, I want to be able to promote events and activities held by myself or my clubs so that I can reach to a wider group of people.
+
+# Nice to have
+1. Integrated notifications: as a user of the app, I want to be able to receive notifications from multiple embedded apps and webs altogether, including Gradescope and Canvs so that I can be better informed.
+2. Personalization: as a user of the app, I want to be able to personalize my app settings such as profile image and background so that I can enjoy the customzied experience.
+3. Order Foods: as a user of the app, I want to be able to order or schedule foods and drinks online from Brody Cafe etc. so that I don’t need to always line up and can pick up my orders sometimes.
+4. Classmates and study group: as a user of the app, I want to be able to find classmates and form study groups so that I have the chance to better know about and work with my peers.
+5. One-time log-in: as a user of the app, I want to be able to login to the app using my school email account and don’t need to re-login to other embedded apps and websites so that I only need to login once.
+6. Activity Map: as a user of the app, I want to be able to browse over an activity map that shows campus activities with locations so that I find out intriguing events that’s near me more easily.
+
+## Non-functional Requirements:
+1. Availability/Usability
+- The app should be easy to navigate such that users can understand how the content is organized and where to access key features.
+- In standard network conditions, the app should fully load in less than 3 seconds
+
+2. Maintainability/Scalability
+- The database storage should be capable of storing 5000 course information and be easy to expand when higher need comes up
+- The web app should be able to handle 300 users at the same time without affecting its performance
+- The system must be restored within 2 hours during daytime and 6 hours during night after a failure
+
+3. Portability/Compatibility
+- The app should support IOS operating system
+- The app should be able to run and fit to any IOS devices including iphones and ipad of all generations
+
+4. Security/Privacy
+- User should not be able to have access to other user’s information including personal schedule and to-do list
+- All requests to the backend should be properly authenticated
+
+
+## Software Architecture & Technology Stack: Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to specific software architecture? What programming languages, frameworks, databases, …, will be used to develop and deploy the software?
+GoBlueJays is a mobile app that conforms to iOS Mobile Application Architecture with the MVC model (Model-View-Controller):
+- Model – The data layer (persistence, model objects, parsers, managers, networking code).
+- View – Similar to the presentation layer, a re-usable layer that represents the app to the user.
+- Controller – A mediator level that communicates with an abstraction via a protocol.
+
+The app is built and run on Xcode. We use Swift as our major programming language and SQLite for databases.
+
+## Similar Apps: List a few similar applications to the one you are developing. Don't be eager to conclude no similar app exists! There is always something similar to what you are building! Finding those will help you to better specify your project. You must be prepared to explain how your app is different from the existing ones.
+PKUhelper(PKU)
+UC San Diego (UCSD)
+NYU Mobile (NYU)
