@@ -99,11 +99,11 @@
             <objects>
                 <viewController id="Zgk-y1-nAS" customClass="HomeVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iiv-Bj-Hte">
-                        <rect key="frame" x="0.0" y="0.0" width="415" height="1304"/>
+                        <rect key="frame" x="0.0" y="0.0" width="415" height="1581"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B79-A2-VQK">
-                                <rect key="frame" x="0.0" y="140" width="415" height="1081"/>
+                                <rect key="frame" x="0.0" y="140" width="415" height="1358"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-gv-1YH">
                                         <rect key="frame" x="0.0" y="0.0" width="415" height="1050"/>
@@ -112,7 +112,7 @@
                                                 <rect key="frame" x="0.0" y="5" width="414" height="186"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8C-Mv-ImV" userLabel="Lib">
-                                                <rect key="frame" x="0.0" y="448" width="414" height="140"/>
+                                                <rect key="frame" x="-1" y="723" width="414" height="140"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-fr-I88">
                                                         <rect key="frame" x="-12" y="-12" width="439" height="152"/>
@@ -250,285 +250,8 @@
                                                     <constraint firstItem="hcE-fr-I88" firstAttribute="centerX" secondItem="o8C-Mv-ImV" secondAttribute="centerX" id="k7S-7F-9iz"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLb-Et-hnX" userLabel="Dining">
-                                                <rect key="frame" x="0.0" y="180" width="415" height="238"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUN-zz-zyS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="415" height="55"/>
-                                                        <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Dining" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RaP-RM-NsL">
-                                                                <rect key="frame" x="16" y="14" width="97" height="21"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="97" id="fLY-sN-gYp"/>
-                                                                </constraints>
-                                                                <color key="textColor" red="0.44705882349999998" green="0.67450980390000004" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jx-M1-isG">
-                                                                <rect key="frame" x="288" y="23" width="112" height="14"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="14" id="Zxc-QK-WnA"/>
-                                                                </constraints>
-                                                                <attributedString key="attributedText">
-                                                                    <fragment content="Check Today’s Menu">
-                                                                        <attributes>
-                                                                            <color key="NSColor" red="0.44705882352941173" green="0.67450980392156867" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <font key="NSFont" size="12" name="Arial-ItalicMT"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="7Jx-M1-isG" secondAttribute="bottom" constant="18" id="3sh-TL-3nG"/>
-                                                            <constraint firstAttribute="bottom" secondItem="7Jx-M1-isG" secondAttribute="bottom" constant="18" id="GRH-Hk-HsH"/>
-                                                            <constraint firstItem="RaP-RM-NsL" firstAttribute="leading" secondItem="UUN-zz-zyS" secondAttribute="leading" constant="16" id="I3n-zf-l3h"/>
-                                                            <constraint firstAttribute="bottom" secondItem="RaP-RM-NsL" secondAttribute="bottom" constant="15" id="P7F-aO-MOE"/>
-                                                            <constraint firstAttribute="height" constant="55" id="Qx8-oa-9uJ"/>
-                                                            <constraint firstAttribute="trailing" secondItem="7Jx-M1-isG" secondAttribute="trailing" constant="15" id="cUJ-g4-Aqi"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gX-3Y-GeX">
-                                                        <rect key="frame" x="0.0" y="60" width="414" height="180"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M6J-74-ACb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="720" height="180"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQc-Yq-5AQ" userLabel="HopkinsCafe">
-                                                                        <rect key="frame" x="8" y="0.0" width="138" height="172"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FFC" translatesAutoresizingMaskIntoConstraints="NO" id="sDW-mG-Ojv">
-                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xte-yt-gCH">
-                                                                                <rect key="frame" x="8" y="132" width="74" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Hopkins Café">
-                                                                                        <attributes>
-                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iea-zH-Gd5">
-                                                                                <rect key="frame" x="8" y="151" width="62" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Closed Today">
-                                                                                        <attributes>
-                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="spI-mL-KRy" userLabel="Nolans">
-                                                                        <rect key="frame" x="148" y="0.0" width="138" height="172"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Nolans" translatesAutoresizingMaskIntoConstraints="NO" id="atu-lW-1el">
-                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK5-SX-Ixd">
-                                                                                <rect key="frame" x="8" y="132" width="88" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Nolan's on 33rd">
-                                                                                        <attributes>
-                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2Q-Hm-i6n">
-                                                                                <rect key="frame" x="8" y="151" width="77" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Open til 2:00 PM">
-                                                                                        <attributes>
-                                                                                            <color key="NSColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <color key="highlightedColor" red="0.63137254899999995" green="0.80392156859999997" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2U-RV-fE6" userLabel="Levering">
-                                                                        <rect key="frame" x="288" y="0.0" width="138" height="172"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Levering" translatesAutoresizingMaskIntoConstraints="NO" id="tXB-12-NeM">
-                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlE-aE-eo7">
-                                                                                <rect key="frame" x="8" y="132" width="122" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Levering Kitchens">
-                                                                                        <attributes>
-                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1W-8S-Eal">
-                                                                                <rect key="frame" x="8" y="151" width="82" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Dinner at 6:30 PM">
-                                                                                        <attributes>
-                                                                                            <color key="NSColor" red="0.84705882352941175" green="0.74509803921568629" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0WT-tM-1nE" userLabel="Levering">
-                                                                        <rect key="frame" x="425" y="0.0" width="136" height="172"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="charMar" translatesAutoresizingMaskIntoConstraints="NO" id="fjN-9s-fh6">
-                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW2-pn-E97">
-                                                                                <rect key="frame" x="8" y="133" width="122" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Charles Street Market">
-                                                                                        <attributes>
-                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1L-pn-ewM">
-                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Closed Today">
-                                                                                        <attributes>
-                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1S-CQ-003" userLabel="Levering">
-                                                                        <rect key="frame" x="563" y="0.0" width="136" height="172"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="leveringCafe" translatesAutoresizingMaskIntoConstraints="NO" id="NvZ-7n-9Ud">
-                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtV-SB-YD5">
-                                                                                <rect key="frame" x="8" y="133" width="122" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Levering Café">
-                                                                                        <attributes>
-                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evj-6n-7de">
-                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <attributedString key="attributedText">
-                                                                                    <fragment content="Closed Today">
-                                                                                        <attributes>
-                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
-                                                                                        </attributes>
-                                                                                    </fragment>
-                                                                                </attributedString>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    </view>
-                                                                </subviews>
-                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="720" id="gGe-SW-Na1"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="M6J-74-ACb" secondAttribute="trailing" id="1ca-Zx-EFz"/>
-                                                            <constraint firstItem="M6J-74-ACb" firstAttribute="leading" secondItem="7gX-3Y-GeX" secondAttribute="leading" id="3Tb-gg-vLH"/>
-                                                            <constraint firstAttribute="bottom" secondItem="M6J-74-ACb" secondAttribute="bottom" id="CBY-He-htr"/>
-                                                            <constraint firstItem="M6J-74-ACb" firstAttribute="top" secondItem="7gX-3Y-GeX" secondAttribute="top" id="kpO-QK-XFw"/>
-                                                        </constraints>
-                                                    </scrollView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="leading" secondItem="xLb-Et-hnX" secondAttribute="leading" id="0rH-gE-JNd"/>
-                                                    <constraint firstAttribute="height" constant="238" id="4h6-KT-yxe"/>
-                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="width" secondItem="xLb-Et-hnX" secondAttribute="width" id="8iT-Gj-QIm"/>
-                                                    <constraint firstItem="UUN-zz-zyS" firstAttribute="leading" secondItem="xLb-Et-hnX" secondAttribute="leading" id="KlM-nn-VCh"/>
-                                                    <constraint firstAttribute="trailing" secondItem="7gX-3Y-GeX" secondAttribute="trailing" id="YtY-ew-ueJ"/>
-                                                    <constraint firstItem="M6J-74-ACb" firstAttribute="height" secondItem="xLb-Et-hnX" secondAttribute="height" multiplier="0.722689" id="a24-r1-tlF"/>
-                                                    <constraint firstAttribute="trailing" secondItem="UUN-zz-zyS" secondAttribute="trailing" id="bTq-66-aW7"/>
-                                                    <constraint firstItem="UUN-zz-zyS" firstAttribute="top" secondItem="xLb-Et-hnX" secondAttribute="top" id="mrU-fY-ntU"/>
-                                                    <constraint firstAttribute="bottom" secondItem="7gX-3Y-GeX" secondAttribute="bottom" id="oxR-gc-Pct"/>
-                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="top" secondItem="UUN-zz-zyS" secondAttribute="bottom" id="quD-So-0nv"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bz8-Sv-Qpl" userLabel="About">
-                                                <rect key="frame" x="0.0" y="617" width="415" height="430"/>
+                                                <rect key="frame" x="-1" y="876" width="415" height="430"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJL-5b-Dbg">
                                                         <rect key="frame" x="20" y="14" width="375" height="34"/>
@@ -818,6 +541,311 @@
                                                     <constraint firstItem="mc2-rU-n5u" firstAttribute="centerX" secondItem="iJL-5b-Dbg" secondAttribute="centerX" id="wf3-ht-CH8"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xLb-Et-hnX" userLabel="Dining">
+                                                <rect key="frame" x="-2" y="460" width="415" height="238"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUN-zz-zyS">
+                                                        <rect key="frame" x="0.0" y="1" width="415" height="55"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Dining" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RaP-RM-NsL">
+                                                                <rect key="frame" x="16" y="14" width="97" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="97" id="fLY-sN-gYp"/>
+                                                                </constraints>
+                                                                <color key="textColor" red="0.44705882349999998" green="0.67450980390000004" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jx-M1-isG">
+                                                                <rect key="frame" x="288" y="23" width="112" height="14"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="14" id="Zxc-QK-WnA"/>
+                                                                </constraints>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Check Today’s Menu">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.44705882352941173" green="0.67450980392156867" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="12" name="Arial-ItalicMT"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="7Jx-M1-isG" secondAttribute="bottom" constant="18" id="3sh-TL-3nG"/>
+                                                            <constraint firstAttribute="bottom" secondItem="7Jx-M1-isG" secondAttribute="bottom" constant="18" id="GRH-Hk-HsH"/>
+                                                            <constraint firstItem="RaP-RM-NsL" firstAttribute="leading" secondItem="UUN-zz-zyS" secondAttribute="leading" constant="16" id="I3n-zf-l3h"/>
+                                                            <constraint firstAttribute="bottom" secondItem="RaP-RM-NsL" secondAttribute="bottom" constant="15" id="P7F-aO-MOE"/>
+                                                            <constraint firstAttribute="height" constant="55" id="Qx8-oa-9uJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="7Jx-M1-isG" secondAttribute="trailing" constant="15" id="cUJ-g4-Aqi"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gX-3Y-GeX">
+                                                        <rect key="frame" x="0.0" y="60" width="414" height="180"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M6J-74-ACb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="720" height="180"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQc-Yq-5AQ" userLabel="HopkinsCafe">
+                                                                        <rect key="frame" x="8" y="0.0" width="138" height="172"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FFC" translatesAutoresizingMaskIntoConstraints="NO" id="sDW-mG-Ojv">
+                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xte-yt-gCH">
+                                                                                <rect key="frame" x="8" y="132" width="74" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Hopkins Café">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iea-zH-Gd5">
+                                                                                <rect key="frame" x="8" y="151" width="62" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Closed Today">
+                                                                                        <attributes>
+                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="spI-mL-KRy" userLabel="Nolans">
+                                                                        <rect key="frame" x="148" y="0.0" width="138" height="172"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Nolans" translatesAutoresizingMaskIntoConstraints="NO" id="atu-lW-1el">
+                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK5-SX-Ixd">
+                                                                                <rect key="frame" x="8" y="132" width="88" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Nolan's on 33rd">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2Q-Hm-i6n">
+                                                                                <rect key="frame" x="8" y="151" width="77" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Open til 2:00 PM">
+                                                                                        <attributes>
+                                                                                            <color key="NSColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <color key="highlightedColor" red="0.63137254899999995" green="0.80392156859999997" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2U-RV-fE6" userLabel="Levering">
+                                                                        <rect key="frame" x="288" y="0.0" width="138" height="172"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Levering" translatesAutoresizingMaskIntoConstraints="NO" id="tXB-12-NeM">
+                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlE-aE-eo7">
+                                                                                <rect key="frame" x="8" y="132" width="122" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Levering Kitchens">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1W-8S-Eal">
+                                                                                <rect key="frame" x="8" y="151" width="82" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Dinner at 6:30 PM">
+                                                                                        <attributes>
+                                                                                            <color key="NSColor" red="0.84705882352941175" green="0.74509803921568629" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0WT-tM-1nE" userLabel="Levering">
+                                                                        <rect key="frame" x="425" y="0.0" width="136" height="172"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="charMar" translatesAutoresizingMaskIntoConstraints="NO" id="fjN-9s-fh6">
+                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW2-pn-E97">
+                                                                                <rect key="frame" x="8" y="133" width="122" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Charles Street Market">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1L-pn-ewM">
+                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Closed Today">
+                                                                                        <attributes>
+                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1S-CQ-003" userLabel="Levering">
+                                                                        <rect key="frame" x="563" y="0.0" width="136" height="172"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="leveringCafe" translatesAutoresizingMaskIntoConstraints="NO" id="NvZ-7n-9Ud">
+                                                                                <rect key="frame" x="8" y="0.0" width="130" height="125"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtV-SB-YD5">
+                                                                                <rect key="frame" x="8" y="133" width="122" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Levering Café">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evj-6n-7de">
+                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <attributedString key="attributedText">
+                                                                                    <fragment content="Closed Today">
+                                                                                        <attributes>
+                                                                                            <color key="NSColor" red="0.83921568627450982" green="0.38039215686274508" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <font key="NSFont" size="10" name="Avenir-Medium"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                </attributedString>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                </subviews>
+                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="720" id="gGe-SW-Na1"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="M6J-74-ACb" secondAttribute="trailing" id="1ca-Zx-EFz"/>
+                                                            <constraint firstItem="M6J-74-ACb" firstAttribute="leading" secondItem="7gX-3Y-GeX" secondAttribute="leading" id="3Tb-gg-vLH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="M6J-74-ACb" secondAttribute="bottom" id="CBY-He-htr"/>
+                                                            <constraint firstItem="M6J-74-ACb" firstAttribute="top" secondItem="7gX-3Y-GeX" secondAttribute="top" id="kpO-QK-XFw"/>
+                                                        </constraints>
+                                                    </scrollView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="leading" secondItem="xLb-Et-hnX" secondAttribute="leading" id="0rH-gE-JNd"/>
+                                                    <constraint firstAttribute="height" constant="238" id="4h6-KT-yxe"/>
+                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="width" secondItem="xLb-Et-hnX" secondAttribute="width" id="8iT-Gj-QIm"/>
+                                                    <constraint firstItem="UUN-zz-zyS" firstAttribute="leading" secondItem="xLb-Et-hnX" secondAttribute="leading" id="KlM-nn-VCh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7gX-3Y-GeX" secondAttribute="trailing" id="YtY-ew-ueJ"/>
+                                                    <constraint firstItem="M6J-74-ACb" firstAttribute="height" secondItem="xLb-Et-hnX" secondAttribute="height" multiplier="0.722689" id="a24-r1-tlF"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UUN-zz-zyS" secondAttribute="trailing" id="bTq-66-aW7"/>
+                                                    <constraint firstItem="UUN-zz-zyS" firstAttribute="top" secondItem="xLb-Et-hnX" secondAttribute="top" id="mrU-fY-ntU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7gX-3Y-GeX" secondAttribute="bottom" id="oxR-gc-Pct"/>
+                                                    <constraint firstItem="7gX-3Y-GeX" firstAttribute="top" secondItem="UUN-zz-zyS" secondAttribute="bottom" id="quD-So-0nv"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SU-1E-H85">
+                                                <rect key="frame" x="-1" y="202" width="416" height="161"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Apps" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-n0-ijS">
+                                                        <rect key="frame" x="16" y="16" width="97" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="97" id="AZv-Pf-noz"/>
+                                                        </constraints>
+                                                        <color key="textColor" red="0.44705882349999998" green="0.67450980390000004" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AKU-8W-jmy" userLabel="Scroll View">
+                                                        <rect key="frame" x="1" y="53" width="415" height="104"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="canvas" translatesAutoresizingMaskIntoConstraints="NO" id="avb-d6-da6">
+                                                                <rect key="frame" x="-78" y="92" width="254" height="215"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <viewLayoutGuide key="contentLayoutGuide" id="cI5-cM-PGJ"/>
+                                                        <viewLayoutGuide key="frameLayoutGuide" id="k4v-ii-0zz"/>
+                                                    </scrollView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
@@ -859,11 +887,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hfP-7F-lpq"/>
-                    <size key="freeformSize" width="415" height="1304"/>
+                    <size key="freeformSize" width="415" height="1581"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRq-sN-HYt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1205.072463768116" y="-1462.5"/>
+            <point key="canvasLocation" x="-1205.072463768116" y="-1369.7544642857142"/>
         </scene>
         <!--Academics-->
         <scene sceneID="0Py-sc-9MN">
