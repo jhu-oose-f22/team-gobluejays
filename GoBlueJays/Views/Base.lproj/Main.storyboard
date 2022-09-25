@@ -146,7 +146,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mF4-SR-TqP">
                                                                 <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtL-Bx-Wdq" userLabel="Canvas">
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtL-Bx-Wdq" userLabel="Canvas" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
@@ -163,8 +163,14 @@
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="CampusGroups:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="Ndk-GF-3eK"/>
+                                                                        </connections>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cVZ-Ou-dF6" userLabel="Mobile Order">
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cVZ-Ou-dF6" userLabel="Mobile Order" customClass="UIButton">
                                                                         <rect key="frame" x="100" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
@@ -181,8 +187,14 @@
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="MobileOrder:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="X5p-a8-5XN"/>
+                                                                        </connections>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cSh-iC-GzE" userLabel="Transloc">
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cSh-iC-GzE" userLabel="Transloc" customClass="UIButton">
                                                                         <rect key="frame" x="200" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
@@ -199,6 +211,12 @@
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="Transloc:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="mv0-CZ-X8S"/>
+                                                                        </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -256,7 +274,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEf-XE-Cmn">
                                                                 <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGM-4D-Avr" userLabel="SIS">
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGM-4D-Avr" userLabel="SIS" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
@@ -273,8 +291,15 @@
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                            <bool key="isElement" value="NO"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="SIS:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="i3B-Ir-vbL"/>
+                                                                        </connections>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R3z-3n-XGm" userLabel="Semesterly">
+                                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R3z-3n-XGm" userLabel="Semesterly" customClass="UIButton">
                                                                         <rect key="frame" x="100" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
@@ -291,6 +316,12 @@
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                        </accessibility>
+                                                                        <connections>
+                                                                            <action selector="Semesterly:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="INw-EG-F0Q"/>
+                                                                        </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
