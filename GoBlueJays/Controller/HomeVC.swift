@@ -21,6 +21,24 @@ class HomeVC: UIViewController {
     @IBAction func tapMSE(_ sender: UIButton) {
         UIApplication.shared.openURL(URL(string: "https://jhu.libcal.com/seats?lid=1196")!)
     }
+    @IBAction func Transloc(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transloc/id1280444930")! as URL, options: [:],completionHandler: nil)
+    }
     
+    @IBAction func MobileOrder(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transact-mobile-ordering/id1494719529")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func CampusGroups(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://canvas.jhu.edu")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func SIS(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func Semesterly(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
+    }
 }
 

@@ -12,19 +12,19 @@ class AppsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    @IBAction func Transloc(_ sender: UIButton) {
+    @IBAction func Transloc(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transloc/id1280444930")! as URL, options: [:],completionHandler: nil)
     }
     
-    @IBAction func MobileOrder(_ sender: UIButton) {
+    @IBAction func MobileOrder(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transact-mobile-ordering/id1494719529")! as URL, options: [:],completionHandler: nil)
     }
     
-    @IBAction func CampusGroups(_ sender: UIButton) {
+    @IBAction func CampusGroups(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://canvas.jhu.edu")! as URL, options: [:],completionHandler: nil)
     }
     
-    @IBAction func SIS(_ sender: UIButton) {
+    @IBAction func SIS(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
     }
     
