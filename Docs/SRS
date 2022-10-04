@@ -23,8 +23,8 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 
 ## Functional Requirements: List the (functional) requirements that software needs to have in order to solve the problem stated above. List these in role-goal-benefit format. It is useful to try to group the requirements into those that are essential (must have), and those which are non-essential (but nice to have).
 # Must have
-1. Make schedule: as a user of the app, I want to make my own schedule including adding all the courses and my personal events so that I can check them out conveniently on the app. 
-2. Obtain course information: as a user of the app, I want to be able to organize all the detailed information about my enrolled courses in the calender, including classroom location, homework submission portals, etc. in the app so that I can find all information in one place.
+1. Add to schedule: as a user of the app, I want to make my own schedule including adding all the courses and my personal events so that I can check them out conveniently on the app. 
+2. Obtain details and specific schedule information: as a user of the app, I want to be able to organize all the detailed information about my enrolled courses in the calendar, including classroom location, homework submission portals, etc. in the app so that I can find all information in one place.
 3. Find buildings and classrooms: as a user of the app, I want to be able to find classrooms and buildings by clicking the course on my calendar so that I can just check the app whenever I forget the location.
 4. View campus events: as a user of the app, I want to be able to check all the campus events and activities so that I won't miss out any activity I can go.
 5. Search activity: as a user of the app, I want to be able to search activities using some keywords so that I can better find events that might interest me.
