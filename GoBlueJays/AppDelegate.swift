@@ -21,10 +21,10 @@ let app = App(id: "gobluejays-czowp", configuration: configuration)
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
         GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
         // test
-        app.login(credentials: Credentials.anonymous) { (result) in
+        let user = try await app.login(credentials: Credentials.anonymous) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
