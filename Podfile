@@ -8,6 +8,7 @@ target 'GoBlueJays' do
   pod 'THLabel', '~> 1.4.0'
   pod 'GooglePlaces', '4.2.0'
   pod 'GoogleMaps'
+  pod 'RealmSwift', '=10.0.0-alpha.4'
 
   target 'GoBlueJaysTests' do
     inherit! :search_paths
