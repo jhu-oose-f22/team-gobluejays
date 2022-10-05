@@ -2974,13 +2974,26 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-O7-jej">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="support:" destination="lcO-5c-yCg" eventType="touchUpInside" id="lKt-Sy-t8O"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="3mj-wf-cx7"/>
+                                            <constraint firstAttribute="trailing" secondItem="fJO-O7-jej" secondAttribute="trailing" id="85Q-Z9-pga"/>
+                                            <constraint firstAttribute="bottom" secondItem="fJO-O7-jej" secondAttribute="bottom" id="FsW-O6-89k"/>
                                             <constraint firstAttribute="bottom" secondItem="IUl-jc-bfz" secondAttribute="bottom" constant="10" id="J68-bi-wKG"/>
+                                            <constraint firstItem="fJO-O7-jej" firstAttribute="top" secondItem="X8r-v1-TbB" secondAttribute="top" id="J8k-OY-PR5"/>
                                             <constraint firstItem="IUl-jc-bfz" firstAttribute="leading" secondItem="YPf-YR-Itt" secondAttribute="trailing" constant="20" id="UHg-cc-edD"/>
                                             <constraint firstAttribute="bottom" secondItem="YPf-YR-Itt" secondAttribute="bottom" constant="15" id="bSs-1t-cWH"/>
+                                            <constraint firstItem="fJO-O7-jej" firstAttribute="leading" secondItem="X8r-v1-TbB" secondAttribute="leading" id="fpJ-ba-yqc"/>
                                             <constraint firstItem="YPf-YR-Itt" firstAttribute="top" secondItem="X8r-v1-TbB" secondAttribute="top" constant="15" id="iUk-Rc-8i5"/>
                                             <constraint firstItem="YPf-YR-Itt" firstAttribute="leading" secondItem="X8r-v1-TbB" secondAttribute="leading" constant="20" id="ogX-lU-Pi6"/>
                                             <constraint firstItem="IUl-jc-bfz" firstAttribute="top" secondItem="X8r-v1-TbB" secondAttribute="top" constant="10" id="vJ7-oX-ZBr"/>
@@ -3053,6 +3066,15 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcb-9p-CDN">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="about:" destination="lcO-5c-yCg" eventType="touchUpInside" id="ykH-pv-pyZ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -3065,7 +3087,11 @@
                                             <constraint firstAttribute="bottom" secondItem="hL2-ng-nGV" secondAttribute="bottom" constant="10" id="MAD-XK-ojq"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="NYI-cE-Q1S"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="Roq-tT-5zy"/>
+                                            <constraint firstAttribute="bottom" secondItem="Gcb-9p-CDN" secondAttribute="bottom" id="chy-Pm-Kjd"/>
                                             <constraint firstAttribute="height" constant="60" id="ksh-fM-4C8"/>
+                                            <constraint firstAttribute="trailing" secondItem="Gcb-9p-CDN" secondAttribute="trailing" id="lZB-KC-0ky"/>
+                                            <constraint firstItem="Gcb-9p-CDN" firstAttribute="leading" secondItem="pxy-dK-kug" secondAttribute="leading" id="mfc-V1-ifW"/>
+                                            <constraint firstItem="Gcb-9p-CDN" firstAttribute="top" secondItem="pxy-dK-kug" secondAttribute="top" id="xEO-4m-ebW"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="borderWidth" value="10"/>
