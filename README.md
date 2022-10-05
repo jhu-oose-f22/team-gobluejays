@@ -29,7 +29,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/77982805/194137270-7f759a30-1295-419f-8fd3-94db9ac750c5.png">
+
+* website: https://gobluejays.netlify.app
 
 There're numerous web and mobile applications supporting students' life in JHU, yet functions of every application are too discrete so that students have to switch among various applications, which is inconvenient. For daily communication, course information, and academic resources, students would use a variety of apps at the same time, including Slack, Teams, Piazza, and SIS. Not to mention applications for school life like TransLoc, Hop-Rec, etc.
 
@@ -99,8 +101,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [x] Add to Schedule
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
+    - [x] implement frontend of the weekly calendar
+    - [x] add custom event to schedule
+    - [x] implement the backend for user events and activity
+- [x] View campus events
+    - [x] implement frontend of the campus event tab
+- [x] Access school apps and websites
+    - [x] Add more Apps and Websites to Apps/Websites Sections (Find icons online)
+    - [x] set up team website
 - [ ] Add "components" document to easily copy & paste sections of the readme
 - [ ] Multi-language Support
     - [ ] Chinese
