@@ -52,19 +52,18 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+* Download Xcode
+* Download cocoapods following https://www.bilibili.com/video/BV12F4113794?p=113&vd_source=dcfa70e0de27daf616f415670fe6e116
+* Git clone in Xcode using HTTPS code from our github repo
+* Click the triangle on top left to get started!
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+Navigate to local repo in terminal
+* cocoapods
   ```sh
-  npm install npm@latest -g
+  pods install
   ```
 
 ### Installation
@@ -137,9 +136,9 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Jessie Luo - jluo30@jhu.edu
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/jhu-oose-f22/team-gobluejays](https://github.com/jhu-oose-f22/team-gobluejays)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
