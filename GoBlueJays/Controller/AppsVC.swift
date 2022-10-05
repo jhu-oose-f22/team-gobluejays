@@ -35,6 +35,13 @@ class AppsVC: UIViewController {
     @IBAction func MyChart(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: "https://jhu.campusgroups.com/login_only?redirect=https%3a%2f%2fjhu.campusgroups.com%2fgroups")! as URL, options: [:],completionHandler: nil)
     }
+    @IBAction func about(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://gobluejays.netlify.app")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func support(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://gobluejays.netlify.app/contact")! as URL, options: [:],completionHandler: nil)
+    }
     
 }
 
