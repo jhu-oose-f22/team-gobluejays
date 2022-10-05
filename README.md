@@ -43,9 +43,6 @@ CampusGrpup is the only application where students can obtain information about 
 
 
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * Swift
 * Cocoapods
 * Xcode
@@ -89,9 +86,10 @@ Navigate to local repo in terminal
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+https://user-images.githubusercontent.com/77982805/194147947-5e938547-f8dd-4fd1-a87f-6a560364e632.mp4
+
+_For more examples, please refer to the [Documentation](https://github.com/jhu-oose-f22/team-gobluejays/tree/main/Docs)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,10 +102,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [x] implement frontend of the weekly calendar
     - [x] add custom event to schedule
     - [x] implement the backend for user events and activity
-    - [ ] connect the backend to current codebase
 - [x] View campus events
     - [x] implement frontend of the campus event tab
-    - [x] design UI interface of the event page on Figma#11
+    - [x] design UI interface of the event page on Figma
 - [ ] Access school apps and websites
     - [x] Add more Apps and Websites to Apps/Websites Sections (Find icons online)
     - [x] Create Apps and Websites Section on Home Page
@@ -115,7 +112,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Setting page
     - [x] set up team website
     - [ ] design user profile interface
-    - [ ] design user profile
+    - [ ] implement user profile frontend
 
 See the [open issues](https://github.com/jhu-oose-f22/team-gobluejays/issues) for a full list of proposed features (and known issues).
 
