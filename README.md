@@ -104,15 +104,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [x] implement frontend of the weekly calendar
     - [x] add custom event to schedule
     - [x] implement the backend for user events and activity
+    - [ ] connect the backend to current codebase
 - [x] View campus events
     - [x] implement frontend of the campus event tab
-- [x] Access school apps and websites
+    - [x] design UI interface of the event page on Figma#11
+- [ ] Access school apps and websites
     - [x] Add more Apps and Websites to Apps/Websites Sections (Find icons online)
+    - [x] Create Apps and Websites Section on Home Page
+    - [ ] Link About sections to appropriate websites, imitate UI from Academics for Athletics, Housing, Social Media sections
+- [ ] Setting page
     - [x] set up team website
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+    - [ ] design user profile interface
+    - [ ] design user profile
 
 See the [open issues](https://github.com/jhu-oose-f22/team-gobluejays/issues) for a full list of proposed features (and known issues).
 
