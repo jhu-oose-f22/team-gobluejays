@@ -34,6 +34,7 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 9. Access school apps and websites: as a user of the app, I want to access to or be directed to different campus apps and websites, such as TransLoc, SIS, and Canvas, so that I can enjoy various services and obtain different information easily from an integrated platform.
 10. Know operating hours: as a user of the app, I want to know the operating hours of recreational center, library, dining halls, etc. so that I won’t waste my time.
 11. Check menu: as a user of the app, I want to be able to check daily menus of campus dining places so that I can decide where to go in advance.
+12. Profile page: as a user, when I log in, there should be a setting page containing my personal profile information and have access to project document and support.
 
 # Nice to have
 1. Event notification: as a user of the app, I want to get notified of different school events and campus news so that I won’t miss out anything that’s important or interests me.
