@@ -1,25 +1,20 @@
 //
-//  AcademicsVC.swift
+//  HousingVC.swift
 //  GoBlueJays
 //
-//  Created by Jessie Luo on 8/13/22.
+//  Created by Thomas Yu on 10/7/22.
 //
 
 import Foundation
 import UIKit
 
-class AcademicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var tableView: UITableView!
     var tabs: [Detail] = [
-        Detail(title: "Overview", link: "https://www.jhu.edu", icon: "overview"),
-        Detail(title: "Undergraduate Education", link: "https://www.jhu.edu/academics/undergraduate-studies/", icon: "undergrad"),
-        Detail(title: "Graduate Education", link: "https://www.jhu.edu/academics/graduate-studies/", icon: "grad"),
-        Detail(title: "Schools & Divisions", link: "https://www.jhu.edu/schools/", icon: "search"),
-        Detail(title: "Programs & Majors", link: "https://e-catalogue.jhu.edu/programs/", icon: "study"),
-        Detail(title: "Advanced Academic Programs", link: "https://advanced.jhu.edu", icon: "advanced"),
-        Detail(title: "Study Abroad", link: "https://studyabroad.jhu.edu", icon: "globe"),
+        Detail(title: "On-Campus Housing", link: "https://studentaffairs.jhu.edu/community-living/university-housing/", icon: "studenthousing"),
+        Detail(title: "First and Second Year Building Options", link: "https://studentaffairs.jhu.edu/community-living/university-housing/buildings-rates/", icon: "options"),
     ]
     
     override func viewDidLoad() {
