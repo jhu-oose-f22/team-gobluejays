@@ -13,6 +13,20 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         title = "Home"
         navigationController?.additionalSafeAreaInsets.top = -5
+        
+        //get current time
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        
+        //NOTE: Need to send in current time parameters
+        setHopkinsCafeStatus();
+        setNolansStatus();
+        setLeveringKitchenStatus();
+        setCharMarStatus();
+        setLeveringCafeStatus();
+        
     }
     @IBAction func tapBrody(_ sender: UIButton) {
         UIApplication.shared.openURL(URL(string: "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0")!)
@@ -40,5 +54,34 @@ class HomeVC: UIViewController {
     @IBAction func Semesterly(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
     }
+    
+    func setHopkinsCafeStatus() {
+        //need to retrieve hours
+        //parameter should include current time
+        //set label to open or closed
+    }
+    
+    func setNolansStatus() {
+        //need to retrieve hours
+        //parameter should include current time
+        //set label to open or closed
+    }
+    
+    func setLeveringKitchenStatus() {
+        //need to retrieve hours
+        //parameter should include current time
+        //set label to open or closed
+    }
+    
+    func setCharMarStatus() {
+        //need to retrieve hours
+        //parameter should include current time
+        //set label to open or closed
+    }
+    
+    func setLeveringCafeStatus() {
+        //need to retrieve hours
+        //parameter should include current time
+        //set label to open or closed
+    }
 }
-
