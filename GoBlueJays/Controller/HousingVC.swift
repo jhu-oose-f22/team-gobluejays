@@ -15,6 +15,10 @@ class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tabs: [Detail] = [
         Detail(title: "On-Campus Housing", link: "https://studentaffairs.jhu.edu/community-living/university-housing/", icon: "studenthousing"),
         Detail(title: "First and Second Year Building Options", link: "https://studentaffairs.jhu.edu/community-living/university-housing/buildings-rates/", icon: "options"),
+        Detail(title: "Off-Campus Housing", link: "https://offcampushousing.jhu.edu/", icon: "options"), //change icon
+        Detail(title: "Nine East", link: "https://nineeast33rd.com/", icon: "options"), //change icon
+        Detail(title: "Academy on Charles", link: "https://www.theacademyoncharles.com/", icon: "options"),//change icon
+        Detail(title: "2022-2023 Rates", link: "https://studentaffairs.jhu.edu/community-living/wp-content/uploads/sites/20/2022/03/2022-2023-Room-Board-Rates.pdf", icon: "options"), //change icon
     ]
     
     override func viewDidLoad() {
