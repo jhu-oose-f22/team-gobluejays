@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B79-A2-VQK">
-                                <rect key="frame" x="0.0" y="140" width="415" height="1081"/>
+                                <rect key="frame" x="0.0" y="88" width="415" height="1133"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-gv-1YH">
                                         <rect key="frame" x="0.0" y="0.0" width="415" height="1500"/>
@@ -886,7 +886,7 @@
                                                                     </backgroundConfiguration>
                                                                 </buttonConfiguration>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Complete coverage of Johns Hopkins varsity athletics" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yR3-Rr-R2P">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Complete coverage of Johns Hopkins varsity athletics" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yR3-Rr-R2P">
                                                                 <rect key="frame" x="147" y="37" width="230" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
@@ -949,10 +949,9 @@
                                                                     </backgroundConfiguration>
                                                                 </buttonConfiguration>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Keep up with everything happening around Student Affairs by connecting us!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zxl-Ew-nLo">
-                                                                <rect key="frame" x="148" y="40" width="230" height="39"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Keep up with everything happening around Student Affairs by connecting us!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zxl-Ew-nLo">
+                                                                <rect key="frame" x="148" y="40" width="227" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1012,8 +1011,8 @@
                                                                     </backgroundConfiguration>
                                                                 </buttonConfiguration>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="View on-campus and off-campus housing &amp; apartments near homewood campus" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7ZC-ge-76g">
-                                                                <rect key="frame" x="147" y="40" width="232" height="47"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="View on-campus and off-campus housing &amp; apartments near homewood campus" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7ZC-ge-76g">
+                                                                <rect key="frame" x="147" y="40" width="228" height="47"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
