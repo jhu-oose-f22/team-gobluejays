@@ -1,25 +1,20 @@
 //
-//  AcademicsVC.swift
+//  SocialMediaVC.swift
 //  GoBlueJays
 //
-//  Created by Jessie Luo on 8/13/22.
+//  Created by Thomas Yu on 10/7/22.
 //
 
 import Foundation
 import UIKit
 
-class AcademicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SocialMediaVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var tableView: UITableView!
     var tabs: [Detail] = [
-        Detail(title: "Overview", link: "https://www.jhu.edu", icon: "overview"),
-        Detail(title: "Undergraduate Education", link: "https://www.jhu.edu/academics/undergraduate-studies/", icon: "undergrad"),
-        Detail(title: "Graduate Education", link: "https://www.jhu.edu/academics/graduate-studies/", icon: "grad"),
-        Detail(title: "Schools & Divisions", link: "https://www.jhu.edu/schools/", icon: "search"),
-        Detail(title: "Programs & Majors", link: "https://e-catalogue.jhu.edu/programs/", icon: "study"),
-        Detail(title: "Advanced Academic Programs", link: "https://advanced.jhu.edu", icon: "advanced"),
-        Detail(title: "Study Abroad", link: "https://studyabroad.jhu.edu", icon: "globe"),
+        Detail(title: "Instagram", link: "https://www.instagram.com/johnshopkinsu/?hl=en", icon: "instagram"),
+        Detail(title: "Twitter", link: "https://twitter.com/JohnsHopkins?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor", icon: "twitter"),
     ]
     
     override func viewDidLoad() {
