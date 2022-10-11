@@ -889,7 +889,7 @@
                                                                     <segue destination="lXM-pB-nHR" kind="show" id="o6l-sY-Z0V"/>
                                                                 </connections>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Complete coverage of Johns Hopkins varsity athletics" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yR3-Rr-R2P">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Complete coverage of Johns Hopkins varsity athletics" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yR3-Rr-R2P">
                                                                 <rect key="frame" x="147" y="37" width="230" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
@@ -955,10 +955,9 @@
                                                                     <segue destination="G7T-Hg-crE" kind="show" id="SCX-ZB-Ev0"/>
                                                                 </connections>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Keep up with everything happening around Student Affairs by connecting us on social media!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zxl-Ew-nLo">
-                                                                <rect key="frame" x="148" y="40" width="230" height="39"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Keep up with everything happening around Student Affairs by connecting us!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zxl-Ew-nLo">
+                                                                <rect key="frame" x="148" y="40" width="227" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1021,8 +1020,8 @@
                                                                     <segue destination="p6d-gO-XmB" kind="show" id="9kb-Qh-71e"/>
                                                                 </connections>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="View on-campus and off-campus housing &amp; apartments near homewood campus" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7ZC-ge-76g">
-                                                                <rect key="frame" x="147" y="40" width="232" height="47"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="View on-campus and off-campus housing &amp; apartments near homewood campus" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7ZC-ge-76g">
+                                                                <rect key="frame" x="147" y="40" width="228" height="47"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1110,6 +1109,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="hfP-7F-lpq"/>
                     <size key="freeformSize" width="415" height="1304"/>
+                    <connections>
+                        <outlet property="charMarStatus" destination="i1L-pn-ewM" id="McF-5E-9YC"/>
+                        <outlet property="hopkinsCafeStatus" destination="iea-zH-Gd5" id="aMz-B2-VHZ"/>
+                        <outlet property="leveringCafeStatus" destination="evj-6n-7de" id="APf-EG-fGJ"/>
+                        <outlet property="leveringKitchensStatus" destination="e1W-8S-Eal" id="Oav-BO-DXt"/>
+                        <outlet property="nolansStatus" destination="g2Q-Hm-i6n" id="hWG-Bx-Lhe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRq-sN-HYt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
