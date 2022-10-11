@@ -62,6 +62,26 @@ class HomeVC: UIViewController {
         UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
     }
     
+    @IBAction func HopkinsCafeMenu(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func NolansMenu(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func LeveringKitchenMenu(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-1")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func CharMarMenu(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-2")! as URL, options: [:],completionHandler: nil)
+    }
+    
+    @IBAction func LeveringCafeMenu(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe")! as URL, options: [:],completionHandler: nil)
+    }
+    
     func setHopkinsCafeStatus(day: Int, hour: Int, minutes: Int) {
         if (day >= 2 && day <= 6) { //monday - friday
             if (hour >= 7 && hour < 19) {
