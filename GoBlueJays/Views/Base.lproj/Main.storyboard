@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B79-A2-VQK">
-                                <rect key="frame" x="0.0" y="88" width="415" height="1133"/>
+                                <rect key="frame" x="0.0" y="140" width="415" height="1081"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-gv-1YH">
                                         <rect key="frame" x="0.0" y="0.0" width="415" height="1500"/>
@@ -1100,6 +1100,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="hfP-7F-lpq"/>
                     <size key="freeformSize" width="415" height="1304"/>
+                    <connections>
+                        <outlet property="charMarStatus" destination="i1L-pn-ewM" id="McF-5E-9YC"/>
+                        <outlet property="hopkinsCafeStatus" destination="iea-zH-Gd5" id="aMz-B2-VHZ"/>
+                        <outlet property="leveringCafeStatus" destination="evj-6n-7de" id="APf-EG-fGJ"/>
+                        <outlet property="leveringKitchensStatus" destination="e1W-8S-Eal" id="Oav-BO-DXt"/>
+                        <outlet property="nolansStatus" destination="g2Q-Hm-i6n" id="hWG-Bx-Lhe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRq-sN-HYt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
