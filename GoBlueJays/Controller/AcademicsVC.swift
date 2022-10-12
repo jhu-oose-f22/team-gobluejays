@@ -45,7 +45,7 @@ class AcademicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let urlString = tabs[indexPath.row].link
         if let url = URL(string: urlString)
         {
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url)
         }
     }
 }
