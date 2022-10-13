@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1240"
+   LastUpgradeVersion = "1300"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD58CB19DE267310074CC06BD3075F6B"
-               BuildableName = "THLabel.framework"
-               BlueprintName = "THLabel"
+               BlueprintIdentifier = "E5B4BBC6DD552AC8943C7E22772FC1D3"
+               BuildableName = "GoogleMaps"
+               BlueprintName = "GoogleMaps"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
