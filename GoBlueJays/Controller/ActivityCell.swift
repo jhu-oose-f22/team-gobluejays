@@ -23,9 +23,39 @@ class ActivityCell: UITableViewCell{
     @IBOutlet weak var location2: UILabel!
     @IBOutlet weak var ActivityImage2: UIImageView!
     @IBOutlet weak var back2: UIView!
+    @IBOutlet weak var ActivityBlock2: UIView!
     
-    @IBAction func tapBotton() {
-        
+    @IBAction func likes_click(_ sender: UIButton) {
+        if collect.tag == 0 {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart.fill", withConfiguration: config)
+            collect.setImage(image, for: .normal)
+            collect.tintColor = .red
+            collect.tag = 1
+        } else {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart", withConfiguration: config)
+            collect.setImage(image, for: .normal)
+            collect.tintColor = .lightGray
+            collect.tag = 0
+        }
+    }
+    
+    
+    @IBAction func likes_click2(_ sender: UIButton) {
+        if collect2.tag == 0 {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart.fill", withConfiguration: config)
+            collect2.setImage(image, for: .normal)
+            collect2.tintColor = .red
+            collect2.tag = 1
+        } else {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart", withConfiguration: config)
+            collect2.setImage(image, for: .normal)
+            collect2.tintColor = .lightGray
+            collect2.tag = 0
+        }
     }
     
     func configure() {
