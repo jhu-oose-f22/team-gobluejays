@@ -52,6 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+
+       
+        
+//        db.collection("calendarCourse").getDocuments(){
+//            (QuerySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in QuerySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+//        }
         
         return true
     }
