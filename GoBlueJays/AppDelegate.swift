@@ -7,50 +7,50 @@
 
 import UIKit
 import GooglePlaces
-import RealmSwift
-
-
-let configuration = AppConfiguration(
-   baseURL: "https://realm.mongodb.com", // Custom base URL
-   transport: nil, // Custom RLMNetworkTransportProtocol
-   localAppName: "GoBlueJays",
-   localAppVersion: nil,
-   defaultRequestTimeoutMS: 30000
-)
-let app = App(id: "gobluejays-czowp", configuration: configuration)
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
-        // test
-        let user = try await app.login(credentials: Credentials.anonymous) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    print("Login failed: \(error)")
-                case .success(let user):
-                    print("Login as \(user) succeeded!")
+        FirebaseApp.configure()
+        
+        //test
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        ref = db.collection("events").addDocument(data: [
+            "name": "OOSE",
+            "location": "Hodson 210"
+        ]) {
+            err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID:\(ref!.documentID)")
+            }
+        }
+        ref = db.collection("events").addDocument(data: [
+            "name": "Free lunch",
+            "location": "East gate"
+        ]) {
+            err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID:\(ref!.documentID)")
+            }
+        }
+        
+        db.collection("events").getDocuments(){
+            (QuerySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in QuerySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
                 }
             }
-            let client = app.currentUser!.mongoClient("GoBlueJays")
-            let database = client.database(named:"ios")
-            let collection = database.collection(withName: "events")
-            
-            let event: Document = [
-                "name": "OOSE",
-                "location": "Hodson 210"
-            ]
-            collection.insertOne(event) {result in
-                switch result {
-                case .failure(let error):
-                    print("Call to mongodb Failed")
-                    return
-                case .success(let objectIds):
-                    print("Successfully inserted 1 object")
-                }
-            }
-            
         }
         
         return true
