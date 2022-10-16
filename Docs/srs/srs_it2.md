@@ -52,7 +52,7 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 # Must have
 #### Schedule Page
 1. Add to schedule: as a user of the app, I want to make my own schedule including adding all the courses and my personal events so that I can check them out conveniently on the app. 
-2. View Course: When schedule page load, it should display current week or next week if today is Saturday or Sunday.
+2. View current week: When schedule page load, it should display current week or next week if today is Saturday or Sunday.
 3. Obtain course details: as a user of the app, I want to be able to view relevent course information by clicking on course tabs.
 4. Find buildings and classrooms: as a user of the app, I want to be able to locate classrooms and buildings by clicking the location on course detail page so that I can just check the app whenever I forget the location.
 #### Activity Page
