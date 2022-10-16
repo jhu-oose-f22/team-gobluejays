@@ -16,7 +16,13 @@ class ScheduleVC: UIViewController,NewEventDelegate {
     var monday = 96.0
     var text: String?
     var week = ["1", "2", "3", "2", "3"]
-//    var courses = []
+    var courses: [Course] = []
+    
+    @IBOutlet weak var view1: UIView!
+    @IBOutlet weak var view2: UIView!
+    @IBOutlet weak var view3: UIView!
+    @IBOutlet weak var view4: UIView!
+    @IBOutlet weak var view5: UIView!
     
     @IBOutlet weak var MON: UILabel!
     @IBOutlet weak var TUE: UILabel!
@@ -112,7 +118,7 @@ class ScheduleVC: UIViewController,NewEventDelegate {
         let db = Firestore.firestore()
         setCurrentWeek()
         
-        db.collection("calendarCourse").getDocuments(){
+        db.collection("calendarCourse").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -122,11 +128,62 @@ class ScheduleVC: UIViewController,NewEventDelegate {
                     guard let dateee = data["date"] as? String else {
                         return
                     }
-                    print(dateee)
+//                    print(dateee)
+                    if let fooOffset = self.week.firstIndex(where: {$0 == dateee}) {
+                        print("found date in current week: \(dateee)")
+                        print(fooOffset)
+                        
+                        let course1: Course = Course(name: data["courseName"] as! String, num: data["courseNum"] as! String , date: data["date"] as! String , weekday: fooOffset , location: data["location"] as! String, prof: data["prof"] as! String, startTime: data["startTime"] as! Double, duration: data["duration"] as! Double, syllabus: data["syllabus"] as! [String], locationURL: data["locationURL"] as! String, gradescopeURL: data["gradescopeURL"] as! String, webURL: data["webURL"] as! String)
+                        self.courses.append(course1)
+                    } else {
+                        print("nono")
+                    }
                 }
+                showCourses(courses: courses)
+                
+                
+//                self.view.addSubview(event(title:self.courses[0].name, day: self.courses[0].weekday, start: self.courses[0].startTime, duration: self.courses[0].duration))
             }
         }
+        
     }
+    
+    func showCourses(courses: [Course]) {
+        for course in courses {
+            let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
+                let controller =
+                self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
+                controller.course = course
+                self.present(controller,animated: true,completion: nil)
+            }));
+            let oneHour = self.view1.frame.height / 17
+            let y = (course.startTime - 7.0 + 0.6) * oneHour
+            courseButton.setTitle(course.name, for: .normal)
+            courseButton.backgroundColor = .blue
+            courseButton.setTitleColor(.black, for: .normal);
+            courseButton.frame = CGRect(x: 0, y: y, width: self.view1.frame.width, height: oneHour*course.duration);
+            switch (course.weekday)  {
+              case 0:
+                self.view1.addSubview(courseButton)
+              case 1:
+                self.view2.addSubview(courseButton)
+              case 2:
+                self.view3.addSubview(courseButton)
+              case 3:
+                self.view4.addSubview(courseButton)
+              case 4:
+                self.view5.addSubview(courseButton)
+              default:
+                self.view1.addSubview(courseButton)
+            }
+            
+        }
+    }
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+            print("Button tapped!")
+        }
+
     // day 0: Monday
     func event (title: String, day: Double, start: Double, duration: Double) -> UIView {
         let x = monday + day * width
