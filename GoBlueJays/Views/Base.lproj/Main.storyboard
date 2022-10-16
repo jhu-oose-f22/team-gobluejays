@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B79-A2-VQK">
-                                <rect key="frame" x="0.0" y="88" width="415" height="1133"/>
+                                <rect key="frame" x="0.0" y="140" width="415" height="1081"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-gv-1YH">
                                         <rect key="frame" x="0.0" y="0.0" width="415" height="1500"/>
@@ -3898,7 +3898,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PQ-iN-dr9" userLabel="explore">
-                                        <rect key="frame" x="0.0" y="175" width="414" height="550"/>
+                                        <rect key="frame" x="0.0" y="175" width="414" height="520"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbg-qv-WEO" userLabel="filter">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
@@ -3959,13 +3959,13 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8v3-A8-0cq" userLabel="activity">
-                                                <rect key="frame" x="0.0" y="32" width="414" height="518"/>
+                                                <rect key="frame" x="0.0" y="32" width="414" height="488"/>
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpV-WW-y5V">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="518"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="488"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="L3T-oZ-NbU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="518"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="488"/>
                                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                             </tableView>
                                                         </subviews>
@@ -4003,18 +4003,27 @@
                                             <constraint firstItem="8v3-A8-0cq" firstAttribute="top" secondItem="Zbg-qv-WEO" secondAttribute="bottom" id="ua9-N3-14n"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07N-Zp-dNz">
+                                        <rect key="frame" x="0.0" y="695" width="414" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="mbQ-3r-fAF"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WeP-9S-iUv" secondAttribute="trailing" id="533-RN-l2Z"/>
                                     <constraint firstItem="0PQ-iN-dr9" firstAttribute="leading" secondItem="raO-CT-BCP" secondAttribute="leading" id="AG6-ab-fYt"/>
-                                    <constraint firstAttribute="bottom" secondItem="0PQ-iN-dr9" secondAttribute="bottom" id="BVW-80-Gsm"/>
                                     <constraint firstItem="WeP-9S-iUv" firstAttribute="leading" secondItem="raO-CT-BCP" secondAttribute="leading" id="Dp6-hp-ACw"/>
                                     <constraint firstAttribute="trailing" secondItem="wTr-Ik-maI" secondAttribute="trailing" id="Fmj-u0-a1j"/>
+                                    <constraint firstAttribute="bottom" secondItem="07N-Zp-dNz" secondAttribute="bottom" id="HNr-nx-a67"/>
+                                    <constraint firstItem="07N-Zp-dNz" firstAttribute="leading" secondItem="raO-CT-BCP" secondAttribute="leading" id="HU2-Xd-u3W"/>
                                     <constraint firstItem="wTr-Ik-maI" firstAttribute="top" secondItem="WeP-9S-iUv" secondAttribute="bottom" id="Luk-KH-aup"/>
                                     <constraint firstItem="WeP-9S-iUv" firstAttribute="top" secondItem="raO-CT-BCP" secondAttribute="top" id="Qmh-pg-Pch"/>
                                     <constraint firstItem="wTr-Ik-maI" firstAttribute="leading" secondItem="raO-CT-BCP" secondAttribute="leading" id="bjG-Qg-BAo"/>
                                     <constraint firstAttribute="trailing" secondItem="0PQ-iN-dr9" secondAttribute="trailing" id="omf-X7-hLa"/>
                                     <constraint firstItem="0PQ-iN-dr9" firstAttribute="top" secondItem="wTr-Ik-maI" secondAttribute="bottom" id="stv-3e-cvG"/>
+                                    <constraint firstAttribute="trailing" secondItem="07N-Zp-dNz" secondAttribute="trailing" id="w0K-mB-BUb"/>
                                     <constraint firstItem="0PQ-iN-dr9" firstAttribute="top" secondItem="wTr-Ik-maI" secondAttribute="bottom" id="yik-15-QET"/>
                                 </constraints>
                             </stackView>
@@ -4042,7 +4051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nWl-mN-CUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4209" y="-611"/>
+            <point key="canvasLocation" x="4208.695652173913" y="-611.38392857142856"/>
         </scene>
         <!--Collects-->
         <scene sceneID="Gkb-Z5-7Ly">
@@ -4154,7 +4163,6 @@
         <image name="Unknown 2 (2)" width="55" height="55"/>
         <image name="Unknown 2 (3)" width="55" height="55"/>
         <image name="academics" width="275" height="183"/>
-        <image name="archivebox" catalog="system" width="128" height="107"/>
         <image name="athletics" width="318" height="159"/>
         <image name="balloon.2" catalog="system" width="102" height="128"/>
         <image name="books.vertical.circle.fill" catalog="system" width="128" height="123"/>
@@ -4167,6 +4175,7 @@
         <image name="exclamationmark.circle" catalog="system" width="128" height="123"/>
         <image name="folder.fill.badge.gearshape" catalog="system" width="128" height="91"/>
         <image name="frontpage" width="3822" height="2027"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="housing" width="294" height="172"/>
         <image name="leveringCafe" width="474" height="316"/>
