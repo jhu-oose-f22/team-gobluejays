@@ -101,7 +101,7 @@ There are two ways to see data. The first is through query API like the example 
 ``` swift
 db.collection("events").getDocuments() { // handle the future object returned by getDocuments() }
 ```
-Another is through portal. Open Firebase console, log in as the administrator (usedforatlasmurphy@gmail.com) and click the gobluejays project. From the left column you can find Firestore. There's database, collection and documents in it.
+Another is through portal. Open Firebase console, log in as the administrator (usedforatlasmurphy@gmail.com, password:gobluejays2022) and click the gobluejays project. From the left column you can find Firestore. There's database, collection and documents in it.
 
 #### Attention
 
