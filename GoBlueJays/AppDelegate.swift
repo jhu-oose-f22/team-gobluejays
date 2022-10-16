@@ -19,39 +19,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //test
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
-        ref = db.collection("events").addDocument(data: [
-            "name": "OOSE",
-            "location": "Hodson 210"
-        ]) {
-            err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID:\(ref!.documentID)")
-            }
-        }
-        ref = db.collection("events").addDocument(data: [
-            "name": "Free lunch",
-            "location": "East gate"
-        ]) {
-            err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID:\(ref!.documentID)")
-            }
-        }
-        
-        db.collection("events").getDocuments(){
-            (QuerySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in QuerySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-            }
-        }
+//        ref = db.collection("calendarCourse").addDocument(data: [
+//            "courseName": "FPSE",
+//            "prof": "OCaml",
+//            "courseNum": "EN.501.448",
+//            "date": "19/10/2022",
+//            "location": "Maryland 210",
+//            "startTime": 12,
+//            "duration": 2.0,
+//            "locationURL":"https://jhu-oose-f22.github.io/cs421/",
+//            "gradescopeURL":"https://jhu-oose-f22.github.io/cs421/",
+//            "webURL":"https://pl.cs.jhu.edu/fpse/dateline.html",
+//            "syllabus":["40% - Assignments","60% - Project"]
+//        ]) {
+//            err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID:\(ref!.documentID)")
+//            }
+//        }
+//        ref = db.collection("events").addDocument(data: [
+//            "name": "OOSE",
+//            "location": "Hodson 210"
+//        ]) {
+//            err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID:\(ref!.documentID)")
+//            }
+//        }
+//        ref = db.collection("events").addDocument(data: [
+//            "name": "Free lunch",
+//            "location": "East gate"
+//        ]) {
+//            err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID:\(ref!.documentID)")
+//            }
+//        }
+//
+//        db.collection("events").getDocuments(){
+//            (QuerySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in QuerySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+//        }
 
        
         
