@@ -105,20 +105,6 @@ The app is built and run on Xcode. We use Swift as our major programming languag
 PKUhelper(PKU)
 UC San Diego (UCSD)
 NYU Mobile (NYU)
-3. Obtain details and specific schedule information: as a user of the app, I want to be able to organize all the detailed information about my enrolled courses in the calendar, including classroom location, homework submission portals, etc. in the app so that I can find all information in one place.
-4. Find buildings and classrooms: as a user of the app, I want to be able to find classrooms and buildings by clicking the course on my calendar so that I can just check the app whenever I forget the location.
-#### Activity Page
-4. View campus events: as a user of the app, I want to be able to check all the campus events and activities so that I won't miss out any activity I can go.
-5. Search activity: as a user of the app, I want to be able to search activities using some keywords so that I can better find events that might interest me.
-6. Collect campus events: as a user of the app, I want to be able to collect the events that I'm interested in so that I can access their details conveniently.
-7. Activity recommendation by schedule: as a user of the app, I want to be able to get recommended by events that fits my schedule so that I won't bother to double check.
-8. Activity recommendation by location: as a user of the app, I want to be able to get recommended by events that are close to me so that I can attend activities that are near to me when I'm free.
-#### Home Page
-9. Access school apps and websites: as a user of the app, I want to access to or be directed to different campus apps and websites, such as TransLoc, SIS, and Canvas, so that I can enjoy various services and obtain different information easily from an integrated platform.
-10. Know operating hours: as a user of the app, I want to know the operating hours of recreational center, library, dining halls, etc. so that I won’t waste my time.
-11. Check menu: as a user of the app, I want to be able to check daily menus of campus dining places so that I can decide where to go in advance.
-#### Setting Page
-13. Setting page: as a user, when I log in, there should be a setting page containing my personal profile information and have access to project document and support.
 
 # Nice to have
 1. Event notification: as a user of the app, I want to get notified of different school events and campus news so that I won’t miss out anything that’s important or interests me.
