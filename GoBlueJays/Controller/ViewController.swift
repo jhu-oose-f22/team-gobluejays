@@ -29,7 +29,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print("hi")
         name.text = course.name
-        time.text = String(course.startTime)
+        var minute = String(Int(course.startTime.truncatingRemainder(dividingBy: 1)*60))
+        if (minute.count == 1) {
+            minute = "0" + minute;
+        }
+        time.text = String(Int(course.startTime/1)) + ":" +
+                            minute
         location.text = course.location
         prof.text = course.prof
         num.text = course.num
