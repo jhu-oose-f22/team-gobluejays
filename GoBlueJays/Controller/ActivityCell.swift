@@ -9,7 +9,6 @@ import UIKit
 
 class ActivityCell: UITableViewCell{
     
-
     @IBOutlet weak var ActivityImage: UIImageView!
     @IBOutlet weak var Title: UILabel!
     @IBOutlet weak var time: UILabel!
@@ -24,6 +23,8 @@ class ActivityCell: UITableViewCell{
     @IBOutlet weak var ActivityImage2: UIImageView!
     @IBOutlet weak var back2: UIView!
     @IBOutlet weak var ActivityBlock2: UIView!
+    
+    var activityID
     
     @IBAction func likes_click(_ sender: UIButton) {
         if collect.tag == 0 {
@@ -75,6 +76,10 @@ class ActivityCell: UITableViewCell{
         back.clipsToBounds = true
         back2.layer.cornerRadius = 5
         back2.clipsToBounds = true
+    }
+    
+    func assign_ID() {
+        
     }
     
     override func awakeFromNib() {
