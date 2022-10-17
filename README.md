@@ -119,10 +119,10 @@ Before you push any data, be aware that you should create corresponding database
 - [x] View campus events
     - [x] implement frontend of the campus event tab
     - [x] design UI interface of the event page on Figma
-- [ ] Access school apps and websites
+- [x] Access school apps and websites
     - [x] Add more Apps and Websites to Apps/Websites Sections (Find icons online)
     - [x] Create Apps and Websites Section on Home Page
-    - [ ] Link About sections to appropriate websites, imitate UI from Academics for Athletics, Housing, Social Media sections
+    - [x] Link About sections to appropriate websites, imitate UI from Academics for Athletics, Housing, Social Media sections
 - [ ] Setting page
     - [x] set up team website
     - [ ] design user profile interface
