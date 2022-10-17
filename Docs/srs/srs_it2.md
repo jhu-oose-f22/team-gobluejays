@@ -25,8 +25,9 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 # Must have
 #### Schedule Page
 1. Add to schedule: as a user of the app, I want to make my own schedule including adding all the courses and my personal events so that I can check them out conveniently on the app. 
-2. Obtain details and specific schedule information: as a user of the app, I want to be able to organize all the detailed information about my enrolled courses in the calendar, including classroom location, homework submission portals, etc. in the app so that I can find all information in one place.
-3. Find buildings and classrooms: as a user of the app, I want to be able to find classrooms and buildings by clicking the course on my calendar so that I can just check the app whenever I forget the location.
+2. View current week: When schedule page load, it should display current week or next week if today is Saturday or Sunday.
+3. Obtain course details: as a user of the app, I want to be able to view relevent course information by clicking on course tabs.
+4. Find buildings and classrooms: as a user of the app, I want to be able to locate classrooms and buildings by clicking the location on course detail page so that I can just check the app whenever I forget the location.
 #### Activity Page
 4. View campus events: as a user of the app, I want to be able to check all the campus events and activities so that I won't miss out any activity I can go.
 5. Search activity: as a user of the app, I want to be able to search activities using some keywords so that I can better find events that might interest me.
@@ -37,8 +38,6 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 9. Access school apps and websites: as a user of the app, I want to access to or be directed to different campus apps and websites, such as TransLoc, SIS, and Canvas, so that I can enjoy various services and obtain different information easily from an integrated platform.
 10. Know operating hours: as a user of the app, I want to know the operating hours of recreational center, library, dining halls, etc. so that I won’t waste my time.
 11. Check menu: as a user of the app, I want to be able to check daily menus of campus dining places so that I can decide where to go in advance.
-#### Setting Page
-13. Setting page: as a user, when I log in, there should be a setting page containing my personal profile information and have access to project document and support.
 
 # Nice to have
 1. Event notification: as a user of the app, I want to get notified of different school events and campus news so that I won’t miss out anything that’s important or interests me.
@@ -66,6 +65,19 @@ In short, while acting as a resource hub, our app will help Hopkins students ach
 - User should not be able to have access to other user’s information including personal schedule and to-do list
 - All requests to the backend should be properly authenticated
 
+
+## Software Architecture & Technology Stack: Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to specific software architecture? What programming languages, frameworks, databases, …, will be used to develop and deploy the software?
+GoBlueJays is a mobile app that conforms to iOS Mobile Application Architecture with the MVC model (Model-View-Controller):
+- Model – The data layer (persistence, model objects, parsers, managers, networking code).
+- View – Similar to the presentation layer, a re-usable layer that represents the app to the user.
+- Controller – A mediator level that communicates with an abstraction via a protocol.
+
+The app is built and run on Xcode. We use Swift as our major programming language and SQLite for databases.
+
+## Similar Apps: List a few similar applications to the one you are developing. Don't be eager to conclude no similar app exists! There is always something similar to what you are building! Finding those will help you to better specify your project. You must be prepared to explain how your app is different from the existing ones.
+PKUhelper(PKU)
+UC San Diego (UCSD)
+NYU Mobile (NYU)
 
 ## Software Architecture & Technology Stack: Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to specific software architecture? What programming languages, frameworks, databases, …, will be used to develop and deploy the software?
 GoBlueJays is a mobile app that conforms to iOS Mobile Application Architecture with the MVC model (Model-View-Controller):

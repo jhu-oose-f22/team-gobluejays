@@ -7,51 +7,84 @@
 
 import UIKit
 import GooglePlaces
-import RealmSwift
-
-
-let configuration = AppConfiguration(
-   baseURL: "https://realm.mongodb.com", // Custom base URL
-   transport: nil, // Custom RLMNetworkTransportProtocol
-   localAppName: "GoBlueJays",
-   localAppVersion: nil,
-   defaultRequestTimeoutMS: 30000
-)
-let app = App(id: "gobluejays-czowp", configuration: configuration)
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
-        // test
-        let user = try await app.login(credentials: Credentials.anonymous) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    print("Login failed: \(error)")
-                case .success(let user):
-                    print("Login as \(user) succeeded!")
-                }
+        FirebaseApp.configure()
+        
+        //test
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        ref = db.collection("calendarCourse").addDocument(data: [
+            "courseName": "IP",
+            "prof": "Joanne",
+            "courseNum": "EN.510.220",
+            "date": "21/10/2022",
+            "location": "Maryland 310",
+            "startTime": 16,
+            "duration": 1.0,
+            "locationURL":"https://jhu-oose-f22.github.io/cs421/",
+            "gradescopeURL":"https://jhu-oose-f22.github.io/cs421/",
+            "webURL":"https://pl.cs.jhu.edu/fpse/dateline.html",
+            "syllabus":["40% - Assignments","60% - Project"]
+        ]) {
+            err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID:\(ref!.documentID)")
             }
-            let client = app.currentUser!.mongoClient("GoBlueJays")
-            let database = client.database(named:"ios")
-            let collection = database.collection(withName: "events")
-            
-            let event: Document = [
-                "name": "OOSE",
-                "location": "Hodson 210"
-            ]
-            collection.insertOne(event) {result in
-                switch result {
-                case .failure(let error):
-                    print("Call to mongodb Failed")
-                    return
-                case .success(let objectIds):
-                    print("Successfully inserted 1 object")
-                }
-            }
-            
         }
+//        ref = db.collection("events").addDocument(data: [
+//            "name": "OOSE",
+//            "location": "Hodson 210"
+//        ]) {
+//            err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID:\(ref!.documentID)")
+//            }
+//        }
+//        ref = db.collection("events").addDocument(data: [
+//            "name": "Free lunch",
+//            "location": "East gate"
+//        ]) {
+//            err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID:\(ref!.documentID)")
+//            }
+//        }
+//
+//        db.collection("events").getDocuments(){
+//            (QuerySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in QuerySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+//        }
+
+       
+        
+//        db.collection("calendarCourse").getDocuments(){
+//            (QuerySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in QuerySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+//        }
         
         return true
     }
