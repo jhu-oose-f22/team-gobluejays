@@ -79,33 +79,6 @@ PKUhelper(PKU)
 UC San Diego (UCSD)
 NYU Mobile (NYU)
 
-# Nice to have
-1. Event notification: as a user of the app, I want to get notified of different school events and campus news so that I won’t miss out anything that’s important or interests me.
-2. Activity recommendation by personal preference: as a user of the app, I want to be able to get recommended by events that might interest me so that I won't miss out anything. 
-3. One-time log-in: as a user of the app, I want to be able to login to the app using my school email account and don’t need to re-login to other embedded apps and websites so that I only need to login once.
-4. Post activity: as a user of the app, I want to be able to post my own activity so that I can better promote the event or activity held by myself or my clubs so that I can reach to a wider group of people.
-5. Personalization: as a user of the app, I want to be able to personalize my app settings such as profile image and background so that I can enjoy the customized experience.
-
-
-## Non-functional Requirements:
-1. Availability/Usability
-- The app should be easy to navigate such that users can understand how the content is organized and where to access key features.
-- In standard network conditions, the app should fully load in less than 3 seconds
-
-2. Maintainability/Scalability
-- The database storage should be capable of storing 5000 course information and be easy to expand when higher need comes up
-- The web app should be able to handle 300 users at the same time without affecting its performance
-- The system must be restored within 2 hours during daytime and 6 hours during night after a failure
-
-3. Portability/Compatibility
-- The app should support IOS operating system
-- The app should be able to run and fit to any IOS devices including iphones and ipad of all generations
-
-4. Security/Privacy
-- User should not be able to have access to other user’s information including personal schedule and to-do list
-- All requests to the backend should be properly authenticated
-
-
 ## Software Architecture & Technology Stack: Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to specific software architecture? What programming languages, frameworks, databases, …, will be used to develop and deploy the software?
 GoBlueJays is a mobile app that conforms to iOS Mobile Application Architecture with the MVC model (Model-View-Controller):
 - Model – The data layer (persistence, model objects, parsers, managers, networking code).
