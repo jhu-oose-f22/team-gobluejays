@@ -106,11 +106,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-
 		08784FA6B690948710BBEC27DDA7E866 /* GooglePlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.debug.xcconfig; sourceTree = "<group>"; };
 		08FE8924E5F192B3AF82472B4856FBD3 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		140CB1B6C502AF56104158CD0B45C564 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
-
 		18F126B89C7FE10BDA2CC698F6CE3268 /* Pods-GoBlueJays-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJays-acknowledgements.plist"; sourceTree = "<group>"; };
 		1D3EE936FDD05A1E83EBD5988AE768D6 /* Pods-GoBlueJays */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-GoBlueJays"; path = Pods_GoBlueJays.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21511AF8532AE25697878B9DADDA300C /* Pods-GoBlueJays.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GoBlueJays.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 		5B65B3B4976C0C21521B56741EDC4959 /* Pods-GoBlueJaysTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GoBlueJaysTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5D183D3CFF9B7236054783DF94CDE7ED /* Pods-GoBlueJaysTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-GoBlueJaysTests"; path = Pods_GoBlueJaysTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BE3273FC88B69CEC45C6A150147289 /* Pods-GoBlueJaysTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GoBlueJaysTests-dummy.m"; sourceTree = "<group>"; };
-
 		6A6222697B632572911B2639D06CB8CF /* THLabel-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "THLabel-Info.plist"; sourceTree = "<group>"; };
 		6A6D6DFF6D0430FFA65B5A44DDA6A907 /* Pods-GoBlueJays-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GoBlueJays-dummy.m"; sourceTree = "<group>"; };
 		6C7E578086292BA0E14F8A083E5A4A04 /* Pods-GoBlueJays-GoBlueJaysUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GoBlueJays-GoBlueJaysUITests-frameworks.sh"; sourceTree = "<group>"; };
@@ -145,13 +142,11 @@
 		AC3DDEBD91AE24EFF7349E734613DDCF /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
 		B22F7BE374DA15ED78CE48FAF173631D /* Pods-GoBlueJays-GoBlueJaysUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GoBlueJays-GoBlueJaysUITests.modulemap"; sourceTree = "<group>"; };
 		B669CD7E38097AFD3F1FB1CE0385B408 /* GoogleMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.debug.xcconfig; sourceTree = "<group>"; };
-
 		BB62E24380E22298317E2CA355814F13 /* Pods-GoBlueJays-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJays-Info.plist"; sourceTree = "<group>"; };
 		BB86E635D00C05F9523043416E6359F4 /* Pods-GoBlueJaysTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJaysTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		BD4F4F16A3F7ED6B87D12BE65E9072C6 /* Pods-GoBlueJays-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GoBlueJays-frameworks.sh"; sourceTree = "<group>"; };
 		BE8D4C0F230D48E0C87919675CA1722A /* Pods-GoBlueJaysTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJaysTests-Info.plist"; sourceTree = "<group>"; };
 		C1A524F80E3B33467D441F3E766CFAD4 /* Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GoBlueJays-GoBlueJaysUITests.release.xcconfig"; sourceTree = "<group>"; };
-
 		CBA04857543FDAE44F8B58007CAFCF90 /* THLabel */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = THLabel; path = THLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF51F67BE52DF639B7F6F53CD42143B5 /* Pods-GoBlueJays-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GoBlueJays-resources.sh"; sourceTree = "<group>"; };
 		D5B64561836842B4B1C364A2BD2881C3 /* THLabel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = THLabel.release.xcconfig; sourceTree = "<group>"; };
@@ -162,11 +157,9 @@
 		E943AB0CA4029B433CF1A5AF073BFAF9 /* THLabel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = THLabel.modulemap; sourceTree = "<group>"; };
 		ED97992E684E5581291286343C6FADD3 /* Pods-GoBlueJays-GoBlueJaysUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GoBlueJays-GoBlueJaysUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDF1D5EBF678374712065B0232E98D27 /* Pods-GoBlueJays-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GoBlueJays-acknowledgements.markdown"; sourceTree = "<group>"; };
-
 		F442050CECE90927E6244EDAF47AD37B /* Pods-GoBlueJays-GoBlueJaysUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GoBlueJays-GoBlueJaysUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		F700567C8B08AE0D3E53DDA5C06C22F7 /* GooglePlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.release.xcconfig; sourceTree = "<group>"; };
 		FC68705F03308F097A452F5DAA48903D /* Pods-GoBlueJaysTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GoBlueJaysTests-umbrella.h"; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,9 +223,7 @@
 				EF26FF022AA8BF8D8AF18D8BD92D1DD4 /* GooglePlaces */,
 				851A6CF2EEB813F6876AFFCF4AFC5AD2 /* THLabel */,
 			);
-
 			name = Pods;
-
 			sourceTree = "<group>";
 		};
 		482D2B60E11697EC2C18D840EFFE7D6F /* Support Files */ = {
@@ -245,7 +236,6 @@
 			path = "../Target Support Files/GoogleMaps";
 			sourceTree = "<group>";
 		};
-
 		48D58F41AAEFC2F01A4621BFED9897AE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,7 +249,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/THLabel";
-
 			sourceTree = "<group>";
 		};
 		4FA3FB14A5D549B1F63A88F4DBF83A1D /* Resources */ = {
@@ -273,11 +262,9 @@
 		61413CE2875A9ACB5E70A42483249707 /* GoogleMaps */ = {
 			isa = PBXGroup;
 			children = (
-
 				D58F744079876AA0E5CD31543D5A7C41 /* Base */,
 				7395B27AF68166571A9B599536532589 /* Maps */,
 				482D2B60E11697EC2C18D840EFFE7D6F /* Support Files */,
-
 			);
 			name = GoogleMaps;
 			path = GoogleMaps;
@@ -365,10 +352,8 @@
 				DBE94F6E89A30C4AC5AD7A2E0932359D /* THLabel.m */,
 				48D58F41AAEFC2F01A4621BFED9897AE /* Support Files */,
 			);
-
 			name = THLabel;
 			path = THLabel;
-
 			sourceTree = "<group>";
 		};
 		BD3FF4FCB4DB42645EDD644BEF460C99 /* Pods-GoBlueJays */ = {
@@ -530,7 +515,6 @@
 			productReference = 5D183D3CFF9B7236054783DF94CDE7ED /* Pods-GoBlueJaysTests */;
 			productType = "com.apple.product-type.framework";
 		};
-
 		7446F2E8105F17966FF4187045CCE23D /* Pods-GoBlueJays-GoBlueJaysUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDADA0A83C4B7E16277C5A81ECBD0B9B /* Build configuration list for PBXNativeTarget "Pods-GoBlueJays-GoBlueJaysUITests" */;
@@ -576,8 +560,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
