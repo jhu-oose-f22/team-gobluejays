@@ -13,4 +13,5 @@ struct Activity {
     let location: String
     let image: String
     let likes: Bool
+    let id: String
 }
