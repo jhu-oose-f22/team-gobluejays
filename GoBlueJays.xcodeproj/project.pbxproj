@@ -61,12 +61,13 @@
 		2CE790D4289F7EED00C3BB2B /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790D3289F7EED00C3BB2B /* ScheduleVC.swift */; };
 		2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790D5289F7F1A00C3BB2B /* MapVC.swift */; };
 		31F33AF8D91F4CF3A227FCC8 /* Pods_GoBlueJaysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F392C337C1E0F67180F3BE15 /* Pods_GoBlueJaysTests.framework */; };
-		40A89A1328F75FE800E3CE60 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40A89A0E28F75FE700E3CE60 /* ActivityCell.xib */; };
-		40A89A1428F75FE800E3CE60 /* CollectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A89A0F28F75FE700E3CE60 /* CollectVC.swift */; };
-		40A89A1528F75FE800E3CE60 /* ActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A89A1028F75FE800E3CE60 /* ActivityVC.swift */; };
-		40A89A1628F75FE800E3CE60 /* AddEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A89A1128F75FE800E3CE60 /* AddEventVC.swift */; };
-		40A89A1728F75FE800E3CE60 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A89A1228F75FE800E3CE60 /* ActivityCell.swift */; };
-		40A89A1928F7602F00E3CE60 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A89A1828F7602E00E3CE60 /* Activity.swift */; };
+		40A89A1328F75FE800E3CE60 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		40A89A1428F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40A89A1528F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40A89A1628F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40A89A1728F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40A89A1928F7602F00E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F98422728FE204B009990D4 /* WebViewVC.swift */; };
 		4FED0F6128EFF868003265A1 /* AthleticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6028EFF868003265A1 /* AthleticsVC.swift */; };
 		4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */; };
 		4FED0F6528F003CA003265A1 /* HousingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6428F003CA003265A1 /* HousingVC.swift */; };
@@ -135,6 +136,7 @@
 		2CE790D5289F7F1A00C3BB2B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		361C4B63EF566EB168F64E76 /* Pods-GoBlueJaysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJaysTests.release.xcconfig"; path = "Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AB4E1A6DADC38CB07519827 /* Pods-GoBlueJays.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJays.debug.xcconfig"; path = "Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays.debug.xcconfig"; sourceTree = "<group>"; };
+		4F98422728FE204B009990D4 /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = "<group>"; };
 		4FED0F6028EFF868003265A1 /* AthleticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsVC.swift; sourceTree = "<group>"; };
 		4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaVC.swift; sourceTree = "<group>"; };
 		4FED0F6428F003CA003265A1 /* HousingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousingVC.swift; sourceTree = "<group>"; };
@@ -218,7 +220,6 @@
 		2CB79C8E28A9D9FA00744FF8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				40A89A1828F7602E00E3CE60 /* Activity.swift */,
 				2CB79C8F28A9DA1C00744FF8 /* Detail.swift */,
 			);
 			path = Models;
@@ -245,14 +246,10 @@
 				2CE790D1289F7EE100C3BB2B /* AppsVC.swift */,
 				2CE790CF289F7EBA00C3BB2B /* HomeVC.swift */,
 				2CE790A1289F72BE00C3BB2B /* ViewController.swift */,
-				40A89A1228F75FE800E3CE60 /* ActivityCell.swift */,
-				40A89A0E28F75FE700E3CE60 /* ActivityCell.xib */,
-				40A89A1028F75FE800E3CE60 /* ActivityVC.swift */,
-				40A89A1128F75FE800E3CE60 /* AddEventVC.swift */,
-				40A89A0F28F75FE700E3CE60 /* CollectVC.swift */,
 				2CE790D3289F7EED00C3BB2B /* ScheduleVC.swift */,
 				2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */,
 				4FED0F6028EFF868003265A1 /* AthleticsVC.swift */,
+				4F98422728FE204B009990D4 /* WebViewVC.swift */,
 				4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */,
 				4FED0F6428F003CA003265A1 /* HousingVC.swift */,
 			);
@@ -470,7 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CE790AA289F72BF00C3BB2B /* LaunchScreen.storyboard in Resources */,
-				40A89A1328F75FE800E3CE60 /* ActivityCell.xib in Resources */,
+				40A89A1328F75FE800E3CE60 /* (null) in Resources */,
 				2CE790A7289F72BF00C3BB2B /* Assets.xcassets in Resources */,
 				08C1484A28F8503600A493B2 /* GoogleService-Info.plist in Resources */,
 				2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */,
@@ -644,20 +641,21 @@
 				2CD2536828ED2AF8004C03A6 /* AddEventViewController.swift in Sources */,
 				2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */,
 				2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */,
-				40A89A1928F7602F00E3CE60 /* Activity.swift in Sources */,
+				40A89A1928F7602F00E3CE60 /* (null) in Sources */,
 				2CE790D0289F7EBA00C3BB2B /* HomeVC.swift in Sources */,
 				2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */,
-				40A89A1428F75FE800E3CE60 /* CollectVC.swift in Sources */,
+				40A89A1428F75FE800E3CE60 /* (null) in Sources */,
 				4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */,
 				2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */,
-				40A89A1528F75FE800E3CE60 /* ActivityVC.swift in Sources */,
+				40A89A1528F75FE800E3CE60 /* (null) in Sources */,
 				2CB9247028E49EB80006967C /* SupportVC.swift in Sources */,
 				2CE790CE289F7D8E00C3BB2B /* CustomTabBarController.swift in Sources */,
 				2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */,
 				2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */,
-				40A89A1728F75FE800E3CE60 /* ActivityCell.swift in Sources */,
-				40A89A1628F75FE800E3CE60 /* AddEventVC.swift in Sources */,
+				40A89A1728F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
+				4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */,
 				2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */,
 				2CE790D2289F7EE100C3BB2B /* AppsVC.swift in Sources */,
 				2CE790A0289F72BE00C3BB2B /* SceneDelegate.swift in Sources */,
