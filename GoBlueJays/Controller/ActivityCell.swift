@@ -24,7 +24,7 @@ class ActivityCell: UITableViewCell{
     @IBOutlet weak var back2: UIView!
     @IBOutlet weak var ActivityBlock2: UIView!
     
-    var activityID
+//    var activityID
     
     @IBAction func likes_click(_ sender: UIButton) {
         if collect.tag == 0 {
