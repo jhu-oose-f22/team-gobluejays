@@ -1,16 +1,20 @@
 //
-//  CollectVC.swift
+//  CollectActivities.swift
 //  GoBlueJays
 //
-//  Created by 刘忻岩 on 10/10/22.
+//  Created by david on 10/17/22.
+
 //
 
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
-class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+
+class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+
     @IBOutlet weak var tableView: UITableView!
     
 //    var collects: [Activity] = [
@@ -23,6 +27,9 @@ class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 //    ]
     var collects: [Activity] = []
     
+    var filteredCollects: [Activity]!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -30,7 +37,10 @@ class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
-        
+
+        searchBar.delegate = self
+        filteredCollects = collects
+
         //navigationController?.navigationBar.tintColor = .accentColor
         
         let db = Firestore.firestore()
@@ -57,10 +67,11 @@ class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (collects.count % 2 == 0){
-            return collects.count/2
+
+        if (filteredCollects.count % 2 == 0){
+            return filteredCollects.count/2
         } else {
-            return collects.count/2 + 1
+            return filteredCollects.count/2 + 1
         }
     }
     
@@ -70,18 +81,19 @@ class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
         
-        cell.location.text = collects[ind1].location
-        cell.Title.text = collects[ind1].title
-        cell.time.text = collects[ind1].time
-        cell.ActivityImage.image = UIImage(named: collects[ind1].image)
-        cell.collect.isHidden = true
+
+        cell.location.text = filteredCollects[ind1].location
+        cell.Title.text = filteredCollects[ind1].title
+        cell.time.text = filteredCollects[ind1].time
+        cell.ActivityImage.image = UIImage(named: filteredCollects[ind1].image)
         
-        if (ind2 <= collects.count-1) {
-            cell.location2.text = collects[ind2].location
-            cell.Title2.text = collects[ind2].title
-            cell.time2.text = collects[ind2].time
-            cell.ActivityImage2.image = UIImage(named: collects[ind2].image)
-            cell.collect2.isHidden = true
+        if (ind2 <= filteredCollects.count-1) {
+            cell.ActivityBlock2.isHidden = false
+            cell.location2.text = filteredCollects[ind2].location
+            cell.Title2.text = filteredCollects[ind2].title
+            cell.time2.text = filteredCollects[ind2].time
+            cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
+
         }
         else {
             cell.ActivityBlock2.isHidden = true
@@ -100,5 +112,22 @@ class CollectVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: Search Bar Config
+    // whenever there is text in the search bar, run the following code
+    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
+        
+        filteredCollects = []
+        if searchText == "" {
+            filteredCollects = collects
+        } else {
+            for collect in collects {
+                if collect.title.lowercased().contains(searchText.lowercased()) {
+                    filteredCollects.append(collect)
+                }
+            }
+        }
+        self.tableView.reloadData()
+    }
 
 }

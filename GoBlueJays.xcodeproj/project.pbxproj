@@ -278,6 +278,10 @@
 				2CE790D1289F7EE100C3BB2B /* AppsVC.swift */,
 				2CE790CF289F7EBA00C3BB2B /* HomeVC.swift */,
 				2CE790A1289F72BE00C3BB2B /* ViewController.swift */,
+				40A89A1228F75FE800E3CE60 /* ActivityCell.swift */,
+				40A89A0E28F75FE700E3CE60 /* ActivityCell.xib */,
+				40A89A1028F75FE800E3CE60 /* ActivityVC.swift */,
+				40A89A1128F75FE800E3CE60 /* AddEventVC.swift */,
 				2CE790D3289F7EED00C3BB2B /* ScheduleVC.swift */,
 				2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */,
 				40923DA728FE33AF003B15B5 /* ActivityCell.swift */,
@@ -611,12 +615,9 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -624,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A47660A6015EF3A29B6152F8 /* [CP] Embed Pods Frameworks */ = {
@@ -682,6 +683,7 @@
 				40923DAE28FE33AF003B15B5 /* AddEventVC.swift in Sources */,
 				2CD2536828ED2AF8004C03A6 /* AddEventViewController.swift in Sources */,
 				2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */,
+				63051E5128FE462B002C43BF /* CollectVC.swift in Sources */,
 				2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */,
 				40A89A1928F7602F00E3CE60 /* (null) in Sources */,
 				2CE790D0289F7EBA00C3BB2B /* HomeVC.swift in Sources */,
@@ -976,6 +978,7 @@
 		};
 		2CE790C9289F72BF00C3BB2B /* Release */ = {
 			isa = XCBuildConfiguration;
+
 			baseConfigurationReference = 93467292E5551B79B66EC8F5 /* Pods-GoBlueJaysTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
