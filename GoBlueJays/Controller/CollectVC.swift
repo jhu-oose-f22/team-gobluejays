@@ -3,15 +3,18 @@
 //  GoBlueJays
 //
 //  Created by david on 10/17/22.
+
 //
 
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     @IBOutlet weak var searchBar: UISearchBar!
+
     @IBOutlet weak var tableView: UITableView!
     
 //    var collects: [Activity] = [
@@ -26,6 +29,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     
     var filteredCollects: [Activity]!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -33,9 +37,10 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
-        
+
         searchBar.delegate = self
         filteredCollects = collects
+
         //navigationController?.navigationBar.tintColor = .accentColor
         
         let db = Firestore.firestore()
@@ -62,6 +67,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         if (filteredCollects.count % 2 == 0){
             return filteredCollects.count/2
         } else {
@@ -75,6 +81,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
         
+
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
@@ -86,6 +93,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.Title2.text = filteredCollects[ind2].title
             cell.time2.text = filteredCollects[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
+
         }
         else {
             cell.ActivityBlock2.isHidden = true
@@ -121,4 +129,5 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         }
         self.tableView.reloadData()
     }
+
 }

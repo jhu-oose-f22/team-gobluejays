@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -25,8 +26,9 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 //    ]
     var activities: [Activity] = []
     
+
     var filteredActivities: [Activity]!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,10 +37,10 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
-        
+
         searchBar.delegate = self
         filteredActivities = activities
-        
+
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
@@ -64,8 +66,10 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             return filteredActivities.count/2
         } else {
             return filteredActivities.count/2 + 1
+            tableView.reloadData()
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
@@ -74,6 +78,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         let ind2 = indexPath.row * 2 + 1
         var ids : [String] = []
         
+
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
@@ -89,6 +94,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
+
+
         }
         else {
             cell.ActivityBlock2.isHidden = true
@@ -107,6 +114,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         // Pass the selected object to the new view controller.
     }
     */
+
     
     // MARK: Search Bar Config
     // whenever there is text in the search bar, run the following code
@@ -124,5 +132,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         }
         self.tableView.reloadData()
     }
+
 
 }
