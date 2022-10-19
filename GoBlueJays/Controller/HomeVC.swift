@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class HomeVC: UIViewController {
 
@@ -36,11 +37,21 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func tapBrody(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0")!)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0")!)
     }
     
     @IBAction func tapMSE(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://jhu.libcal.com/seats?lid=1196")!)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://jhu.libcal.com/seats?lid=1196"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/seats?lid=1196")!)
     }
     @IBAction func Transloc(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transloc/id1280444930")! as URL, options: [:],completionHandler: nil)
@@ -55,31 +66,66 @@ class HomeVC: UIViewController {
     } //https://apps.apple.com/us/app/canvas-student/id480883488 use this link instead
     
     @IBAction func SIS(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://sis.jhu.edu/sswf/"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func Semesterly(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://jhu.semester.ly"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func HopkinsCafeMenu(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func NolansMenu(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func LeveringKitchenMenu(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-1")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://hopkinsdining.nutrislice.com/menu/site-1"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-1")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func CharMarMenu(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-2")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://hopkinsdining.nutrislice.com/menu/site-2"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-2")! as URL, options: [:],completionHandler: nil)
     }
     
     @IBAction func LeveringCafeMenu(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe")! as URL, options: [:],completionHandler: nil)
+        let webView:WebViewVC = WebViewVC()
+        //webView.modalPresentationStyle = .fullScreen
+        webView.link = "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe"
+        self.present(webView, animated: false, completion: nil)
+        
+        //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe")! as URL, options: [:],completionHandler: nil)
     }
     
     func setHopkinsCafeStatus(day: Int, hour: Int, minutes: Int) {

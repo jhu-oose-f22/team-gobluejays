@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -13,16 +15,17 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     @IBOutlet weak var searchBar: UISearchBar!
     
 //    var activities: [Activity] = [
-//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false),
-//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false),
-//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false),
-//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
-//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
-//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
-//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false),
+//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id: "1"),
+//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id: "1"),
+//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id: "1"),
+//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false, id: "1"),
+//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false, id: "1"),
+//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false, id: "1"),
+//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false, id: "1"),
 //    ]
-    var activities = db.collection("activity").getDocuments()
-    print(activities)
+    var activities: [Activity] = []
+    
+    var filteredActivities: [Activity]!
     
     var filteredActivities: [Activity]!
     
@@ -34,10 +37,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
-        
-        searchBar.delegate = self
-        
-        filteredActivities = activities
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (filteredActivities.count % 2 == 0){
@@ -52,11 +51,14 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
+        var ids : [String] = []
         
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
         cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
+        cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
+        ids.append(filteredActivities[ind1].id)
         
         if (ind2 <= filteredActivities.count-1) {
             cell.ActivityBlock2.isHidden = false
@@ -64,10 +66,13 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
+            cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
+            ids.append(filteredActivities[ind2].id)
         }
         else {
             cell.ActivityBlock2.isHidden = true
         }
+        cell.assign_ID(ids: ids)
         cell.configure()
         return cell
     }

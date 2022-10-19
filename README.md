@@ -93,6 +93,20 @@ _For more examples, please refer to the [Documentation](https://github.com/jhu-o
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Database
+
+#### Query the data in database
+
+There are two ways to see data. The first is through query API like the example in AppDelegate.swift.
+``` swift
+db.collection("events").getDocuments() { // handle the future object returned by getDocuments() }
+```
+Another is through portal. Open Firebase console, log in as the administrator (usedforatlasmurphy@gmail.com, password:gobluejays2022) and click the gobluejays project. From the left column you can find Firestore. There's database, collection and documents in it.
+
+#### Attention
+
+Before you push any data, be aware that you should create corresponding database and collection first. In k-v store, a collection can be modeled as a table in relational database, that means, every single module needs seperate collection to store.
+
 
 
 <!-- ROADMAP -->
@@ -105,10 +119,10 @@ _For more examples, please refer to the [Documentation](https://github.com/jhu-o
 - [x] View campus events
     - [x] implement frontend of the campus event tab
     - [x] design UI interface of the event page on Figma
-- [ ] Access school apps and websites
+- [x] Access school apps and websites
     - [x] Add more Apps and Websites to Apps/Websites Sections (Find icons online)
     - [x] Create Apps and Websites Section on Home Page
-    - [ ] Link About sections to appropriate websites, imitate UI from Academics for Athletics, Housing, Social Media sections
+    - [x] Link About sections to appropriate websites, imitate UI from Academics for Athletics, Housing, Social Media sections
 - [ ] Setting page
     - [x] set up team website
     - [ ] design user profile interface

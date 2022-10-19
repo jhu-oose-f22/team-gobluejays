@@ -6,20 +6,25 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var collects: [Activity] = [
-        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false),
-        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false),
-        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false),
-        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
-        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
-        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
-    ]
+//    var collects: [Activity] = [
+//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id: "1"),
+//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id: "1"),
+//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id: "1"),
+//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false, id: "1"),
+//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false, id: "1"),
+//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false, id: "1"),
+//    ]
+    var collects: [Activity] = []
+    
+    var filteredCollects: [Activity]!
     
     var filteredCollects: [Activity]!
     
@@ -34,6 +39,28 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         searchBar.delegate = self
         filteredCollects = collects
         //navigationController?.navigationBar.tintColor = .accentColor
+        
+        let db = Firestore.firestore()
+        db.collection("activity").getDocuments(){ [self]
+            (QuerySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in QuerySnapshot!.documents {
+                    let data = document.data()
+                    if (data["likes"] as! Bool == true) {
+                        let act:Activity = Activity(title: data["title"] as! String,
+                                                    time: data["time"] as! String,
+                                                    location: data["location"] as! String,
+                                                    image: data["image"] as! String,
+                                                    likes: data["likes"] as! Bool,
+                                                    id: document.documentID)
+                        self.collects.append(act)
+                    }
+                }
+            }
+            tableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,4 +124,3 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         self.tableView.reloadData()
     }
 }
-

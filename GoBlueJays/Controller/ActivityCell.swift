@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 class ActivityCell: UITableViewCell{
     
@@ -24,47 +26,34 @@ class ActivityCell: UITableViewCell{
     @IBOutlet weak var back2: UIView!
     @IBOutlet weak var ActivityBlock2: UIView!
     
-    var activityID
+    var activityID: [String] = []
     
     @IBAction func likes_click(_ sender: UIButton) {
+        let db = Firestore.firestore()
         if collect.tag == 0 {
-            let config = UIImage.SymbolConfiguration(scale: .medium)
-            let image = UIImage(systemName: "heart.fill", withConfiguration: config)
-            collect.setImage(image, for: .normal)
-            collect.tintColor = .red
-            collect.tag = 1
+            button_configure(likes: true, but: 1)
+            db.collection("activity").document(activityID[0]).updateData(["likes" : true])
         } else {
-            let config = UIImage.SymbolConfiguration(scale: .medium)
-            let image = UIImage(systemName: "heart", withConfiguration: config)
-            collect.setImage(image, for: .normal)
-            collect.tintColor = .lightGray
-            collect.tag = 0
+            button_configure(likes: false, but: 1)
+            db.collection("activity").document(activityID[0]).updateData(["likes" : false])
         }
     }
     
-    
     @IBAction func likes_click2(_ sender: UIButton) {
+        let db = Firestore.firestore()
         if collect2.tag == 0 {
-            let config = UIImage.SymbolConfiguration(scale: .medium)
-            let image = UIImage(systemName: "heart.fill", withConfiguration: config)
-            collect2.setImage(image, for: .normal)
-            collect2.tintColor = .red
-            collect2.tag = 1
+            button_configure(likes: true, but: 2)
+            db.collection("activity").document(activityID[1]).updateData(["likes" : true])
         } else {
-            let config = UIImage.SymbolConfiguration(scale: .medium)
-            let image = UIImage(systemName: "heart", withConfiguration: config)
-            collect2.setImage(image, for: .normal)
-            collect2.tintColor = .lightGray
-            collect2.tag = 0
+            button_configure(likes: false, but: 2)
+            db.collection("activity").document(activityID[1]).updateData(["likes" : false])
         }
     }
     
     func configure() {
         collect.setTitle("", for: .normal)
-        collect.tintColor = .lightGray
         collect.imageView?.contentMode = .scaleAspectFit
         collect2.setTitle("", for: .normal)
-        collect2.tintColor = .lightGray
         collect2.imageView?.contentMode = .scaleAspectFit
         
         ActivityImage.layer.cornerRadius = 5
@@ -78,8 +67,37 @@ class ActivityCell: UITableViewCell{
         back2.clipsToBounds = true
     }
     
-    func assign_ID() {
-        
+    func button_configure(likes: Bool, but: Int) {
+        if likes == true {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart.fill", withConfiguration: config)
+            if but == 1 {
+                collect.setImage(image, for: .normal)
+                collect.tintColor = .red
+                collect.tag = 1
+            } else {
+                collect2.setImage(image, for: .normal)
+                collect2.tintColor = .red
+                collect2.tag = 1
+            }
+        } else {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            let image = UIImage(systemName: "heart", withConfiguration: config)
+            if but == 1 {
+                collect.setImage(image, for: .normal)
+                collect.tintColor = .lightGray
+                collect.tag = 0
+            } else {
+                collect2.setImage(image, for: .normal)
+                collect2.tintColor = .lightGray
+                collect2.tag = 0
+            }
+        }
+    }
+    
+    func assign_ID(ids: [String]) {
+        activityID = ids
+        print(activityID)
     }
     
     override func awakeFromNib() {
