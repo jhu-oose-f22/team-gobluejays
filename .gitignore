@@ -1,2 +1,5 @@
 .DS_Store
-Pods/GoogleMaps/
+
+Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/GoogleMapsBase
+
+Pods/GoogleMaps/Maps/Frameworks/GoogleMapsCore.framework/GoogleMapsCore 
