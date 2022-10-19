@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectActivities: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
+class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!

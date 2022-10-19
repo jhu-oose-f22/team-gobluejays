@@ -4049,7 +4049,7 @@
         <!--Collects-->
         <scene sceneID="Gkb-Z5-7Ly">
             <objects>
-                <viewController storyboardIdentifier="CollectVC" title="Collects" id="6S7-eH-CEU" customClass="CollectActivities" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CollectVC" title="Collects" id="6S7-eH-CEU" customClass="CollectVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fbt-dq-Fi6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
