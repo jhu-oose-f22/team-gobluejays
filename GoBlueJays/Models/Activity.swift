@@ -12,4 +12,6 @@ struct Activity {
     let time: String
     let location: String
     let image: String
+    let likes: Bool
+    let id: String
 }
