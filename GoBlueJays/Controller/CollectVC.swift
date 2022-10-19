@@ -26,8 +26,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     
     var filteredCollects: [Activity]!
     
-    var filteredCollects: [Activity]!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

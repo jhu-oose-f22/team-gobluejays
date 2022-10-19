@@ -27,8 +27,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     
     var filteredActivities: [Activity]!
     
-    var filteredActivities: [Activity]!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -37,6 +35,29 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
+        
+        searchBar.delegate = self
+        filteredActivities = activities
+        
+        let db = Firestore.firestore()
+        db.collection("activity").getDocuments(){ [self]
+            (QuerySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in QuerySnapshot!.documents {
+                    let data = document.data()
+                    print(data)
+                    let act:Activity = Activity(title: data["title"] as! String,
+                                                time: data["time"] as! String,
+                                                location: data["location"] as! String,
+                                                image: data["image"] as! String,
+                                                likes: data["likes"] as! Bool,
+                                                id: document.documentID)
+                    self.activities.append(act)
+                }
+            }
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (filteredActivities.count % 2 == 0){
