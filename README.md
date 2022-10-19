@@ -62,7 +62,7 @@ CampusGrpup is the only application where students can obtain information about 
 Navigate to local repo in terminal
 * cocoapods
   ```sh
-  pods install
+  pod install
   ```
 
 ### Installation
@@ -73,7 +73,7 @@ Navigate to local repo in terminal
    ```
 2. Install cocoapods packages
    ```sh
-   pods install
+   pod install
    ```
 
 * If you are facing the error “Framework Not Found”, follow https://developer.apple.com/forums/thread/660864 for instruction. Remove arm64 from the setting, run the app, add arm64 back, and run it again. The problem should be fixed.
