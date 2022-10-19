@@ -116,8 +116,8 @@
                                                     <constraint firstAttribute="height" constant="186" id="ecu-QT-sOl"/>
                                                 </constraints>
                                             </imageView>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zlt-HS-kpe" userLabel="Apps">
-                                                <rect key="frame" x="0.0" y="206" width="415" height="140"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zlt-HS-kpe" userLabel="Apps">
+                                                <rect key="frame" x="0.0" y="206" width="415" height="128"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLq-mT-b7q">
                                                         <rect key="frame" x="0.0" y="0.0" width="415" height="55"/>
@@ -217,7 +217,7 @@
                                                                             <accessibilityTraits key="traits" button="YES"/>
                                                                         </accessibility>
                                                                         <connections>
-                                                                            <action selector="Transloc:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="mv0-CZ-X8S"/>
+                                                                            <action selector="Transloc:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="Ag0-fq-RGJ"/>
                                                                         </connections>
                                                                     </view>
                                                                 </subviews>
@@ -420,7 +420,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iea-zH-Gd5">
-                                                                                <rect key="frame" x="8" y="151" width="62" height="14"/>
+                                                                                <rect key="frame" x="8" y="151" width="120" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Closed Today">
@@ -466,7 +466,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2Q-Hm-i6n">
-                                                                                <rect key="frame" x="8" y="151" width="77" height="14"/>
+                                                                                <rect key="frame" x="8" y="151" width="120" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Open til 2:00 PM">
@@ -513,7 +513,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1W-8S-Eal">
-                                                                                <rect key="frame" x="8" y="151" width="82" height="14"/>
+                                                                                <rect key="frame" x="8" y="151" width="120" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Dinner at 6:30 PM">
@@ -560,7 +560,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1L-pn-ewM">
-                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
+                                                                                <rect key="frame" x="8" y="152" width="120" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Closed Today">
@@ -578,7 +578,7 @@
                                                                             <accessibilityTraits key="traits" button="YES"/>
                                                                         </accessibility>
                                                                         <connections>
-                                                                            <action selector="CharMarMenu:" destination="Zgk-y1-nAS" eventType="touchDragInside" id="gmH-Gj-Qbi"/>
+                                                                            <action selector="CharMarMenu:" destination="Zgk-y1-nAS" eventType="touchUpInside" id="Yb2-Kh-LGT"/>
                                                                         </connections>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1S-CQ-003" userLabel="Levering Cafe" customClass="UIButton">
@@ -606,7 +606,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evj-6n-7de">
-                                                                                <rect key="frame" x="8" y="152" width="62" height="14"/>
+                                                                                <rect key="frame" x="8" y="152" width="120" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Closed Today">
@@ -4647,12 +4647,27 @@
             </objects>
             <point key="canvasLocation" x="4947.826086956522" y="-611.38392857142856"/>
         </scene>
+        <!--WebViewVC-->
+        <scene sceneID="zJG-eT-OKk">
+            <objects>
+                <viewController id="fjD-ZT-eJF" userLabel="WebViewVC" customClass="WebViewVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V1o-GZ-Rne">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="pdq-oD-bOU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UOH-RI-m2M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1230" y="-2271"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="loz-ed-3sa"/>
         <segue reference="SCX-ZB-Ev0"/>
         <segue reference="mQk-ba-pcJ"/>
-        <segue reference="2m1-qi-XpU"/>
+        <segue reference="cjo-eI-t5I"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
