@@ -26,10 +26,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
 //        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false, id: "1"),
 //    ]
     var collects: [Activity] = []
+    var filteredCollects: [Activity] = []
     
-    var filteredCollects: [Activity]!
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,7 +37,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         tableView.separatorStyle = .none
 
         searchBar.delegate = self
-        filteredCollects = collects
 
         //navigationController?.navigationBar.tintColor = .accentColor
         
@@ -62,6 +59,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                     }
                 }
             }
+            filteredCollects = collects
             tableView.reloadData()
         }
     }
@@ -86,6 +84,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
         cell.ActivityImage.image = UIImage(named: filteredCollects[ind1].image)
+        cell.collect.isHidden = true
         
         if (ind2 <= filteredCollects.count-1) {
             cell.ActivityBlock2.isHidden = false
@@ -93,7 +92,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.Title2.text = filteredCollects[ind2].title
             cell.time2.text = filteredCollects[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
-
+            cell.collect2.isHidden = true
         }
         else {
             cell.ActivityBlock2.isHidden = true
@@ -122,7 +121,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             filteredCollects = collects
         } else {
             for collect in collects {
-                if collect.title.lowercased().contains(searchText.lowercased()) {
+                if collect.title.lowercased().contains(searchText.lowercased()) || collect.location.lowercased().contains(searchText.lowercased()) {
                     filteredCollects.append(collect)
                 }
             }

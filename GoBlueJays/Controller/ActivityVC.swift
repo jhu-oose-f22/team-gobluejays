@@ -25,9 +25,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 //        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false, id: "1"),
 //    ]
     var activities: [Activity] = []
-    
-
-    var filteredActivities: [Activity]!
+    var filteredActivities: [Activity] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +37,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.separatorStyle = .none
 
         searchBar.delegate = self
-        filteredActivities = activities
 
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
@@ -59,18 +56,19 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                     self.activities.append(act)
                 }
             }
+            filteredActivities = activities
+            tableView.reloadData()
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (filteredActivities.count % 2 == 0){
             return filteredActivities.count/2
         } else {
             return filteredActivities.count/2 + 1
-            tableView.reloadData()
         }
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
         
@@ -94,8 +92,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
-
-
         }
         else {
             cell.ActivityBlock2.isHidden = true
@@ -125,7 +121,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             filteredActivities = activities
         } else {
             for activity in activities {
-                if activity.title.lowercased().contains(searchText.lowercased()) {
+                if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
                     filteredActivities.append(activity)
                 }
             }

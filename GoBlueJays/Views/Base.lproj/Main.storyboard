@@ -3,9 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
-
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1822,7 +1820,6 @@
                                         <rect key="frame" x="0.0" y="50" width="414" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="82r-4Q-rZQ">
-
                                                 <rect key="frame" x="87.333333333333329" y="3" width="239.33333333333337" height="34.333333333333336"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pto-Hh-7RE">
@@ -1835,9 +1832,7 @@
                                                         </buttonConfiguration>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMC-Op-RfA">
-
                                                         <rect key="frame" x="153.66666666666669" y="0.0" width="85.666666666666686" height="34.333333333333336"/>
-
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Collects"/>
                                                     </button>
@@ -1917,7 +1912,6 @@
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwa-c4-Dy7">
-
                                                                                         <rect key="frame" x="171" y="0.0" width="75" height="34.333333333333336"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -2024,7 +2018,6 @@
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPv-Oi-hGg">
-
                                                                                         <rect key="frame" x="171" y="0.0" width="75" height="34.333333333333336"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -3009,7 +3002,6 @@
         <scene sceneID="XmF-vY-ar2">
             <objects>
                 <navigationController id="QKA-W2-Rqi" sceneMemberID="viewController">
-
                     <tabBarItem key="tabBarItem" title="Activity" image="balloon.2" catalog="system" selectedImage="balloon.2" id="VLQ-he-gII"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z4V-FP-qfe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -4014,7 +4006,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yC-fG-6CJ">
                                 <rect key="frame" x="0.0" y="164" width="414" height="250"/>
-
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="XPz-76-Fam">
                                         <rect key="frame" x="32" y="26" width="60.333333333333343" height="138.33333333333334"/>
@@ -4230,7 +4221,6 @@
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNS-qd-Fve">
                                                                                         <rect key="frame" x="171" y="0.0" width="75" height="34.333333333333336"/>
-
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                                                     </button>
@@ -4336,9 +4326,7 @@
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhc-xJ-Q5p">
-
                                                                                         <rect key="frame" x="171" y="0.0" width="75" height="34.333333333333336"/>
-
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                                                     </button>
@@ -4561,16 +4549,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-
-
+                        <outlet property="searchBar" destination="6qy-un-Pk4" id="weM-hT-RaX"/>
                         <outlet property="tableView" destination="L3T-oZ-NbU" id="RnN-jK-YA7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nWl-mN-CUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="4208.695652173913" y="-611.38392857142856"/>
-
         </scene>
         <!--Collects-->
         <scene sceneID="Gkb-Z5-7Ly">
@@ -4656,15 +4641,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Collects" largeTitleDisplayMode="never" id="FSx-ce-1kI"/>
                     <connections>
-
                         <outlet property="searchBar" destination="edP-ck-4QK" id="mQL-Ef-jrF"/>
                         <outlet property="tableView" destination="iNL-6Q-9mD" id="wYe-2i-grI"/>
-
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ekr-jY-vfE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="4947.826086956522" y="-611.38392857142856"/>
         </scene>
         <!--WebViewVC-->
@@ -4739,15 +4721,6 @@
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -4782,9 +4755,7 @@
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
-
         </systemColor>
         <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
