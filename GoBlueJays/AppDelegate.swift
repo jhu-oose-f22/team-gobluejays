@@ -9,12 +9,17 @@ import UIKit
 import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
+import CoreLocation;
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
         FirebaseApp.configure()
+        
+        // CLLocationManagerFactory.initialize()
+        let locationManager = CLLocationManagerCreator.getLocationManager()
+        locationManager.delegate = self
         
         //test
         let db = Firestore.firestore()
