@@ -359,7 +359,6 @@
 				2CE79098289F72BE00C3BB2B /* Resources */,
 				2CAB898828ACA10500DD27EA /* Embed Frameworks */,
 				8E432E099F6F31E711E6F200 /* [CP] Embed Pods Frameworks */,
-				02EE2C7798AD2CF9E86FC347 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -423,12 +422,10 @@
 			buildConfigurationList = 2CE790CA289F72BF00C3BB2B /* Build configuration list for PBXNativeTarget "GoBlueJaysUITests" */;
 			buildPhases = (
 				AA047B46090D9F7827F7A6EC /* [CP] Check Pods Manifest.lock */,
-				9E48EEFF00E8BFD896AF8917 /* [CP] Copy Pods Resources */,
 				2CE790B6289F72BF00C3BB2B /* Sources */,
 				2CE790B7289F72BF00C3BB2B /* Frameworks */,
 				2CE790B8289F72BF00C3BB2B /* Resources */,
 				A47660A6015EF3A29B6152F8 /* [CP] Embed Pods Frameworks */,
-				068906BF4FC0DA5B00810BDC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -520,40 +517,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02EE2C7798AD2CF9E86FC347 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		068906BF4FC0DA5B00810BDC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		39A953BF830F3FB4F233E64C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -591,23 +554,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9E48EEFF00E8BFD896AF8917 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A47660A6015EF3A29B6152F8 /* [CP] Embed Pods Frameworks */ = {

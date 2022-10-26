@@ -111,8 +111,19 @@ class ScheduleVC: UIViewController,NewEventDelegate {
         print(week[0])
     }
     
+    
+    @IBOutlet weak var dateTF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //DatePicker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
+        datePicker.preferredDatePickerStyle = .inline
+        dateTF.inputView = datePicker
+        dateTF.text = formatDate(date: Date())
+        
 //        let a;
         //test
         let db = Firestore.firestore()
@@ -146,6 +157,16 @@ class ScheduleVC: UIViewController,NewEventDelegate {
             }
         }
         
+    }
+    
+    @objc func dateChange(datePicker: UIDatePicker) {
+        dateTF.text = formatDate(date: datePicker.date)
+    }
+    
+    func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        return formatter.string(from: date)
     }
     
     func showCourses(courses: [Course]) {
