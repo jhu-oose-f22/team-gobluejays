@@ -3836,12 +3836,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="UBu-Cq-JCt">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="W0u-uv-9pe">
-                            <rect key="frame" x="109.66666666666669" y="5" width="195" height="34"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="egs-9L-yGS" customClass="TextField" customModule="GoBlueJays" customModuleProvider="target">
+                            <rect key="frame" x="132" y="5" width="150" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain"/>
-                        </button>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" selected="YES"/>
+                            </accessibility>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="go" textContentType="date-time"/>
+                        </textField>
                     </navigationItem>
                     <connections>
                         <outlet property="FRI" destination="4Og-ec-Nb7" id="zXd-i8-Lpe"/>
@@ -3849,7 +3854,7 @@
                         <outlet property="THU" destination="bNi-fy-fL2" id="kfh-iR-0GP"/>
                         <outlet property="TUE" destination="KwS-iP-Yyb" id="tdt-S1-DpM"/>
                         <outlet property="WED" destination="Gd9-c0-8vb" id="DYl-uT-pXZ"/>
-                        <outlet property="term" destination="W0u-uv-9pe" id="Vhn-iR-1L9"/>
+                        <outlet property="dateTF" destination="egs-9L-yGS" id="0c6-gD-V2j"/>
                         <outlet property="view1" destination="bzN-se-oEs" id="gye-wM-QIk"/>
                         <outlet property="view2" destination="atg-op-EgD" id="y4H-a6-wYW"/>
                         <outlet property="view3" destination="L5E-0r-zbg" id="uyO-sn-4K8"/>
