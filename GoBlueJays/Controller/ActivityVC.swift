@@ -9,8 +9,11 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+protocol activityTableDelegate: AnyObject {
+    func cellButtonPressed(actID: String)
+}
 
-class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -48,7 +51,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                 }
             }
             filteredActivities = activities
-            tableView.reloadData()
+            print("reload")
+            self.reloadData()
         }
     }
     
@@ -62,6 +66,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
+        cell.delegate = self
         
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
@@ -90,6 +95,22 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         cell.configure()
         return cell
     }
+    
+    func cellButtonPressed(actID: String) {
+        print("delegate here")
+        for (index, activity) in self.activities.enumerated() {
+            if activity.id == actID {
+                self.activities[index].likes = !self.activities[index].likes
+            }
+        }
+        for (index, activity) in self.filteredActivities.enumerated() {
+            if activity.id == actID {
+                self.filteredActivities[index].likes = !self.filteredActivities[index].likes
+            }
+        }
+        self.reloadData()
+//        print("reloaded!")
+    }
 
     /*
     // MARK: - Navigation
@@ -107,38 +128,22 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
         
         self.filteredActivities = []
-        self.activities = []
         
-        let db = Firestore.firestore()
-        db.collection("activity").getDocuments(){ [self]
-            (QuerySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in QuerySnapshot!.documents {
-                    let data = document.data()
-                    print(data)
-                    let act:Activity = Activity(title: data["title"] as! String,
-                                                time: data["time"] as! String,
-                                                location: data["location"] as! String,
-                                                image: data["image"] as! String,
-                                                likes: data["likes"] as! Bool,
-                                                id: document.documentID)
-                    self.activities.append(act)
+        if searchText == "" {
+            self.filteredActivities = self.activities
+        } else {
+            for activity in self.activities {
+                if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
+                    filteredActivities.append(activity)
                 }
             }
-            if searchText == "" {
-                self.filteredActivities = self.activities
-            } else {
-                for activity in self.activities {
-                    if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
-                        filteredActivities.append(activity)
-                    }
-                }
-            }
-            self.tableView.reloadData()
         }
+        print("reload!")
+        self.reloadData()
     }
-
+    
+    func reloadData() {
+        self.tableView.reloadData()
+    }
 
 }

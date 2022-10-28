@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 class ActivityCell: UITableViewCell{
+    weak var delegate: activityTableDelegate?
     
     @IBOutlet weak var ActivityImage: UIImageView!
     @IBOutlet weak var Title: UILabel!
@@ -29,14 +30,18 @@ class ActivityCell: UITableViewCell{
     var activityID: [String] = []
     
     @IBAction func likes_click(_ sender: UIButton) {
+        print(activityID)
         let db = Firestore.firestore()
         if collect.tag == 0 {
             button_configure(likes: true, but: 1)
             db.collection("activity").document(activityID[0]).updateData(["likes" : true])
+            print("liked")
         } else {
             button_configure(likes: false, but: 1)
             db.collection("activity").document(activityID[0]).updateData(["likes" : false])
+            print("unliked")
         }
+        delegate?.cellButtonPressed(actID: activityID[0])
     }
     
     @IBAction func likes_click2(_ sender: UIButton) {
@@ -48,6 +53,7 @@ class ActivityCell: UITableViewCell{
             button_configure(likes: false, but: 2)
             db.collection("activity").document(activityID[1]).updateData(["likes" : false])
         }
+        delegate?.cellButtonPressed(actID: activityID[1])
     }
     
     func configure() {
@@ -97,7 +103,6 @@ class ActivityCell: UITableViewCell{
     
     func assign_ID(ids: [String]) {
         activityID = ids
-        print(activityID)
     }
     
     override func awakeFromNib() {
