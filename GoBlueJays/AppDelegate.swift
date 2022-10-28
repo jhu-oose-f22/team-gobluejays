@@ -14,7 +14,7 @@ import CoreLocation;
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
+        // GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
         FirebaseApp.configure()
         
         // CLLocationManagerFactory.initialize()

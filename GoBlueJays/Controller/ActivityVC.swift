@@ -27,6 +27,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 //    ]
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
+    var recommendActivities: [Activity] = []
+    var sortedActivites: [Activity] = []
     
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 0.0;
@@ -97,6 +99,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             BuildingLocation(name: "freshman quad", location: CLLocationCoordinate2D(latitude: 39.33071041942408, longitude: -76.61942234313949)),
             BuildingLocation(name: "the beach", location: CLLocationCoordinate2D(latitude: 39.32900089341375, longitude: -76.61837410006774))
         ]
+        activity_recommendation()
+        print(sortedActivites)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -220,13 +224,15 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
         })
         
-        filteredActivities = []
-        
-        for i in 1...activityRecommend {
-            filteredActivities.append(filtered_activities[i].activity)
+        for activity in filtered_activities {
+            sortedActivites.append(activity.activity)
         }
         
-        assert(filteredActivities.count > 0)
+        for i in 1...activityRecommend {
+            recommendActivities.append(filtered_activities[i].activity)
+        }
+        
+        assert(recommendActivities.count > 0)
         
     }
 
