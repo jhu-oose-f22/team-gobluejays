@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GooglePlaces
+//import GooglePlaces
 import CoreLocation
 
 struct Place {
@@ -17,7 +17,7 @@ struct Place {
 final class GooglePlacesManager{
     static let shared = GooglePlacesManager()
     
-    private let client = GMSPlacesClient.shared()
+    //private let client = GMSPlacesClient.shared()
     
     private init(){}
     
@@ -27,9 +27,9 @@ final class GooglePlacesManager{
     }
     
     public func setUp(){
-        GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
+        //GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
     }
-    
+    /*
     public func findPlaces(query: String, completion: @escaping (Result<[Place], Error>) -> Void) {
         let filter = GMSAutocompleteFilter()
         filter.type = .geocode
@@ -65,6 +65,6 @@ final class GooglePlacesManager{
             completion(.success(coordinate))
         }
     }
-    
+    */
 }
 

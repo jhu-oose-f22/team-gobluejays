@@ -38,7 +38,7 @@
 		08C1484B28F8503600A493B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08C1484928F8503500A493B2 /* GoogleService-Info.plist */; };
 		08C1484C28F8503600A493B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08C1484928F8503500A493B2 /* GoogleService-Info.plist */; };
 		2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83283228A7DC5A00EBA59B /* AcademicsVC.swift */; };
-		2CAB898728ACA10500DD27EA /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2CAB898728ACA10500DD27EA /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2CAC969D28FBC7060075E8E4 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC969C28FBC7060075E8E4 /* Course.swift */; };
 		2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79C8F28A9DA1C00744FF8 /* Detail.swift */; };
 		2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79C9628A9E43900744FF8 /* IconCell.swift */; };
@@ -68,12 +68,12 @@
 		40923DAF28FE33AF003B15B5 /* CollectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DAA28FE33AF003B15B5 /* CollectVC.swift */; };
 		40923DB128FE33CC003B15B5 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DB028FE33CC003B15B5 /* Activity.swift */; };
 		40923DB328FE6915003B15B5 /* activity_load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DB228FE6915003B15B5 /* activity_load.swift */; };
-		40A89A1328F75FE800E3CE60 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		40A89A1428F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		40A89A1528F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		40A89A1628F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		40A89A1728F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		40A89A1928F7602F00E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40A89A1328F75FE800E3CE60 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		40A89A1428F75FE800E3CE60 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		40A89A1528F75FE800E3CE60 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		40A89A1628F75FE800E3CE60 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		40A89A1728F75FE800E3CE60 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		40A89A1928F7602F00E3CE60 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		4955DDD6C80C3D7900EA2CAE /* Pods_GoBlueJays_GoBlueJaysUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A043E384DBF58BD1E43EA8 /* Pods_GoBlueJays_GoBlueJaysUITests.framework */; };
 		4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F98422728FE204B009990D4 /* WebViewVC.swift */; };
 		4F98422A290ADFF9009990D4 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F984229290ADFF9009990D4 /* TextField.swift */; };
@@ -108,7 +108,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2CAB898728ACA10500DD27EA /* (null) in Embed Frameworks */,
+				2CAB898728ACA10500DD27EA /* BuildFile in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,7 +362,6 @@
 				2CE79098289F72BE00C3BB2B /* Resources */,
 				2CAB898828ACA10500DD27EA /* Embed Frameworks */,
 				D225873D8A9BDC7228049B0C /* [CP] Embed Pods Frameworks */,
-				1523E0C2A7D466B981C69479 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -430,7 +429,6 @@
 				2CE790B7289F72BF00C3BB2B /* Frameworks */,
 				2CE790B8289F72BF00C3BB2B /* Resources */,
 				39DBC39321FCD051DEC198DC /* [CP] Embed Pods Frameworks */,
-				8365B2049159A7594CF49821 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -494,7 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CE790AA289F72BF00C3BB2B /* LaunchScreen.storyboard in Resources */,
-				40A89A1328F75FE800E3CE60 /* (null) in Resources */,
+				40A89A1328F75FE800E3CE60 /* BuildFile in Resources */,
 				2CE790A7289F72BF00C3BB2B /* Assets.xcassets in Resources */,
 				08C1484A28F8503600A493B2 /* GoogleService-Info.plist in Resources */,
 				2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */,
@@ -522,23 +520,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1523E0C2A7D466B981C69479 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		39DBC39321FCD051DEC198DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -576,23 +557,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8365B2049159A7594CF49821 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoBlueJays-GoBlueJaysUITests/Pods-GoBlueJays-GoBlueJaysUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AE807012ED81F112B1F7B941 /* [CP] Check Pods Manifest.lock */ = {
@@ -673,25 +637,25 @@
 				2CD2536828ED2AF8004C03A6 /* AddEventViewController.swift in Sources */,
 				2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */,
 				2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */,
-				40A89A1928F7602F00E3CE60 /* (null) in Sources */,
+				40A89A1928F7602F00E3CE60 /* BuildFile in Sources */,
 				2CE790D0289F7EBA00C3BB2B /* HomeVC.swift in Sources */,
 				2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */,
-				40A89A1428F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1428F75FE800E3CE60 /* BuildFile in Sources */,
 				4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */,
 				2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */,
-				40A89A1528F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1528F75FE800E3CE60 /* BuildFile in Sources */,
 				2CB9247028E49EB80006967C /* SupportVC.swift in Sources */,
 				40923DB328FE6915003B15B5 /* activity_load.swift in Sources */,
 				2CE790CE289F7D8E00C3BB2B /* CustomTabBarController.swift in Sources */,
 				2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */,
 				2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */,
-				40A89A1728F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1728F75FE800E3CE60 /* BuildFile in Sources */,
 				4F98422A290ADFF9009990D4 /* TextField.swift in Sources */,
-				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1628F75FE800E3CE60 /* BuildFile in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */,
 				40923DAC28FE33AF003B15B5 /* ActivityCell.swift in Sources */,
-				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
+				40A89A1628F75FE800E3CE60 /* BuildFile in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				40923DB128FE33CC003B15B5 /* Activity.swift in Sources */,
 				2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */,

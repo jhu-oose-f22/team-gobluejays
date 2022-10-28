@@ -6,14 +6,14 @@
 //
 
 import UIKit
-import GooglePlaces
+//import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
+        //GMSPlacesClient.provideAPIKey("AIzaSyBFplEn_udrAH3qeqQR5DTfThprGEVSnbY")
         FirebaseApp.configure()
         
         //test
