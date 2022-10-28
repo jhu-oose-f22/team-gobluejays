@@ -38,8 +38,7 @@ class ScheduleVC: UIViewController,NewEventDelegate {
 //        view.addSubview(welcomeLabel(title:name, day: date, start: start, duration: 2))
     }
     
-    func setCurrentWeek() {
-        let date = Date()
+    func setCurrentWeek(date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, MMMM dd, yyyy" // OR "dd-MM-yyyy"
         let dateFormatter2 = DateFormatter()
@@ -75,7 +74,7 @@ class ScheduleVC: UIViewController,NewEventDelegate {
           default:
             monthString = "default"
         }
-        term.setTitle(monthString, for: .normal)
+        //term.setTitle(monthString, for: .normal)
         
         var mondayIndex = 0;
         let currentDateString: String = dateFormatter.string(from: date)
@@ -110,13 +109,29 @@ class ScheduleVC: UIViewController,NewEventDelegate {
         FRI.text = week[4].substring(with: 0..<2)
         print(week[0])
     }
-    
+
+    @IBOutlet weak var dateTF: TextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Start DatePicker Code
+        dateTF.delegate = self
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.sizeToFit()
+        dateTF.inputView = datePicker
+        dateTF.text = formatDate(date: Date())
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        //End DatePicker Code
+        
 //        let a;
         //test
         let db = Firestore.firestore()
-        setCurrentWeek()
+        setCurrentWeek(date: Date())
         
         db.collection("calendarCourse").getDocuments(){ [self]
             (QuerySnapshot, err) in
@@ -146,6 +161,22 @@ class ScheduleVC: UIViewController,NewEventDelegate {
             }
         }
         
+    }
+    
+    @objc func dateChange(datePicker: UIDatePicker) {
+        dateTF.text = formatDate(date: datePicker.date)
+        setCurrentWeek(date: datePicker.date)
+        //dateTF.endEditing(true) //this closes the DatePicker when a new date is selected
+    }
+    
+    func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "LLLL ▼"
+        return formatter.string(from: date)
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        dateTF.resignFirstResponder()
     }
     
     func showCourses(courses: [Course]) {
@@ -235,3 +266,15 @@ extension String {
         return String(self[startIndex..<endIndex])
     }
 }
+
+extension ScheduleVC: UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    }
+    
+}
+

@@ -8,10 +8,10 @@
 import Foundation
 
 struct Activity {
-    let title: String
-    let time: String
-    let location: String
-    let image: String
-    let likes: Bool
-    let id: String
+    var title: String
+    var time: String
+    var location: String
+    var image: String
+    var likes: Bool
+    var id: String
 }

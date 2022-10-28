@@ -10,21 +10,15 @@ import FirebaseCore
 import FirebaseFirestore
 import CoreLocation
 
+protocol activityTableDelegate: AnyObject {
+    func cellButtonPressed(actID: String)
+}
 
-class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-//    var activities: [Activity] = [
-//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id: "1"),
-//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id: "1"),
-//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id: "1"),
-//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false, id: "1"),
-//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false, id: "1"),
-//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false, id: "1"),
-//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false, id: "1"),
-//    ]
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
     var recommendActivities: [Activity] = []
@@ -65,7 +59,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                 }
             }
             filteredActivities = activities
-            tableView.reloadData()
+            print("reload")
+            self.reloadData()
         }
         
         // hard-code building locations
@@ -113,12 +108,12 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
+        cell.delegate = self
         
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
         var ids : [String] = []
         
-
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
@@ -141,6 +136,22 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         cell.assign_ID(ids: ids)
         cell.configure()
         return cell
+    }
+    
+    func cellButtonPressed(actID: String) {
+        print("delegate here")
+        for (index, activity) in self.activities.enumerated() {
+            if activity.id == actID {
+                self.activities[index].likes = !self.activities[index].likes
+            }
+        }
+        for (index, activity) in self.filteredActivities.enumerated() {
+            if activity.id == actID {
+                self.filteredActivities[index].likes = !self.filteredActivities[index].likes
+            }
+        }
+        self.reloadData()
+//        print("reloaded!")
     }
 
     /*
@@ -241,18 +252,23 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     // whenever there is text in the search bar, run the following code
     func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
         
-        filteredActivities = []
+        self.filteredActivities = []
+        
         if searchText == "" {
-            filteredActivities = activities
+            self.filteredActivities = self.activities
         } else {
-            for activity in activities {
+            for activity in self.activities {
                 if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
                     filteredActivities.append(activity)
                 }
             }
         }
+        print("reload!")
+        self.reloadData()
+    }
+    
+    func reloadData() {
         self.tableView.reloadData()
     }
-
 
 }
