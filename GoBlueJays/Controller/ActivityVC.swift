@@ -31,7 +31,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 0.0;
     var longitude: CLLocationDegrees = 0.0;
-    let activityRecommend: Int = 10;
+    let activityRecommend: Int = 5;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,22 +157,21 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             }
         }
         
-        // request to Google Map: payment method needed, it's not free
+        var returnLocation = CLLocationCoordinate2D()
+        // request to Google Map: payment method needed
         /*
-        let request = URLRequest(url: "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=\(name)&inputtype=textquery&fields=geometry&key=YOUR_API_KEY")
-        let returnLocation = CLLocationCoordinate2D()
+        let request =  URL(string:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=\(name)&inputtype=textquery&fields=geometry&key=AIzaSyDmH0diWsSMIhNsb3G2HIEG8g4p62rCgCI")!
         
-        let task = URLSession.shared.dataTask(with: request, completionHandler: (data, response, error) in {
+        
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else { return }
-            returnLocation.latitude = data["candidates"]["geometry"]["location"]["lat"]
-            returnLocation.longitude = data["candidates"]["geometry"]["location"]["lng"]
-        })
+            let f = JSONSerialization.jsonObject(with: data)
+            returnLocation.latitude = f["candidates"]["geometry"]["location"]["lat"]
+            returnLocation.longitude = f["candidates"]["geometry"]["location"]["lng"]}
         
         task.resume()
-        
-        return returnLocation
          */
-        return buildingLocations[0].location
+        return returnLocation
     }
     
     func locationManager(
