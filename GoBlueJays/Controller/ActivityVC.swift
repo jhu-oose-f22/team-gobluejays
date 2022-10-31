@@ -40,8 +40,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var sortedActivites: [Activity] = []
     
     var buildingLocations: [BuildingLocation] = []
-    var latitude: CLLocationDegrees = 0.0;
-    var longitude: CLLocationDegrees = 0.0;
+    var latitude: CLLocationDegrees = 39.0
+    var longitude: CLLocationDegrees = -76.0;
     let activityRecommend: Int = 5;
 
     override func viewDidLoad() {
@@ -82,10 +82,16 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                 }
             }
             filteredActivities = activities
+            setBuildingLocations()
+            activity_recommendation()
+            print(sortedActivites)
+            recact = recommendActivities
             print("reload")
             self.reloadData()
         }
-        
+    }
+    
+    func setBuildingLocations() {
         // hard-code building locations
         buildingLocations = [
             BuildingLocation(name: "hodson hall", location: CLLocationCoordinate2D(latitude: 39.32749022560959, longitude: -76.62227881124888)),
@@ -117,8 +123,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             BuildingLocation(name: "freshman quad", location: CLLocationCoordinate2D(latitude: 39.33071041942408, longitude: -76.61942234313949)),
             BuildingLocation(name: "the beach", location: CLLocationCoordinate2D(latitude: 39.32900089341375, longitude: -76.61837410006774))
         ]
-        activity_recommendation()
-        print(sortedActivites)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -238,15 +242,14 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     func activity_recommendation() {
         if !CLLocationManager.headingAvailable() {
             print("Warning: Location is not available")
-            return
+            //return
+        } else {
+            let locationManager = CLLocationManagerCreator.getLocationManager()
+            locationManager.requestWhenInUseAuthorization()
         }
         
-        let locationManager = CLLocationManagerCreator.getLocationManager()
-        
-        locationManager.requestWhenInUseAuthorization()
-        
         if latitude == -1.0 && longitude == -1.0 {
-            return
+            //return
         }
         var filtered_activities: [sortActivity] = []
         
@@ -292,6 +295,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     
     func reloadData() {
         self.tableView.reloadData()
+        self.recomCollection.reloadData()
     }
     
     @objc func recChange() {
