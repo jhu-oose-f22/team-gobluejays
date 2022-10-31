@@ -15,7 +15,7 @@ class ScheduleVC: UIViewController{
     var week = ["1", "2", "3", "2", "3"]
     var courses: [Course] = []
     var registeredCourses: [RegisteredCourse] = []
-    var currentWeekCourses:[Book] = []
+    var currentWeekCourses:[CourseDetails] = []
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -106,46 +106,11 @@ class ScheduleVC: UIViewController{
         }
 //        if (week[0].substring(with: 0..<2) > ""
     }
-    struct Meeting: Decodable {
-        let DOW: String
-        let Dates: String
-        let Times: String
-        let Location: String
-        let Building: String
-        let Room: String
-    }
-    
-    struct SectionDetail: Decodable {
-        let Description: String
-        let Meetings: [Meeting]
-    }
-    
-    struct Book: Decodable {
-        let TermStartDate: String
-        let SchoolName: String
-        //"MW 12:00PM - 1:15PM, Th 3:00PM - 3:50PM",
-        let Meetings: String
-        let OfferingName: String
-        let SectionName: String
-        let Title: String
-        let Credits: String
-        let Level: String
-        let Areas: String
-        let Building: String
-        let Term_JSS: String
-        let SectionDetails : [SectionDetail]
-    }
-    
-    struct RegisteredCourse {
-        let semester: String
-        let courseNumber: String
-    }
-
-    
 
     @IBOutlet weak var dateTF: TextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCurrentWeek(date: Date())
         
         //Start DatePicker Code
         dateTF.delegate = self
@@ -173,7 +138,7 @@ class ScheduleVC: UIViewController{
         for registeredCourse in registeredCourses {
             let group = DispatchGroup()
             group.enter()
-            getRandomFood(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
+            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
                 self.currentWeekCourses = json ?? []
                 group.leave()
             }
@@ -182,11 +147,11 @@ class ScheduleVC: UIViewController{
             print(self.currentWeekCourses)
             displayCourses(books: self.currentWeekCourses)
         }
-        setCurrentWeek(date: Date())
+        
     }
     
-    func getRandomFood(semester:String,courseNumber:String, completion: @escaping (_ json: [Book]?, _ error: Error?)->()) {
-        var booooks:[Book] = []
+    func getCourses(semester:String,courseNumber:String, completion: @escaping (_ json: [CourseDetails]?, _ error: Error?)->()) {
+        var booooks:[CourseDetails] = []
         
             let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber;
             let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
@@ -198,7 +163,7 @@ class ScheduleVC: UIViewController{
                     }
                     if let data = data {
                         
-                        if let books = try? JSONDecoder().decode([Book].self, from: data) {
+                        if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
                             //print(books)
                             booooks.append(contentsOf: books)
                         } else {
@@ -232,11 +197,11 @@ class ScheduleVC: UIViewController{
             let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
                 let controller =
                 self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
-                controller.course = course
+                //controller.course = course
                 self.present(controller,animated: true,completion: nil)
             }));
             let oneHour = self.view1.frame.height / 17
-            let y = (course.startTime - 7.0 + 0.8) * oneHour
+            let y = (course.startTime - 7.0 + 0.85) * oneHour
             courseButton.setTitle(course.name, for: .normal)
             courseButton.titleLabel?.lineBreakMode = .byWordWrapping
             courseButton.backgroundColor = UIColor(red: 102/255, green: 250/255, blue: 51/255, alpha: 0.5)
@@ -259,31 +224,35 @@ class ScheduleVC: UIViewController{
             
         }
     }
-    func displayCourses(books: [Book]) {
+    func displayCourses(books: [CourseDetails]) {
         for book in books {
             for section in book.SectionDetails {
                 for meeting in section.Meetings {
                     print(meeting.DOW)
                     var days = parseDOW(DOW:meeting.DOW)
                     let ss = meeting.Times
-                    let startStr = ss.substring(with: 0..<8);
-                    let endStr = ss.substring(with: 11..<19);
+                    let startStr = ss.substring(with: 0..<8)
+                    let endStr = ss.substring(with: 11..<19)
                     let startTime = parseTime(time: startStr)
                     let endTime = parseTime(time: endStr)
+                    let semesterDates = meeting.Dates
+                    let semesterStart = semesterDates.substring(with: 0..<2) + "/" + semesterDates.substring(with: 3..<5) + "/" + semesterDates.substring(with: 6..<10)
+                    let semesterEnd = semesterDates.substring(with: 14..<16) + "/" + semesterDates.substring(with: 17..<19) + "/" + semesterDates.substring(with: 20..<24)
+                    print(semesterStart)
+                    print(semesterEnd)
                     for day in days {
-                    let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
-                        let controller =
-                        self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
-                        // controller.course = course
-                        self.present(controller,animated: true,completion: nil)
-                    }));
-                    let oneHour = self.view1.frame.height / 17
-                    let y = (startTime - 7.0 + 0.7) * oneHour
-                    courseButton.setTitle(book.Title, for: .normal)
-                    courseButton.backgroundColor = UIColor(red: 102/255, green: 250/255, blue: 51/255, alpha: 0.5)
-                    courseButton.setTitleColor(.black, for: .normal);
-                    courseButton.frame = CGRect(x: 0, y: y, width: self.view1.frame.width, height: oneHour*(endTime - startTime));
-                    
+                        let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
+                            let controller =
+                            self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
+                            controller.course = book
+                            self.present(controller,animated: true,completion: nil)
+                        }));
+                        let oneHour = self.view1.frame.height / 17
+                        let y = (startTime - 7.0 + 0.75) * oneHour
+                        courseButton.setTitle(book.Title, for: .normal)
+                        courseButton.backgroundColor = UIColor(red: 102/255, green: 250/255, blue: 51/255, alpha: 0.5)
+                        courseButton.setTitleColor(.black, for: .normal);
+                        courseButton.frame = CGRect(x: 0, y: y, width: self.view1.frame.width, height: oneHour*(endTime - startTime));
                         switch (day)  {
                         case "M":
                             self.view1.addSubview(courseButton)
@@ -296,7 +265,7 @@ class ScheduleVC: UIViewController{
                         case "F":
                             self.view5.addSubview(courseButton)
                         default:
-                            self.view1.addSubview(courseButton)
+                            self.view2.addSubview(courseButton)
                         }
                     }
                 }
