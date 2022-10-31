@@ -16,11 +16,26 @@ protocol activityTableDelegate: AnyObject {
 
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
+    @IBOutlet weak var PageView: UIPageControl!
+    @IBOutlet weak var recomCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var timer = Timer()
+    var counter = 0
+    
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
+    var recact: [Activity] = [
+        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id:"act001"),
+        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id:"act002"),
+        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id:"act003"),
+//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
+//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
+//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
+//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false),
+    ]
+    
     var recommendActivities: [Activity] = []
     var sortedActivites: [Activity] = []
     
@@ -39,7 +54,15 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.separatorStyle = .none
 
         searchBar.delegate = self
-
+        
+        recomCollection.delegate = self
+        recomCollection.dataSource = self
+        PageView.numberOfPages = recact.count
+        PageView.currentPage = 0
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
+        }
+        
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
@@ -270,5 +293,59 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     func reloadData() {
         self.tableView.reloadData()
     }
+    
+    @objc func recChange() {
+        if counter < recact.count {
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            PageView.currentPage = counter
+            counter += 1
+        } else {
+            counter = 0
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+            PageView.currentPage = counter
+            counter = 1
+        }
+    }
 
+}
+
+extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recact.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecomCell", for: indexPath) as! RecomCell
+        let index = indexPath.row
+        
+        cell.configure()
+        cell.location.text = recact[index].location
+        cell.title.text = recact[index].title
+        cell.time.text = recact[index].time
+        cell.image.image = UIImage(named: recact[index].image)
+        cell.rectext.text = "Near you!"
+        
+        return cell
+    }
+}
+
+extension ActivityVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = recomCollection.frame.size
+        return CGSize(width: size.width, height: size.height-10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
 }
