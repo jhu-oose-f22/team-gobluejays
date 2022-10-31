@@ -13,4 +13,8 @@ class TextField: UITextField, UITextFieldDelegate{
         return CGRect.zero
     }
     
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false; //disables long press options on the textfield
+    }
+    
 }
