@@ -45,11 +45,6 @@ class ViewController: UIViewController {
         area.text = area.text! + course.Areas
         details.text =  course.SectionDetails[0].Description
         
-//        for lecture in course.SectionDetails[0].Meetings {
-//            location.text = location.text! + lecture.Building
-//            location.text = location.text! + lecture.Room
-//            location.text = location.text! + ", "
-//        }
         for i in 0...(course.SectionDetails[0].Meetings.count - 1) {
             let lecture = course.SectionDetails[0].Meetings[i]
             location.text = location.text! + lecture.Building
@@ -58,22 +53,6 @@ class ViewController: UIViewController {
                 location.text = location.text! + ", "
             }
         }
-//        var minute = String(Int(course.startTime.truncatingRemainder(dividingBy: 1)*60))
-//        if (minute.count == 1) {
-//            minute = "0" + minute;
-//        }
-//        time.text = String(Int(course.startTime/1)) + ":" +
-//                            minute
-//        location.text = course.location
-//        prof.text = course.prof
-//        num.text = course.num
-//        print(course.name)
-//        details.numberOfLines = course.syllabus.count
-//        var grading = ""
-//        for item in course.syllabus {
-//            grading += item + " \n"
-//        }
-//        details.text = grading
     }
 
 
