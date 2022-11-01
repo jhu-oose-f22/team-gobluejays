@@ -3,4 +3,70 @@
    uuid = "F90681BC-FA8C-4705-B6B1-98B3F9CD37F6"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D92E385B-7D46-49B4-910E-8295B98E97A6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoBlueJays/Controller/ActivityVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "ActivityVC"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "D92E385B-7D46-49B4-910E-8295B98E97A6 - d273e55b117d3d43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GoBlueJays.ActivityVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; GoBlueJays.ActivityVC"
+                  moduleName = "GoBlueJays"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david/Documents/GitHub/team-gobluejays/GoBlueJays/Controller/ActivityVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "229">
+               </Location>
+               <Location
+                  uuid = "D92E385B-7D46-49B4-910E-8295B98E97A6 - ca96e521d1db3ee1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GoBlueJays.ActivityVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GoBlueJays.ActivityVC&gt;"
+                  moduleName = "GoBlueJays"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david/Documents/GitHub/team-gobluejays/GoBlueJays/Controller/ActivityVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "186">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F019032-8361-4FBF-821D-A81B9A0B6803"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoBlueJays/Models/Activity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "Activity"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

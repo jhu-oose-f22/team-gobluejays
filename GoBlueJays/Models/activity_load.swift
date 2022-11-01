@@ -27,7 +27,8 @@ class activity_load {
                                                 location: data["location"] as! String,
                                                 image: data["image"] as! String,
                                                 likes: data["likes"] as! Bool,
-                                                id: document.documentID)
+                                                id: document.documentID,
+                                                category: data["category"] as! String)
 //                    print("reading document")
 //                    print(act)
                     activities.append(act)

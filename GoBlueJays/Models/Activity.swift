@@ -14,4 +14,5 @@ struct Activity {
     let image: String
     let likes: Bool
     let id: String
+    let category: String
 }

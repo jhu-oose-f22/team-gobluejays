@@ -15,6 +15,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    let searchController = UISearchController(searchResultsController: nil)
 //    var activities: [Activity] = [
 //        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id: "1"),
 //        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id: "1"),
@@ -36,7 +37,15 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
 
-        searchBar.delegate = self
+        // search bar config
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
 
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
@@ -52,7 +61,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                                                 location: data["location"] as! String,
                                                 image: data["image"] as! String,
                                                 likes: data["likes"] as! Bool,
-                                                id: document.documentID)
+                                                id: document.documentID,
+                                                category: data["category"] as! String)
                     self.activities.append(act)
                 }
             }
@@ -60,7 +70,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             tableView.reloadData()
         }
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (filteredActivities.count % 2 == 0){
             return filteredActivities.count/2
@@ -112,22 +121,58 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     */
 
     
-    // MARK: Search Bar Config
+    // Old Search Bar Config
     // whenever there is text in the search bar, run the following code
-    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
-        
-        filteredActivities = []
-        if searchText == "" {
-            filteredActivities = activities
-        } else {
-            for activity in activities {
-                if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
-                    filteredActivities.append(activity)
+//    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
+//
+//        filteredActivities = []
+//        if searchText == "" {
+//            filteredActivities = activities
+//        } else {
+//            for activity in activities {
+//                if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
+//                    filteredActivities.append(activity)
+//                }
+//            }
+//        }
+//        self.tableView.reloadData()
+//    }
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    var isFiltering: Bool {
+        let searchBarScopeIsFiltering =
+            searchController.searchBar.selectedScopeButtonIndex != 0
+          return searchController.isActive &&
+            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+    }
+
+    func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
+        if isFiltering {
+            filteredActivities = activities.filter { (activity: Activity) -> Bool in
+                if isSearchBarEmpty {
+                    let scopeMatch = (scopeButton == "All" || activity.category.lowercased().contains(scopeButton.lowercased()))
+                    return scopeMatch
+                } else {
+                    let scopeMatch = (scopeButton == "All" || activity.category.lowercased().contains(scopeButton.lowercased()))
+                    let searchTextMatch = activity.title.lowercased().contains(searchText.lowercased())
+                    return scopeMatch && searchTextMatch
                 }
             }
+        } else {
+            filteredActivities = activities
         }
+      
         self.tableView.reloadData()
     }
 
-
+}
+extension ActivityVC: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+      let searchBar = searchController.searchBar
+      let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+      let searchText = searchBar.text!
+      filterContentForSearchText(searchText: searchText, scopeButton: scopeButton)
+  }
 }

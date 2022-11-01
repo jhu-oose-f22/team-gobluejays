@@ -11,10 +11,12 @@ import FirebaseCore
 import FirebaseFirestore
 
 
-class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource  {
+class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var searchBar: UISearchBar!
-
+    
     @IBOutlet weak var tableView: UITableView!
     
 //    var collects: [Activity] = [
@@ -35,8 +37,17 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
         tableView.separatorStyle = .none
-
-        searchBar.delegate = self
+        
+        // search bar config
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        // searchBar.delegate = self
 
         //navigationController?.navigationBar.tintColor = .accentColor
         
@@ -54,7 +65,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                                                     location: data["location"] as! String,
                                                     image: data["image"] as! String,
                                                     likes: data["likes"] as! Bool,
-                                                    id: document.documentID)
+                                                    id: document.documentID,
+                                                    category: data["category"] as! String)
                         self.collects.append(act)
                     }
                 }
@@ -112,21 +124,60 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
     */
     
-    // MARK: Search Bar Config
+    // Old Search Bar Config
     // whenever there is text in the search bar, run the following code
-    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
-        
-        filteredCollects = []
-        if searchText == "" {
-            filteredCollects = collects
-        } else {
-            for collect in collects {
-                if collect.title.lowercased().contains(searchText.lowercased()) || collect.location.lowercased().contains(searchText.lowercased()) {
-                    filteredCollects.append(collect)
+//    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
+//
+//        filteredCollects = []
+//        if searchText == "" {
+//            filteredCollects = collects
+//        } else {
+//            for collect in collects {
+//                if collect.title.lowercased().contains(searchText.lowercased()) || collect.location.lowercased().contains(searchText.lowercased()) {
+//                    filteredCollects.append(collect)
+//                }
+//            }
+//        }
+//        self.tableView.reloadData()
+//    }
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    var isFiltering: Bool {
+        let searchBarScopeIsFiltering =
+            searchController.searchBar.selectedScopeButtonIndex != 0
+          return searchController.isActive &&
+            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+    }
+
+    func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
+        if isFiltering {
+            filteredCollects = collects.filter {
+                collect in
+                if isSearchBarEmpty {
+                    let scopeMatch = (scopeButton == "All" || collect.category.lowercased().contains(scopeButton.lowercased()))
+                    return scopeMatch
+                } else {
+                    let scopeMatch = (scopeButton == "All" || collect.category.lowercased().contains(scopeButton.lowercased()))
+                    let searchTextMatch = collect.title.lowercased().contains(searchText.lowercased())
+                    return scopeMatch && searchTextMatch
                 }
             }
+        } else {
+            filteredCollects = collects
         }
         self.tableView.reloadData()
     }
 
 }
+extension CollectVC: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+      let searchBar = searchController.searchBar
+      let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+      let searchText = searchBar.text!
+      filterContentForSearchText(searchText: searchText, scopeButton: scopeButton)
+  }
+}
+
+
