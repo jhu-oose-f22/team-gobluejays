@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 class ActivityCell: UITableViewCell{
+    weak var delegate: activityTableDelegate?
     
     @IBOutlet weak var ActivityImage: UIImageView!
     @IBOutlet weak var Title: UILabel!
@@ -18,6 +19,11 @@ class ActivityCell: UITableViewCell{
     @IBOutlet weak var collect: UIButton!
     @IBOutlet weak var back: UIView!
     
+    @IBOutlet weak var locicon2: UIImageView!
+    
+    @IBOutlet weak var img2: UIView!
+    @IBOutlet weak var whiteback2: UIView!
+    @IBOutlet weak var timeicon2: UIImageView!
     @IBOutlet weak var Title2: UILabel!
     @IBOutlet weak var time2: UILabel!
     @IBOutlet weak var collect2: UIButton!
@@ -29,14 +35,18 @@ class ActivityCell: UITableViewCell{
     var activityID: [String] = []
     
     @IBAction func likes_click(_ sender: UIButton) {
+        print(activityID)
         let db = Firestore.firestore()
         if collect.tag == 0 {
             button_configure(likes: true, but: 1)
             db.collection("activity").document(activityID[0]).updateData(["likes" : true])
+            print("liked")
         } else {
             button_configure(likes: false, but: 1)
             db.collection("activity").document(activityID[0]).updateData(["likes" : false])
+            print("unliked")
         }
+        delegate?.cellButtonPressed(actID: activityID[0])
     }
     
     @IBAction func likes_click2(_ sender: UIButton) {
@@ -48,6 +58,7 @@ class ActivityCell: UITableViewCell{
             button_configure(likes: false, but: 2)
             db.collection("activity").document(activityID[1]).updateData(["likes" : false])
         }
+        delegate?.cellButtonPressed(actID: activityID[1])
     }
     
     func configure() {
@@ -97,7 +108,6 @@ class ActivityCell: UITableViewCell{
     
     func assign_ID(ids: [String]) {
         activityID = ids
-        print(activityID)
     }
     
     override func awakeFromNib() {

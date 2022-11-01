@@ -107,7 +107,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.collect2.isHidden = true
         }
         else {
-            cell.ActivityBlock2.isHidden = true
+            cell.img2.isHidden = true
+            cell.whiteback2.isHidden = true
         }
         
         cell.configure()

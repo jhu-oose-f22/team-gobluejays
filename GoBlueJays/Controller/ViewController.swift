@@ -10,41 +10,49 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var prof: UILabel!
-    @IBOutlet weak var num: UILabel!
     @IBOutlet weak var details: UILabel!
     
-    @IBAction func locationURL(_ sender: Any) {
-        UIApplication.shared.open(URL(string: course.locationURL)! as URL, options: [:],completionHandler: nil)
-    }
-    var course: Course = Course(name: "1", num: "1", date: "1", weekday: 1, location: "1", prof: "1", startTime: 10.0, duration: 10.0, syllabus: ["1"], locationURL: "1", gradescopeURL: "1", webURL: "1")
+
+    @IBOutlet weak var courseNumber: UILabel!
+    @IBOutlet weak var department: UILabel!
+    @IBOutlet weak var level: UILabel!
     
-    @IBAction func courseWeb(_ sender: Any) {
-        UIApplication.shared.open(URL(string: course.webURL)! as URL, options: [:],completionHandler: nil)
-    }
+    @IBOutlet weak var credits: UILabel!
+    @IBOutlet weak var meeting: UILabel!
+    @IBOutlet weak var area: UILabel!
+
+    @IBOutlet weak var location: UILabel!
+    
+    @IBOutlet weak var term: UILabel!
+    
+    var fakeMeetings = [Meeting(DOW: "1", Dates: "1", Times: "1", Location: "1", Building: "1", Room: "1")]
+    lazy var fakeSectionDetail = [SectionDetail(Description: "1", Meetings: fakeMeetings)]
+    lazy var course = CourseDetails(TermStartDate: "1", SchoolName: "1", Meetings: "1", OfferingName: "1", SectionName: "1", Title: "1", Credits: "1", Level: "1", Areas: "1", Building: "1", Term_JSS: "1", SectionDetails: fakeSectionDetail)
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hi")
-        name.text = course.name
-        var minute = String(Int(course.startTime.truncatingRemainder(dividingBy: 1)*60))
-        if (minute.count == 1) {
-            minute = "0" + minute;
+        print("hithere")
+        print(course.Title)
+        level.text = level.text! + course.Level
+        credits.text = credits.text! + course.Credits
+        courseNumber.text = course.OfferingName
+        name.text = course.Title
+        department.text = department.text! + course.SchoolName
+        meeting.text = meeting.text! + course.Meetings
+        term.text = term.text! + course.Term_JSS
+        area.text = area.text! + course.Areas
+        details.text =  course.SectionDetails[0].Description
+        
+        for i in 0...(course.SectionDetails[0].Meetings.count - 1) {
+            let lecture = course.SectionDetails[0].Meetings[i]
+            location.text = location.text! + lecture.Building
+            location.text = location.text! + lecture.Room
+            if (i != course.SectionDetails[0].Meetings.count - 1 ) {
+                location.text = location.text! + ", "
+            }
         }
-        time.text = String(Int(course.startTime/1)) + ":" +
-                            minute
-        location.text = course.location
-        prof.text = course.prof
-        num.text = course.num
-        print(course.name)
-        details.numberOfLines = course.syllabus.count
-        var grading = ""
-        for item in course.syllabus {
-            grading += item + " \n"
-        }
-        details.text = grading
     }
 
 

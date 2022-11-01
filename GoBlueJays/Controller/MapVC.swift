@@ -16,7 +16,7 @@ class MapVC: UIViewController, UISearchResultsUpdating{
         }
         
         resultsVC.delegate = self
-        
+        /*
         GooglePlacesManager.shared.findPlaces(query: query) { result in
             switch result {
             case .success(let places):
@@ -27,6 +27,7 @@ class MapVC: UIViewController, UISearchResultsUpdating{
                 print(error)
             }
         }
+        */
     }
     
     let mapView = MKMapView()
