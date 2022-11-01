@@ -26,21 +26,22 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
-    var recact: [Activity] = [
-        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id:"act001"),
-        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id:"act002"),
-        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id:"act003"),
+    var recact: [Activity] = []
+//    [
+//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id:"act001"),
+//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id:"act002"),
+//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id:"act003"),
 //        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
 //        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
 //        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
 //        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false),
-    ]
+//    ]
     
     var recommendActivities: [Activity] = []
     var sortedActivites: [Activity] = []
     
     var buildingLocations: [BuildingLocation] = []
-    var latitude: CLLocationDegrees = 39.0
+    var latitude: CLLocationDegrees = 39.0;
     var longitude: CLLocationDegrees = -76.0;
     let activityRecommend: Int = 5;
 
@@ -86,6 +87,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             activity_recommendation()
             print(sortedActivites)
             recact = recommendActivities
+            PageView.numberOfPages = recact.count
             print("reload")
             self.reloadData()
         }
@@ -158,7 +160,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             ids.append(filteredActivities[ind2].id)
         }
         else {
-            cell.ActivityBlock2.isHidden = true
+            cell.img2.isHidden = true
+            cell.whiteback2.isHidden = true
         }
         cell.assign_ID(ids: ids)
         cell.configure()
