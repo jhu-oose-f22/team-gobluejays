@@ -161,15 +161,15 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         ids.append(filteredActivities[ind1].id)
         
         if (ind2 <= filteredActivities.count-1) {
-            cell.ActivityBlock2.isHidden = false
+            cell.img2.isHidden = false
+            cell.whiteback2.isHidden = false
             cell.location2.text = filteredActivities[ind2].location
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
-        }
-        else {
+        } else {
             cell.img2.isHidden = true
             cell.whiteback2.isHidden = true
         }
@@ -193,16 +193,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         self.reloadData()
 //        print("reloaded!")
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func getPlaceLocationFromName(place: String) -> CLLocationCoordinate2D {
         let name = place.lowercased()
@@ -286,23 +276,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         
     }
 
-    
-    // Old Search Bar Config
-    // whenever there is text in the search bar, run the following code
-//    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
-//
-//        filteredActivities = []
-//        if searchText == "" {
-//            filteredActivities = activities
-//        } else {
-//            for activity in activities {
-//                if activity.title.lowercased().contains(searchText.lowercased()) || activity.location.lowercased().contains(searchText.lowercased()) {
-//                    filteredActivities.append(activity)
-//                }
-//            }
-//        }
-//        self.tableView.reloadData()
-//    }
+
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -324,7 +298,11 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                     let scopeMatch = (scopeButton == "All" || activity.category.lowercased().contains(scopeButton.lowercased()))
                     let searchTextMatch = activity.title.lowercased().contains(searchText.lowercased())
                     return scopeMatch && searchTextMatch
-
+                }
+            }
+        } else {
+            filteredActivities = activities
+        }
         self.reloadData()
     }
     

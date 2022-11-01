@@ -90,7 +90,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
-        
+        var ids : [String] = []
 
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
@@ -99,12 +99,13 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.collect.isHidden = true
         
         if (ind2 <= filteredCollects.count-1) {
-            cell.ActivityBlock2.isHidden = false
+            cell.img2.isHidden = false
+            cell.whiteback2.isHidden = false
             cell.location2.text = filteredCollects[ind2].location
             cell.Title2.text = filteredCollects[ind2].title
             cell.time2.text = filteredCollects[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
-            cell.collect2.isHidden = true
+            ids.append(filteredCollects[ind2].id)
         }
         else {
             cell.img2.isHidden = true
@@ -115,32 +116,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         return cell
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // Old Search Bar Config
-    // whenever there is text in the search bar, run the following code
-//    func searchBar(_ searchBar:UISearchBar, textDidChange searchText: String) {
-//
-//        filteredCollects = []
-//        if searchText == "" {
-//            filteredCollects = collects
-//        } else {
-//            for collect in collects {
-//                if collect.title.lowercased().contains(searchText.lowercased()) || collect.location.lowercased().contains(searchText.lowercased()) {
-//                    filteredCollects.append(collect)
-//                }
-//            }
-//        }
-//        self.tableView.reloadData()
-//    }
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
