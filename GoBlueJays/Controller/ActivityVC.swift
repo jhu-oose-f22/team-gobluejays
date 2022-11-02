@@ -284,8 +284,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var isFiltering: Bool {
         let searchBarScopeIsFiltering =
             searchController.searchBar.selectedScopeButtonIndex != 0
-          return searchController.isActive &&
-            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+          return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
     func filterContentForSearchText(searchText: String, scopeButton: String = "All") {

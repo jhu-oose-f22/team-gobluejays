@@ -106,6 +106,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.time2.text = filteredCollects[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
             ids.append(filteredCollects[ind2].id)
+            cell.collect2.isHidden = true
         }
         else {
             cell.img2.isHidden = true
@@ -123,8 +124,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     var isFiltering: Bool {
         let searchBarScopeIsFiltering =
             searchController.searchBar.selectedScopeButtonIndex != 0
-          return searchController.isActive &&
-            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+          return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
     func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
