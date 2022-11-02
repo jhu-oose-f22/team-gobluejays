@@ -9,6 +9,10 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+import SwiftUI
+import EventKitUI
+
+
 class ScheduleVC: UIViewController{
     var text: String?
     var currentTerm: String?
@@ -16,6 +20,7 @@ class ScheduleVC: UIViewController{
     var courses: [Course] = []
     var registeredCourses: [RegisteredCourse] = []
     var currentWeekCourses:[CourseDetails] = []
+    let db = Firestore.firestore()
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -109,6 +114,7 @@ class ScheduleVC: UIViewController{
     }
 
     @IBOutlet weak var dateTF: TextField!
+//
     override func viewDidLoad() {
         super.viewDidLoad()
         setCurrentWeek(date: Date())
@@ -129,23 +135,15 @@ class ScheduleVC: UIViewController{
         
 
         //test
-        let db = Firestore.firestore()
+//        let db = Firestore.firestore()
         // fake data
         // Course1: EN.601.421(01), Fall 2022
         let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN55343601");
         let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN60142101");
         registeredCourses.append(registeredCourse1);
         registeredCourses.append(registeredCourse2);
-        for registeredCourse in registeredCourses {
-            let group = DispatchGroup()
-            group.enter()
-            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
-                self.currentWeekCourses = json ?? []
-                group.leave()
-            }
-            group.wait()
-            displayCourses(books: self.currentWeekCourses)
-        }
+        
+        reloadCourseEvent()
         
     }
     
@@ -178,23 +176,10 @@ class ScheduleVC: UIViewController{
     @objc func dateChange(datePicker: UIDatePicker) {
         dateTF.text = formatDate(date: datePicker.date)
         setCurrentWeek(date: datePicker.date)
-        for v in [view1,view2, view3,view4,view5] {
-            for subview in v!.subviews {
-                if (subview is UIButton) {
-                    subview.removeFromSuperview()
-                }
-            }
-        }
-        for registeredCourse in registeredCourses {
-            let group = DispatchGroup()
-            group.enter()
-            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
-                self.currentWeekCourses = json ?? []
-                group.leave()
-            }
-            group.wait()
-            displayCourses(books: self.currentWeekCourses)
-        }
+        
+        reloadCourseEvent()
+            
+        
         //dateTF.endEditing(true) //this closes the DatePicker when a new date is selected
     }
     
@@ -210,19 +195,14 @@ class ScheduleVC: UIViewController{
     
     func showCourses(courses: [Course]) {
         for course in courses {
-            let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
-                let controller =
-                self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
-                //controller.course = course
-                self.present(controller,animated: true,completion: nil)
-            }));
+            let courseButton = UIButton(type: .system)
             let oneHour = self.view1.frame.height / 17
             let y = (course.startTime - 7.0 + 0.85) * oneHour
 //            courseButton.setTitle(course.name, for: .normal)
-            courseButton.setTitle("1", for: .normal)
-            courseButton.titleLabel?.font = UIFont(name: "GillSans-Italic", size: 5)
+            courseButton.setTitle(course.name, for: .normal)
+            courseButton.titleLabel?.font = UIFont(name: "GillSans-Italic", size: 10)
             courseButton.titleLabel?.lineBreakMode = .byWordWrapping
-            courseButton.backgroundColor = UIColor(red: 102/255, green: 250/255, blue: 51/255, alpha: 0.5)
+            courseButton.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)
             courseButton.setTitleColor(.black, for: .normal);
             
             courseButton.frame = CGRect(x: 0, y: y, width: self.view1.frame.width, height: oneHour*course.duration);
@@ -258,9 +238,6 @@ class ScheduleVC: UIViewController{
     func displayCourses(books: [CourseDetails]) {
         for book in books {
             var color = Colors[index % Colors.count]
-            print(index)
-            print(color)
-            print(book.Title)
             index = index + 1
             print(index)
             for section in book.SectionDetails {
@@ -363,13 +340,13 @@ class ScheduleVC: UIViewController{
     }
 
     // day 0: Monday
-    @IBAction func addEvent(_ sender: Any) {
-        let controller =
-        storyboard?.instantiateViewController(withIdentifier: "AddEventStoryboard") as! AddEventViewController
-        controller.modalPresentationStyle = .fullScreen
-//        controller.delegate = self
-        present(controller,animated: true,completion: nil)
-    }
+//    @IBAction func addEvent(_ sender: Any) {
+//        let controller =
+//        storyboard?.instantiateViewController(withIdentifier: "AddEventStoryboard") as! AddEventViewController
+//        controller.modalPresentationStyle = .fullScreen
+////        controller.delegate = self
+//        present(controller,animated: true,completion: nil)
+//    }
 
 }
 
@@ -397,11 +374,150 @@ extension String {
 
 extension ScheduleVC: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        textField.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        textField.textColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     }
     
+}
+
+
+extension ScheduleVC: EKEventEditViewDelegate {
+    @IBAction func addEvent(_ sender: UIButton) {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .notDetermined:
+            let eventStore = EKEventStore()
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted {
+                    // do stuff
+                    DispatchQueue.main.async {
+                        self.showEventViewController()
+                    }
+                }
+            }
+        case .authorized:
+            // do stuff
+            DispatchQueue.main.async {
+                self.showEventViewController()
+            }
+        default:
+            break
+        }
+    }
+    
+    func showEventViewController(){
+        let eventVC = EKEventEditViewController()
+        eventVC.editViewDelegate = self // The delegate to notify when editing an event.
+        eventVC.eventStore = EKEventStore()
+        
+        let event = EKEvent(eventStore: eventVC.eventStore)
+        event.title = "Hello calendar!"
+        event.startDate = Date()
+        eventVC.event = event
+
+        present(eventVC, animated: true)
+    
+        
+        
+    }
+
+    
+    func convertTime(at date: Date) -> Double{
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm:ss"
+        
+        return (Double(timeFormatter.string(from: date).substring(with: 0..<2)) ?? 7.0) + (Double(timeFormatter.string(from: date).substring(with: 3..<5)) ?? 0.0)/60.0
+    }
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        var name: String = controller.event?.title ?? "Empty Title"
+        var startDate: Date = controller.event?.startDate ?? Date()
+        var endDate: Date = controller.event?.endDate ?? Date()
+//        var isAllDay: Bool = controller.event?.isAllDay ?? false
+        
+        /**
+         Convert date to string
+         */
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        var couseDate:String = dateFormatter.string(from: startDate)
+        /**
+         Convert date to Time
+         */
+        var startTime:Double = convertTime(at: startDate)
+        var endTime:Double = convertTime(at: endDate)
+        var duration: Double = endTime - startTime
+        print(name,startTime,endTime,duration) // New course! 12.0 18.0 6.0
+        
+        
+        var ref: DocumentReference? = nil
+        ref = db.collection("event").addDocument(data: [
+            "name": name,
+            "date": couseDate,
+            "location": "Maryland 310",
+            "startTime": startTime,
+            "duration": duration
+        ]) {
+            err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID:\(ref!.documentID)")
+            }
+        }
+        
+        dismiss(animated: true, completion: nil)
+        reloadCourseEvent()
+        
+        
+            
+    }
+    
+    func reloadCourseEvent(){
+        for v in [view1,view2, view3,view4,view5] {
+            for subview in v!.subviews {
+                if (subview is UIButton) {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        for registeredCourse in registeredCourses {
+            let group = DispatchGroup()
+            group.enter()
+            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
+                self.currentWeekCourses = json ?? []
+                group.leave()
+            }
+            group.wait()
+            displayCourses(books: self.currentWeekCourses)
+        }
+        courses = []
+        db.collection("event").getDocuments(){ [self]
+            (QuerySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in QuerySnapshot!.documents {
+                    let data = document.data()
+                    guard let dateee = data["date"] as? String else {
+                        return
+                    }
+                    if let fooOffset = self.week.firstIndex(where: {$0 == dateee}) {
+                        print("found date in current week: \(dateee)")
+                        print(fooOffset)
+                        
+                        let course1: Course = Course(name: data["name"] as! String, date: data["date"] as! String ,weekday: fooOffset , location: data["location"] as! String, startTime: data["startTime"] as! Double, duration: data["duration"] as! Double)
+                        self.courses.append(course1)
+                    } else {
+                        print("nono")
+                    }
+                }
+                showCourses(courses: courses)
+            }
+        }
+    }
 }
