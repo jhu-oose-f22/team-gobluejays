@@ -12,10 +12,12 @@ import CoreLocation
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
+    func cellTapped(actID:String)
 }
 
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
+    @IBOutlet weak var nearby: UIButton!
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var recomCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
@@ -28,15 +30,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
     var recact: [Activity] = []
-//    [
-//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id:"act001"),
-//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id:"act002"),
-//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id:"act003"),
-//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
-//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
-//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
-//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false),
-//    ]
     
     var recommendActivities: [Activity] = []
     var sortedActivites: [Activity] = []
@@ -50,6 +43,8 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Explore"
+        nearby.tag = 0
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
@@ -102,6 +97,22 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             self.reloadData()
         }
     }
+    
+    @IBAction func click(_ sender: Any) {
+        if nearby.tag == 0 {
+            print("clicked!")
+            filteredActivities = sortedActivites
+            print(filteredActivities)
+            self.reloadData()
+            nearby.tag = 1
+        } else {
+            print("unclicked!")
+            filteredActivities = activities
+            self.reloadData()
+            nearby.tag = 0
+        }
+    }
+
     
     func setBuildingLocations() {
         // hard-code building locations
@@ -176,6 +187,10 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         cell.assign_ID(ids: ids)
         cell.configure()
         return cell
+    }
+    
+    func cellTapped(actID: String) {
+//        let detailView:ActivityDetailVC = ActivityDetailVC()
     }
     
     func cellButtonPressed(actID: String) {

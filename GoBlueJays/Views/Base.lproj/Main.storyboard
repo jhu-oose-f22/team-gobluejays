@@ -4339,6 +4339,9 @@
                                                                         </fragment>
                                                                     </attributedString>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="click:" destination="T8d-M3-CKf" eventType="touchUpInside" id="a5h-it-Vo5"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VqP-Su-3MJ">
                                                                 <rect key="frame" x="78.333333333333343" y="0.0" width="78.333333333333343" height="28"/>
@@ -4463,6 +4466,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="PageView" destination="xGu-Cd-f6M" id="tcj-qp-C0R"/>
+                        <outlet property="nearby" destination="Zd9-ui-vDF" id="mjh-Nh-o4p"/>
                         <outlet property="recomCollection" destination="yvQ-sB-y5N" id="ISO-WE-Tfw"/>
                         <outlet property="tableView" destination="L3T-oZ-NbU" id="RnN-jK-YA7"/>
                     </connections>
@@ -4557,7 +4561,7 @@
         <!--ActivityDetail-->
         <scene sceneID="O7N-pD-y58">
             <objects>
-                <viewController id="Mr3-3t-f9O" userLabel="ActivityDetail" sceneMemberID="viewController">
+                <viewController id="Mr3-3t-f9O" userLabel="ActivityDetail" customClass="ActivityDetailVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c9O-VD-H4s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4666,10 +4670,18 @@
                             <constraint firstItem="SPO-ye-dhD" firstAttribute="leading" secondItem="yjv-AJ-diy" secondAttribute="leading" id="vNQ-Tv-HG7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Location" destination="q5b-Bi-RSG" id="9gF-tN-YXP"/>
+                        <outlet property="cost" destination="h6e-hA-KxZ" id="9L0-SR-2sW"/>
+                        <outlet property="detail" destination="GIb-Mu-hJw" id="rKI-Eb-PGQ"/>
+                        <outlet property="host" destination="HHp-cc-U0P" id="bLQ-Jw-FSw"/>
+                        <outlet property="name" destination="7cE-4m-bx7" id="K6o-jq-g8m"/>
+                        <outlet property="time" destination="Ajw-s5-Mzn" id="ONI-5W-fkc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wke-Y8-xc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5744.9275362318849" y="-596.65178571428567"/>
+            <point key="canvasLocation" x="5743" y="-611"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
