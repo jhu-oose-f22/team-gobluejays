@@ -87,6 +87,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
                     self.activities.append(act)
                 }
             }
+            print(activities)
             filteredActivities = activities
             setBuildingLocations()
             activity_recommendation()
@@ -117,24 +118,24 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     func setBuildingLocations() {
         // hard-code building locations
         buildingLocations = [
-            BuildingLocation(name: "hodson hall", location: CLLocationCoordinate2D(latitude: 39.32749022560959, longitude: -76.62227881124888)),
-            BuildingLocation(name: "hackerman hall", location: CLLocationCoordinate2D(latitude: 39.32691271415686, longitude: -76.62090191636538)),
-            BuildingLocation(name: "malone hall", location: CLLocationCoordinate2D(latitude: 39.32623759589481, longitude: -76.62080273393454)),
-            BuildingLocation(name: "maryland hall", location: CLLocationCoordinate2D(latitude: 39.328045703864206, longitude: -76.6198668018716)),
-            BuildingLocation(name: "levering hall", location: CLLocationCoordinate2D(latitude: 39.32809140048764, longitude: -76.62189940022438)),
-            BuildingLocation(name: "krieger hall", location: CLLocationCoordinate2D(latitude: 39.32865204939853, longitude: -76.6199681981623)),
-            BuildingLocation(name: "wyman park building", location: CLLocationCoordinate2D(latitude: 39.32517737353952, longitude: -76.62289381377747)),
-            BuildingLocation(name: "clark hall", location: CLLocationCoordinate2D(latitude: 39.32693374517105, longitude: -76.62225083148367)),
-            BuildingLocation(name: "latrobe hall", location: CLLocationCoordinate2D(latitude: 39.32789328034753, longitude: -76.62075340116824)),
-            BuildingLocation(name: "croft hall", location: CLLocationCoordinate2D(latitude: 39.32733683893719, longitude: -76.61957309112006)),
-            BuildingLocation(name: "mason hall", location: CLLocationCoordinate2D(latitude: 39.325861985523076, longitude: -76.62151281118587)),
-            BuildingLocation(name: "shiver hall", location: CLLocationCoordinate2D(latitude: 39.32642389924464, longitude:  -76.62025109761828)),
-            BuildingLocation(name: "gilman hall", location: CLLocationCoordinate2D(latitude: 39.32893189373731, longitude: -76.62157898877807)),
-            BuildingLocation(name: "mergenthaler hall", location: CLLocationCoordinate2D(latitude: 39.329652795301435, longitude: -76.62063640452014)),
-            BuildingLocation(name: "remsen hall", location: CLLocationCoordinate2D(latitude: 39.32953968324859, longitude: -76.62002418197157)),
-            BuildingLocation(name: "mudd hall", location: CLLocationCoordinate2D(latitude: 39.33096989515415, longitude: -76.62054267311402)),
-            BuildingLocation(name: "macaulay hall", location: CLLocationCoordinate2D(latitude: 39.33021214342024, longitude: -76.62078368915385)),
-            BuildingLocation(name: "dunning hall", location: CLLocationCoordinate2D(latitude: 39.33027356644766, longitude: -76.62001903445636)),
+            BuildingLocation(name: "hodson", location: CLLocationCoordinate2D(latitude: 39.32749022560959, longitude: -76.62227881124888)),
+            BuildingLocation(name: "hackerman", location: CLLocationCoordinate2D(latitude: 39.32691271415686, longitude: -76.62090191636538)),
+            BuildingLocation(name: "malone", location: CLLocationCoordinate2D(latitude: 39.32623759589481, longitude: -76.62080273393454)),
+            BuildingLocation(name: "maryland", location: CLLocationCoordinate2D(latitude: 39.328045703864206, longitude: -76.6198668018716)),
+            BuildingLocation(name: "levering", location: CLLocationCoordinate2D(latitude: 39.32809140048764, longitude: -76.62189940022438)),
+            BuildingLocation(name: "krieger", location: CLLocationCoordinate2D(latitude: 39.32865204939853, longitude: -76.6199681981623)),
+            BuildingLocation(name: "wyman", location: CLLocationCoordinate2D(latitude: 39.32517737353952, longitude: -76.62289381377747)),
+            BuildingLocation(name: "clark", location: CLLocationCoordinate2D(latitude: 39.32693374517105, longitude: -76.62225083148367)),
+            BuildingLocation(name: "latrobe", location: CLLocationCoordinate2D(latitude: 39.32789328034753, longitude: -76.62075340116824)),
+            BuildingLocation(name: "croft", location: CLLocationCoordinate2D(latitude: 39.32733683893719, longitude: -76.61957309112006)),
+            BuildingLocation(name: "mason", location: CLLocationCoordinate2D(latitude: 39.325861985523076, longitude: -76.62151281118587)),
+            BuildingLocation(name: "shiver", location: CLLocationCoordinate2D(latitude: 39.32642389924464, longitude:  -76.62025109761828)),
+            BuildingLocation(name: "gilman", location: CLLocationCoordinate2D(latitude: 39.32893189373731, longitude: -76.62157898877807)),
+            BuildingLocation(name: "mergenthaler", location: CLLocationCoordinate2D(latitude: 39.329652795301435, longitude: -76.62063640452014)),
+            BuildingLocation(name: "remsen", location: CLLocationCoordinate2D(latitude: 39.32953968324859, longitude: -76.62002418197157)),
+            BuildingLocation(name: "mudd", location: CLLocationCoordinate2D(latitude: 39.33096989515415, longitude: -76.62054267311402)),
+            BuildingLocation(name: "macaulay", location: CLLocationCoordinate2D(latitude: 39.33021214342024, longitude: -76.62078368915385)),
+            BuildingLocation(name: "dunning", location: CLLocationCoordinate2D(latitude: 39.33027356644766, longitude: -76.62001903445636)),
             BuildingLocation(name: "wyman quad", location: CLLocationCoordinate2D(latitude: 39.327531421428056, longitude: -76.62036598718512)),
             BuildingLocation(name: "decker quad", location: CLLocationCoordinate2D(latitude: 39.32650901050207, longitude: -76.6215549382646)),
             BuildingLocation(name: "milton s eisenhower library", location: CLLocationCoordinate2D(latitude: 39.32916209697434, longitude: -76.61924558793446)),
@@ -254,7 +255,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     }
     
     func distance(lo: CLLocationDegrees, la: CLLocationDegrees) -> Double {
-        return (lo - longitude) * (lo - longitude) + (la - latitude) * (la - latitude)
+        return (lo - longitude) * (lo - longitude) * 69 + (la - latitude) * (la - latitude) * 54.6
     }
     
     func activity_recommendation() {
@@ -267,8 +268,9 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         }
         
         if latitude == -1.0 && longitude == -1.0 {
-            //return
+            return
         }
+        print(latitude, longitude)
         var filtered_activities: [sortActivity] = []
         
         for activity in activities {
