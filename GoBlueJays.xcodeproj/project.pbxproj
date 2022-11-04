@@ -113,6 +113,8 @@
 		4FED0F6128EFF868003265A1 /* AthleticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6028EFF868003265A1 /* AthleticsVC.swift */; };
 		4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */; };
 		4FED0F6528F003CA003265A1 /* HousingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6428F003CA003265A1 /* HousingVC.swift */; };
+		63C8F3DC291592EA00E9EF2F /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8F3DA291592E900E9EF2F /* EditProfileVC.swift */; };
+		63C8F3DD291592EA00E9EF2F /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8F3DB291592E900E9EF2F /* ProfileVC.swift */; };
 		847B657350BAA9D69717C357 /* Pods_GoBlueJaysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD8310A85FBB8D1BB955A1B /* Pods_GoBlueJaysTests.framework */; };
 		C86BB70F919382E8E96852B4 /* Pods_GoBlueJays.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8903B82F5B5302F32A84FDAA /* Pods_GoBlueJays.framework */; };
 /* End PBXBuildFile section */
@@ -199,6 +201,8 @@
 		4FED0F6028EFF868003265A1 /* AthleticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsVC.swift; sourceTree = "<group>"; };
 		4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaVC.swift; sourceTree = "<group>"; };
 		4FED0F6428F003CA003265A1 /* HousingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousingVC.swift; sourceTree = "<group>"; };
+		63C8F3DA291592E900E9EF2F /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		63C8F3DB291592E900E9EF2F /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		8903B82F5B5302F32A84FDAA /* Pods_GoBlueJays.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoBlueJays.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		922DA689854F3B5647D9434C /* Pods-GoBlueJays.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJays.debug.xcconfig"; path = "Target Support Files/Pods-GoBlueJays/Pods-GoBlueJays.debug.xcconfig"; sourceTree = "<group>"; };
 		ADD8310A85FBB8D1BB955A1B /* Pods_GoBlueJaysTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoBlueJaysTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +333,8 @@
 		2CB79C9328A9E38500744FF8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				63C8F3DA291592E900E9EF2F /* EditProfileVC.swift */,
+				63C8F3DB291592E900E9EF2F /* ProfileVC.swift */,
 				2CE790D5289F7F1A00C3BB2B /* MapVC.swift */,
 				408D837D2913009D003C034C /* ActivityDetailVC.swift */,
 				2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */,
@@ -351,8 +357,6 @@
 				4FED0F6428F003CA003265A1 /* HousingVC.swift */,
 				40715752290CBFD900D4E18A /* RecomCell.swift */,
 				087FC7D02909D1D3005A582E /* LocationManagerCreator.swift */,
-				636CE05129140A1900F28C26 /* ProfileVC.swift */,
-				63F1D0522914A814004B6C26 /* EditProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -755,8 +759,10 @@
 				2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */,
 				2C83283328A7DC5A00EBA59B /* AcademicsVC.swift in Sources */,
 				408D837E2913009D003C034C /* ActivityDetailVC.swift in Sources */,
+				63C8F3DC291592EA00E9EF2F /* EditProfileVC.swift in Sources */,
 				40A89A1728F75FE800E3CE60 /* (null) in Sources */,
 				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
+				63C8F3DD291592EA00E9EF2F /* ProfileVC.swift in Sources */,
 				087FC7972909B3E8005A582E /* sortActivity.swift in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */,

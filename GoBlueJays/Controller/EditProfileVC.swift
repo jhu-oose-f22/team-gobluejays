@@ -40,7 +40,6 @@ class EditProfileVC: UIViewController {
                     "Phone": phoneText,
                     "School": SchoolText,
                     "Bio": bioText]
-        let oldDict = db.collection("Profile")
         db.collection("Profile").addDocument(data: dict)
     }
 }
