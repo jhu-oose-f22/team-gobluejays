@@ -15,8 +15,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var tableView: UITableView!
     
 //    var collects: [Activity] = [

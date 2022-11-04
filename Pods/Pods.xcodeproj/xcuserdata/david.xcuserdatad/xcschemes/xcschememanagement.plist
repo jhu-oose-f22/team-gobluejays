@@ -4,26 +4,28 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-GoBlueJays-GoBlueJaysUITests.xcscheme_^#shared#^_</key>
+		<key>Pods-GoBlueJays-GoBlueJaysUITests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>Pods-GoBlueJays.xcscheme_^#shared#^_</key>
+		<key>Pods-GoBlueJays.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>Pods-GoBlueJaysTests.xcscheme_^#shared#^_</key>
+		<key>Pods-GoBlueJaysTests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>THLabel.xcscheme_^#shared#^_</key>
+		<key>THLabel.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict/>
 </dict>
 </plist>

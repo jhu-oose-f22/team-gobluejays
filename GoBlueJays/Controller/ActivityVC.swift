@@ -19,7 +19,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var recomCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     let searchController = UISearchController(searchResultsController: nil)
     var timer = Timer()
