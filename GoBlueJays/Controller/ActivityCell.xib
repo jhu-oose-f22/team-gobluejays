@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Oe-QYm" userLabel="content1">
                                 <rect key="frame" x="0.0" y="0.0" width="206" height="186"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syl-yK-j10" userLabel="img">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syl-yK-j10" userLabel="img" customClass="UIButton">
                                         <rect key="frame" x="10" y="7" width="191" height="105"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KhT-ti-2M5">
@@ -44,6 +44,9 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="KhT-ti-2M5" secondAttribute="trailing" id="7Xb-Cw-IXS"/>
                                             <constraint firstItem="KhT-ti-2M5" firstAttribute="leading" secondItem="Syl-yK-j10" secondAttribute="leading" id="Kb6-Ya-nIY"/>
@@ -57,6 +60,9 @@
                                             <constraint firstAttribute="bottom" secondItem="KhT-ti-2M5" secondAttribute="bottom" id="lxx-gB-1wI"/>
                                             <constraint firstItem="KhT-ti-2M5" firstAttribute="top" secondItem="Syl-yK-j10" secondAttribute="top" id="u51-gu-kUO"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="cell1_tap:" destination="KGk-i7-Jjw" eventType="valueChanged" id="hGb-QS-1uu"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-np-e8T" userLabel="whiteback">
                                         <rect key="frame" x="10" y="112" width="191" height="60"/>
