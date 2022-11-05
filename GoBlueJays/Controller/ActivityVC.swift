@@ -171,7 +171,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         ids.append(filteredActivities[ind1].id)
         
         if (ind2 <= filteredActivities.count-1) {
-            cell.img2.isHidden = false
+            cell.img2?.isHidden = false
             cell.whiteback2.isHidden = false
             cell.location2.text = filteredActivities[ind2].location
             cell.Title2.text = filteredActivities[ind2].title
@@ -196,11 +196,11 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
+        //let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        vc.activity = act
-        self.present(vc, animated: true, completion: nil)
+        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        //vc.activity = act
+        //self.present(vc, animated: true, completion: nil)
     }
     
     func cellButtonPressed(actID: String) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ActivityDetailModel {
     var title: String
@@ -15,5 +16,5 @@ struct ActivityDetailModel {
     var host: String
     var cost: String
     var detail: String
-    var id: String
+    var image: UIImage
 }
