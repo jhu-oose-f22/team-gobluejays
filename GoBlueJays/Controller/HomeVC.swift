@@ -42,7 +42,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0")!)
     }
@@ -51,7 +51,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.libcal.com/seats?lid=1196"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/seats?lid=1196")!)
     }
@@ -71,7 +71,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://sis.jhu.edu/sswf/"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
     }
@@ -80,7 +80,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.semester.ly"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
     }
@@ -89,7 +89,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe")! as URL, options: [:],completionHandler: nil)
     }
@@ -98,7 +98,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd")! as URL, options: [:],completionHandler: nil)
     }
@@ -107,7 +107,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/site-1"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-1")! as URL, options: [:],completionHandler: nil)
     }
@@ -116,7 +116,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/site-2"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-2")! as URL, options: [:],completionHandler: nil)
     }
@@ -125,7 +125,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe")! as URL, options: [:],completionHandler: nil)
     }
