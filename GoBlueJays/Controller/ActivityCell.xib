@@ -22,7 +22,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hXz-HR-rqT">
                         <rect key="frame" x="0.0" y="0.0" width="412" height="186"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Oe-QYm" userLabel="content1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Oe-QYm" userLabel="content1" customClass="UIButton">
                                 <rect key="frame" x="0.0" y="0.0" width="206" height="186"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syl-yK-j10" userLabel="img" customClass="UIButton">
@@ -60,9 +60,6 @@
                                             <constraint firstAttribute="bottom" secondItem="KhT-ti-2M5" secondAttribute="bottom" id="lxx-gB-1wI"/>
                                             <constraint firstItem="KhT-ti-2M5" firstAttribute="top" secondItem="Syl-yK-j10" secondAttribute="top" id="u51-gu-kUO"/>
                                         </constraints>
-                                        <connections>
-                                            <action selector="cell1_tap:" destination="KGk-i7-Jjw" eventType="valueChanged" id="hGb-QS-1uu"/>
-                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-np-e8T" userLabel="whiteback">
                                         <rect key="frame" x="10" y="112" width="191" height="60"/>
@@ -157,6 +154,9 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="206" id="3Dz-7f-5kz"/>
                                     <constraint firstAttribute="trailing" secondItem="k6w-np-e8T" secondAttribute="trailing" constant="5" id="43h-o8-3Hf"/>

@@ -16,7 +16,6 @@ protocol activityTableDelegate: AnyObject {
 }
 
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
-
     @IBOutlet weak var nearby: UIButton!
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var recomCollection: UICollectionView!
@@ -190,7 +189,16 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     }
     
     func cellTapped(actID: String) {
-//        let detailView:ActivityDetailVC = ActivityDetailVC()
+        //
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        print(indexPath.row)
+        let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
+        
+        let activityDetail:ActivityDetail = ActivityDetail()
+        activityDetail.activity = act
+        self.present(activityDetail, animated: true, completion: nil)
     }
     
     func cellButtonPressed(actID: String) {

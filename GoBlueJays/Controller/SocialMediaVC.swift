@@ -41,6 +41,6 @@ class SocialMediaVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = urlString
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
     }
 }

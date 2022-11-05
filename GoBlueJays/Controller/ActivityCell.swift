@@ -34,15 +34,16 @@ class ActivityCell: UITableViewCell{
     
     var activityID: [String] = []
     
-    @IBAction func cell1_tap(_ sender: Any) {
-        let detailView:ActivityDetailVC = ActivityDetailVC()
-        detailView.time.text = (detailView.time.text ?? "Time") + self.time.text!
-        detailView.name.text = (detailView.name.text ?? "Name") + self.Title.text!
-        detailView.Location.text = (detailView.Location.text ?? "Location") + self.location.text!
-        detailView.host.text = "OOSE"
-        detailView.cost.text = "0"
-        detailView.detail.text = "N/A"
+    @IBAction func cell1_tap(_ sender: UIButton) {
+        //let detailView:ActivityDetailVC = ActivityDetailVC()
+        //detailView.link = self.time.text ?? "No Time"
+        //detailView.name.text = self.Title.text
+        //detailView.Location.text =  self.location.text
+        //detailView.host.text = "OOSE"
+        //detailView.cost.text = "0"
+        //detailView.detail.text = "N/A"
         
+        //self.delegate!.playButtonDidSelect(vc:detailView)
         
         print("try")
 //        self.presentViewController(detailView, animated:false,completion:nil)
