@@ -43,9 +43,9 @@ class ActivityCell: UITableViewCell{
         //detailView.cost.text = "0"
         //detailView.detail.text = "N/A"
         
-        //self.delegate!.playButtonDidSelect(vc:detailView)
-        
-        print("try")
+        //let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
+        //self.delegate!.cellTapped(act: act)
+        //print("try")
 //        self.presentViewController(detailView, animated:false,completion:nil)
     }
     

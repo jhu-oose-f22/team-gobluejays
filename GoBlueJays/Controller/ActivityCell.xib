@@ -166,6 +166,9 @@
                                     <constraint firstItem="Syl-yK-j10" firstAttribute="leading" secondItem="sob-Oe-QYm" secondAttribute="leading" constant="10" id="UwM-OQ-bcR"/>
                                     <constraint firstAttribute="trailing" secondItem="Syl-yK-j10" secondAttribute="trailing" constant="5" id="nn2-m1-g6T"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="cell1_tap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RZ1-Jc-Y8Z"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQC-Al-Y34" userLabel="content2">
                                 <rect key="frame" x="206" y="0.0" width="206" height="186"/>

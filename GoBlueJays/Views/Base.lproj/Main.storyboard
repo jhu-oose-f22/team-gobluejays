@@ -4561,7 +4561,7 @@
         <!--Activity Detail-->
         <scene sceneID="sYq-Xh-BtX">
             <objects>
-                <viewController id="pvR-fp-8dC" customClass="ActivityDetail" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivityDetailView" id="pvR-fp-8dC" customClass="ActivityDetail" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bdz-qh-0jd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4569,8 +4569,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-2Q-DeX">
                                 <rect key="frame" x="0.0" y="44" width="414" height="120"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gW-rQ-mr0">
-                                        <rect key="frame" x="30.000000000000004" y="56.666666666666686" width="54.333333333333343" height="25.333333333333314"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gW-rQ-mr0" userLabel="Title">
+                                        <rect key="frame" x="30.000000000000004" y="56.666666666666679" width="54.333333333333343" height="25.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -4579,6 +4579,7 @@
                                 <constraints>
                                     <constraint firstItem="7gW-rQ-mr0" firstAttribute="leading" secondItem="GeC-2Q-DeX" secondAttribute="leading" constant="30" id="cN3-zZ-NFH"/>
                                     <constraint firstAttribute="height" constant="120" id="tgU-3a-Hov"/>
+                                    <constraint firstItem="7gW-rQ-mr0" firstAttribute="top" secondItem="GeC-2Q-DeX" secondAttribute="top" constant="56.666666666666686" id="uqO-Pg-OlO"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RK-i2-Jvu">

@@ -12,7 +12,7 @@ import CoreLocation
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
-    func cellTapped(actID:String)
+    func cellTapped(act: ActivityDetailModel)
 }
 
 class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
@@ -188,17 +188,19 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         return cell
     }
     
-    func cellTapped(actID: String) {
-        //
+    func cellTapped(act: ActivityDetailModel) {
+        print("got to here")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        vc.activity = act
+        self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        print(indexPath.row)
         let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
         
-        let activityDetail:ActivityDetail = ActivityDetail()
-        activityDetail.activity = act
-        self.present(activityDetail, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        vc.activity = act
+        self.present(vc, animated: true, completion: nil)
     }
     
     func cellButtonPressed(actID: String) {
