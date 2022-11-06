@@ -40,7 +40,7 @@ class AppsVC: UIViewController {
     }
     
     @IBAction func support(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://gobluejays.netlify.app/contact")! as URL, options: [:],completionHandler: nil)
+        //UIApplication.shared.open(URL(string: "https://gobluejays.netlify.app/contact")! as URL, options: [:],completionHandler: nil)
     }
     
 }
