@@ -21,7 +21,7 @@ class ActivityCell: UITableViewCell{
     
     @IBOutlet weak var locicon2: UIImageView!
     
-    @IBOutlet weak var img2: UIView!
+    @IBOutlet weak var img2: UIButton!
     @IBOutlet weak var whiteback2: UIView!
     @IBOutlet weak var timeicon2: UIImageView!
     @IBOutlet weak var Title2: UILabel!
