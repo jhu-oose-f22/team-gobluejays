@@ -8,11 +8,7 @@
 import UIKit
 
 class ActivityDetailVC: UIViewController {
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
 }

@@ -12,14 +12,16 @@ import CoreLocation
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
+    func cellTapped(act: ActivityDetailModel)
 }
 
-class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
-
+class ActivityVC: UIViewController{
+    @IBOutlet weak var category_btn: UIButton!
+    @IBOutlet weak var nearby: UIButton!
+    @IBOutlet weak var upcoming: UIButton!
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var recomCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     let searchController = UISearchController(searchResultsController: nil)
     var timer = Timer()
@@ -28,18 +30,9 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
     var recact: [Activity] = []
-//    [
-//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id:"act001"),
-//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id:"act002"),
-//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id:"act003"),
-//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false),
-//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false),
-//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false),
-//        Activity(title: "Activity 7", time: "October 26 2022", location: "Malone Hall 207", image:"social media", likes:false),
-//    ]
-    
     var recommendActivities: [Activity] = []
     var sortedActivites: [Activity] = []
+    var sortedAct2: [Activity] = []
     
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 39.0;
@@ -48,30 +41,16 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         title = "Explore"
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
-        tableView.separatorStyle = .none
-
-        // search bar config
-        navigationItem.searchController = searchController
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
-        searchController.searchBar.delegate = self
-        definesPresentationContext = true
         
-        recomCollection.delegate = self
-        recomCollection.dataSource = self
-        PageView.numberOfPages = recact.count
-        PageView.currentPage = 0
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
-        }
+        // 2 sort config
+        sort_config()
+        // table config
+        table_config()
+        // search bar config
+        search_bar_config()
+        // rec carousel config
+        rec_config()
 
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
@@ -79,51 +58,96 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
                     let data = document.data()
-                    print(data)
+                    let timep = data["timestamp"] as! Timestamp
+                    let timec = formatter.string(from: timep.dateValue())
+                    
                     let act:Activity = Activity(title: data["title"] as! String,
-                                                time: data["time"] as! String,
+                                                time: timec,
                                                 location: data["location"] as! String,
                                                 image: data["image"] as! String,
                                                 likes: data["likes"] as! Bool,
                                                 id: document.documentID,
                                                 category: data["category"] as! String)
+                    
                     self.activities.append(act)
                 }
             }
             filteredActivities = activities
             setBuildingLocations()
             activity_recommendation()
-            print(sortedActivites)
+            sort_by_time()
             recact = recommendActivities
             PageView.numberOfPages = recact.count
-            print("reload")
             self.reloadData()
+        }
+    }
+    
+    @IBAction func click(_ sender: Any) {
+        if nearby.tag == 0 {
+            print("clicked!")
+            filteredActivities = sortedActivites
+            print(filteredActivities)
+            self.reloadData()
+            nearby.tag = 1
+            nearby.setTitleColor(UIColor.link, for: .normal)
+            if upcoming.tag == 1 {
+                upcoming.tag = 0
+                upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
+            }
+        } else {
+            print("unclicked!")
+            filteredActivities = activities
+            self.reloadData()
+            nearby.tag = 0
+            nearby.setTitleColor(UIColor.systemGray3, for: .normal)
+        }
+    }
+    
+    @IBAction func click2(_ sender: Any) {
+        if upcoming.tag == 0 {
+            print("clicked!")
+            filteredActivities = sortedAct2
+            self.reloadData()
+            upcoming.tag = 1
+            upcoming.setTitleColor(UIColor.link, for: .normal)
+            if nearby.tag == 1 {
+                nearby.tag = 0
+                nearby.setTitleColor(UIColor.systemGray3, for: .normal)
+            }
+        } else {
+            print("unclicked!")
+            filteredActivities = activities
+            self.reloadData()
+            upcoming.tag = 0
+            upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
         }
     }
     
     func setBuildingLocations() {
         // hard-code building locations
         buildingLocations = [
-            BuildingLocation(name: "hodson hall", location: CLLocationCoordinate2D(latitude: 39.32749022560959, longitude: -76.62227881124888)),
-            BuildingLocation(name: "hackerman hall", location: CLLocationCoordinate2D(latitude: 39.32691271415686, longitude: -76.62090191636538)),
-            BuildingLocation(name: "malone hall", location: CLLocationCoordinate2D(latitude: 39.32623759589481, longitude: -76.62080273393454)),
-            BuildingLocation(name: "maryland hall", location: CLLocationCoordinate2D(latitude: 39.328045703864206, longitude: -76.6198668018716)),
-            BuildingLocation(name: "levering hall", location: CLLocationCoordinate2D(latitude: 39.32809140048764, longitude: -76.62189940022438)),
-            BuildingLocation(name: "krieger hall", location: CLLocationCoordinate2D(latitude: 39.32865204939853, longitude: -76.6199681981623)),
-            BuildingLocation(name: "wyman park building", location: CLLocationCoordinate2D(latitude: 39.32517737353952, longitude: -76.62289381377747)),
-            BuildingLocation(name: "clark hall", location: CLLocationCoordinate2D(latitude: 39.32693374517105, longitude: -76.62225083148367)),
-            BuildingLocation(name: "latrobe hall", location: CLLocationCoordinate2D(latitude: 39.32789328034753, longitude: -76.62075340116824)),
-            BuildingLocation(name: "croft hall", location: CLLocationCoordinate2D(latitude: 39.32733683893719, longitude: -76.61957309112006)),
-            BuildingLocation(name: "mason hall", location: CLLocationCoordinate2D(latitude: 39.325861985523076, longitude: -76.62151281118587)),
-            BuildingLocation(name: "shiver hall", location: CLLocationCoordinate2D(latitude: 39.32642389924464, longitude:  -76.62025109761828)),
-            BuildingLocation(name: "gilman hall", location: CLLocationCoordinate2D(latitude: 39.32893189373731, longitude: -76.62157898877807)),
-            BuildingLocation(name: "mergenthaler hall", location: CLLocationCoordinate2D(latitude: 39.329652795301435, longitude: -76.62063640452014)),
-            BuildingLocation(name: "remsen hall", location: CLLocationCoordinate2D(latitude: 39.32953968324859, longitude: -76.62002418197157)),
-            BuildingLocation(name: "mudd hall", location: CLLocationCoordinate2D(latitude: 39.33096989515415, longitude: -76.62054267311402)),
-            BuildingLocation(name: "macaulay hall", location: CLLocationCoordinate2D(latitude: 39.33021214342024, longitude: -76.62078368915385)),
-            BuildingLocation(name: "dunning hall", location: CLLocationCoordinate2D(latitude: 39.33027356644766, longitude: -76.62001903445636)),
+            BuildingLocation(name: "hodson", location: CLLocationCoordinate2D(latitude: 39.32749022560959, longitude: -76.62227881124888)),
+            BuildingLocation(name: "hackerman", location: CLLocationCoordinate2D(latitude: 39.32691271415686, longitude: -76.62090191636538)),
+            BuildingLocation(name: "malone", location: CLLocationCoordinate2D(latitude: 39.32623759589481, longitude: -76.62080273393454)),
+            BuildingLocation(name: "maryland", location: CLLocationCoordinate2D(latitude: 39.328045703864206, longitude: -76.6198668018716)),
+            BuildingLocation(name: "levering", location: CLLocationCoordinate2D(latitude: 39.32809140048764, longitude: -76.62189940022438)),
+            BuildingLocation(name: "krieger", location: CLLocationCoordinate2D(latitude: 39.32865204939853, longitude: -76.6199681981623)),
+            BuildingLocation(name: "wyman", location: CLLocationCoordinate2D(latitude: 39.32517737353952, longitude: -76.62289381377747)),
+            BuildingLocation(name: "clark", location: CLLocationCoordinate2D(latitude: 39.32693374517105, longitude: -76.62225083148367)),
+            BuildingLocation(name: "latrobe", location: CLLocationCoordinate2D(latitude: 39.32789328034753, longitude: -76.62075340116824)),
+            BuildingLocation(name: "croft", location: CLLocationCoordinate2D(latitude: 39.32733683893719, longitude: -76.61957309112006)),
+            BuildingLocation(name: "mason", location: CLLocationCoordinate2D(latitude: 39.325861985523076, longitude: -76.62151281118587)),
+            BuildingLocation(name: "shiver", location: CLLocationCoordinate2D(latitude: 39.32642389924464, longitude:  -76.62025109761828)),
+            BuildingLocation(name: "gilman", location: CLLocationCoordinate2D(latitude: 39.32893189373731, longitude: -76.62157898877807)),
+            BuildingLocation(name: "mergenthaler", location: CLLocationCoordinate2D(latitude: 39.329652795301435, longitude: -76.62063640452014)),
+            BuildingLocation(name: "remsen", location: CLLocationCoordinate2D(latitude: 39.32953968324859, longitude: -76.62002418197157)),
+            BuildingLocation(name: "mudd", location: CLLocationCoordinate2D(latitude: 39.33096989515415, longitude: -76.62054267311402)),
+            BuildingLocation(name: "macaulay", location: CLLocationCoordinate2D(latitude: 39.33021214342024, longitude: -76.62078368915385)),
+            BuildingLocation(name: "dunning", location: CLLocationCoordinate2D(latitude: 39.33027356644766, longitude: -76.62001903445636)),
             BuildingLocation(name: "wyman quad", location: CLLocationCoordinate2D(latitude: 39.327531421428056, longitude: -76.62036598718512)),
             BuildingLocation(name: "decker quad", location: CLLocationCoordinate2D(latitude: 39.32650901050207, longitude: -76.6215549382646)),
             BuildingLocation(name: "milton s eisenhower library", location: CLLocationCoordinate2D(latitude: 39.32916209697434, longitude: -76.61924558793446)),
@@ -135,63 +159,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
             BuildingLocation(name: "freshman quad", location: CLLocationCoordinate2D(latitude: 39.33071041942408, longitude: -76.61942234313949)),
             BuildingLocation(name: "the beach", location: CLLocationCoordinate2D(latitude: 39.32900089341375, longitude: -76.61837410006774))
         ]
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (filteredActivities.count % 2 == 0){
-            return filteredActivities.count/2
-        } else {
-            return filteredActivities.count/2 + 1
-        }
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
-        cell.delegate = self
-        
-        let ind1 = indexPath.row * 2
-        let ind2 = indexPath.row * 2 + 1
-        var ids : [String] = []
-        
-        cell.location.text = filteredActivities[ind1].location
-        cell.Title.text = filteredActivities[ind1].title
-        cell.time.text = filteredActivities[ind1].time
-        cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
-        cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
-        ids.append(filteredActivities[ind1].id)
-        
-        if (ind2 <= filteredActivities.count-1) {
-            cell.img2.isHidden = false
-            cell.whiteback2.isHidden = false
-            cell.location2.text = filteredActivities[ind2].location
-            cell.Title2.text = filteredActivities[ind2].title
-            cell.time2.text = filteredActivities[ind2].time
-            cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
-            cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
-            ids.append(filteredActivities[ind2].id)
-        } else {
-            cell.img2.isHidden = true
-            cell.whiteback2.isHidden = true
-        }
-        cell.assign_ID(ids: ids)
-        cell.configure()
-        return cell
-    }
-    
-    func cellButtonPressed(actID: String) {
-        print("delegate here")
-        for (index, activity) in self.activities.enumerated() {
-            if activity.id == actID {
-                self.activities[index].likes = !self.activities[index].likes
-            }
-        }
-        for (index, activity) in self.filteredActivities.enumerated() {
-            if activity.id == actID {
-                self.filteredActivities[index].likes = !self.filteredActivities[index].likes
-            }
-        }
-        self.reloadData()
-//        print("reloaded!")
     }
     
     func getPlaceLocationFromName(place: String) -> CLLocationCoordinate2D {
@@ -239,7 +206,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     }
     
     func distance(lo: CLLocationDegrees, la: CLLocationDegrees) -> Double {
-        return (lo - longitude) * (lo - longitude) + (la - latitude) * (la - latitude)
+        return (lo - longitude) * (lo - longitude) * 69 + (la - latitude) * (la - latitude) * 54.6
     }
     
     func activity_recommendation() {
@@ -252,8 +219,9 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         }
         
         if latitude == -1.0 && longitude == -1.0 {
-            //return
+            return
         }
+        print(latitude, longitude)
         var filtered_activities: [sortActivity] = []
         
         for activity in activities {
@@ -271,12 +239,168 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         for i in 1...activityRecommend {
             recommendActivities.append(filtered_activities[i].activity)
         }
-        
         assert(recommendActivities.count > 0)
+    }
+    
+    func sort_by_time() {
+        var times: [Date] = []
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
+        for activity in activities {
+            times.append(formatter.date(from: activity.time)!)
+        }
         
+        sortedAct2 = activities
+        let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
+        let aftertimes = combined.filter {$0.0 > now}
+        sortedAct2 = aftertimes.map {$0.1}
+        print(sortedAct2)
+    }
+    
+    func reloadData() {
+        self.tableView.reloadData()
+        self.recomCollection.reloadData()
+    }
+    
+    func sort_config() {
+        nearby.tag = 0
+        upcoming.tag = 0
+        category_btn.tag = 0
+        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        nearby.setTitle("Nearby", for: .normal)
+        nearby.setTitleColor(UIColor.systemGray3, for: .normal)
+        
+        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        upcoming.setTitle("Upcoming", for: .normal)
+        upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
+        
+        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        category_btn.setTitle("Category", for: .normal)
+        category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
+    }
+    
+    func table_config() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
+        tableView.separatorStyle = .none
+    }
+    
+    func search_bar_config() {
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+    }
+    
+    func rec_config() {
+        recomCollection.delegate = self
+        recomCollection.dataSource = self
+        PageView.numberOfPages = recact.count
+        PageView.currentPage = 0
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func recChange() {
+        if counter < recact.count {
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            PageView.currentPage = counter
+            counter += 1
+        } else {
+            counter = 0
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+            PageView.currentPage = counter
+            counter = 1
+        }
+    }
+}
+
+extension ActivityVC: activityTableDelegate {
+    func cellTapped(act: ActivityDetailModel) {
+        print("got to here")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        vc.activity = act
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func cellButtonPressed(actID: String) {
+        print("delegate here")
+        for (index, activity) in self.activities.enumerated() {
+            if activity.id == actID {
+                self.activities[index].likes = !self.activities[index].likes
+            }
+        }
+        for (index, activity) in self.filteredActivities.enumerated() {
+            if activity.id == actID {
+                self.filteredActivities[index].likes = !self.filteredActivities[index].likes
+            }
+        }
+        self.reloadData()
+//        print("reloaded!")
+    }
+}
+
+extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (filteredActivities.count % 2 == 0){
+            return filteredActivities.count/2
+        } else {
+            return filteredActivities.count/2 + 1
+        }
     }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
+        cell.delegate = self
+        
+        let ind1 = indexPath.row * 2
+        let ind2 = indexPath.row * 2 + 1
+        var ids : [String] = []
+        
+        cell.location.text = filteredActivities[ind1].location
+        cell.Title.text = filteredActivities[ind1].title
+        cell.time.text = filteredActivities[ind1].time
+        cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
+        cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
+        ids.append(filteredActivities[ind1].id)
+        
+        if (ind2 <= filteredActivities.count-1) {
+            cell.img2?.isHidden = false
+            cell.whiteback2.isHidden = false
+            cell.location2.text = filteredActivities[ind2].location
+            cell.Title2.text = filteredActivities[ind2].title
+            cell.time2.text = filteredActivities[ind2].time
+            cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
+            cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
+            ids.append(filteredActivities[ind2].id)
+        } else {
+            cell.img2.isHidden = true
+            cell.whiteback2.isHidden = true
+        }
+        cell.assign_ID(ids: ids)
+        cell.configure()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        //let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
+        
+        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        //vc.activity = act
+        //self.present(vc, animated: true, completion: nil)
+    }
+}
 
+extension ActivityVC: UISearchBarDelegate {
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -284,8 +408,7 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
     var isFiltering: Bool {
         let searchBarScopeIsFiltering =
             searchController.searchBar.selectedScopeButtonIndex != 0
-          return searchController.isActive &&
-            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+          return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
     func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
@@ -305,27 +428,6 @@ class ActivityVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UI
         }
         self.reloadData()
     }
-    
-    func reloadData() {
-        self.tableView.reloadData()
-        self.recomCollection.reloadData()
-    }
-    
-    @objc func recChange() {
-        if counter < recact.count {
-            let index = IndexPath.init(item: counter, section: 0)
-            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-            PageView.currentPage = counter
-            counter += 1
-        } else {
-            counter = 0
-            let index = IndexPath.init(item: counter, section: 0)
-            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
-            PageView.currentPage = counter
-            counter = 1
-        }
-    }
-
 }
 
 extension ActivityVC: UISearchResultsUpdating {

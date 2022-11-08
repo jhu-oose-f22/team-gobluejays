@@ -36,11 +36,13 @@ class HomeVC: UIViewController {
         setLeveringCafeStatus(day: dayOfWeek, hour: hour, minutes: minutes);
     }
     
+    
+    
     @IBAction func tapBrody(_ sender: UIButton) {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/spaces?lid=1195&gid=2086&c=0")!)
     }
@@ -49,7 +51,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.libcal.com/seats?lid=1196"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.libcal.com/seats?lid=1196")!)
     }
@@ -69,7 +71,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://sis.jhu.edu/sswf/"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://sis.jhu.edu/sswf/")! as URL, options: [:],completionHandler: nil)
     }
@@ -78,7 +80,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://jhu.semester.ly"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://jhu.semester.ly")! as URL, options: [:],completionHandler: nil)
     }
@@ -87,7 +89,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/hopkins-cafe")! as URL, options: [:],completionHandler: nil)
     }
@@ -96,7 +98,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/nolans-on-33rd")! as URL, options: [:],completionHandler: nil)
     }
@@ -105,7 +107,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/site-1"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-1")! as URL, options: [:],completionHandler: nil)
     }
@@ -114,7 +116,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/site-2"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/site-2")! as URL, options: [:],completionHandler: nil)
     }
@@ -123,7 +125,7 @@ class HomeVC: UIViewController {
         let webView:WebViewVC = WebViewVC()
         //webView.modalPresentationStyle = .fullScreen
         webView.link = "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe"
-        self.present(webView, animated: false, completion: nil)
+        self.present(webView, animated: true, completion: nil)
         
         //UIApplication.shared.open(URL(string: "https://hopkinsdining.nutrislice.com/menu/levering-cafe/cafe")! as URL, options: [:],completionHandler: nil)
     }
@@ -136,7 +138,7 @@ class HomeVC: UIViewController {
             } else if (hour == 6) {
                 hopkinsCafeStatus.text = "Opening at 7am"
                 hopkinsCafeStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 20) {
+            } else if (hour < 20 && hour >= 7) {
                 hopkinsCafeStatus.text = "Closing at 8pm"
                 hopkinsCafeStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else if (hour >= 20 && hour < 21 && day != 6){
@@ -159,7 +161,7 @@ class HomeVC: UIViewController {
             } else if (hour == 9) {
                 hopkinsCafeStatus.text = "Opening at 10am"
                 hopkinsCafeStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 20) {
+            } else if (hour < 20 && hour >= 10) {
                 hopkinsCafeStatus.text = "Closing at 8pm"
                 hopkinsCafeStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else if (hour >= 20 && hour < 21 && day != 7){
@@ -185,7 +187,7 @@ class HomeVC: UIViewController {
         } else if (hour == 9) {
             nolansStatus.text = "Opening at 10am"
             nolansStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-        } else if (hour < 21) {
+        } else if (hour < 21 && hour >= 10) {
             nolansStatus.text = "Closing at 9pm"
             nolansStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
         } else {
@@ -202,7 +204,7 @@ class HomeVC: UIViewController {
             } else if (hour == 10) {
                 leveringKitchensStatus.text = "Opening at 11am"
                 leveringKitchensStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 14) {
+            } else if (hour < 14 && hour >= 11) {
                 leveringKitchensStatus.text = "Closing at 2pm"
                 leveringKitchensStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else {
@@ -227,7 +229,7 @@ class HomeVC: UIViewController {
             } else if (hour == 6 && minutes >= 30) {
                 charMarStatus.text = "Opening at 7:30am"
                 charMarStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 24) {
+            } else if (hour < 24 && hour >= 8) {
                 charMarStatus.text = "Closing at 12am"
                 charMarStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else {
@@ -241,7 +243,7 @@ class HomeVC: UIViewController {
             } else if (hour == 7) {
                 charMarStatus.text = "Opening at 8:00am"
                 charMarStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 24) {
+            } else if (hour < 24 && hour >= 8) {
                 charMarStatus.text = "Closing at 12am"
                 charMarStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else {
@@ -262,7 +264,7 @@ class HomeVC: UIViewController {
             } else if (hour == 6 && minutes >= 30) {
                 leveringCafeStatus.text = "Opening at 7:30am"
                 leveringCafeStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 17) {
+            } else if (hour < 17 && hour >= 8) {
                 leveringCafeStatus.text = "Closing at 5pm"
                 leveringCafeStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else {
@@ -279,7 +281,7 @@ class HomeVC: UIViewController {
             } else if (hour == 6 && minutes >= 30) {
                 leveringCafeStatus.text = "Opening at 7:30am"
                 leveringCafeStatus.textColor = #colorLiteral(red: 0.8774011731, green: 0.469971776, blue: 0.4901964068, alpha: 1)
-            } else if (hour < 16) {
+            } else if (hour < 16 && hour >= 8) {
                 leveringCafeStatus.text = "Closing at 4pm"
                 leveringCafeStatus.textColor = #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1)
             } else {

@@ -10,23 +10,11 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
-class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
-    
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var tableView: UITableView!
-    
-//    var collects: [Activity] = [
-//        Activity(title: "Activity 1", time: "October 20 2022", location: "Malone Hall 201", image:"athletics", likes:false, id: "1"),
-//        Activity(title: "Activity 2", time: "October 21 2022", location: "Malone Hall 202", image:"academics", likes:false, id: "1"),
-//        Activity(title: "Activity 3", time: "October 22 2022", location: "Malone Hall 203", image:"housing", likes:false, id: "1"),
-//        Activity(title: "Activity 4", time: "October 23 2022", location: "Malone Hall 204", image:"frontpage", likes:false, id: "1"),
-//        Activity(title: "Activity 5", time: "October 24 2022", location: "Malone Hall 205", image:"Nolans", likes:false, id: "1"),
-//        Activity(title: "Activity 6", time: "October 25 2022", location: "Malone Hall 206", image:"social media", likes:false, id: "1"),
-//    ]
     var collects: [Activity] = []
     var filteredCollects: [Activity] = []
     
@@ -57,11 +45,16 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
                     let data = document.data()
+                    let timep = data["timestamp"] as! Timestamp
+                    let timec = formatter.string(from: timep.dateValue())
+                    
                     if (data["likes"] as! Bool == true) {
                         let act:Activity = Activity(title: data["title"] as! String,
-                                                    time: data["time"] as! String,
+                                                    time: timec,
                                                     location: data["location"] as! String,
                                                     image: data["image"] as! String,
                                                     likes: data["likes"] as! Bool,
@@ -87,6 +80,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
+        cell.delegate = self
         
         let ind1 = indexPath.row * 2
         let ind2 = indexPath.row * 2 + 1
@@ -106,6 +100,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.time2.text = filteredCollects[ind2].time
             cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
             ids.append(filteredCollects[ind2].id)
+            cell.collect2.isHidden = true
         }
         else {
             cell.img2.isHidden = true
@@ -123,8 +118,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     var isFiltering: Bool {
         let searchBarScopeIsFiltering =
             searchController.searchBar.selectedScopeButtonIndex != 0
-          return searchController.isActive &&
-            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+          return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
     func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
@@ -144,6 +138,16 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             filteredCollects = collects
         }
         self.tableView.reloadData()
+    }
+    
+    func cellButtonPressed(actID: String) {
+    }
+    
+    func cellTapped(act: ActivityDetailModel) {
+        print("got to here")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+        vc.activity = act
+        self.present(vc, animated: true, completion: nil)
     }
 
 }
