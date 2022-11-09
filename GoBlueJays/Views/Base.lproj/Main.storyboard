@@ -4716,9 +4716,6 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Change Profile photo"/>
-                                                        <connections>
-                                                            <action selector="changeProfileImage" destination="Oi6-hI-oa6" eventType="touchUpInside" id="bol-yZ-saB"/>
-                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qGa-3t-ZNW" userLabel="dividingLine">
                                                         <rect key="frame" x="0.0" y="151" width="314" height="1"/>
@@ -5053,9 +5050,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="myProfileImage" destination="YCG-Ar-o7u" id="nlA-2A-Edp"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nrp-1f-ZCN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5091,9 +5085,6 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Change Profile photo"/>
-                                                        <connections>
-                                                            <action selector="changeProfileImage" destination="h6h-9S-E6M" eventType="touchUpInside" id="QvN-si-QHK"/>
-                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CPa-u7-rKK" userLabel="dividingLine">
                                                         <rect key="frame" x="0.0" y="151" width="314" height="1"/>
@@ -5424,9 +5415,6 @@
                     <navigationItem key="navigationItem" id="KbU-Qc-7FS">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Sdc-yy-rcC"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="myProfileImage" destination="rVz-9M-APN" id="LMC-fk-L3l"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdM-z3-ocG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
