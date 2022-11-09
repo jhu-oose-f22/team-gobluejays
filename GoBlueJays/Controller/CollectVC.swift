@@ -56,7 +56,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                         let act:Activity = Activity(title: data["title"] as! String,
                                                     time: timec,
                                                     location: data["location"] as! String,
-                                                    image: data["image"] as! String,
+                                                    image: data["imageLink"] as! String,
                                                     likes: data["likes"] as! Bool,
                                                     id: document.documentID,
                                                     category: data["category"] as! String)
@@ -89,7 +89,10 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
-        cell.ActivityImage.image = UIImage(named: filteredCollects[ind1].image)
+        // cell.ActivityImage.image = UIImage(named: filteredCollects[ind1].image)
+        // cell.loadImageFrom(urlAddress: filteredCollects[ind1].image, right: true)
+        let url1 = URL(string: filteredCollects[ind1].image)
+        cell.ActivityImage.kf.setImage(with: url1)
         cell.collect.isHidden = true
         
         if (ind2 <= filteredCollects.count-1) {
@@ -98,7 +101,10 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.location2.text = filteredCollects[ind2].location
             cell.Title2.text = filteredCollects[ind2].title
             cell.time2.text = filteredCollects[ind2].time
-            cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
+            // cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
+            // cell.loadImageFrom(urlAddress: filteredCollects[ind2].image, right: false)
+            let url2 = URL(string: filteredCollects[ind2].image)
+            cell.ActivityImage2.kf.setImage(with: url2)
             ids.append(filteredCollects[ind2].id)
             cell.collect2.isHidden = true
         }
