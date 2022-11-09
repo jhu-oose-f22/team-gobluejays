@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import CoreLocation
+import Kingfisher
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
@@ -68,7 +69,7 @@ class ActivityVC: UIViewController{
                     let act:Activity = Activity(title: data["title"] as! String,
                                                 time: timec,
                                                 location: data["location"] as! String,
-                                                image: data["image"] as! String,
+                                                image: data["imageLink"] as! String,
                                                 likes: data["likes"] as! Bool,
                                                 id: document.documentID,
                                                 category: data["category"] as! String)
@@ -377,7 +378,10 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
-        cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
+        // cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
+        // cell.loadImageFrom(urlAddress: filteredActivities[ind1].image, right: true)
+        let url1 = URL(string: filteredActivities[ind1].image)
+        cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
         ids.append(filteredActivities[ind1].id)
         
@@ -387,7 +391,10 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             cell.location2.text = filteredActivities[ind2].location
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
-            cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
+            // cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
+            // cell.loadImageFrom(urlAddress: filteredActivities[ind2].image, right: false)
+            let url2 = URL(string: filteredActivities[ind2].image)
+            cell.ActivityImage2.kf.setImage(with: url2)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
         } else {
@@ -406,6 +413,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         //vc.activity = act
         //self.present(vc, animated: true, completion: nil)
     }
+    
 }
 
 extension ActivityVC: UISearchBarDelegate {
@@ -460,7 +468,9 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.location.text = recact[index].location
         cell.title.text = recact[index].title
         cell.time.text = recact[index].time
-        cell.image.image = UIImage(named: recact[index].image)
+        // cell.image.image = UIImage(named: recact[index].image)
+        let url = URL(string: recact[index].image)
+        cell.image.kf.setImage(with: url)
         cell.rectext.text = "Near you!"
         
         return cell
