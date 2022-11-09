@@ -172,12 +172,16 @@ class ActivityVC: UIViewController{
     
     func activity_recommendation() {
         sort_by_dist()
+        print("HERE")
+        print(sortedActivites)
         
         recommendActivities = []
         for i in 0...activityRecommend-1 {
             recommendActivities.append(sortedActivites[i])
         }
         assert(recommendActivities.count > 0)
+        print("HERE")
+        print(recommendActivities)
         
     }
     
