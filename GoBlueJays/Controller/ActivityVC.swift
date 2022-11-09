@@ -79,7 +79,6 @@ class ActivityVC: UIViewController{
             filteredActivities = activities
             setBuildingLocations()
             activity_recommendation()
-            sort_by_time()
             recact = recommendActivities
             PageView.numberOfPages = recact.count
             self.reloadData()
@@ -88,9 +87,8 @@ class ActivityVC: UIViewController{
     
     @IBAction func click(_ sender: Any) {
         if nearby.tag == 0 {
-            print("clicked!")
+            sort_by_dist()
             filteredActivities = sortedActivites
-            print(filteredActivities)
             self.reloadData()
             nearby.tag = 1
             nearby.setTitleColor(UIColor.link, for: .normal)
@@ -99,7 +97,6 @@ class ActivityVC: UIViewController{
                 upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
             }
         } else {
-            print("unclicked!")
             filteredActivities = activities
             self.reloadData()
             nearby.tag = 0
@@ -109,7 +106,7 @@ class ActivityVC: UIViewController{
     
     @IBAction func click2(_ sender: Any) {
         if upcoming.tag == 0 {
-            print("clicked!")
+            sort_by_time()
             filteredActivities = sortedAct2
             self.reloadData()
             upcoming.tag = 1
@@ -119,14 +116,139 @@ class ActivityVC: UIViewController{
                 nearby.setTitleColor(UIColor.systemGray3, for: .normal)
             }
         } else {
-            print("unclicked!")
             filteredActivities = activities
             self.reloadData()
             upcoming.tag = 0
             upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
         }
     }
+
+    func sort_by_time() {
+        var times: [Date] = []
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
+        for activity in activities {
+            times.append(formatter.date(from: activity.time)!)
+        }
+        
+        sortedAct2 = activities
+        let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
+        let aftertimes = combined.filter {$0.0 > now}
+        sortedAct2 = aftertimes.map {$0.1}
+        print(sortedAct2)
+    }
     
+    func sort_by_dist() {
+        sortedActivites = []
+        
+        if !CLLocationManager.headingAvailable() {
+            print("Warning: Location is not available")
+            //return
+        } else {
+            let locationManager = CLLocationManagerCreator.getLocationManager()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        if latitude == -1.0 && longitude == -1.0 {
+            return
+        }
+        
+        print(latitude, longitude)
+        var filtered_activities: [sortActivity] = []
+        for activity in activities {
+            filtered_activities.append(sortActivity(activity: activity, location: getPlaceLocationFromName(place: activity.location)))
+        }
+        
+        filtered_activities = filtered_activities.sorted(by: {
+            return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
+        })
+        print(filtered_activities)
+        
+        for activity in filtered_activities {
+            sortedActivites.append(activity.activity)
+        }
+    }
+    
+    func activity_recommendation() {
+        sort_by_dist()
+        
+        recommendActivities = []
+        for i in 0...activityRecommend-1 {
+            recommendActivities.append(sortedActivites[i])
+        }
+        assert(recommendActivities.count > 0)
+        
+    }
+    
+    
+    func reloadData() {
+        self.tableView.reloadData()
+        self.recomCollection.reloadData()
+    }
+    
+    func sort_config() {
+        nearby.tag = 0
+        upcoming.tag = 0
+        category_btn.tag = 0
+        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        nearby.setTitle("Nearby", for: .normal)
+        nearby.setTitleColor(UIColor.systemGray3, for: .normal)
+        
+        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        upcoming.setTitle("Upcoming", for: .normal)
+        upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
+        
+        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        category_btn.setTitle("Category", for: .normal)
+        category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
+    }
+    
+    func table_config() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
+        tableView.separatorStyle = .none
+    }
+    
+    func search_bar_config() {
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+    }
+    
+    func rec_config() {
+        recomCollection.delegate = self
+        recomCollection.dataSource = self
+        PageView.numberOfPages = recact.count
+        PageView.currentPage = 0
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func recChange() {
+        if counter < recact.count {
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            PageView.currentPage = counter
+            counter += 1
+        } else {
+            counter = 0
+            let index = IndexPath.init(item: counter, section: 0)
+            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+            PageView.currentPage = counter
+            counter = 1
+        }
+    }
+}
+
+// Location related
+extension ActivityVC {
     func setBuildingLocations() {
         // hard-code building locations
         buildingLocations = [
@@ -207,120 +329,6 @@ class ActivityVC: UIViewController{
     
     func distance(lo: CLLocationDegrees, la: CLLocationDegrees) -> Double {
         return (lo - longitude) * (lo - longitude) * 69 + (la - latitude) * (la - latitude) * 54.6
-    }
-    
-    func activity_recommendation() {
-        if !CLLocationManager.headingAvailable() {
-            print("Warning: Location is not available")
-            //return
-        } else {
-            let locationManager = CLLocationManagerCreator.getLocationManager()
-            locationManager.requestWhenInUseAuthorization()
-        }
-        
-        if latitude == -1.0 && longitude == -1.0 {
-            return
-        }
-        print(latitude, longitude)
-        var filtered_activities: [sortActivity] = []
-        
-        for activity in activities {
-            filtered_activities.append(sortActivity(activity: activity, location: getPlaceLocationFromName(place: activity.location)))
-        }
-        
-        filtered_activities = filtered_activities.sorted(by: {
-            return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
-        })
-        
-        for activity in filtered_activities {
-            sortedActivites.append(activity.activity)
-        }
-        
-        for i in 1...activityRecommend {
-            recommendActivities.append(filtered_activities[i].activity)
-        }
-        assert(recommendActivities.count > 0)
-    }
-    
-    func sort_by_time() {
-        var times: [Date] = []
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
-        for activity in activities {
-            times.append(formatter.date(from: activity.time)!)
-        }
-        
-        sortedAct2 = activities
-        let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
-        let aftertimes = combined.filter {$0.0 > now}
-        sortedAct2 = aftertimes.map {$0.1}
-        print(sortedAct2)
-    }
-    
-    func reloadData() {
-        self.tableView.reloadData()
-        self.recomCollection.reloadData()
-    }
-    
-    func sort_config() {
-        nearby.tag = 0
-        upcoming.tag = 0
-        category_btn.tag = 0
-        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
-        nearby.setTitle("Nearby", for: .normal)
-        nearby.setTitleColor(UIColor.systemGray3, for: .normal)
-        
-        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
-        upcoming.setTitle("Upcoming", for: .normal)
-        upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
-        
-        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
-        category_btn.setTitle("Category", for: .normal)
-        category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
-    }
-    
-    func table_config() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib.init(nibName:"ActivityCell", bundle: .main), forCellReuseIdentifier: "ActivityCell")
-        tableView.separatorStyle = .none
-    }
-    
-    func search_bar_config() {
-        navigationItem.searchController = searchController
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
-        searchController.searchBar.delegate = self
-        definesPresentationContext = true
-    }
-    
-    func rec_config() {
-        recomCollection.delegate = self
-        recomCollection.dataSource = self
-        PageView.numberOfPages = recact.count
-        PageView.currentPage = 0
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
-        }
-    }
-    
-    @objc func recChange() {
-        if counter < recact.count {
-            let index = IndexPath.init(item: counter, section: 0)
-            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-            PageView.currentPage = counter
-            counter += 1
-        } else {
-            counter = 0
-            let index = IndexPath.init(item: counter, section: 0)
-            self.recomCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
-            PageView.currentPage = counter
-            counter = 1
-        }
     }
 }
 
