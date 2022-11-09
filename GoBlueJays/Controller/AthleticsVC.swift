@@ -43,7 +43,7 @@ class AthleticsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let webView:WebViewVC = WebViewVC()
             //webView.modalPresentationStyle = .fullScreen
             webView.link = urlString
-            self.present(webView, animated: false, completion: nil)
+            self.present(webView, animated: true, completion: nil)
         } else if let url = URL(string: urlString) {
             UIApplication.shared.open(url)
         }

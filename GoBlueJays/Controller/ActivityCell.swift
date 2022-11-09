@@ -21,7 +21,7 @@ class ActivityCell: UITableViewCell{
     
     @IBOutlet weak var locicon2: UIImageView!
     
-    @IBOutlet weak var img2: UIView!
+    @IBOutlet weak var img2: UIButton!
     @IBOutlet weak var whiteback2: UIView!
     @IBOutlet weak var timeicon2: UIImageView!
     @IBOutlet weak var Title2: UILabel!
@@ -34,18 +34,14 @@ class ActivityCell: UITableViewCell{
     
     var activityID: [String] = []
     
-    @IBAction func cell1_tap(_ sender: Any) {
-        let detailView:ActivityDetailVC = ActivityDetailVC()
-        detailView.time.text = (detailView.time.text ?? "Time") + self.time.text!
-        detailView.name.text = (detailView.name.text ?? "Name") + self.Title.text!
-        detailView.Location.text = (detailView.Location.text ?? "Location") + self.location.text!
-        detailView.host.text = "OOSE"
-        detailView.cost.text = "0"
-        detailView.detail.text = "N/A"
-        
-        
-        print("try")
-//        self.presentViewController(detailView, animated:false,completion:nil)
+    @IBAction func cell1_tap(_ sender: UIButton) {
+        let act = ActivityDetailModel(title: Title.text ?? "No Title", date: "Temp", time: time.text ?? "No Time", location: location.text ?? "No Location", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage.asImage())
+        self.delegate!.cellTapped(act: act)
+    }
+    
+    @IBAction func cell2_tap(_ send: UIButton) {
+        let act = ActivityDetailModel(title: Title2.text ?? "temp", date: "Temp", time: time2.text ?? "temp", location: location2.text ?? "temp", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage2.asImage())
+        self.delegate!.cellTapped(act: act)
     }
     
     @IBAction func likes_click(_ sender: UIButton) {
@@ -136,4 +132,16 @@ class ActivityCell: UITableViewCell{
         // Configure the view for the selected state
     }
     
+}
+
+extension UIView {
+
+    // Using a function since `var image` might conflict with an existing variable
+    // (like on `UIImageView`)
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
 }
