@@ -103,7 +103,6 @@
 		40923DAE28FE33AF003B15B5 /* AddEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DA928FE33AF003B15B5 /* AddEventVC.swift */; };
 		40923DAF28FE33AF003B15B5 /* CollectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DAA28FE33AF003B15B5 /* CollectVC.swift */; };
 		40923DB128FE33CC003B15B5 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DB028FE33CC003B15B5 /* Activity.swift */; };
-		40923DB328FE6915003B15B5 /* activity_load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40923DB228FE6915003B15B5 /* activity_load.swift */; };
 		40A89A1328F75FE800E3CE60 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		40A89A1428F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		40A89A1528F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -197,7 +196,6 @@
 		40923DA928FE33AF003B15B5 /* AddEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventVC.swift; sourceTree = "<group>"; };
 		40923DAA28FE33AF003B15B5 /* CollectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectVC.swift; sourceTree = "<group>"; };
 		40923DB028FE33CC003B15B5 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		40923DB228FE6915003B15B5 /* activity_load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activity_load.swift; sourceTree = "<group>"; };
 		44B6B9861E2C142521E86743 /* Pods-GoBlueJaysTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoBlueJaysTests.debug.xcconfig"; path = "Target Support Files/Pods-GoBlueJaysTests/Pods-GoBlueJaysTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F31055B2915CF520095FE6A /* ActivityDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetail.swift; sourceTree = "<group>"; };
 		4F31055F2915DDC10095FE6A /* ActivityDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailModel.swift; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				2CB79C8F28A9DA1C00744FF8 /* Detail.swift */,
 				4F984229290ADFF9009990D4 /* TextField.swift */,
 				2CAC969C28FBC7060075E8E4 /* Course.swift */,
-				40923DB228FE6915003B15B5 /* activity_load.swift */,
 				087FC7942909915C005A582E /* BuildingLocation.swift */,
 				087FC7962909B3E8005A582E /* sortActivity.swift */,
 			);
@@ -764,7 +761,6 @@
 				2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */,
 				40A89A1528F75FE800E3CE60 /* (null) in Sources */,
 				2CB9247028E49EB80006967C /* SupportVC.swift in Sources */,
-				40923DB328FE6915003B15B5 /* activity_load.swift in Sources */,
 				4F31055C2915CF520095FE6A /* ActivityDetail.swift in Sources */,
 				40715753290CBFD900D4E18A /* RecomCell.swift in Sources */,
 				2CE790CE289F7D8E00C3BB2B /* CustomTabBarController.swift in Sources */,

@@ -4228,20 +4228,20 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xql-Oy-fh1">
-                                                                            <rect key="frame" x="333" y="100" width="65" height="20"/>
+                                                                            <rect key="frame" x="348" y="104" width="50" height="16"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommend!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ux9-US-f0E" userLabel="time">
-                                                                                    <rect key="frame" x="9.6666666666666821" y="5.6666666666666705" width="45.666666666666657" height="8.6666666666666643"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                                                                    <rect key="frame" x="5.3333333333333144" y="4.3333333333333286" width="39.666666666666664" height="7.3333333333333321"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="6"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
                                                                             <color key="backgroundColor" red="0.66691022317255078" green="0.79058857794162674" blue="0.9544740657216495" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="65" id="6mK-Bo-Git"/>
+                                                                                <constraint firstAttribute="width" constant="50" id="6mK-Bo-Git"/>
                                                                                 <constraint firstItem="ux9-US-f0E" firstAttribute="centerX" secondItem="Xql-Oy-fh1" secondAttribute="centerX" id="X4d-B7-ta8"/>
-                                                                                <constraint firstAttribute="height" constant="20" id="nco-6E-8nB"/>
+                                                                                <constraint firstAttribute="height" constant="16" id="nco-6E-8nB"/>
                                                                                 <constraint firstItem="ux9-US-f0E" firstAttribute="centerY" secondItem="Xql-Oy-fh1" secondAttribute="centerY" id="rBR-Qb-z0G"/>
                                                                             </constraints>
                                                                         </view>

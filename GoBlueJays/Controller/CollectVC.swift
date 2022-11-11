@@ -59,7 +59,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                                                     image: data["imageLink"] as! String,
                                                     likes: data["likes"] as! Bool,
                                                     id: document.documentID,
-                                                    category: data["category"] as! String)
+                                                    category: data["category"] as! String,
+                                                    tags: (data["tags"] as! NSArray) as! [String])
                         self.collects.append(act)
                     }
                 }

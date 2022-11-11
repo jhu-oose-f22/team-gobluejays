@@ -30,15 +30,20 @@ class ActivityVC: UIViewController{
 
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
-    var recact: [Activity] = []
-    var recommendActivities: [Activity] = []
     var sortedActivites: [Activity] = []
     var sortedAct2: [Activity] = []
+    
+    var recact: [Activity] = []
+    var recact_slogan: [String] = []
+    let activityRecommend_dist_max: Int = 3;
+    var recommendActivities_dist: [Activity] = []
+    let activityRecommend_type_max: Int = 3;
+    var recommendActivities_type: [Activity] = []
+    var likes_tags: [String] = []
     
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 39.0;
     var longitude: CLLocationDegrees = -76.0;
-    let activityRecommend: Int = 5;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +64,7 @@ class ActivityVC: UIViewController{
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                likes_tags = []
                 let formatter = DateFormatter()
                 formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
@@ -72,15 +78,18 @@ class ActivityVC: UIViewController{
                                                 image: data["imageLink"] as! String,
                                                 likes: data["likes"] as! Bool,
                                                 id: document.documentID,
-                                                category: data["category"] as! String)
+                                                category: data["category"] as! String,
+                                                tags: (data["tags"] as! NSArray) as! [String])
                     
                     self.activities.append(act)
+                    if act.likes == true {
+                        likes_tags += act.tags
+                    }
                 }
             }
             filteredActivities = activities
             setBuildingLocations()
             activity_recommendation()
-            recact = recommendActivities
             PageView.numberOfPages = recact.count
             self.reloadData()
         }
@@ -142,6 +151,7 @@ class ActivityVC: UIViewController{
     
     func sort_by_dist() {
         sortedActivites = []
+        recommendActivities_dist = []
         
         if !CLLocationManager.headingAvailable() {
             print("Warning: Location is not available")
@@ -154,7 +164,6 @@ class ActivityVC: UIViewController{
             return
         }
         
-        print(latitude, longitude)
         var filtered_activities: [sortActivity] = []
         for activity in activities {
             filtered_activities.append(sortActivity(activity: activity, location: getPlaceLocationFromName(place: activity.location)))
@@ -163,28 +172,15 @@ class ActivityVC: UIViewController{
         filtered_activities = filtered_activities.sorted(by: {
             return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
         })
-        print(filtered_activities)
         
         for activity in filtered_activities {
             sortedActivites.append(activity.activity)
+            
+            if activity.location.latitude != 0.0 && activity.location.longitude != 0.0 {
+                recommendActivities_dist.append(activity.activity)
+            }
         }
     }
-    
-    func activity_recommendation() {
-        sort_by_dist()
-        print("HERE")
-        print(sortedActivites)
-        
-        recommendActivities = []
-        for i in 0...activityRecommend-1 {
-            recommendActivities.append(sortedActivites[i])
-        }
-        assert(recommendActivities.count > 0)
-        print("HERE")
-        print(recommendActivities)
-        
-    }
-    
     
     func reloadData() {
         self.tableView.reloadData()
@@ -195,15 +191,15 @@ class ActivityVC: UIViewController{
         nearby.tag = 0
         upcoming.tag = 0
         category_btn.tag = 0
-        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
         nearby.setTitle("Nearby", for: .normal)
         nearby.setTitleColor(UIColor.systemGray3, for: .normal)
         
-        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
         upcoming.setTitle("Upcoming", for: .normal)
         upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
         
-        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
         category_btn.setTitle("Category", for: .normal)
         category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
     }
@@ -252,6 +248,59 @@ class ActivityVC: UIViewController{
     }
 }
 
+// Recommendation
+extension ActivityVC {
+    func activity_recommendation() {
+        recact = []
+        recact_slogan = []
+        
+        // recommend by distance
+        sort_by_dist()
+        let dist_count = min(activityRecommend_dist_max, recommendActivities_dist.count)
+        for i in 0...dist_count-1 {
+            recact.append(recommendActivities_dist[i])
+            recact_slogan.append("Near you!")
+        }
+        
+        // recommend by event type
+        let in_actid = recact.map({ (act: Activity) -> String in act.id })
+        activity_rec_by_type()
+        let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
+        for i in 0...type_count-1 {
+            if in_actid.contains(recommendActivities_type[i].id) {
+                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
+                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
+                continue
+            }
+            recact.append(recommendActivities_type[i])
+            recact_slogan.append("You might like!")
+        }
+    }
+    
+    func activity_rec_by_type() {
+        
+        let mappedItems = likes_tags.map { ($0, 1) }
+        let wgts = Dictionary(mappedItems, uniquingKeysWith: +)
+        print(wgts)
+        var weights: [Double] = []
+        for act in activities {
+            var val = 0.0
+            for t in act.tags {
+                if likes_tags.contains(t) {
+                    var v = wgts[t]
+                    val += pow(Double(v!),Double(v!))
+                }
+            }
+            weights.append(val/Double(act.tags.count))
+        }
+        
+        let recact_type = activities
+        let combined = zip(weights, recact_type).sorted {$0.0 > $1.0}
+        let very_like = combined.filter {$0.0 > 1}
+        recommendActivities_type = very_like.map {$0.1}
+    }
+}
+
 // Location related
 extension ActivityVC {
     func setBuildingLocations() {
@@ -284,7 +333,9 @@ extension ActivityVC {
             BuildingLocation(name: "hopkins cafe", location: CLLocationCoordinate2D(latitude: 39.331613285972054, longitude: -76.61963798082502)),
             BuildingLocation(name: "bloomberg center for physics and astronomy", location: CLLocationCoordinate2D(latitude: 39.33391493367228, longitude: -76.62396509512084)),
             BuildingLocation(name: "freshman quad", location: CLLocationCoordinate2D(latitude: 39.33071041942408, longitude: -76.61942234313949)),
-            BuildingLocation(name: "the beach", location: CLLocationCoordinate2D(latitude: 39.32900089341375, longitude: -76.61837410006774))
+            BuildingLocation(name: "the beach", location: CLLocationCoordinate2D(latitude: 39.32900089341375, longitude: -76.61837410006774)),
+            BuildingLocation(name: "bloomberg", location: CLLocationCoordinate2D(latitude: 39.3318433252, longitude: -76.6231796557)),
+            BuildingLocation(name: "barnes and nobles", location: CLLocationCoordinate2D(latitude: 39.32847376491413, longitude: -76.61624772944326))
         ]
     }
     
@@ -475,7 +526,7 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         // cell.image.image = UIImage(named: recact[index].image)
         let url = URL(string: recact[index].image)
         cell.image.kf.setImage(with: url)
-        cell.rectext.text = "Near you!"
+        cell.rectext.text = recact_slogan[index]
         
         return cell
     }
