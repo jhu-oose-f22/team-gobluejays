@@ -120,6 +120,26 @@ class ActivityCell: UITableViewCell{
         activityID = ids
     }
     
+    func loadImageFrom(urlAddress: String, right: Bool){
+        
+        guard let url = URL(string: urlAddress) else {
+            return
+        }
+        
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: url) else {
+                return
+            }
+            DispatchQueue.main.async {
+                if right == true {
+                    self.ActivityImage.image = UIImage(data: imageData)
+                } else {
+                    self.ActivityImage2.image = UIImage(data: imageData)
+                }
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
