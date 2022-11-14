@@ -206,6 +206,11 @@ class ActivityVC: UIViewController{
         
     }
     
+    /*@IBAction func clickRecommendation(_ sender: UIButton) {
+        let act = ActivityDetailModel(title: "", date: "", time: "", location: "", host: "", cost: "", detail: "", image: UIImage())
+        cellTapped(act: act)
+    }*/
+    
     @IBAction func click(_ sender: Any) {
         if nearby.tag == 0 {
             sort_by_dist()
