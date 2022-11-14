@@ -39,22 +39,26 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
 
         //navigationController?.navigationBar.tintColor = .accentColor
         
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
+//                let formatter = DateFormatter()
+//                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
                     let data = document.data()
-                    let timep = data["timestamp"] as! Timestamp
-                    let timec = formatter.string(from: timep.dateValue())
+//                    let timep = data["timestamp"] as! String
+//                    let timec = formatter.date(from: timep) as! Date
                     
                     if (data["likes"] as! Bool == true) {
                         let act:Activity = Activity(title: data["title"] as! String,
-                                                    time: timec,
+                                                    time: data["timestamp"] as! String,
                                                     location: data["location"] as! String,
                                                     image: data["imageLink"] as! String,
                                                     likes: data["likes"] as! Bool,

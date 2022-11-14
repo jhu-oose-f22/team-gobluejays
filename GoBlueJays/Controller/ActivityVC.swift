@@ -29,6 +29,7 @@ class ActivityVC: UIViewController{
     var timer = Timer()
     var counter = 0
 
+    var collect_ids: [String] = []
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
     var sortedActivites: [Activity] = []
@@ -58,118 +59,148 @@ class ActivityVC: UIViewController{
         search_bar_config()
         // rec carousel config
         rec_config()
-
+        
         /*
+         let db = Firestore.firestore()
+         db.collection("activity").getDocuments(){ [self]
+         (QuerySnapshot, err) in
+         if let err = err {
+         print("Error getting documents: \(err)")
+         } else {
+         likes_tags = []
+         let formatter = DateFormatter()
+         formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
+         for document in QuerySnapshot!.documents {
+         let data = document.data()
+         let timep = data["timestamp"] as! Timestamp
+         let timec = formatter.string(from: timep.dateValue())
+         
+         let act:Activity = Activity(title: data["title"] as! String,
+         time: timec,
+         location: data["location"] as! String,
+         image: data["imageLink"] as! String,
+         likes: data["likes"] as! Bool,
+         id: document.documentID,
+         category: data["category"] as! String,
+         tags: (data["tags"] as! NSArray) as! [String])
+         
+         self.activities.append(act)
+         if act.likes == true {
+         likes_tags += act.tags
+         }
+         }
+         }
+         filteredActivities = activities
+         setBuildingLocations()
+         activity_recommendation()
+         PageView.numberOfPages = recact.count
+         self.reloadData()
+         }
+         */
+        
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                collect_ids = []
                 likes_tags = []
-                let formatter = DateFormatter()
-                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
-                    let data = document.data()
-                    let timep = data["timestamp"] as! Timestamp
-                    let timec = formatter.string(from: timep.dateValue())
-                    
-                    let act:Activity = Activity(title: data["title"] as! String,
-                                                time: timec,
-                                                location: data["location"] as! String,
-                                                image: data["imageLink"] as! String,
-                                                likes: data["likes"] as! Bool,
-                                                id: document.documentID,
-                                                category: data["category"] as! String,
-                                                tags: (data["tags"] as! NSArray) as! [String])
-                    
-                    self.activities.append(act)
-                    if act.likes == true {
-                        likes_tags += act.tags
+                    if (document.documentID.count > 6) {
+                        let data = document.data()
+                        collect_ids.append(document.documentID)
+                        likes_tags.append(data["category"] as! String)
                     }
                 }
             }
-            filteredActivities = activities
-            setBuildingLocations()
-            activity_recommendation()
-            PageView.numberOfPages = recact.count
-            self.reloadData()
-        }
-         */
-        let group = DispatchGroup()
-        group.enter()
 
-        let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                if let data = data {
-                    let g = String(data: data, encoding: .utf8)
-                    self.activities = []
-                    // parse manually
-                    let components = g!.components(separatedBy: "\r\n\r\n")
-                    for component in components {
-                        let properties = component.components(separatedBy: "\r\n")
-                        var title = ""
-                        var time = ""
-                        var location = ""
-                        var category = ""
-                        var id = ""
-                        for property in properties {
-                            let equality = property.split(separator: ":")
-                            if equality.isEmpty {
-                                break
+            let group = DispatchGroup()
+            group.enter()
+            
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            
+            let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
+            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                    if let data = data {
+                        let g = String(data: data, encoding: .utf8)
+                        self.activities = []
+                        // parse manually
+                        let components = g!.components(separatedBy: "\r\n\r\n")
+                        for component in components {
+                            let properties = component.components(separatedBy: "\r\n")
+                            var title = ""
+                            var time = ""
+                            var location = ""
+                            var category = ""
+                            var id = ""
+                            var likes = false
+                            for property in properties {
+                                let equality = property.split(separator: ":")
+                                if equality.isEmpty {
+                                    break
+                                }
+                                if equality[0] == "BEGIN" && equality[1] != "VEVENT" {
+                                    continue
+                                }
+                                if equality[0].lowercased() == "summary;encoding=quoted-printable" {
+                                    title = String(equality[1])
+                                }
+                                if equality[0].lowercased() == "dtstart" {
+                                    time = String(equality[1])
+                                }
+                                if equality[0].lowercased() == "categories;x-cg-category=event_type" {
+                                    category = String(equality[1])
+                                }
+                                if equality[0].lowercased() == "location" {
+                                    location = String(equality[1])
+                                }
+                                if equality[0].lowercased() == "uid" {
+                                    id = String(equality[1])
+                                }
                             }
-                            if equality[0] == "BEGIN" && equality[1] != "VEVENT" {
+                            if title.isEmpty {
                                 continue
                             }
-                            if equality[0].lowercased() == "summary;encoding=quoted-printable" {
-                                title = String(equality[1])
+                            let datetime = time.split(separator: Character("T"))
+                            if datetime.isEmpty || datetime.count < 2 {
+                                continue
                             }
-                            if equality[0].lowercased() == "dtstart" {
-                                time = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "categories;x-cg-category=event_type" {
-                                category = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "location" {
-                                location = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "uid" {
-                                id = String(equality[1])
+                            let yyyy = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 0)..<datetime[0].index(datetime[0].startIndex, offsetBy: 4)))
+                            let mo = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 4)..<datetime[0].index(datetime[0].startIndex, offsetBy: 6)))
+                            let dd = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 6)..<datetime[0].index(datetime[0].startIndex, offsetBy: 8)))
+                            let hh = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 0)..<datetime[1].index(datetime[1].startIndex, offsetBy: 2)))
+                            let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
+                            let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
+                            let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
+                            
+                            let timestpp = formatter.date(from: timestp) as! Date
+                            if (timestpp > now) {
+                                if (self.collect_ids.contains(id) == true) {
+                                    likes = true
+                                }
+                                self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: likes, id: id, category: category,tags:[]))
                             }
                         }
-                        if title.isEmpty {
-                            continue
-                        }
-                        let datetime = time.split(separator: Character("T"))
-                        if datetime.isEmpty || datetime.count < 2 {
-                            continue
-                        }
-                        let yyyy = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 0)..<datetime[0].index(datetime[0].startIndex, offsetBy: 4)))
-                        let mo = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 4)..<datetime[0].index(datetime[0].startIndex, offsetBy: 6)))
-                        let dd = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 6)..<datetime[0].index(datetime[0].startIndex, offsetBy: 8)))
-                        let hh = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 0)..<datetime[1].index(datetime[1].startIndex, offsetBy: 2)))
-                        let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
-                        let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
-                        let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi + ":" + ss
-                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: id, category: category,tags:[]))
+                        // print(self.activities)
                     }
-                    // print(self.activities)
-                }
-            self.filteredActivities = self.activities
-            self.setBuildingLocations()
-            self.activity_recommendation()
-//            self.sort_by_time()
-//            self.recact = self.recommendActivities
-            group.leave()
+                self.filteredActivities = self.activities
+                self.setBuildingLocations()
+                self.activity_recommendation()
+                group.leave()
+            }
+            
+            DispatchQueue.global().async {
+                task.resume()
+            }
+            group.wait()
+            
+            self.PageView.numberOfPages = self.recact.count
+            self.reloadData()
         }
         
-        DispatchQueue.global().async {
-            task.resume()
-        }
-        group.wait()
-        
-        self.PageView.numberOfPages = self.recact.count
-        self.reloadData()
     }
     
     @IBAction func click(_ sender: Any) {
@@ -297,7 +328,7 @@ class ActivityVC: UIViewController{
         var times: [Date] = []
         let now = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
         for activity in activities {
             let timestp = formatter.date(from: activity.time)
             if let timestp = timestp {
@@ -393,18 +424,22 @@ extension ActivityVC {
         }
         
         // recommend by event type
-//        let in_actid = recact.map({ (act: Activity) -> String in act.id })
-//        activity_rec_by_type()
-//        let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
-//        for i in 0...type_count-1 {
-//            if in_actid.contains(recommendActivities_type[i].id) {
-//                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
-//                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
-//                continue
-//            }
-//            recact.append(recommendActivities_type[i])
-//            recact_slogan.append("You might like!")
-//        }
+        let in_actid = recact.map({ (act: Activity) -> String in act.id })
+        activity_rec_by_type()
+        let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
+        for i in 0...type_count-1 {
+            let new_id = recommendActivities_type[i].id
+            if collect_ids.contains(new_id) {
+                continue
+            }
+            if in_actid.contains(new_id) {
+                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
+                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
+                continue
+            }
+            recact.append(recommendActivities_type[i])
+            recact_slogan.append("You might like!")
+        }
     }
     
     func activity_rec_by_type() {
@@ -415,18 +450,25 @@ extension ActivityVC {
         var weights: [Double] = []
         for act in activities {
             var val = 0.0
-            for t in act.tags {
-                if likes_tags.contains(t) {
-                    let v = wgts[t]
-                    val += pow(Double(v!),Double(v!))
-                }
+            let t = act.category
+            if likes_tags.contains(t) {
+                let v = wgts[t]
+                val += pow(Double(v!),Double(v!))
             }
-            weights.append(val/Double(act.tags.count))
+//            for t in act.tags {
+//                if likes_tags.contains(t) {
+//                    let v = wgts[t]
+//                    val += pow(Double(v!),Double(v!))
+//                }
+//            }
+//            weights.append(val/Double(act.tags.count))
+            weights.append(val)
         }
+        print(weights)
         
         let recact_type = activities
         let combined = zip(weights, recact_type).sorted {$0.0 > $1.0}
-        let very_like = combined.filter {$0.0 > 1}
+        let very_like = combined.filter {$0.0 > 0}
         recommendActivities_type = very_like.map {$0.1}
     }
 }
@@ -527,19 +569,48 @@ extension ActivityVC: activityTableDelegate {
     }
     
     func cellButtonPressed(actID: String) {
-        print("delegate here")
+        let db = Firestore.firestore()
         for (index, activity) in self.activities.enumerated() {
             if activity.id == actID {
+                if activity.likes == false {
+                    db.collection("activity").document(actID).setData([
+                        "category": activity.category,
+                        "image": activity.image,
+                        "imageLink": "",
+                        "likes": true,
+                        "location":activity.location,
+                        "tags":activity.tags,
+                        "timestamp":activity.time,
+                        "title":activity.title,
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                    }
+                    self.collect_ids.append(actID)
+                } else {
+                    db.collection("activity").document(actID).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    }
+                    self.collect_ids = collect_ids.filter {$0 != actID}
+                }
+
                 self.activities[index].likes = !self.activities[index].likes
             }
         }
+        
         for (index, activity) in self.filteredActivities.enumerated() {
             if activity.id == actID {
                 self.filteredActivities[index].likes = !self.filteredActivities[index].likes
             }
         }
         self.reloadData()
-//        print("reloaded!")
     }
 }
 
