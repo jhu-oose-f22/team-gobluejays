@@ -140,7 +140,7 @@ class ScheduleVC: UIViewController{
         // Course1: EN.601.421(01), Fall 2022
         let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN553436", section: "01");
         let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN601421", section: "01");
-        ScheduleVC.registeredCourses.append(registeredCourse1);
+        //ScheduleVC.registeredCourses.append(registeredCourse1);
         ScheduleVC.registeredCourses.append(registeredCourse2);
         reloadCourseEvent()
         

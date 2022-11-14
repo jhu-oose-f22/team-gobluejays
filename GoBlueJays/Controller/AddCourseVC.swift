@@ -21,6 +21,13 @@ class AddCourseVC: UIViewController {
     //need to implement dropdown for term and section later...
     
     @IBAction func addCourse(_ sender: UIButton) {
+        
+        
+        //This works! the course is added to the array in ScheduleVC, but the views don't immediately update at the moment...
+        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN553436", section: "01");
+        ScheduleVC.registeredCourses.append(registeredCourse1)
+
+
         print("sisisiii")
         self.view.showToast(message: "HIIIIIII") ///
         let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + (term.text ?? "") + "&CourseNumber=" + (courseNumber.text ?? "") + (section.text ?? "")
