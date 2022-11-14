@@ -18,12 +18,14 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "IconCell", bundle: nil), forCellReuseIdentifier: "cell")
-        //FOR LOOP TO ITERATE THROUGH THE ARRAY AND PUT INTO TABS
-        
         for rc in ScheduleVC.registeredCourses {
             tabs.append(rc.courseNumber + "." + rc.section)
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reload()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,11 +46,17 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         //could create a pop up that asks for comfirmation to delete the course
         
         //Trying to delete the item not working right now
-        /*
         ScheduleVC.registeredCourses.remove(at: indexPath.row)
-        
-        tableView.deleteRows(at: [indexPath], with:
-         */
+        reload()
     }
+    
+    func reload() {
+        tabs = []
+        for rc in ScheduleVC.registeredCourses {
+            tabs.append(rc.courseNumber + "." + rc.section + "      (Tap to Delete)")
+        }
+        self.tableView.reloadData()
+    }
+    
 }
 

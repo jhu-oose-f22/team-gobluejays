@@ -115,6 +115,11 @@ class ScheduleVC: UIViewController{
 
     @IBOutlet weak var dateTF: TextField!
 //
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadCourseEvent()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCurrentWeek(date: Date())
@@ -138,7 +143,7 @@ class ScheduleVC: UIViewController{
 //        let db = Firestore.firestore()
         // fake data
         // Course1: EN.601.421(01), Fall 2022
-        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN553436", section: "01");
+        //let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN536", section: "01");
         let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN601421", section: "01");
         //ScheduleVC.registeredCourses.append(registeredCourse1);
         ScheduleVC.registeredCourses.append(registeredCourse2);
@@ -152,7 +157,7 @@ class ScheduleVC: UIViewController{
             let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
             let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
                 if let error = error {
-                    print("error: \(error)")
+                    print("hi im thomas")
                 } else {
                     if let response = response as? HTTPURLResponse {
                         print("statusCode: \(response.statusCode)")

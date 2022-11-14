@@ -24,39 +24,41 @@ class AddCourseVC: UIViewController {
         
         
         //This works! the course is added to the array in ScheduleVC, but the views don't immediately update at the moment...
-        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN553436", section: "01");
+    
+        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: term.text ?? "", courseNumber: courseNumber.text ?? "", section: section.text ?? "");
         ScheduleVC.registeredCourses.append(registeredCourse1)
-
-
+         
         print("sisisiii")
-        self.view.showToast(message: "HIIIIIII") ///
+        self.view.showToast(message: "Course Added!") ///
         let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + (term.text ?? "") + "&CourseNumber=" + (courseNumber.text ?? "") + (section.text ?? "")
         print(url)
+        
         
         var booooks:[CourseDetails] = []
         let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
             if let error = error {
                 print("error: \(error)")
+                print("hi im thomasss")
                 //create toast saying "could not find course, please try again"
                 self.view.showToast(message: "Could not find course, please try again.")
                 
             } else{
                 if let response = response as? HTTPURLResponse {
                     print("statusCode: \(response.statusCode)")
+                    if (self.isDuplicateCourse(courseNumber: "")) {
+                        //break out of this whole thing
+                        self.view.showToast(message: "Course already added.")
+                    } else {
+                        //toast saying "course added!"
+                        self.view.showToast(message: "Course added!")
+                    }
                 }
                 if let data = data {
                     
                     if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
                         //print(books)
                         booooks.append(contentsOf: books)
-                        if (self.isDuplicateCourse(courseNumber: "")) {
-                            //toast saying "course already added"
-                            //break out of this whole thing
-                            self.view.showToast(message: "Course already added.")
-                        } else {
-                            //toast saying "course added!"
-                            self.view.showToast(message: "Course added!")
-                        }
+
                         
                     } else {
                         print("Invalid Response")
@@ -77,10 +79,6 @@ class AddCourseVC: UIViewController {
         return false
     }
     
-    //need function for button click that checks if the class is valid. if valid, add to ScheduleVC.registeredCourses array and pop a toast. if invalid, pop a toast
-    
-        //this function will also grab the values in the textboxes and create a url from that
-    
 }
 
 
@@ -89,7 +87,6 @@ extension UIView {
         guard let window = UIApplication.shared.keyWindow else {
             return
         }
-        
         let toastLbl = UILabel()
         toastLbl.text = message
         toastLbl.textAlignment = .center
