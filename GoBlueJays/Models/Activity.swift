@@ -15,4 +15,5 @@ struct Activity {
     var likes: Bool
     var id: String
     var category: String
+    var tags: [String]
 }
