@@ -18,7 +18,7 @@ class ScheduleVC: UIViewController{
     var currentTerm: String?
     var week = ["1", "2", "3", "2", "3"]
     var courses: [Course] = []
-    var registeredCourses: [RegisteredCourse] = []
+    static var registeredCourses: [RegisteredCourse] = []
     var currentWeekCourses:[CourseDetails] = []
     let db = Firestore.firestore()
     
@@ -138,19 +138,18 @@ class ScheduleVC: UIViewController{
 //        let db = Firestore.firestore()
         // fake data
         // Course1: EN.601.421(01), Fall 2022
-        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN55343601");
-        let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN60142101");
-        registeredCourses.append(registeredCourse1);
-        registeredCourses.append(registeredCourse2);
-        
+        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN553436", section: "01");
+        let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN601421", section: "01");
+        ScheduleVC.registeredCourses.append(registeredCourse1);
+        ScheduleVC.registeredCourses.append(registeredCourse2);
         reloadCourseEvent()
         
     }
     
-    func getCourses(semester:String,courseNumber:String, completion: @escaping (_ json: [CourseDetails]?, _ error: Error?)->()) {
+    func getCourses(semester:String,courseNumber:String,section:String, completion: @escaping (_ json: [CourseDetails]?, _ error: Error?)->()) {
         var booooks:[CourseDetails] = []
         
-            let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber;
+            let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
             let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
                 if let error = error {
                     print("error: \(error)")
@@ -485,10 +484,10 @@ extension ScheduleVC: EKEventEditViewDelegate {
                 }
             }
         }
-        for registeredCourse in registeredCourses {
+        for registeredCourse in ScheduleVC.registeredCourses {
             let group = DispatchGroup()
             group.enter()
-            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber){ json, error in
+            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber, section: registeredCourse.section){ json, error in
                 self.currentWeekCourses = json ?? []
                 group.leave()
             }
