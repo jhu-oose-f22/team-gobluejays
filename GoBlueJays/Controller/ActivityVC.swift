@@ -114,6 +114,9 @@ class ActivityVC: UIViewController{
                     }
                 }
             }
+            
+            print(collect_ids)
+            print(likes_tags)
 
             let group = DispatchGroup()
             group.enter()
@@ -448,7 +451,8 @@ extension ActivityVC {
         let wgts = Dictionary(mappedItems, uniquingKeysWith: +)
         print(wgts)
         var weights: [Double] = []
-        for act in activities {
+        let shuffle_act = activities.shuffled()
+        for act in shuffle_act {
             var val = 0.0
             let t = act.category
             if likes_tags.contains(t) {
@@ -466,7 +470,7 @@ extension ActivityVC {
         }
         print(weights)
         
-        let recact_type = activities
+        let recact_type = shuffle_act
         let combined = zip(weights, recact_type).sorted {$0.0 > $1.0}
         let very_like = combined.filter {$0.0 > 0}
         recommendActivities_type = very_like.map {$0.1}
