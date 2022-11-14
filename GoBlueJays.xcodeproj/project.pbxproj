@@ -239,6 +239,7 @@
 				087FC7B72909CBFE005A582E /* FirebaseFirestoreSwift in Frameworks */,
 				08C1481A28F8459400A493B2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				08C1481428F8459400A493B2 /* FirebaseAnalytics in Frameworks */,
+				08D82ECA291AE8AF00B7C7A5 /* PythonKit in Frameworks */,
 				08C1483028F8459400A493B2 /* FirebaseFirestoreSwift in Frameworks */,
 				087FC7AD2909CBFE005A582E /* FirebaseDatabase in Frameworks */,
 				08C1481628F8459400A493B2 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
@@ -508,6 +509,7 @@
 				087FC7CA2909CBFE005A582E /* FirebaseRemoteConfigSwift */,
 				087FC7CC2909CBFE005A582E /* FirebaseStorage */,
 				087FC7CE2909CBFE005A582E /* FirebaseStorageCombine-Community */,
+				08D82EC9291AE8AF00B7C7A5 /* PythonKit */,
 			);
 			productName = GoBlueJays;
 			productReference = 2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */;
@@ -586,6 +588,7 @@
 			mainGroup = 2CE79091289F72BE00C3BB2B;
 			packageReferences = (
 				08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */,
 			);
 			productRefGroup = 2CE7909B289F72BE00C3BB2B /* Products */;
 			projectDirPath = "";
@@ -1156,6 +1159,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pvieito/PythonKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1428,6 +1439,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		08D82EC9291AE8AF00B7C7A5 /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

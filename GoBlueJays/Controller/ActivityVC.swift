@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import CoreLocation
+import SwiftUI
 import Kingfisher
 
 protocol activityTableDelegate: AnyObject {
@@ -58,6 +59,7 @@ class ActivityVC: UIViewController{
         // rec carousel config
         rec_config()
 
+        /*
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
@@ -93,6 +95,77 @@ class ActivityVC: UIViewController{
             PageView.numberOfPages = recact.count
             self.reloadData()
         }
+         */
+        let group = DispatchGroup()
+        group.enter()
+
+        let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                if let data = data {
+                    let g = String(data: data, encoding: .utf8)
+                    self.activities = []
+                    // parse manually
+                    let components = g!.components(separatedBy: "\r\n\r\n")
+                    for component in components {
+                        let properties = component.components(separatedBy: "\r\n")
+                        var title = ""
+                        var time = ""
+                        var location = ""
+                        var category = ""
+                        for property in properties {
+                            let equality = property.split(separator: ":")
+                            if equality.isEmpty {
+                                break
+                            }
+                            if equality[0] == "BEGIN" && equality[1] != "VEVENT" {
+                                continue
+                            }
+                            if equality[0].lowercased() == "summary;encoding=quoted-printable" {
+                                title = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "dtstart" {
+                                time = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "categories;x-cg-category=event_type" {
+                                category = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "location" {
+                                location = String(equality[1])
+                            }
+                        }
+                        if title.isEmpty {
+                            continue
+                        }
+                        let datetime = time.split(separator: Character("T"))
+                        if datetime.isEmpty || datetime.count < 2 {
+                            continue
+                        }
+                        let yyyy = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 0)..<datetime[0].index(datetime[0].startIndex, offsetBy: 4)))
+                        let mo = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 4)..<datetime[0].index(datetime[0].startIndex, offsetBy: 6)))
+                        let dd = String(datetime[0].substring(with: datetime[0].index(datetime[0].startIndex, offsetBy: 6)..<datetime[0].index(datetime[0].startIndex, offsetBy: 8)))
+                        let hh = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 0)..<datetime[1].index(datetime[1].startIndex, offsetBy: 2)))
+                        let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
+                        let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
+                        let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi + ":" + ss
+                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: "", category: category))
+                    }
+                    // print(self.activities)
+                }
+            self.filteredActivities = self.activities
+            self.setBuildingLocations()
+            self.activity_recommendation()
+            self.sort_by_time()
+            self.recact = self.recommendActivities
+            group.leave()
+        }
+        
+        DispatchQueue.global().async {
+            task.resume()
+        }
+        group.wait()
+        
+        self.PageView.numberOfPages = self.recact.count
+        self.reloadData()
     }
     
     @IBAction func click(_ sender: Any) {
@@ -133,20 +206,63 @@ class ActivityVC: UIViewController{
         }
     }
 
-    func sort_by_time() {
-        var times: [Date] = []
-        let now = Date()
+    func getActivities() {
+        // setenv("PYTHON_LIBRARY", "/Users/murphycheng/opt/anaconda3/bin/python/", 1)
+        // print("get activities")
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
-        for activity in activities {
-            times.append(formatter.date(from: activity.time)!)
+        let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                if let data = data {
+                    let g = String(data: data, encoding: .utf8)
+                    self.activities = []
+                    // parse manually
+                    let components = g!.components(separatedBy: "\r\n\r\n")
+                    for component in components {
+                        let properties = component.components(separatedBy: "\r\n")
+                        var title = ""
+                        var time = ""
+                        var location = ""
+                        var category = ""
+                        for property in properties {
+                            let equality = property.split(separator: ":")
+                            if equality.isEmpty {
+                                break
+                            }
+                            if equality[0] == "BEGIN" && equality[1] != "VEVENT" {
+                                continue
+                            }
+                            if equality[0].lowercased() == "summary;encoding=quoted-printable" {
+                                title = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "dtstart" {
+                                time = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "categories;x-cg-category=event_type" {
+                                category = String(equality[1])
+                            }
+                            if equality[0].lowercased() == "location" {
+                                location = String(equality[1])
+                            }
+                        }
+                        // print("append!", title, location, category)
+                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category))
+                    }
+                    // print(self.activities)
+                }
         }
+        task.resume()
+        //let g = String.init(requests.get("https://jhu.campusgroups.com/ical/ical_jhu.ics").content)
         
-        sortedAct2 = activities
-        let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
-        let aftertimes = combined.filter {$0.0 > now}
-        sortedAct2 = aftertimes.map {$0.1}
-        print(sortedAct2)
+    }
+    
+    func getPlaceLocationFromName(place: String) -> CLLocationCoordinate2D {
+        let name = place.lowercased()
+        for buildingLocation in buildingLocations {
+            if name.hasPrefix(buildingLocation.name) {
+                return buildingLocation.location
+            }
+        }
     }
     
     func sort_by_dist() {
@@ -180,6 +296,30 @@ class ActivityVC: UIViewController{
                 recommendActivities_dist.append(activity.activity)
             }
         }
+        
+        for i in 1...activityRecommend {
+            recommendActivities.append(filtered_activities[i].activity)
+        }
+        assert(recommendActivities.count > 0)
+    }
+    
+    func sort_by_time() {
+        var times: [Date] = []
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        for activity in activities {
+            let timestp = formatter.date(from: activity.time)
+            if let timestp = timestp {
+                times.append(timestp)
+            }
+        }
+        
+        sortedAct2 = activities
+        let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
+        let aftertimes = combined.filter {$0.0 > now}
+        sortedAct2 = aftertimes.map {$0.1}
+        print(sortedAct2)
     }
     
     func reloadData() {
