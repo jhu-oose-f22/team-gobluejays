@@ -112,6 +112,7 @@ class ActivityVC: UIViewController{
                         var time = ""
                         var location = ""
                         var category = ""
+                        var id = ""
                         for property in properties {
                             let equality = property.split(separator: ":")
                             if equality.isEmpty {
@@ -132,6 +133,9 @@ class ActivityVC: UIViewController{
                             if equality[0].lowercased() == "location" {
                                 location = String(equality[1])
                             }
+                            if equality[0].lowercased() == "uid" {
+                                id = String(equality[1])
+                            }
                         }
                         if title.isEmpty {
                             continue
@@ -147,7 +151,7 @@ class ActivityVC: UIViewController{
                         let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
                         let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
                         let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi + ":" + ss
-                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: "", category: category,tags:[]))
+                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: id, category: category,tags:[]))
                     }
                     // print(self.activities)
                 }
