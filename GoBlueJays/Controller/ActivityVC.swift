@@ -147,15 +147,15 @@ class ActivityVC: UIViewController{
                         let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
                         let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
                         let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi + ":" + ss
-                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: "", category: category))
+                        self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: false, id: "", category: category,tags:[]))
                     }
                     // print(self.activities)
                 }
             self.filteredActivities = self.activities
             self.setBuildingLocations()
             self.activity_recommendation()
-            self.sort_by_time()
-            self.recact = self.recommendActivities
+//            self.sort_by_time()
+//            self.recact = self.recommendActivities
             group.leave()
         }
         
@@ -246,7 +246,7 @@ class ActivityVC: UIViewController{
                             }
                         }
                         // print("append!", title, location, category)
-                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category))
+                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category,tags:[]))
                     }
                     // print(self.activities)
                 }
@@ -254,15 +254,6 @@ class ActivityVC: UIViewController{
         task.resume()
         //let g = String.init(requests.get("https://jhu.campusgroups.com/ical/ical_jhu.ics").content)
         
-    }
-    
-    func getPlaceLocationFromName(place: String) -> CLLocationCoordinate2D {
-        let name = place.lowercased()
-        for buildingLocation in buildingLocations {
-            if name.hasPrefix(buildingLocation.name) {
-                return buildingLocation.location
-            }
-        }
     }
     
     func sort_by_dist() {
@@ -296,11 +287,6 @@ class ActivityVC: UIViewController{
                 recommendActivities_dist.append(activity.activity)
             }
         }
-        
-        for i in 1...activityRecommend {
-            recommendActivities.append(filtered_activities[i].activity)
-        }
-        assert(recommendActivities.count > 0)
     }
     
     func sort_by_time() {
@@ -403,18 +389,18 @@ extension ActivityVC {
         }
         
         // recommend by event type
-        let in_actid = recact.map({ (act: Activity) -> String in act.id })
-        activity_rec_by_type()
-        let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
-        for i in 0...type_count-1 {
-            if in_actid.contains(recommendActivities_type[i].id) {
-                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
-                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
-                continue
-            }
-            recact.append(recommendActivities_type[i])
-            recact_slogan.append("You might like!")
-        }
+//        let in_actid = recact.map({ (act: Activity) -> String in act.id })
+//        activity_rec_by_type()
+//        let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
+//        for i in 0...type_count-1 {
+//            if in_actid.contains(recommendActivities_type[i].id) {
+//                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
+//                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
+//                continue
+//            }
+//            recact.append(recommendActivities_type[i])
+//            recact_slogan.append("You might like!")
+//        }
     }
     
     func activity_rec_by_type() {
@@ -427,7 +413,7 @@ extension ActivityVC {
             var val = 0.0
             for t in act.tags {
                 if likes_tags.contains(t) {
-                    var v = wgts[t]
+                    let v = wgts[t]
                     val += pow(Double(v!),Double(v!))
                 }
             }
