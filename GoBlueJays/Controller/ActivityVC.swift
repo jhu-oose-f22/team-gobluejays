@@ -14,7 +14,8 @@ import Kingfisher
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
-    func cellTapped(act: ActivityDetailModel)
+//    func cellTapped(act: ActivityDetailModel)
+    func cellTapped(act: ActivityDetailModel, actID: String)
 }
 
 class ActivityVC: UIViewController{
@@ -140,6 +141,9 @@ class ActivityVC: UIViewController{
                             var category = ""
                             var id = ""
                             var likes = false
+                            var cost = "Free"
+                            var host = ""
+                            var detail = ""
                             for property in properties {
                                 let equality = property.split(separator: ":")
                                 if equality.isEmpty {
@@ -163,6 +167,17 @@ class ActivityVC: UIViewController{
                                 if equality[0].lowercased() == "uid" {
                                     id = String(equality[1])
                                 }
+                                if equality[0].lowercased() == "description" {
+                                    detail = equality[1].replacingOccurrences(of: "\\n---\\nEvent Details", with: "", options: NSString.CompareOptions.literal, range: nil)
+                                    
+                                    print(detail)
+                                }
+                                if equality[0].lowercased().contains("organizer") {
+                                    let sarr = equality[0].components(separatedBy: "=")
+                                    host = sarr[1].replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range:nil)
+                                    print("host:!!!!")
+                                    print(host)
+                                }
                             }
                             if title.isEmpty {
                                 continue
@@ -184,7 +199,7 @@ class ActivityVC: UIViewController{
                                 if (self.collect_ids.contains(id) == true) {
                                     likes = true
                                 }
-                                self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: likes, id: id, category: category,tags:[]))
+                                self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: likes, id: id, category: category, host: host, cost: cost, detail: detail))
                             }
                         }
                         // print(self.activities)
@@ -284,7 +299,7 @@ class ActivityVC: UIViewController{
                             }
                         }
                         // print("append!", title, location, category)
-                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category,tags:[]))
+                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category, host:"", cost: "", detail:""))
                     }
                     // print(self.activities)
                 }
@@ -430,18 +445,20 @@ extension ActivityVC {
         let in_actid = recact.map({ (act: Activity) -> String in act.id })
         activity_rec_by_type()
         let type_count = min(activityRecommend_type_max, recommendActivities_type.count)
-        for i in 0...type_count-1 {
-            let new_id = recommendActivities_type[i].id
-            if collect_ids.contains(new_id) {
-                continue
+        if (type_count-1) >= 0 {
+            for i in 0...type_count-1 {
+                let new_id = recommendActivities_type[i].id
+                if collect_ids.contains(new_id) {
+                    continue
+                }
+                if in_actid.contains(new_id) {
+                    let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
+                    recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
+                    continue
+                }
+                recact.append(recommendActivities_type[i])
+                recact_slogan.append("You might like!")
             }
-            if in_actid.contains(new_id) {
-                let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
-                recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
-                continue
-            }
-            recact.append(recommendActivities_type[i])
-            recact_slogan.append("You might like!")
         }
     }
     
@@ -565,10 +582,31 @@ extension ActivityVC {
 }
 
 extension ActivityVC: activityTableDelegate {
-    func cellTapped(act: ActivityDetailModel) {
+//    func cellTapped(act: ActivityDetailModel) {
+//        print("got to here")
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+//        vc.activity = act
+//        self.present(vc, animated: true, completion: nil)
+//    }
+    
+    func cellTapped(act: ActivityDetailModel, actID: String) {
         print("got to here")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        vc.activity = act
+        
+        var actdetail = act
+        for a in self.activities {
+            if a.id == actID {
+                let tarr = a.time.components(separatedBy: " ")
+                actdetail.date = tarr[0]
+                actdetail.time = tarr[1]
+                actdetail.host = a.host
+                actdetail.detail = a.detail
+                actdetail.cost = a.cost
+                
+                vc.activity = actdetail
+            }
+        }
+        
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -583,9 +621,11 @@ extension ActivityVC: activityTableDelegate {
                         "imageLink": "",
                         "likes": true,
                         "location":activity.location,
-                        "tags":activity.tags,
                         "timestamp":activity.time,
                         "title":activity.title,
+                        "host":activity.host,
+                        "cost":activity.cost,
+                        "detail":activity.detail
                     ]) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
