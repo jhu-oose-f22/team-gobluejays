@@ -21,6 +21,7 @@ class ScheduleVC: UIViewController{
     static var registeredCourses: [RegisteredCourse] = []
     var currentWeekCourses:[CourseDetails] = []
     let db = Firestore.firestore()
+    var curCourse:Course = Course()
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -197,18 +198,84 @@ class ScheduleVC: UIViewController{
         dateTF.resignFirstResponder()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! EventDetailVC
+        destinationVC.event = curCourse
+    
+    }
+    
+    
     func showCourses(courses: [Course]) {
+        
         for course in courses {
-            let courseButton = UIButton(type: .system)
+            curCourse = course
+//            let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
+////                let controller =
+////                self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
+////                controller.course = book
+////                self.present(controller,animated: true,completion: nil)
+//
+//                var textField = UITextField() // refer to the locol variable of text field
+//
+//                 // Pop up an alert
+//                let alert = UIAlertController(title: course.name, message: "", preferredStyle: .alert) // .alert == UIAlertController.alert
+//
+//                 // Add a button and Apply the default style to the action button when the user taps a button in an alert.
+//
+//                alert.addAction(UIAlertAction(title: NSLocalizedString("Completed！", comment: "Default action"), style: .default, handler: { _ in
+//                    course.completed = !course.completed
+//                }))
+//
+//                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+//                  print("Handle Cancel Logic here")
+//                  }))
+//                 // add a textfield
+//                 alert.addTextField{
+//                     // Trigger the closure only when the text field is added to the alert
+//                     (alertTextField) in alertTextField.placeholder = "Create a new item"
+//                     // ! Extend the scope of alertTextField to the whole function
+//                     textField = alertTextField // textField has a scope of entile addButtonPressed function while the alertTextField only has it inside the closure
+//
+//                     // print(alertTextField.text) // empty!!!
+//                 }
+//
+//                 // attach the action object to the alert
+//                //  Add your label
+//                      let margin:CGFloat = 8.0
+//                      let rect = CGRect(x: margin, y: 72.0, width: alert.view.frame.width - margin * 2.0 , height: 20)
+//                      let label = UILabel(frame: rect)
+//                      label.text = "withLabel"
+//                      label.textAlignment = .center
+//                      label.adjustsFontSizeToFitWidth = true
+//                      label.minimumScaleFactor = 0.5
+//                      alert.view.addSubview(label)
+//
+//                 // present the alert view controller
+//                self.present(alert, animated: true, completion: nil)
+//            }))
+            
+            let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "show event", handler: { _ in
+                let controller =
+                self.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
+                
+                controller.event = course
+//                self.present(controller,animated: true,completion: nil)
+                self.performSegue(withIdentifier: "showEventDetail", sender: self)
+                
+            }))
+                                                                               
             let oneHour = self.view1.frame.height / 17
             let y = (course.startTime - 7.0 + 0.85) * oneHour
-//            courseButton.setTitle(course.name, for: .normal)
             courseButton.setTitle(course.name, for: .normal)
             courseButton.titleLabel?.font = UIFont(name: "GillSans-Italic", size: 10)
             courseButton.titleLabel?.lineBreakMode = .byWordWrapping
-            courseButton.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)
+            if !course.completed{
+                courseButton.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)}
+            else{
+                courseButton.backgroundColor = UIColor(red: 0/255, green: 255/255, blue: 50/255, alpha: 0.5)
+            }
             courseButton.setTitleColor(.black, for: .normal);
-            
+
             courseButton.frame = CGRect(x: 0, y: y, width: self.view1.frame.width, height: oneHour*course.duration);
 //            let label = UILabel(frame: CGRect(x: 100, y: 100, width: self.view1.frame.width, height: 21))
 //            label.text = "I'm a test label"
@@ -413,20 +480,20 @@ extension ScheduleVC: EKEventEditViewDelegate {
     
     func showEventViewController(){
         let eventVC = EKEventEditViewController()
+        eventVC.delegate = self //?
         eventVC.editViewDelegate = self // The delegate to notify when editing an event.
         eventVC.eventStore = EKEventStore()
+        
         
         let event = EKEvent(eventStore: eventVC.eventStore)
         event.title = "Hello calendar!"
         event.startDate = Date()
+        event.notes = ""
         eventVC.event = event
-
+        
         present(eventVC, animated: true)
-    
-        
-        
     }
-
+    
     
     func convertTime(at date: Date) -> Double{
         let timeFormatter = DateFormatter()
@@ -439,7 +506,51 @@ extension ScheduleVC: EKEventEditViewDelegate {
         var name: String = controller.event?.title ?? "Empty Title"
         var startDate: Date = controller.event?.startDate ?? Date()
         var endDate: Date = controller.event?.endDate ?? Date()
-//        var isAllDay: Bool = controller.event?.isAllDay ?? false
+        var isAllDay: Bool = controller.event?.isAllDay ?? false
+        var location: String = controller.event?.location ?? ""
+        var notes: String = controller.event?.notes ?? ""
+        var alarms:[EKAlarm] = controller.event?.alarms ?? []
+        var recurrenceRules:[EKRecurrenceRule] = controller.event?.recurrenceRules ?? []
+        var recurrenceInterval:Int
+        var recurrenceEndDate: Date
+        var recurrenceFreq: Int
+        if controller.event?.hasRecurrenceRules == true{
+            recurrenceEndDate = recurrenceRules[0].recurrenceEnd?.endDate ?? startDate
+//            recurrenceInterval = recurrenceRules[0].interval
+            recurrenceFreq = recurrenceRules[0].frequency.rawValue
+            print(recurrenceRules) // [EKRecurrenceRule <0x600000bdf8e0> RRULE FREQ=WEEKLY;INTERVAL=1;UNTIL=20221208T034900Z]
+            print(recurrenceEndDate) //2022-12-08 04:20:00 +0000
+//            print(recurrenceInterval) // 1
+            print(recurrenceFreq) // 0 = daily, 1 = weekly, 2 = monthly, 3 = yearly
+//            print(alarms[0].relativeOffset) //-600
+            
+        }
+        let dateComponents = DateComponents(year: 2022, month: 2)
+        let calendar = Calendar.current
+        let date = calendar.date(from: dateComponents)!
+
+        let range = calendar.range(of: .day, in: .month, for: date)!
+        let numDays = range.count
+        print("days:\(numDays)")
+//        switch(recurrenceFreq){
+//        case 0: // daily
+//            recurrenceInterval = 1;
+//            break;
+//        case 1: //weekly
+//            recurrenceInterval = 7;
+//            break;
+//        case 2: //monthly
+//            recurrenceInterval = 1;
+//            break;
+//        case 3: //yearly
+//            recurrenceInterval = 1;
+//            break;
+//
+//        default:
+//
+//        }
+        
+        
         
         /**
          Convert date to string
@@ -455,22 +566,24 @@ extension ScheduleVC: EKEventEditViewDelegate {
         var startTime:Double = convertTime(at: startDate)
         var endTime:Double = convertTime(at: endDate)
         var duration: Double = endTime - startTime
-        print(name,startTime,endTime,duration) // New course! 12.0 18.0 6.0
+        print(name,startTime,endTime,duration,location,notes,alarms) // New course! 12.0 18.0 6.0 JHU 3400 N Charles Street, Baltimore, MD 21218, United States Balalaika
         
-        
-        var ref: DocumentReference? = nil
-        ref = db.collection("event").addDocument(data: [
+        let uuid = controller.event?.eventIdentifier ?? "0"
+        db.collection("scheduleEvents").document(uuid).setData([
+            "uuid":uuid,
             "name": name,
             "date": couseDate,
-            "location": "Maryland 310",
+            "location": location,
             "startTime": startTime,
-            "duration": duration
+            "duration": duration,
+            "notes":notes,
+            "completed":false
         ]) {
             err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID:\(ref!.documentID)")
+                print("Document added with ID:\(uuid)")
             }
         }
         
@@ -490,17 +603,17 @@ extension ScheduleVC: EKEventEditViewDelegate {
             }
         }
         for registeredCourse in ScheduleVC.registeredCourses {
-            let group = DispatchGroup()
-            group.enter()
-            getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber, section: registeredCourse.section){ json, error in
-                self.currentWeekCourses = json ?? []
-                group.leave()
-            }
-            group.wait()
-            displayCourses(books: self.currentWeekCourses)
-        }
+                    let group = DispatchGroup()
+                    group.enter()
+                    getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber, section: registeredCourse.section){ json, error in
+                        self.currentWeekCourses = json ?? []
+                        group.leave()
+                    }
+                    group.wait()
+                    displayCourses(books: self.currentWeekCourses)
+                }
         courses = []
-        db.collection("event").getDocuments(){ [self]
+        db.collection("scheduleEvents").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -514,7 +627,16 @@ extension ScheduleVC: EKEventEditViewDelegate {
                         print("found date in current week: \(dateee)")
                         print(fooOffset)
                         
-                        let course1: Course = Course(name: data["name"] as! String, date: data["date"] as! String ,weekday: fooOffset , location: data["location"] as! String, startTime: data["startTime"] as! Double, duration: data["duration"] as! Double)
+                        let course1: Course = Course(
+                            uuid:data["uuid"] as! String,
+                            name: data["name"] as! String,
+                            date: data["date"] as! String ,
+                            weekday: fooOffset,
+                            location: data["location"] as! String,
+                            startTime: data["startTime"] as! Double,
+                            duration: data["duration"] as! Double,
+                            notes: data["notes"] as! String,
+                            completed: data["completed"] as! Bool)
                         self.courses.append(course1)
                     } else {
                         print("nono")
@@ -524,4 +646,61 @@ extension ScheduleVC: EKEventEditViewDelegate {
             }
         }
     }
+}
+
+extension ScheduleVC:UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if(viewController.isKind(of: UITableViewController.self)){
+            let tblViewVC:UITableViewController = viewController as! UITableViewController
+            let tblView = tblViewVC.tableView
+            // 0,0: Name
+            // 0,1: All-Day
+            // 0,2: Repeat
+            // 0,4: Elert
+            // 0,6: Attachment
+            // 0,8: url
+            // 1,0: Locatiion
+            // 1,1: Starts
+            // 1,8: Notes
+            // 2,1: Ends
+            // 3,1: Travel Time
+            
+            let keepArr:[String] = ["00","11","21"]
+            for i in 0...11{
+                for j in 0...11{
+                    if !(keepArr.contains("\(i)\(j)")){
+                        if let cell:UITableViewCell = (tblView?.cellForRow(at: IndexPath(row: i, section: j))){
+                            cell.isUserInteractionEnabled=false
+                            cell.isHidden = true
+                        }
+                    }
+                    
+                }
+            }
+//            print("calling")
+//            print(tblView?.visibleCells.count)
+//            print(tblView?.visibleCells.description)
+//            tblView?.deleteSections(IndexSet([1]),with:.automatic)
+//            for i in [1,2,4,6,8]{
+//                let cell:UITableViewCell = (tblView?.cellForRow(at: IndexPath(row: 0, section: i)))!
+////                print(cell.description)
+//                cell.isUserInteractionEnabled=false
+//                cell.isHidden = true
+//            }
+
+
+            
+            
+
+
+
+            
+
+        }
+        
+    }
+    
+
+   
+    
 }
