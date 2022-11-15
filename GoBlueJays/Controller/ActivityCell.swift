@@ -49,11 +49,11 @@ class ActivityCell: UITableViewCell{
         let db = Firestore.firestore()
         if collect.tag == 0 {
             button_configure(likes: true, but: 1)
-            db.collection("activity").document(activityID[0]).updateData(["likes" : true])
+            // db.collection("activity").document(activityID[0]).updateData(["likes" : true])
             print("liked")
         } else {
             button_configure(likes: false, but: 1)
-            db.collection("activity").document(activityID[0]).updateData(["likes" : false])
+            // db.collection("activity").document(activityID[0]).updateData(["likes" : false])
             print("unliked")
         }
         delegate?.cellButtonPressed(actID: activityID[0])
@@ -63,10 +63,10 @@ class ActivityCell: UITableViewCell{
         let db = Firestore.firestore()
         if collect2.tag == 0 {
             button_configure(likes: true, but: 2)
-            db.collection("activity").document(activityID[1]).updateData(["likes" : true])
+            // db.collection("activity").document(activityID[1]).updateData(["likes" : true])
         } else {
             button_configure(likes: false, but: 2)
-            db.collection("activity").document(activityID[1]).updateData(["likes" : false])
+            // db.collection("activity").document(activityID[1]).updateData(["likes" : false])
         }
         delegate?.cellButtonPressed(actID: activityID[1])
     }
@@ -118,6 +118,26 @@ class ActivityCell: UITableViewCell{
     
     func assign_ID(ids: [String]) {
         activityID = ids
+    }
+    
+    func loadImageFrom(urlAddress: String, right: Bool){
+        
+        guard let url = URL(string: urlAddress) else {
+            return
+        }
+        
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: url) else {
+                return
+            }
+            DispatchQueue.main.async {
+                if right == true {
+                    self.ActivityImage.image = UIImage(data: imageData)
+                } else {
+                    self.ActivityImage2.image = UIImage(data: imageData)
+                }
+            }
+        }
     }
     
     override func awakeFromNib() {
