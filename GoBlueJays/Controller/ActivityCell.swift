@@ -35,13 +35,15 @@ class ActivityCell: UITableViewCell{
     var activityID: [String] = []
     
     @IBAction func cell1_tap(_ sender: UIButton) {
-        let act = ActivityDetailModel(title: Title.text ?? "No Title", date: "Temp", time: time.text ?? "No Time", location: location.text ?? "No Location", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage.asImage())
-        self.delegate!.cellTapped(act: act)
+        print("HERE!!!")
+        print(activityID)
+        var act = ActivityDetailModel(title: Title.text ?? "No Title", date: "Temp", time: "No Time", location: location.text ?? "No Location", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage.asImage())
+        self.delegate!.cellTapped(act: act, actID: activityID[0])
     }
     
     @IBAction func cell2_tap(_ send: UIButton) {
-        let act = ActivityDetailModel(title: Title2.text ?? "temp", date: "Temp", time: time2.text ?? "temp", location: location2.text ?? "temp", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage2.asImage())
-        self.delegate!.cellTapped(act: act)
+        var act = ActivityDetailModel(title: Title2.text ?? "temp", date: "Temp", time: time2.text ?? "temp", location: location2.text ?? "temp", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage2.asImage())
+        self.delegate!.cellTapped(act: act, actID: activityID[1])
     }
     
     @IBAction func likes_click(_ sender: UIButton) {

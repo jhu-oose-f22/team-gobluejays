@@ -198,7 +198,7 @@ class ScheduleVC: UIViewController{
         dateTF.resignFirstResponder()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func prepare(for segue: UIStoryboardSegue, sender: UIButton) { //I changed sender from Any? to UIButton and it fixes the crash
         let destinationVC = segue.destination as! EventDetailVC
         destinationVC.event = curCourse
     

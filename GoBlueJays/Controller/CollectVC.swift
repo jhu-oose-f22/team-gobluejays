@@ -56,7 +56,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
 //                    let timep = data["timestamp"] as! String
 //                    let timec = formatter.date(from: timep) as! Date
                     
-                    if (data["likes"] as! Bool == true) {
+                    if (data["likes"] as! Bool == true) && (document.documentID.count > 6){
                         let act:Activity = Activity(title: data["title"] as! String,
                                                     time: data["timestamp"] as! String,
                                                     location: data["location"] as! String,
@@ -64,7 +64,10 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                                                     likes: data["likes"] as! Bool,
                                                     id: document.documentID,
                                                     category: data["category"] as! String,
-                                                    tags: (data["tags"] as! NSArray) as! [String])
+                                                    host: data["host"] as! String,
+                                                    cost: data["cost"] as! String,
+                                                    detail: data["detail"] as! String)
+//                        tags: (data["tags"] as! NSArray) as! [String]
                         self.collects.append(act)
                     }
                 }
@@ -99,6 +102,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         let url1 = URL(string: filteredCollects[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.collect.isHidden = true
+        ids.append(filteredCollects[ind1].id)
         
         if (ind2 <= filteredCollects.count-1) {
             cell.img2.isHidden = false
@@ -119,6 +123,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         }
         
         cell.configure()
+        cell.assign_ID(ids: ids)
         return cell
     }
 
@@ -154,10 +159,31 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     func cellButtonPressed(actID: String) {
     }
     
-    func cellTapped(act: ActivityDetailModel) {
+//    func cellTapped(act: ActivityDetailModel) {
+//        print("got to here")
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+//        vc.activity = act
+//        self.present(vc, animated: true, completion: nil)
+//    }
+    
+    func cellTapped(act: ActivityDetailModel, actID: String) {
         print("got to here")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        vc.activity = act
+        
+        var actdetail = act
+        for a in self.collects {
+            if a.id == actID {
+                let tarr = a.time.components(separatedBy: " ")
+                actdetail.date = tarr[0]
+                actdetail.time = tarr[1]
+                actdetail.host = a.host
+                actdetail.detail = a.detail
+                actdetail.cost = a.cost
+                
+                vc.activity = actdetail
+            }
+        }
+        
         self.present(vc, animated: true, completion: nil)
     }
 
