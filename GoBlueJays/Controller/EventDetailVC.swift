@@ -15,7 +15,7 @@ import EventKit
 
 class EventDetailVC: UIViewController {
     let db = Firestore.firestore()
-    lazy var eventstore: EKEventStore = EKEventStore()
+    //lazy var eventstore: EKEventStore = EKEventStore()
     lazy var event = Course()
 
  

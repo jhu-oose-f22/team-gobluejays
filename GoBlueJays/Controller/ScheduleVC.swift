@@ -198,9 +198,12 @@ class ScheduleVC: UIViewController{
         dateTF.resignFirstResponder()
     }
     
-    func prepare(for segue: UIStoryboardSegue, sender: UIButton) { //I changed sender from Any? to UIButton and it fixes the crash
-        let destinationVC = segue.destination as! EventDetailVC
-        destinationVC.event = curCourse
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //I changed sender from Any? to UIButton and it fixes the crash
+        if segue.identifier == "showEventDetail" {
+            let destinationVC = segue.destination as! EventDetailVC
+            destinationVC.event = self.curCourse
+            }
+        
     
     }
     
@@ -208,58 +211,15 @@ class ScheduleVC: UIViewController{
     func showCourses(courses: [Course]) {
         
         for course in courses {
-            curCourse = course
-//            let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { _ in
-////                let controller =
-////                self.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
-////                controller.course = book
-////                self.present(controller,animated: true,completion: nil)
-//
-//                var textField = UITextField() // refer to the locol variable of text field
-//
-//                 // Pop up an alert
-//                let alert = UIAlertController(title: course.name, message: "", preferredStyle: .alert) // .alert == UIAlertController.alert
-//
-//                 // Add a button and Apply the default style to the action button when the user taps a button in an alert.
-//
-//                alert.addAction(UIAlertAction(title: NSLocalizedString("Completed！", comment: "Default action"), style: .default, handler: { _ in
-//                    course.completed = !course.completed
-//                }))
-//
-//                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-//                  print("Handle Cancel Logic here")
-//                  }))
-//                 // add a textfield
-//                 alert.addTextField{
-//                     // Trigger the closure only when the text field is added to the alert
-//                     (alertTextField) in alertTextField.placeholder = "Create a new item"
-//                     // ! Extend the scope of alertTextField to the whole function
-//                     textField = alertTextField // textField has a scope of entile addButtonPressed function while the alertTextField only has it inside the closure
-//
-//                     // print(alertTextField.text) // empty!!!
-//                 }
-//
-//                 // attach the action object to the alert
-//                //  Add your label
-//                      let margin:CGFloat = 8.0
-//                      let rect = CGRect(x: margin, y: 72.0, width: alert.view.frame.width - margin * 2.0 , height: 20)
-//                      let label = UILabel(frame: rect)
-//                      label.text = "withLabel"
-//                      label.textAlignment = .center
-//                      label.adjustsFontSizeToFitWidth = true
-//                      label.minimumScaleFactor = 0.5
-//                      alert.view.addSubview(label)
-//
-//                 // present the alert view controller
-//                self.present(alert, animated: true, completion: nil)
-//            }))
+            //self.curCourse = course
             
             let courseButton = UIButton(type: .system, primaryAction: UIAction(title: "show event", handler: { _ in
-                let controller =
-                self.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
-                
-                controller.event = course
+//                let controller =
+//                self.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
+//
+//                controller.event = course
 //                self.present(controller,animated: true,completion: nil)
+                self.curCourse = course
                 self.performSegue(withIdentifier: "showEventDetail", sender: self)
                 
             }))
