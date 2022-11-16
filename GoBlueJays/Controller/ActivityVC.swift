@@ -32,6 +32,7 @@ class ActivityVC: UIViewController{
     var collect_ids: [String] = []
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
+    var filterInfo = [String]()
     var sortedActivites: [Activity] = []
     var sortedAct2: [Activity] = []
     
@@ -205,11 +206,19 @@ class ActivityVC: UIViewController{
         }
         
     }
-    
     /*@IBAction func clickRecommendation(_ sender: UIButton) {
         let act = ActivityDetailModel(title: "", date: "", time: "", location: "", host: "", cost: "", detail: "", image: UIImage())
         cellTapped(act: act)
     }*/
+    
+    // MARK: Click Category
+    @IBAction func clickCategory(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "category") as? activityFilter {
+                 //informs the Juice ViewController that the restaurant is the delegate
+                   vc.delegate = self
+                   self.navigationController?.pushViewController(vc, animated: true)
+               }
+    }
     
     @IBAction func click(_ sender: Any) {
         if nearby.tag == 0 {
@@ -385,8 +394,8 @@ class ActivityVC: UIViewController{
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+//        searchController.searchBar.showsScopeBar = true
+//        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
         definesPresentationContext = true
     }
@@ -680,29 +689,32 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-extension ActivityVC: UISearchBarDelegate {
+// MARK: - Zaiwei
+extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
-
+    
     var isFiltering: Bool {
-        let searchBarScopeIsFiltering =
-            searchController.searchBar.selectedScopeButtonIndex != 0
-          return (!isSearchBarEmpty || searchBarScopeIsFiltering)
+        return (!isSearchBarEmpty || !filterInfo.isEmpty)
     }
-
-    func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
-        if isFiltering {
+    
+    func returnFilterCategory(info: [String]) {
+        filterInfo = info
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        if !isSearchBarEmpty {
             filteredActivities = activities.filter { (activity: Activity) -> Bool in
-                if isSearchBarEmpty {
-                    let scopeMatch = (scopeButton == "All" || activity.category.lowercased().contains(scopeButton.lowercased()))
-                    return scopeMatch
-                } else {
-                    let scopeMatch = (scopeButton == "All" || activity.category.lowercased().contains(scopeButton.lowercased()))
-                    let searchTextMatch = activity.title.lowercased().contains(searchText.lowercased())
-                    return scopeMatch && searchTextMatch
-                }
+                let searchTextMatch = activity.category.lowercased().contains(searchText.lowercased())
+                return searchTextMatch
+            }
+        } else if !filterInfo.isEmpty {
+            filteredActivities = activities.filter { (activity: Activity) -> Bool in
+                return filterInfo.contains(where: {(category1: String) -> Bool in
+                    return activity.category.lowercased() == category1.lowercased()
+                })
+                
             }
         } else {
             filteredActivities = activities
@@ -710,13 +722,11 @@ extension ActivityVC: UISearchBarDelegate {
         self.reloadData()
     }
 }
-
 extension ActivityVC: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
       let searchBar = searchController.searchBar
-      let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
       let searchText = searchBar.text!
-      filterContentForSearchText(searchText: searchText, scopeButton: scopeButton)
+      filterContentForSearchText(searchText: searchText)
   }
 }
 
