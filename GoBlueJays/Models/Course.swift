@@ -2,16 +2,20 @@
 //  Course.swift
 //  GoBlueJays
 //
-//  Created by Jessie Luo on 10/16/22.
+//  Created by Kaia Gao on 10/16/22.
 //
 
 import Foundation
 
 struct Course {
-    let name: String
-    let date: String
-    let weekday: Int
-    let location: String
-    let startTime: Double
-    let duration: Double
+    var uuid:String = ""
+    var name: String = ""
+    var date: String = ""
+    var weekday: Int = 1
+    var location: String = ""
+    var startTime: Double = 4.0
+    var duration: Double = 0.0
+    var notes:String = ""
+    var completed: Bool = false
+    
 }

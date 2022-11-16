@@ -23,6 +23,7 @@ struct SectionDetail: Decodable {
 struct RegisteredCourse {
     let semester: String
     let courseNumber: String
+    let section: String
 }
 
 struct CourseDetails: Decodable {
