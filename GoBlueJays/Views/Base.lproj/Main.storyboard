@@ -4568,6 +4568,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="Art/Maker Space"/>
+                                        <connections>
+                                            <action selector="artMakerBtnClicked:" destination="Re6-6n-Kgf" eventType="touchUpInside" id="Zvj-cg-hya"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpO-jD-EzR">
                                         <rect key="frame" x="157" y="50" width="157" height="35"/>

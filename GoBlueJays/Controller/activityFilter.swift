@@ -37,9 +37,10 @@ class activityFilter: UIViewController {
         }
         
         // initialize filters with all categories selected
-        info.append("Academics")
+        info.append("Academic")
         info.append("Sport")
         info.append("Volunteer Opportunities")
+        info.append("Art/Maker Space")
     }
     
     @IBAction func sendData(_ sender: Any) {
@@ -56,10 +57,10 @@ class activityFilter: UIViewController {
     @IBAction func academicsBtnClicked(_ sender: Any) {
         if self.academicsBtn.backgroundColor == UIColor.cyan {
             self.academicsBtn.backgroundColor = UIColor.blue
-            filterInfo.append("Academics")
+            filterInfo.append("Academic")
         } else {
             self.academicsBtn.backgroundColor = UIColor.cyan
-            if let index = filterInfo.firstIndex(of: "Academics") {
+            if let index = filterInfo.firstIndex(of: "Academic") {
                 filterInfo.remove(at: index)
             }
         }
@@ -77,5 +78,26 @@ class activityFilter: UIViewController {
     }
     
     @IBAction func volunteerBtnClicked(_ sender: Any) {
+        if self.volunteerBtn.backgroundColor == UIColor.cyan {
+            self.volunteerBtn.backgroundColor = UIColor.blue
+            filterInfo.append("Sport")
+        } else {
+            self.volunteerBtn.backgroundColor = UIColor.cyan
+            if let index = filterInfo.firstIndex(of: "Sport") {
+                filterInfo.remove(at: index)
+            }
+        }
+    }
+    
+    @IBAction func artMakerBtnClicked(_ sender: Any) {
+        if self.artMakerBtn.backgroundColor == UIColor.cyan {
+            self.artMakerBtn.backgroundColor = UIColor.blue
+            filterInfo.append("Sport")
+        } else {
+            self.artMakerBtn.backgroundColor = UIColor.cyan
+            if let index = filterInfo.firstIndex(of: "Sport") {
+                filterInfo.remove(at: index)
+            }
+        }
     }
 }

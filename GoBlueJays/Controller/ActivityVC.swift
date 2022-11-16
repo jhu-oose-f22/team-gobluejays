@@ -741,20 +741,22 @@ extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
     
     func returnFilterCategory(info: [String]) {
         filterInfo = info
-    }
-    
-    func filterContentForSearchText(searchText: String) {
-        if !isSearchBarEmpty {
-            filteredActivities = activities.filter { (activity: Activity) -> Bool in
-                let searchTextMatch = activity.category.lowercased().contains(searchText.lowercased())
-                return searchTextMatch
-            }
-        } else if !filterInfo.isEmpty {
+        if !filterInfo.isEmpty {
             filteredActivities = activities.filter { (activity: Activity) -> Bool in
                 return filterInfo.contains(where: {(category1: String) -> Bool in
                     return activity.category.lowercased() == category1.lowercased()
                 })
                 
+            }
+        }
+        self.reloadData()
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        if !isSearchBarEmpty {
+            filteredActivities = activities.filter { (activity: Activity) -> Bool in
+                let searchTextMatch = activity.title.lowercased().contains(searchText.lowercased())
+                return searchTextMatch
             }
         } else {
             filteredActivities = activities
