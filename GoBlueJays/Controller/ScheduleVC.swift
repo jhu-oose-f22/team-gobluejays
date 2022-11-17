@@ -18,7 +18,7 @@ class ScheduleVC: UIViewController{
     var currentTerm: String?
     var week = ["1", "2", "3", "2", "3"]
     var courses: [Course] = []
-    static var registeredCourses: [RegisteredCourse] = []
+    var registeredCourses: [RegisteredCourse] = []
     var currentWeekCourses:[CourseDetails] = []
     let db = Firestore.firestore()
     var curCourse:Course = Course()
@@ -118,7 +118,25 @@ class ScheduleVC: UIViewController{
 //
     
     override func viewWillAppear(_ animated: Bool) {
-        reloadCourseEvent()
+        //need to pull the data from the database right here***
+        //set registeredCourses to what is currently in the database...
+        let db = Firestore.firestore()
+        registeredCourses = []
+        db.collection("scheduleCourses").getDocuments() {
+            (QuerySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in QuerySnapshot!.documents {
+                    let sem = document.data()["Term"] as? String
+                    let cn = document.data()["CourseNumber"] as? String
+                    let s = document.data()["Section"] as? String
+                    let uuid = document.data()["uuid"] as? String
+                    self.registeredCourses.append(RegisteredCourse(semester: sem!, courseNumber: cn!, section: s!, uuid: uuid!))
+                }
+                self.reloadCourseEvent()
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -141,13 +159,14 @@ class ScheduleVC: UIViewController{
         
 
         //test
-//        let db = Firestore.firestore()
+        //let db = Firestore.firestore()
         // fake data
         // Course1: EN.601.421(01), Fall 2022
         //let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN536", section: "01");
-        let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN601421", section: "01");
+        //let registeredCourse2: RegisteredCourse = RegisteredCourse(semester: "Fall%202022", courseNumber: "EN601421", section: "01");
         //ScheduleVC.registeredCourses.append(registeredCourse1);
-        ScheduleVC.registeredCourses.append(registeredCourse2);
+        //ScheduleVC.registeredCourses.append(registeredCourse2);
+        //ScheduleVC.registeredCourses = db.collection("scheduleCourses").getDocuments()
         reloadCourseEvent()
         
     }
@@ -562,7 +581,7 @@ extension ScheduleVC: EKEventEditViewDelegate {
                 }
             }
         }
-        for registeredCourse in ScheduleVC.registeredCourses {
+        for registeredCourse in registeredCourses {
                     let group = DispatchGroup()
                     group.enter()
                     getCourses(semester: registeredCourse.semester, courseNumber: registeredCourse.courseNumber, section: registeredCourse.section){ json, error in
