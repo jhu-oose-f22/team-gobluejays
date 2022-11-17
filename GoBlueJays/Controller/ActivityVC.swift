@@ -777,6 +777,17 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return recact.count
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
+
+        let act = recact[indexPath.row]
+        let actdetail = ActivityDetailModel(title: act.title, date: act.time, time: act.time, location: act.location, host: act.host, cost: act.cost, detail: act.detail, image: UIImage())
+        vc.activity = actdetail
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecomCell", for: indexPath) as! RecomCell
         let index = indexPath.row
