@@ -41,13 +41,23 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         print(indexPath.row)
-        //***THIS IS WHERE WE CAN DELETE THE COURSE FROM THE ARRAY***
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this?", preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                     print("Ok button tapped")
+            ScheduleVC.registeredCourses.remove(at: indexPath.row)
+            self.reload()
+                })
         
-        //could create a pop up that asks for comfirmation to delete the course
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button tapped")
+        }
         
-        //Trying to delete the item not working right now
-        ScheduleVC.registeredCourses.remove(at: indexPath.row)
-        reload()
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        self.present(dialogMessage, animated: true, completion: nil)
+
     }
     
     func reload() {
