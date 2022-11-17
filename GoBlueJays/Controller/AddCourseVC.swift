@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 class AddCourseVC: UIViewController {
     
@@ -25,15 +27,18 @@ class AddCourseVC: UIViewController {
         
         //This works! the course is added to the array in ScheduleVC, but the views don't immediately update at the moment...
     
-        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: term.text ?? "", courseNumber: courseNumber.text ?? "", section: section.text ?? "");
-        ScheduleVC.registeredCourses.append(registeredCourse1)
-         
-        print("sisisiii")
-        self.view.showToast(message: "Course Added!") ///
-        let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + (term.text ?? "") + "&CourseNumber=" + (courseNumber.text ?? "") + (section.text ?? "")
-        print(url)
+        let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: term.text ?? "", courseNumber: courseNumber.text ?? "", section: section.text ?? "", uuid: "");
+        //ScheduleVC.registeredCourses.append(registeredCourse1)
+        //clear database and push to there here***
+        let db = Firestore.firestore()
+        let uuid = NSUUID().uuidString
+        print("uuid: " + uuid)
+        db.collection("scheduleCourses").document(uuid).setData(["Term": registeredCourse1.semester, "CourseNumber": registeredCourse1.courseNumber, "Section": registeredCourse1.section, "uuid": uuid])
         
         
+        self.view.showToast(message: "Course Added!")
+        
+        /*
         var booooks:[CourseDetails] = []
         let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
             if let error = error {
@@ -68,8 +73,9 @@ class AddCourseVC: UIViewController {
             print("did i make it here")
             //completion(booooks, nil)
         }
+         */
     }
-    
+    /*
     func isDuplicateCourse(courseNumber: String) -> Bool {
         for course in ScheduleVC.registeredCourses {
             if (course.courseNumber == courseNumber) {
@@ -78,7 +84,7 @@ class AddCourseVC: UIViewController {
         }
         return false
     }
-    
+    */
 }
 
 

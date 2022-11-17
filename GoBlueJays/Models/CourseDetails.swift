@@ -24,6 +24,7 @@ struct RegisteredCourse {
     let semester: String
     let courseNumber: String
     let section: String
+    let uuid: String
 }
 
 struct CourseDetails: Decodable {
@@ -40,4 +41,9 @@ struct CourseDetails: Decodable {
     let Building: String
     let Term_JSS: String
     let SectionDetails : [SectionDetail]
+}
+
+struct courseListCourse {
+    let name: String
+    let uuid: String
 }
