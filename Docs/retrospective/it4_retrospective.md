@@ -1,4 +1,4 @@
-# What you had done in iteration 2
+# What you had done in iteration 4
 Focus on delivering the following “must have” user stories: 
 1. Schedule Page: Add courses to the schedule by course number. Users will need manually enter course numbers
 2. View Activity: add details, jump to detail page after click
