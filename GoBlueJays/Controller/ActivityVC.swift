@@ -53,6 +53,10 @@ class ActivityVC: UIViewController{
         super.viewDidLoad()
         title = "Explore"
         
+        // CollectVC.delegate = self
+        
+//        CollectVC.shared?.delegate = self
+        
         // 2 sort config
         sort_config()
         // table config
@@ -116,9 +120,6 @@ class ActivityVC: UIViewController{
                     }
                 }
             }
-            
-            print(collect_ids)
-            print(likes_tags)
 
             let group = DispatchGroup()
             group.enter()
@@ -170,14 +171,10 @@ class ActivityVC: UIViewController{
                                 }
                                 if equality[0].lowercased() == "description" {
                                     detail = equality[1].replacingOccurrences(of: "\\n---\\nEvent Details", with: "", options: NSString.CompareOptions.literal, range: nil)
-                                    
-                                    print(detail)
                                 }
                                 if equality[0].lowercased().contains("organizer") {
                                     let sarr = equality[0].components(separatedBy: "=")
                                     host = sarr[1].replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range:nil)
-                                    print("host:!!!!")
-                                    print(host)
                                 }
                             }
                             if title.isEmpty {
@@ -221,6 +218,13 @@ class ActivityVC: UIViewController{
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? CollectVC {
+            destination.delegate = self
+        }
+    }
+    
     /*@IBAction func clickRecommendation(_ sender: UIButton) {
         let act = ActivityDetailModel(title: "", date: "", time: "", location: "", host: "", cost: "", detail: "", image: UIImage())
         cellTapped(act: act)
@@ -372,7 +376,6 @@ class ActivityVC: UIViewController{
         let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
         let aftertimes = combined.filter {$0.0 > now}
         sortedAct2 = aftertimes.map {$0.1}
-        print(sortedAct2)
     }
     
     func reloadData() {
@@ -421,7 +424,7 @@ class ActivityVC: UIViewController{
         PageView.numberOfPages = recact.count
         PageView.currentPage = 0
         DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.recChange), userInfo: nil, repeats: true)
         }
     }
     
@@ -480,7 +483,6 @@ extension ActivityVC {
         
         let mappedItems = likes_tags.map { ($0, 1) }
         let wgts = Dictionary(mappedItems, uniquingKeysWith: +)
-        print(wgts)
         var weights: [Double] = []
         let shuffle_act = activities.shuffled()
         for act in shuffle_act {
@@ -499,7 +501,6 @@ extension ActivityVC {
 //            weights.append(val/Double(act.tags.count))
             weights.append(val)
         }
-        print(weights)
         
         let recact_type = shuffle_act
         let combined = zip(weights, recact_type).sorted {$0.0 > $1.0}
@@ -595,6 +596,37 @@ extension ActivityVC {
     }
 }
 
+extension ActivityVC: collectToMainDelegate {
+    func uncollect(actID: String) {
+        for (index, activity) in self.activities.enumerated() {
+            if activity.id == actID {
+                if activity.likes == false {
+                    self.collect_ids.append(actID)
+                } else {
+                    print("deleting!")
+                    self.collect_ids = collect_ids.filter {$0 != actID}
+                }
+                print("updating!")
+                self.activities[index].likes = !self.activities[index].likes
+            }
+        }
+        
+        for (index, activity) in self.filteredActivities.enumerated() {
+            if activity.id == actID {
+                self.filteredActivities[index].likes = !self.filteredActivities[index].likes
+            }
+        }
+        
+        for (index, activity) in self.recact.enumerated() {
+            if activity.id == actID {
+                self.recact[index].likes = !self.recact[index].likes
+            }
+        }
+        
+        self.reloadData()
+    }
+}
+
 extension ActivityVC: activityTableDelegate {
 //    func cellTapped(act: ActivityDetailModel) {
 //        print("got to here")
@@ -668,6 +700,13 @@ extension ActivityVC: activityTableDelegate {
                 self.filteredActivities[index].likes = !self.filteredActivities[index].likes
             }
         }
+        
+        for (index, activity) in self.recact.enumerated() {
+            if activity.id == actID {
+                self.recact[index].likes = !self.recact[index].likes
+            }
+        }
+        
         self.reloadData()
     }
 }
@@ -791,9 +830,11 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecomCell", for: indexPath) as! RecomCell
+        cell.delegate = self
         let index = indexPath.row
         
         cell.configure()
+        cell.button_configure(likes: recact[index].likes)
         cell.location.text = recact[index].location
         cell.title.text = recact[index].title
         cell.time.text = recact[index].time
@@ -802,6 +843,7 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.image.kf.setImage(with: url)
         cell.rectext.text = recact_slogan[index]
         
+        cell.assign_ID(id: recact[index].id)
         return cell
     }
 }

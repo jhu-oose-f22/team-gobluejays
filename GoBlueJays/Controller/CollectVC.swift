@@ -10,9 +10,18 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+
+protocol collectToMainDelegate: AnyObject {
+    func uncollect(actID: String)
+}
+
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
     let searchController = UISearchController(searchResultsController: nil)
+    
+    weak var delegate: collectToMainDelegate?
+    
+//    static weak var shared: CollectVC?
     
     @IBOutlet weak var tableView: UITableView!
     var collects: [Activity] = []
@@ -20,6 +29,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
@@ -78,7 +88,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         if (filteredCollects.count % 2 == 0){
             return filteredCollects.count/2
         } else {
@@ -101,7 +110,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         // cell.loadImageFrom(urlAddress: filteredCollects[ind1].image, right: true)
         let url1 = URL(string: filteredCollects[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
-        cell.collect.isHidden = true
+//        cell.collect.isHidden = true
+        cell.button_configure(likes: filteredCollects[ind1].likes, but: 1)
         ids.append(filteredCollects[ind1].id)
         
         if (ind2 <= filteredCollects.count-1) {
@@ -115,7 +125,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             let url2 = URL(string: filteredCollects[ind2].image)
             cell.ActivityImage2.kf.setImage(with: url2)
             ids.append(filteredCollects[ind2].id)
-            cell.collect2.isHidden = true
+            cell.button_configure(likes: filteredCollects[ind2].likes, but: 2)
+//            cell.collect2.isHidden = true
         }
         else {
             cell.img2.isHidden = true
@@ -157,14 +168,52 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
     
     func cellButtonPressed(actID: String) {
+        delegate?.uncollect(actID: actID)
+        let db = Firestore.firestore()
+        for (index, activity) in self.collects.enumerated() {
+            if activity.id == actID {
+                if activity.likes == false {
+                    db.collection("activity").document(actID).setData([
+                        "category": activity.category,
+                        "image": activity.image,
+                        "imageLink": "",
+                        "likes": true,
+                        "location":activity.location,
+                        "timestamp":activity.time,
+                        "title":activity.title,
+                        "host":activity.host,
+                        "cost":activity.cost,
+                        "detail":activity.detail
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                    }
+                    // self.collect_ids.append(actID)
+                } else {
+                    db.collection("activity").document(actID).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    }
+                    //self.collect_ids = collect_ids.filter {$0 != actID}
+                }
+                self.collects[index].likes = !self.collects[index].likes
+            }
+        }
+        
+        for (index, activity) in self.filteredCollects.enumerated() {
+            if activity.id == actID {
+                self.filteredCollects[index].likes = !self.filteredCollects[index].likes
+            }
+        }
+        
+        self.tableView.reloadData()
     }
-    
-//    func cellTapped(act: ActivityDetailModel) {
-//        print("got to here")
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-//        vc.activity = act
-//        self.present(vc, animated: true, completion: nil)
-//    }
     
     func cellTapped(act: ActivityDetailModel, actID: String) {
         print("got to here")
