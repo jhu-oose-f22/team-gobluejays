@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationUsageDescription</key>
-	<string>please allow access to the stuff</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>please allow access to the stuff</string>
-	<key>NSContactsUsageDescription</key>
-	<string>please allow access to the stuff</string>
-	<key>NSRemindersUsageDescription</key>
-	<string>please allow access to the stuff</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>please allow access to the stuff</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
