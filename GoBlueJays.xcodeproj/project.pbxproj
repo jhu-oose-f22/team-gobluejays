@@ -123,6 +123,7 @@
 		63C8F3DC291592EA00E9EF2F /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8F3DA291592E900E9EF2F /* EditProfileVC.swift */; };
 		63C8F3DD291592EA00E9EF2F /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8F3DB291592E900E9EF2F /* ProfileVC.swift */; };
 		C92E12BE2923970500BEF96C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E12BD2923970500BEF96C /* EventDetailVC.swift */; };
+		C9CF1BE7293583240038E4CA /* JZCalendarWeekView in Frameworks */ = {isa = PBXBuildFile; productRef = C9CF1BE6293583240038E4CA /* JZCalendarWeekView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +247,7 @@
 				08C1482E28F8459400A493B2 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				087FC7BF2909CBFE005A582E /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				087FC7B32909CBFE005A582E /* FirebaseFirestore in Frameworks */,
+				C9CF1BE7293583240038E4CA /* JZCalendarWeekView in Frameworks */,
 				087FC79D2909CBFE005A582E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				087FC7A32909CBFE005A582E /* FirebaseAppCheck in Frameworks */,
 				08C1481828F8459400A493B2 /* FirebaseAnalyticsSwift in Frameworks */,
@@ -531,6 +533,7 @@
 				087FC7CC2909CBFE005A582E /* FirebaseStorage */,
 				087FC7CE2909CBFE005A582E /* FirebaseStorageCombine-Community */,
 				08D82EC9291AE8AF00B7C7A5 /* PythonKit */,
+				C9CF1BE6293583240038E4CA /* JZCalendarWeekView */,
 			);
 			productName = GoBlueJays;
 			productReference = 2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */;
@@ -610,6 +613,7 @@
 			packageReferences = (
 				08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */,
+				C9CF1BE5293583240038E4CA /* XCRemoteSwiftPackageReference "jzAdvancedCalendarView" */,
 			);
 			productRefGroup = 2CE7909B289F72BE00C3BB2B /* Products */;
 			projectDirPath = "";
@@ -1206,6 +1210,14 @@
 				minimumVersion = 0.3.1;
 			};
 		};
+		C9CF1BE5293583240038E4CA /* XCRemoteSwiftPackageReference "jzAdvancedCalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:kaiagaoqy/jzAdvancedCalendarView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1483,6 +1495,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */;
 			productName = PythonKit;
+		};
+		C9CF1BE6293583240038E4CA /* JZCalendarWeekView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9CF1BE5293583240038E4CA /* XCRemoteSwiftPackageReference "jzAdvancedCalendarView" */;
+			productName = JZCalendarWeekView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
