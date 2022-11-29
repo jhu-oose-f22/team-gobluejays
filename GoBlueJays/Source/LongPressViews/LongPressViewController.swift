@@ -91,7 +91,7 @@ extension LongPressViewController: JZLongPressViewDelegate, JZLongPressViewDataS
 
     func weekView(_ weekView: JZLongPressWeekView, didEndAddNewLongPressAt startDate: Date) {
         let newEvent = AllDayEvent(id: UUID().uuidString, title: "New Event", startDate: startDate, endDate: startDate.add(component: .hour, value: weekView.addNewDurationMins/60),
-                                   location: "Melbourne", isAllDay: false,completed: false, note:"")
+                                   location: "Melbourne", isAllDay: false,completed: false, note:"", type: 0)
 
         if viewModel.eventsByDate[startDate.startOfDay] == nil {
             viewModel.eventsByDate[startDate.startOfDay] = [AllDayEvent]()
@@ -151,6 +151,7 @@ extension LongPressViewController: OptionsViewDelegate {
             optionsButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
             optionsButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
+        addButton.addTarget(self, action: #selector(presentCourseVC), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: addButton)
         
         
@@ -164,6 +165,13 @@ extension LongPressViewController: OptionsViewDelegate {
         optionsVC.viewModel = optionsViewModel
         optionsVC.delegate = self
         let navigationVC = UINavigationController(rootViewController: optionsVC)
+        self.present(navigationVC, animated: true, completion: nil)
+    }
+    
+    @objc func presentCourseVC(){
+        guard let courseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CourseListViewController") as? CourseListVC else{return}
+        
+        let navigationVC = UINavigationController(rootViewController: courseVC)
         self.present(navigationVC, animated: true, completion: nil)
     }
 

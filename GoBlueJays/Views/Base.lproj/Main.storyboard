@@ -5157,7 +5157,7 @@
         <!--Course List-->
         <scene sceneID="4kd-Gh-Yc7">
             <objects>
-                <viewController id="2BS-Nh-5gW" userLabel="Course List" customClass="CourseListVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CourseListViewController" id="2BS-Nh-5gW" userLabel="Course List" customClass="CourseListVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HLT-cH-XCm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

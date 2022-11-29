@@ -44,12 +44,24 @@ class LongPressEventCell: JZLongPressEventCell {
         locationLabel.text = event.location
         titleLabel.text = event.title
         locationLabel.isHidden = isAllDay
-//        print("configure")
-//        print(event.title)
-//        print(event.completed)
-        if event.completed {
+        if event.type == 1{ // Course
+            contentColor = UIColor(hex: 0xDEF5E5)
+            borderColor = UIColor(hex: 0x8EC3B0)
+            borderView.backgroundColor = borderColor
+            self.contentView.backgroundColor = contentColor
+            locationLabel.isHidden = true
+        }
+        else if event.completed {
             contentColor = UIColor(hex: 0xfff1ee)
             borderColor = UIColor(hex: 0xe06560)
+            borderView.backgroundColor = borderColor
+            self.contentView.backgroundColor = contentColor
+        }
+        else{
+            contentColor = UIColor(hex: 0xEEF7FF)
+            borderColor = UIColor(hex: 0x0899FF)
+            borderView.backgroundColor = borderColor
+            self.contentView.backgroundColor = contentColor
         }
     }
 
