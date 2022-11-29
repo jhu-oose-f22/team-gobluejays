@@ -82,11 +82,14 @@ class AllDayViewModel {
     public func initiateEvents(completion: @escaping ((_ events:[AllDayEvent]) -> Void)) {
         var myevents:[AllDayEvent] = []
         var collection = db.collection("scheduleEvents")
+        var registeredCourses:[AllDayEvent] = []
+        var courseCollection = db.collection("scheduleCourses")
+        
         collection.getDocuments() {[self] (querySnapshot, err) in
             if let doc = querySnapshot {
                 for document in doc.documents {
                     let data = document.data()
-                    let event:AllDayEvent = AllDayEvent(id: data["id"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: data["location"] as! String, isAllDay: data["isAllDay"] as! Bool, completed: data["completed"] as! Bool, note: data["note"] as! String)
+                    let event:AllDayEvent = AllDayEvent(id: data["id"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: data["location"] as! String, isAllDay: data["isAllDay"] as! Bool, completed: data["completed"] as! Bool, note: data["note"] as! String,type:0)
                     myevents.append(event)
                     
                 }
@@ -95,13 +98,62 @@ class AllDayViewModel {
                 
             } else{
                     if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("Error getting events: \(err)")
                     }
             }
             
-
-            
         }
+        
+        
+//        courseCollection.getDocuments() {[self] (querySnapshot, err) in
+//            if let doc = querySnapshot {
+//                for document in doc.documents {
+//                    let data = document.data()
+//                    let course:AllDayEvent = AllDayEvent(id: data["uuid"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: "", isAllDay:true, completed: false, note: data["note"] as! String,type:1)
+//                    registeredCourses.append(course)
+//                    self.currentSelectedData.firstDayOfWeek?.rawValue
+//                    self.currentSelectedData.date
+//
+//                    let donutDay2020Components = DateComponents(
+//                        year: Int((data["Term"] as! String).split(separator: "%", omittingEmptySubsequences: true)[1]),         // We want a date in 2020,
+//                      month: 6,           // in June.
+//                      weekday: 6,         // We want a Friday;
+//                      weekdayOrdinal: 1   // the first one.
+//                    )
+//                }
+//                completion(registeredCourses)
+//
+//
+//            } else{
+//                    if let err = err {
+//                    print("Error getting courses: \(err)")
+//                    }
+//            }
+//
+//
+//
+//        }
+        //    override func viewWillAppear(_ animated: Bool) {
+        //        //need to pull the data from the database right here***
+        //        //set registeredCourses to what is currently in the database...
+        //        let db = Firestore.firestore()
+        //        registeredCourses = []
+        //        db.collection("scheduleCourses").getDocuments() {
+        //            (QuerySnapshot, err) in
+        //            if let err = err {
+        //                print("Error getting documents: \(err)")
+        //            } else {
+        //                for document in QuerySnapshot!.documents {
+        //                    let sem = document.data()["Term"] as? String
+        //                    let cn = document.data()["CourseNumber"] as? String
+        //                    let s = document.data()["Section"] as? String
+        //                    let uuid = document.data()["uuid"] as? String
+        //                    self.registeredCourses.append(RegisteredCourse(semester: sem!, courseNumber: cn!, section: s!, uuid: uuid!))
+        //                }
+        //                self.reloadCourseEvent()
+        //            }
+        //        }
+        //    }
         
         completion([])
         
