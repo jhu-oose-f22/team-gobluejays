@@ -52,7 +52,7 @@ class ExpandableData {
 enum ViewType: String {
     case defaultView = "Default JZBaseWeekView"
     case customView = "Custom JZBaseWeekView"
-    case longPressView = "JZLongPressWeekView"
+    case longPressView = "LongPressWeekView"
 }
 
 enum OptionSectionType: String {
