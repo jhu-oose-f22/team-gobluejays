@@ -62,7 +62,7 @@ class LongPressWeekView: JZLongPressWeekView {
             if selectedEvent.type == 0{
                 ToastUtil.addDetailPage(cell: selectedEvent)
             } else{
-                ToastUtil.toastMessageInTheMiddle(message: "\(selectedEvent.title.components(separatedBy: ":")[1]))
+                ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title.components(separatedBy: ":")[1])
             }
             self.updateFocusIfNeeded()
            
