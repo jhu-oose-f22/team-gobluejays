@@ -92,7 +92,8 @@ class OptionsViewModel: NSObject {
     let dateFormatter = DateFormatter()
     var optionsData: [ExpandableData] = {
         let hourDivisionCategories: [JZHourGridDivision] = [.noneDiv, .minutes_5, .minutes_10, .minutes_15, .minutes_20, .minutes_30]
-        let viewTypeCategories: [ViewType] = [.defaultView, .customView, .longPressView]
+//        let viewTypeCategories: [ViewType] = [.defaultView, .customView, .longPressView]
+        let viewTypeCategories: [ViewType] = [.longPressView]
         return [
             ExpandableData(subject: .viewType, categories: viewTypeCategories),
             ExpandableData(subject: .currentDate),
