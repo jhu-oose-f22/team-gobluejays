@@ -37,6 +37,7 @@ class AllDayViewModel {
     
     @available(iOS 16.0, *)
     func reloadData(){
+        self.events = []
         initiateEvents(){
             (events) in
             self.events.append(contentsOf: events)

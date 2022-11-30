@@ -59,6 +59,8 @@ class LongPressEventCell: JZLongPressEventCell {
             borderView.backgroundColor = borderColor
             self.contentView.backgroundColor = contentColor
             locationLabel.text = event.note
+            locationLabel.font = UIFont.systemFont(ofSize: 12)
+            titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         }
         else{
             contentColor = UIColor(hex: 0xEEF7FF)
@@ -66,6 +68,8 @@ class LongPressEventCell: JZLongPressEventCell {
             borderView.backgroundColor = borderColor
             self.contentView.backgroundColor = contentColor
             locationLabel.text = event.note
+            locationLabel.font = UIFont.systemFont(ofSize: 12)
+            titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         }
     }
 
