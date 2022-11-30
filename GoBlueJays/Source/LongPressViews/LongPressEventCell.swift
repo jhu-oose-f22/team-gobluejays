@@ -53,18 +53,19 @@ class LongPressEventCell: JZLongPressEventCell {
             locationLabel.font = UIFont.systemFont(ofSize: 8, weight: .light)
         }
         else if event.completed { //Events
+            
             contentColor = UIColor(hex: 0xfff1ee)
             borderColor = UIColor(hex: 0xe06560)
             borderView.backgroundColor = borderColor
             self.contentView.backgroundColor = contentColor
-            locationLabel.isHidden = true
+            locationLabel.text = event.note
         }
         else{
             contentColor = UIColor(hex: 0xEEF7FF)
             borderColor = UIColor(hex: 0x0899FF)
             borderView.backgroundColor = borderColor
             self.contentView.backgroundColor = contentColor
-            locationLabel.isHidden = true
+            locationLabel.text = event.note
         }
     }
 

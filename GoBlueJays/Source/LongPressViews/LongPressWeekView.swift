@@ -59,7 +59,11 @@ class LongPressWeekView: JZLongPressWeekView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Call when select specific items
         if let selectedEvent = getCurrentEvent(with: indexPath) as? AllDayEvent {
-            ToastUtil.addDetailPage(cell: selectedEvent)
+            if selectedEvent.type == 0{
+                ToastUtil.addDetailPage(cell: selectedEvent)
+            } else{
+                ToastUtil.toastMessageInTheMiddle(message: "\(selectedEvent.title.components(separatedBy: ":")[1]))
+            }
             self.updateFocusIfNeeded()
            
             
