@@ -31,12 +31,24 @@ open class ToastUtil {
     public static func addDetailPage(cell:JZBaseEvent? = nil){
         guard let currentscene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate, toastView == nil else { return }
         guard let currentWindow = currentscene.window else { return }
-        let controller =
-        currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
+
         if let allday = cell?.isKind(of: AllDayEvent.self){
-            controller.event = cell as! AllDayEvent 
+            let allDayCell = cell as! AllDayEvent
+            switch allDayCell.type{
+            case 0: // event
+                let controller =
+                currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
+                controller.event = allDayCell
+                currentWindow.rootViewController?.present(controller, animated: true)
+            case 1: // course
+                break
+            default:
+                break
+            }
+            
+            
         }
-        currentWindow.rootViewController?.present(controller, animated: true)
+        
 //        currentWindow.rootViewController?.performSegue(withIdentifier: "showEventDetail", sender: currentWindow.rootViewController)
         
     }

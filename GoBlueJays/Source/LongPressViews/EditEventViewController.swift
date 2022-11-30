@@ -82,7 +82,11 @@ class EditEventViewController: UIViewController {
             }
         }
         
-        viewModel.reloadData()
+        if #available(iOS 16.0, *) {
+            viewModel.reloadData()
+        } else {
+            // Fallback on earlier versions
+        }
         calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
 
         self.dismiss(animated: true)
