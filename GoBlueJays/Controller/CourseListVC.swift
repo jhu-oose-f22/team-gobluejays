@@ -46,7 +46,8 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                      print("Ok button tapped")
             
             let db = Firestore.firestore()
-            db.collection("scheduleCourses").document(self.tabs[indexPath.row].uuid).delete {
+            let loginName = CurrentLoginName.name
+            db.collection(loginName).document("scheduleCourses").collection("courses").document(self.tabs[indexPath.row].uuid).delete {
                 err in
                     if let err = err {
                         print("Error removing course: \(err)")
@@ -70,7 +71,8 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func reload() {
         let db = Firestore.firestore()
-        db.collection("scheduleCourses").getDocuments() {
+        let loginName = CurrentLoginName.name
+        db.collection(loginName).document("scheduleCourses").collection("courses").getDocuments() {
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
