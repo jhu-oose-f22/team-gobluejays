@@ -122,7 +122,8 @@ class ScheduleVC: UIViewController{
         //set registeredCourses to what is currently in the database...
         let db = Firestore.firestore()
         registeredCourses = []
-        db.collection("scheduleCourses").getDocuments() {
+        let loginName = CurrentLoginName.name
+        db.collection(loginName).document("scheduleCourses").collection("courses").getDocuments() {
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -202,7 +203,6 @@ class ScheduleVC: UIViewController{
         setCurrentWeek(date: datePicker.date)
         
         reloadCourseEvent()
-            
         
         //dateTF.endEditing(true) //this closes the DatePicker when a new date is selected
     }

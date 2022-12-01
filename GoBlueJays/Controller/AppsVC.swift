@@ -43,5 +43,19 @@ class AppsVC: UIViewController {
         //UIApplication.shared.open(URL(string: "https://gobluejays.netlify.app/contact")! as URL, options: [:],completionHandler: nil)
     }
     
+    /*@IBAction func logout(_ sender: Any) {
+        //let login = LoginVC()
+        
+        //self.navigationController!.popToViewController(login, animated: false)
+        self.navigationController!.popViewController(animated: false)
+        
+        /*if let destinationViewController = navigationController?.viewControllers
+                                                                .filter(
+                                              {$0 is LoginVC})
+                                                                .first {
+            navigationController?.popToViewController(destinationViewController, animated: true)
+        }*/
+        //self.navigationController!.popToRootViewController(animated: true)
+    }
+    */
 }
-
