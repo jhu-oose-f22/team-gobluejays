@@ -66,7 +66,7 @@ class EditEventViewController: UIViewController {
     
     @objc func onBtnDoneTapped(){
         if let event = self.cell{
-            let curEvent = self.db.collection("scheduleEvents").document(event.id)
+            let curEvent = self.db.collection("scheduleDayEvents").document(event.id)
             curEvent.updateData(["title":event.title,
                                  "completed":event.completed,
                                  "startDate":event.startDate,

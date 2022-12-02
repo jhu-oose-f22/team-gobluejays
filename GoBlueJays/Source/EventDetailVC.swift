@@ -65,7 +65,7 @@ class EventDetailVC: UIViewController {
         }
     }
     @IBAction func deleteEvent(_ sender: UIButton) {
-        let curEvent = db.collection("scheduleEvents").document(event.id)
+        let curEvent = db.collection("scheduleDayEvents").document(event.id)
         curEvent.delete { err in
             if let err = err {
                 print("Error removing document: \(err)")
@@ -92,7 +92,7 @@ class EventDetailVC: UIViewController {
 
     
     @IBAction func markComplete(_ sender: UIButton) {
-        let curEvent = db.collection("scheduleEvents").document(event.id)
+        let curEvent = db.collection("scheduleDayEvents").document(event.id)
         curEvent.updateData(["completed":!event.completed]){
             err in
                 if let err = err {
