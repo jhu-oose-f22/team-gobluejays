@@ -6348,16 +6348,13 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Enter"/>
                                 <connections>
-                                    <action selector="loginPressed:" destination="lVj-PS-O1K" eventType="touchUpInside" id="SpS-l9-QJj"/>
+                                    <segue destination="aEk-ac-CSd" kind="presentation" modalPresentationStyle="fullScreen" id="Nt0-yG-ODG"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j5P-0Z-NMe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <connections>
-                        <outlet property="loginName" destination="b5V-tI-2J6" id="Wff-yw-aOf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uad-BP-vd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

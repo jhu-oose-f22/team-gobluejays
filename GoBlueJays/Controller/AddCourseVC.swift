@@ -33,8 +33,9 @@ class AddCourseVC: UIViewController {
         let db = Firestore.firestore()
         let uuid = NSUUID().uuidString
         print("uuid: " + uuid)
-        let loginName = CurrentLoginName.name
-        db.collection(loginName).document("scheduleCourses").collection("courses").document(uuid).setData(["Term": registeredCourse1.semester, "CourseNumber": registeredCourse1.courseNumber, "Section": registeredCourse1.section, "uuid": uuid])
+        //let loginName = CurrentLoginName.name
+        //let loginName = "thomas"
+        db.collection("thomas").document("scheduleCourses").collection("courses").document(uuid).setData(["Term": registeredCourse1.semester, "CourseNumber": registeredCourse1.courseNumber, "Section": registeredCourse1.section, "uuid": uuid])
         
         
         self.view.showToast(message: "Course Added!")
