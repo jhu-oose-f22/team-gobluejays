@@ -39,7 +39,7 @@ open class ToastUtil {
                 let controller =
                 currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
                 controller.event = allDayCell
-                currentWindow.rootViewController?.present(controller, animated: true)
+                (((currentWindow.rootViewController?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).present(controller, animated: true)
             case 1: // course
                 break
             default:

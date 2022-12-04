@@ -75,7 +75,7 @@
     {
       "identity" : "jzadvancedcalendarview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kaiagaoqy/jzAdvancedCalendarView.git",
+      "location" : "git@github.com:kaiagaoqy/jzAdvancedCalendarView.git",
       "state" : {
         "branch" : "main",
         "revision" : "033ed0617c869de0b5bed8b32d1f8b5c84829847"

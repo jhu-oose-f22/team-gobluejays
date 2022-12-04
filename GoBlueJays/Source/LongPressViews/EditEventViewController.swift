@@ -12,10 +12,12 @@ import FirebaseFirestore
 
 class EditEventViewController: UIViewController {
     let db = Firestore.firestore()
-    let priorVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: DefaultViewController.className)
     var cell:AllDayEvent!
-    var calendarWeekView = (((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
-    var viewModel = (((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
+
+    
+    var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
+    
+    var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
     
     let doneBtn = UIButton(type: .close)
     
@@ -65,29 +67,33 @@ class EditEventViewController: UIViewController {
     }
     
     @objc func onBtnDoneTapped(){
-        if let event = self.cell{
+        if let event:AllDayEvent = self.cell{
             let curEvent = self.db.collection("scheduleDayEvents").document(event.id)
-            curEvent.updateData(["title":event.title,
-                                 "completed":event.completed,
-                                 "startDate":event.startDate,
-                                 "endDate": event.endDate,
-                                 "location":event.location,
-                                 "isAllDay":false,
-                                 "note":event.note]){err in
+            let keyedValues:[String:Any] = ["title":event.title,
+                                            "completed":event.completed,
+                                            "startDate":event.startDate,
+                                            "endDate": event.endDate,
+                                            "location":event.location,
+                                            "isAllDay":false,
+                                            "note":event.note]
+            
+            
+            curEvent.updateData(keyedValues){err in
                     if let err = err {
                         print("Error updating document: \(err)")
                     } else {
                         print("Document successfully updated")
+                        self.viewModel.events[self.viewModel.events.firstIndex(where: {$0.id == event.id})!] = event.copy() as! AllDayEvent
+                        self.viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents:  self.viewModel.events)
+                        self.calendarWeekView!.forceReload(reloadEvents: self.viewModel.eventsByDate)
                     }
             }
+            
         }
         
-        if #available(iOS 16.0, *) {
-            viewModel.reloadData()
-        } else {
-            // Fallback on earlier versions
-        }
-        calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
+
+
+        
 
         self.dismiss(animated: true)
     }

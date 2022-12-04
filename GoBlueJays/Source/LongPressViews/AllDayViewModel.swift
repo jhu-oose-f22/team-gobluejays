@@ -33,6 +33,13 @@ class AllDayViewModel {
     
     open var events:[AllDayEvent] = []
     
+    lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
+
+    var currentSelectedData: OptionsSelectedData!
+    
+    var registeredCourses: [RegisteredCourse] = []
+    var currentWeekCourses:[CourseDetails] = []
+    
     
     
     @available(iOS 16.0, *)
@@ -103,7 +110,7 @@ class AllDayViewModel {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID:\(event.id)")
+//                print("Document added with ID:\(event.id)")
             }
         }
     }
@@ -139,12 +146,7 @@ class AllDayViewModel {
 //        return myevents
     }
     
-    lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
-
-    var currentSelectedData: OptionsSelectedData!
-    
-    var registeredCourses: [RegisteredCourse] = []
-    var currentWeekCourses:[CourseDetails] = []
+   
     
 }
 

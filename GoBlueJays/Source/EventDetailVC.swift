@@ -23,10 +23,10 @@ class EventDetailVC: UIViewController {
     @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var location: UILabel!
     
-    var calendarWeekView = (((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
+    var calendarWeekView = ((((UIApplication.shared.keyWindow?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
     
-    var viewModel = (((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
-    
+    var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class EventDetailVC: UIViewController {
 
             
             let navigationVC = UINavigationController(rootViewController: controller)
-            ((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0].present(navigationVC, animated: true, completion: nil)
+            (((currentWindow.rootViewController?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).present(navigationVC, animated: true, completion: nil)
             
             
         }
@@ -74,14 +74,12 @@ class EventDetailVC: UIViewController {
             }
         }
         
-        if #available(iOS 16.0, *) {
-            viewModel.reloadData()
-        } else {
-            // Fallback on earlier versions
-        }
-        calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
-        
 
+        //MARK: Update events
+        viewModel.events.removeAll(where: {$0.id == event.id})
+        viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: viewModel.events)
+
+        calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
         
         
         self.dismiss(animated: true)
@@ -109,9 +107,9 @@ class EventDetailVC: UIViewController {
         calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
         
 //        calendarWeekView!.refreshWeekView()
-        for i in viewModel.events{
-            print("\(i.title) -- \(i.completed)")
-        }
+//        for i in viewModel.events{
+//            print("\(i.title) -- \(i.completed)")
+//        }
         self.dismiss(animated: true)
     }
     
