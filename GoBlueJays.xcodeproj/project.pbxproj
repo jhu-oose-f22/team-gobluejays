@@ -111,6 +111,7 @@
 		40A89A1628F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		40A89A1728F75FE800E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		40A89A1928F7602F00E3CE60 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		40D07823293CF4E600EA0B6D /* filterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D07822293CF4E600EA0B6D /* filterVC.swift */; };
 		4F31055C2915CF520095FE6A /* ActivityDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31055B2915CF520095FE6A /* ActivityDetail.swift */; };
 		4F3105602915DDC10095FE6A /* ActivityDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31055F2915DDC10095FE6A /* ActivityDetailModel.swift */; };
 		4F8369E62921D58D00C01550 /* CourseListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8369E52921D58D00C01550 /* CourseListVC.swift */; };
@@ -240,6 +241,7 @@
 		40923DA928FE33AF003B15B5 /* AddEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventVC.swift; sourceTree = "<group>"; };
 		40923DAA28FE33AF003B15B5 /* CollectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectVC.swift; sourceTree = "<group>"; };
 		40923DB028FE33CC003B15B5 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		40D07822293CF4E600EA0B6D /* filterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterVC.swift; sourceTree = "<group>"; };
 		4F31055B2915CF520095FE6A /* ActivityDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetail.swift; sourceTree = "<group>"; };
 		4F31055F2915DDC10095FE6A /* ActivityDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailModel.swift; sourceTree = "<group>"; };
 		4F8369E52921D58D00C01550 /* CourseListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVC.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				40715752290CBFD900D4E18A /* RecomCell.swift */,
 				087FC7D02909D1D3005A582E /* LocationManagerCreator.swift */,
 				630ED0832923F49E00B40529 /* activityFilter.swift */,
+				40D07822293CF4E600EA0B6D /* filterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -979,6 +982,7 @@
 				C9CF1C24293586B30038E4CA /* AllDayViewModel.swift in Sources */,
 				C9CF1C23293586B30038E4CA /* LongPressEventCell.swift in Sources */,
 				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
+				40D07823293CF4E600EA0B6D /* filterVC.swift in Sources */,
 				40923DB128FE33CC003B15B5 /* Activity.swift in Sources */,
 				C9CF1C27293586B30038E4CA /* EventCell.swift in Sources */,
 				2CE790D6289F7F1A00C3BB2B /* MapVC.swift in Sources */,
