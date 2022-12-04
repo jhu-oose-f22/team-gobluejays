@@ -14,7 +14,6 @@ import Kingfisher
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
-//    func cellTapped(act: ActivityDetailModel)
     func cellTapped(act: ActivityDetailModel, actID: String)
 }
 
@@ -25,6 +24,8 @@ class ActivityVC: UIViewController{
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var recomCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var top_btn: UIButton!
+    @IBOutlet weak var filter_btn: UIButton!
     
     let searchController = UISearchController(searchResultsController: nil)
     var timer = Timer()
@@ -36,6 +37,10 @@ class ActivityVC: UIViewController{
     var filterInfo = [String]()
     var sortedActivites: [Activity] = []
     var sortedAct2: [Activity] = []
+    
+    var allCategories: [String] = []
+    var currentFilterCategory = "Choose a category"
+    var currentFilterRank = "Rank by ..."
     
     var recact: [Activity] = []
     var recact_slogan: [String] = []
@@ -52,58 +57,14 @@ class ActivityVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Explore"
-        
-        // CollectVC.delegate = self
-        
-//        CollectVC.shared?.delegate = self
-        
-        // 2 sort config
+
         sort_config()
-        // table config
+        top_config()
+        filter_config()
         table_config()
-        // search bar config
         search_bar_config()
-        // rec carousel config
         rec_config()
-        
-        /*
-         let db = Firestore.firestore()
-         db.collection("activity").getDocuments(){ [self]
-         (QuerySnapshot, err) in
-         if let err = err {
-         print("Error getting documents: \(err)")
-         } else {
-         likes_tags = []
-         let formatter = DateFormatter()
-         formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
-         for document in QuerySnapshot!.documents {
-         let data = document.data()
-         let timep = data["timestamp"] as! Timestamp
-         let timec = formatter.string(from: timep.dateValue())
-         
-         let act:Activity = Activity(title: data["title"] as! String,
-         time: timec,
-         location: data["location"] as! String,
-         image: data["imageLink"] as! String,
-         likes: data["likes"] as! Bool,
-         id: document.documentID,
-         category: data["category"] as! String,
-         tags: (data["tags"] as! NSArray) as! [String])
-         
-         self.activities.append(act)
-         if act.likes == true {
-         likes_tags += act.tags
-         }
-         }
-         }
-         filteredActivities = activities
-         setBuildingLocations()
-         activity_recommendation()
-         PageView.numberOfPages = recact.count
-         self.reloadData()
-         }
-         */
-        
+
         let db = Firestore.firestore()
         db.collection("activity").getDocuments(){ [self]
             (QuerySnapshot, err) in
@@ -198,10 +159,14 @@ class ActivityVC: UIViewController{
                                     likes = true
                                 }
                                 self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: likes, id: id, category: category, host: host, cost: cost, detail: detail))
+                                if (self.allCategories.contains(category) == false) {
+                                    self.allCategories.append(category)
+                                }
                             }
                         }
-                        // print(self.activities)
                     }
+                self.allCategories = self.allCategories.sorted { $0.lowercased() < $1.lowercased() }
+                self.allCategories.insert("All Category", at: 0)
                 self.filteredActivities = self.activities
                 self.setBuildingLocations()
                 self.activity_recommendation()
@@ -225,10 +190,19 @@ class ActivityVC: UIViewController{
         }
     }
     
-    /*@IBAction func clickRecommendation(_ sender: UIButton) {
-        let act = ActivityDetailModel(title: "", date: "", time: "", location: "", host: "", cost: "", detail: "", image: UIImage())
-        cellTapped(act: act)
-    }*/
+    @IBAction func clickTop(_ sender: Any) {
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
+    }
+    
+    @IBAction func clickFilter(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "filter") as? filterVC {
+            vc.delegate = self
+            vc.currentCategoryMessage = self.currentFilterCategory
+            vc.currentRankMessage = self.currentFilterRank
+            vc.category_list = self.allCategories
+            self.navigationController?.pushViewController(vc, animated: true)
+       }
+    }
     
     // MARK: Click Category
     @IBAction func clickCategory(_ sender: Any) {
@@ -351,11 +325,23 @@ class ActivityVC: UIViewController{
             return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
         })
         
+        var common_info: [String] = []
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.month = 1
+        let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)!
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
         for activity in filtered_activities {
             sortedActivites.append(activity.activity)
-            
+                
             if activity.location.latitude != 0.0 && activity.location.longitude != 0.0 {
-                recommendActivities_dist.append(activity.activity)
+                let info = activity.activity.title + activity.activity.location
+                let t = formatter.date(from: activity.activity.time)!
+                if (common_info.contains(info) == false) && (t<futureDate) {
+                    recommendActivities_dist.append(activity.activity)
+                    common_info.append(info)
+                }
             }
         }
     }
@@ -383,6 +369,12 @@ class ActivityVC: UIViewController{
         self.recomCollection.reloadData()
     }
     
+    func filter_config() {
+        filter_btn.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
+        filter_btn.setTitle("Filter", for: .normal)
+        filter_btn.setTitleColor(UIColor.systemGray3, for: .normal)
+    }
+    
     func sort_config() {
         nearby.tag = 0
         upcoming.tag = 0
@@ -398,6 +390,19 @@ class ActivityVC: UIViewController{
         category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
         category_btn.setTitle("Category", for: .normal)
         category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
+        
+        category_btn.isHidden = true
+        nearby.isHidden = true
+        upcoming.isHidden = true
+    }
+    
+    func top_config() {
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "arrow.up", withConfiguration: config)
+        top_btn.setTitle("", for: .normal)
+        top_btn.imageView?.contentMode = .scaleAspectFit
+        top_btn.setImage(image, for: .normal)
+        top_btn.tintColor = .systemGray3
     }
     
     func table_config() {
@@ -444,6 +449,33 @@ class ActivityVC: UIViewController{
     }
 }
 
+// Filter effect
+extension ActivityVC: userFilterDelegate {
+    func returnFilter(category: String, rank: String) {
+        if category == "reset" && rank == "reset" {
+            currentFilterCategory = "Choose a category"
+            currentFilterRank = "Rank by ..."
+            filteredActivities = activities
+            self.reloadData()
+        } else {
+            currentFilterCategory = category
+            currentFilterRank = rank
+            
+            if rank == "Upcoming" {
+                sort_by_time()
+                filteredActivities = sortedAct2
+            } else {
+                sort_by_dist()
+                filteredActivities = sortedActivites
+            }
+            if category != "All Category" {
+                filteredActivities = filteredActivities.filter { $0.category==category }
+            }
+            self.reloadData()
+        }
+    }
+}
+
 // Recommendation
 extension ActivityVC {
     func activity_recommendation() {
@@ -453,9 +485,11 @@ extension ActivityVC {
         // recommend by distance
         sort_by_dist()
         let dist_count = min(activityRecommend_dist_max, recommendActivities_dist.count)
-        for i in 0...dist_count-1 {
-            recact.append(recommendActivities_dist[i])
-            recact_slogan.append("Near you!")
+        if (dist_count-1) >= 0 {
+            for i in 0...dist_count-1 {
+                recact.append(recommendActivities_dist[i])
+                recact_slogan.append("Near you!")
+            }
         }
         
         // recommend by event type
@@ -480,6 +514,13 @@ extension ActivityVC {
     }
     
     func activity_rec_by_type() {
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.month = 1
+        let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)!
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        var common_info: [String] = []
         
         let mappedItems = likes_tags.map { ($0, 1) }
         let wgts = Dictionary(mappedItems, uniquingKeysWith: +)
@@ -488,9 +529,12 @@ extension ActivityVC {
         for act in shuffle_act {
             var val = 0.0
             let t = act.category
-            if likes_tags.contains(t) {
+            let time = formatter.date(from: act.time)!
+            let info = act.title + act.location
+            if likes_tags.contains(t) && time < futureDate && common_info.contains(info) == false {
                 let v = wgts[t]
                 val += pow(Double(v!),Double(v!))
+                common_info.append(info)
             }
 //            for t in act.tags {
 //                if likes_tags.contains(t) {
@@ -768,6 +812,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 // MARK: - Zaiwei
 extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
     var isSearchBarEmpty: Bool {
