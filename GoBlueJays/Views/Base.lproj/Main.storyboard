@@ -155,10 +155,6 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Group 22" translatesAutoresizingMaskIntoConstraints="NO" id="qlF-D4-9nm">
-                                                                                <rect key="frame" x="16" y="12" width="65" height="55"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                            </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Canvas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJP-Uy-wmd">
                                                                                 <rect key="frame" x="27.781163434902737" y="75" width="42.000000000000114" height="15"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -166,6 +162,10 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="canvas logo" translatesAutoresizingMaskIntoConstraints="NO" id="LxO-ht-sjw">
+                                                                                <rect key="frame" x="22" y="14" width="56" height="54"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            </imageView>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <accessibility key="accessibilityConfiguration">
@@ -6370,7 +6370,6 @@
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="FFC" width="279" height="181"/>
-        <image name="Group 22" width="65" height="55"/>
         <image name="Levering" width="275" height="183"/>
         <image name="Nolans" width="275" height="183"/>
         <image name="Unknown 2" width="55" height="55"/>
@@ -6381,6 +6380,7 @@
         <image name="athletics" width="318" height="159"/>
         <image name="books.vertical.circle.fill" catalog="system" width="128" height="123"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
+        <image name="canvas logo" width="256" height="256"/>
         <image name="charMar" width="457" height="316"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="circlebadge" catalog="system" width="128" height="122"/>
