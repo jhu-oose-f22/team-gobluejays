@@ -21,9 +21,9 @@ class LongPressViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 //        viewModel.events = viewModel.initiateEvents()
-        print(viewModel.events)
-        print(viewModel.eventsByDate)
-        print("appear")
+//        print(viewModel.events)
+//        print(viewModel.eventsByDate)
+//        print("appear")
 
     }
     
@@ -47,9 +47,9 @@ class LongPressViewController: UIViewController {
         if viewModel.currentSelectedData != nil {
             // For example only
             setupCalendarViewWithSelectedData()
-            print("setupCalendar")
-            print(viewModel.events)
-            print(viewModel.eventsByDate)
+//            print("setupCalendar")
+//            print(viewModel.events)
+//            print(viewModel.eventsByDate)
         } else {
             calendarWeekView.setupCalendar(numOfDays: 3,
                                            setDate: Date(),

@@ -57,6 +57,12 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     }
                 }
             self.reload()
+            if #available(iOS 16.0, *) {
+                var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
+                viewModel.reloadData()
+            } else {
+                // Fallback on earlier versions
+            }
                 })
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in

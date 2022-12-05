@@ -15,9 +15,9 @@ class EditEventViewController: UIViewController {
     var cell:AllDayEvent!
 
     
-    var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
+    lazy var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
     
-    var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
+    lazy var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
     
     let doneBtn = UIButton(type: .close)
     
@@ -86,6 +86,7 @@ class EditEventViewController: UIViewController {
                         self.viewModel.events[self.viewModel.events.firstIndex(where: {$0.id == event.id})!] = event.copy() as! AllDayEvent
                         self.viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents:  self.viewModel.events)
                         self.calendarWeekView!.forceReload(reloadEvents: self.viewModel.eventsByDate)
+//                        let _ = AllDayViewModel()
                     }
             }
             

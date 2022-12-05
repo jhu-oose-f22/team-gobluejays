@@ -94,7 +94,7 @@ class ExampleOptionsViewController: UIViewController {
                 vc = mainStoryboard.instantiateViewController(withIdentifier: LongPressViewController.className)
                 (vc as? LongPressViewController)?.viewModel.currentSelectedData = selectedData
             }
-            ((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers = [vc]
+            (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers  = [vc]
             self.dismiss(animated: true, completion: nil)
             return
         }

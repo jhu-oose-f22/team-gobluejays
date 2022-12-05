@@ -49,7 +49,7 @@ class AllDayViewModel {
             (events) in
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
-            if let vc = ((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] {
+            if let vc = (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0]{
 //                print("reloading")
                 switch vc{
                 case is LongPressViewController:
@@ -72,7 +72,7 @@ class AllDayViewModel {
         initCourse(){(events) in
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
-            if let vc = ((UIApplication.shared.keyWindow?.rootViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] {
+            if let vc = (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] {
 //                print("reloading")
                 switch vc{
                 case is LongPressViewController:
@@ -156,7 +156,7 @@ extension AllDayViewModel{
     public func initCourse(completion: @escaping ((_ events:[AllDayEvent]) -> Void)){
         var registeredCourses:[RegisteredCourse] = []
         var myCourses:[AllDayEvent] = []
-        let courseCollection = db.collection("scheduleCourses")
+        let courseCollection = db.collection("thomas").document("scheduleCourses").collection("courses")
         
         courseCollection.getDocuments() {[self] (querySnapshot, err) in
             if let doc = querySnapshot {
