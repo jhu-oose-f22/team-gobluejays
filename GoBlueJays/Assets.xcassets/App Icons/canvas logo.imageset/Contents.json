@@ -1,14 +1,9 @@
 {
   "images" : [
     {
-      "filename" : "profile.png",
+      "filename" : "Screen Shot 2022-12-04 at 2.14.26 AM.png",
       "idiom" : "universal",
       "scale" : "1x"
-    },
-    {
-      "filename" : "canvas logo.png",
-      "idiom" : "universal",
-      "scale" : "2x"
     },
     {
       "idiom" : "universal",

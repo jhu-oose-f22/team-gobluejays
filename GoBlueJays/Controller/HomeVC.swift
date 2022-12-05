@@ -57,15 +57,24 @@ class HomeVC: UIViewController {
     }
     @IBAction func Transloc(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transloc/id1280444930")! as URL, options: [:],completionHandler: nil)
+        //in order to open directly to the app, we need the url schema for the app, hard to find
     }
     
     @IBAction func MobileOrder(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/transact-mobile-ordering/id1494719529")! as URL, options: [:],completionHandler: nil)
+        //in order to open directly to the app, we need the url schema for the app, hard to find
     }
     
     @IBAction func Canvas(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://canvas.jhu.edu")! as URL, options: [:],completionHandler: nil)
-    } //https://apps.apple.com/us/app/canvas-student/id480883488 use this link instead
+        if UIApplication.shared.canOpenURL(URL(string: "canvas-courses://")!)
+        {
+            UIApplication.shared.open(URL(string: "canvas-courses://")!)
+        } else {
+            UIApplication.shared.open(URL(string: "https://canvas.jhu.edu")!)
+        }
+        
+        //UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/canvas-student/id480883488")! as URL, options: [:],completionHandler: nil)
+    }
     
     @IBAction func SIS(_ sender: Any) {
         let webView:WebViewVC = WebViewVC()
