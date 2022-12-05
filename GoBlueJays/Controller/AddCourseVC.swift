@@ -15,6 +15,7 @@ class AddCourseVC: UIViewController {
     @IBOutlet weak var courseNumber: UITextField!
     @IBOutlet weak var section: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +40,16 @@ class AddCourseVC: UIViewController {
         
         
         self.view.showToast(message: "Course Added!")
+//        lazy var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
+        
+        
+        if #available(iOS 16.0, *) {
+            var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
+            viewModel.reloadData()
+        } else {
+            // Fallback on earlier versions
+        }
+
         
         /*
         var booooks:[CourseDetails] = []
