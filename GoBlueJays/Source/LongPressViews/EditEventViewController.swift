@@ -39,7 +39,7 @@ class EditEventViewController: UIViewController {
         
     }
     
-    /// Set up navigation bar
+    // Set up navigation bar
     func setupBasic() {
         
         self.automaticallyAdjustsScrollViewInsets = false

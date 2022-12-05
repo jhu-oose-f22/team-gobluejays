@@ -1,20 +1,24 @@
 PODS:
+  - JZCalendarWeekView (0.7.1)
   - Kingfisher (7.4.1)
   - THLabel (1.4.10)
 
 DEPENDENCIES:
+  - JZCalendarWeekView
   - Kingfisher (~> 7.0)
   - THLabel (~> 1.4.0)
 
 SPEC REPOS:
   trunk:
+    - JZCalendarWeekView
     - Kingfisher
     - THLabel
 
 SPEC CHECKSUMS:
+  JZCalendarWeekView: 586a429ab3fbeef4f98d648ea6b801f57c5495cc
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   THLabel: 3fc93a0f01f74e4eec7574df2819e576d57150b3
 
-PODFILE CHECKSUM: 5944010cc63d778c1ef70606f01d9006b19cb38d
+PODFILE CHECKSUM: 145f38c4d93b33b9ff5d8981831d6d6c0c456984
 
 COCOAPODS: 1.11.3

@@ -56,6 +56,14 @@ class ActivityVC: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        LocationManager.shared.getUserLocation { [weak self] location in
+//            DispatchQueue.main.async {
+//                guard let strongSelf = self else {
+//                    print("no location")
+//                    return
+//                }
+//                print(location)
+//            }
         title = "Explore"
 
         sort_config()
@@ -599,7 +607,7 @@ extension ActivityVC {
             }
         }
         
-        var returnLocation = CLLocationCoordinate2D()
+        var returnLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         // request to Google Map: payment method needed
         /*
         let request =  URL(string:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=\(name)&inputtype=textquery&fields=geometry&key=AIzaSyDmH0diWsSMIhNsb3G2HIEG8g4p62rCgCI")!
@@ -636,6 +644,9 @@ extension ActivityVC {
     }
     
     func distance(lo: CLLocationDegrees, la: CLLocationDegrees) -> Double {
+        print("targettt")
+        print(longitude)
+        print(latitude)
         return (lo - longitude) * (lo - longitude) * 69 + (la - latitude) * (la - latitude) * 54.6
     }
 }
