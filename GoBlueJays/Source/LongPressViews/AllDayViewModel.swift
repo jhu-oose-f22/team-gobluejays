@@ -156,7 +156,8 @@ extension AllDayViewModel{
     public func initCourse(completion: @escaping ((_ events:[AllDayEvent]) -> Void)){
         var registeredCourses:[RegisteredCourse] = []
         var myCourses:[AllDayEvent] = []
-        let courseCollection = db.collection("thomas").document("scheduleCourses").collection("courses")
+        let user = CurrentLoginName.name
+        let courseCollection = db.collection(user).document("scheduleCourses").collection("courses")
         
         courseCollection.getDocuments() {[self] (querySnapshot, err) in
             if let doc = querySnapshot {
