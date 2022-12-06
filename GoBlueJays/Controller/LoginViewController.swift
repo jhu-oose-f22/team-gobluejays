@@ -1,25 +1,24 @@
 //
-//  LoginVC.swift
+//  LoginViewController.swift
 //  GoBlueJays
 //
-//  Created by Thomas Yu on 11/30/22.
+//  Created by Thomas Yu on 12/6/22.
 //
 
-
+import UIKit
 import FirebaseFirestore
 import FirebaseCore
-import UIKit
 
-class LoginVC: UIViewController {
+class LoginViewController: UIViewController {
     let db = Firestore.firestore()
-    @IBOutlet weak var login: UITextField!
+    @IBOutlet weak var loginName: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func loginPressed(_ sender: Any) {
-        let loginName = login.text!
+        let loginName = loginName.text!
         if (loginName != "") {
             db.collection(loginName).document("Profile").setData(["Login": "Yes"])
             CurrentLoginName.name = loginName
@@ -27,8 +26,5 @@ class LoginVC: UIViewController {
             next.modalPresentationStyle = .fullScreen
             self.present(next, animated: true, completion: nil)
         }
-        //TODO: Store the loginName so that it can be used elsewhere
     }
-    
-    
 }

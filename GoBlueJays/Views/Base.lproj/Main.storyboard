@@ -3367,7 +3367,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                 <connections>
-                                    <segue destination="lVj-PS-O1K" kind="presentation" modalPresentationStyle="fullScreen" id="oAC-if-Rb7"/>
+                                    <segue destination="lVj-PS-O1K" kind="presentation" modalPresentationStyle="fullScreen" id="Ggj-Yg-zdh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -6543,7 +6543,7 @@
         <!--Login-->
         <scene sceneID="LBg-Bb-y13">
             <objects>
-                <viewController id="lVj-PS-O1K" userLabel="Login" customClass="LoginVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lVj-PS-O1K" userLabel="Login" customClass="LoginViewController" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kUq-EV-knW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6562,14 +6562,16 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Enter"/>
                                 <connections>
-                                    <action selector="loginPressed:" destination="lVj-PS-O1K" eventType="touchUpInside" id="tMj-n3-S7Q"/>
-                                    <segue destination="aEk-ac-CSd" kind="presentation" modalPresentationStyle="fullScreen" id="wUf-PU-jHm"/>
+                                    <action selector="loginPressed:" destination="lVj-PS-O1K" eventType="touchUpInside" id="BTn-uE-vba"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j5P-0Z-NMe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="loginName" destination="b5V-tI-2J6" id="wac-QD-0am"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uad-BP-vd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

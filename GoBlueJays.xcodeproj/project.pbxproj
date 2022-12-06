@@ -118,6 +118,7 @@
 		4F8369E82921DA7C00C01550 /* AddCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8369E72921DA7C00C01550 /* AddCourseVC.swift */; };
 		4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F98422728FE204B009990D4 /* WebViewVC.swift */; };
 		4FB29E32293BF8FB0079FF97 /* CurrentLoginName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB29E31293BF8FB0079FF97 /* CurrentLoginName.swift */; };
+		4FB29E34293F0B990079FF97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB29E33293F0B990079FF97 /* LoginViewController.swift */; };
 		4FED0F6128EFF868003265A1 /* AthleticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6028EFF868003265A1 /* AthleticsVC.swift */; };
 		4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */; };
 		4FED0F6528F003CA003265A1 /* HousingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED0F6428F003CA003265A1 /* HousingVC.swift */; };
@@ -249,6 +250,7 @@
 		4F98422728FE204B009990D4 /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = "<group>"; };
 		4F984229290ADFF9009990D4 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		4FB29E31293BF8FB0079FF97 /* CurrentLoginName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLoginName.swift; sourceTree = "<group>"; };
+		4FB29E33293F0B990079FF97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4FCB86E329371B9E00BF6214 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4FED0F6028EFF868003265A1 /* AthleticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsVC.swift; sourceTree = "<group>"; };
 		4FED0F6228F002C4003265A1 /* SocialMediaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaVC.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				63C8F3DA291592E900E9EF2F /* EditProfileVC.swift */,
 				63C8F3DB291592E900E9EF2F /* ProfileVC.swift */,
 				4FCB86E329371B9E00BF6214 /* LoginVC.swift */,
+				4FB29E33293F0B990079FF97 /* LoginViewController.swift */,
 				2CE790D5289F7F1A00C3BB2B /* MapVC.swift */,
 				408D837D2913009D003C034C /* ActivityDetailVC.swift */,
 				2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */,
@@ -935,6 +938,7 @@
 				C9CF1C1C293586B30038E4CA /* EventDetailVC.swift in Sources */,
 				C9CF1C2B293586B30038E4CA /* DefaultViewController.swift in Sources */,
 				2CB79C9028A9DA1C00744FF8 /* Detail.swift in Sources */,
+				4FB29E34293F0B990079FF97 /* LoginViewController.swift in Sources */,
 				08B23335291070ED00637694 /* TextField.swift in Sources */,
 				4F8369E82921DA7C00C01550 /* AddCourseVC.swift in Sources */,
 				40A89A1928F7602F00E3CE60 /* (null) in Sources */,
