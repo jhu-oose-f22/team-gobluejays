@@ -9,7 +9,7 @@ import UIKit
 //import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
-import CoreLocation;
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {

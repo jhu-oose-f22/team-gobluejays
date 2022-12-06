@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lVj-PS-O1K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lVj-PS-O1K">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -163,7 +163,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="canvas logo" translatesAutoresizingMaskIntoConstraints="NO" id="LxO-ht-sjw">
-                                                                                <rect key="frame" x="22" y="14" width="56" height="54"/>
+                                                                                <rect key="frame" x="18" y="11" width="60" height="60"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -3367,7 +3367,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                 <connections>
-                                    <segue destination="lVj-PS-O1K" kind="presentation" modalPresentationStyle="fullScreen" id="oAC-if-Rb7"/>
+                                    <segue destination="lVj-PS-O1K" kind="presentation" modalPresentationStyle="fullScreen" id="Ggj-Yg-zdh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -6543,7 +6543,7 @@
         <!--Login-->
         <scene sceneID="LBg-Bb-y13">
             <objects>
-                <viewController id="lVj-PS-O1K" userLabel="Login" customClass="LoginVC" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lVj-PS-O1K" userLabel="Login" customClass="LoginViewController" customModule="GoBlueJays" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kUq-EV-knW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6562,13 +6562,16 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Enter"/>
                                 <connections>
-                                    <segue destination="aEk-ac-CSd" kind="presentation" modalPresentationStyle="fullScreen" id="Nt0-yG-ODG"/>
+                                    <action selector="loginPressed:" destination="lVj-PS-O1K" eventType="touchUpInside" id="BTn-uE-vba"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j5P-0Z-NMe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="loginName" destination="b5V-tI-2J6" id="wac-QD-0am"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uad-BP-vd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
