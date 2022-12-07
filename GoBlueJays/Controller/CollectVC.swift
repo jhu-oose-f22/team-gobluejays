@@ -38,11 +38,12 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         
         // search bar config
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
+//        searchController.searchBar.showsScopeBar = true
+//        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         // searchBar.delegate = self

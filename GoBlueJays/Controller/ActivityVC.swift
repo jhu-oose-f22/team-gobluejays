@@ -366,6 +366,7 @@ class ActivityVC: UIViewController{
     }
     
     func reloadData() {
+        self.search_bar_config()
         self.tableView.reloadData()
         self.recomCollection.reloadData()
     }
@@ -415,13 +416,16 @@ class ActivityVC: UIViewController{
     
     func search_bar_config() {
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
 //        searchController.searchBar.showsScopeBar = true
 //        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
-        definesPresentationContext = true
+        definesPresentationContext = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.sizeToFit()
     }
     
     func rec_config() {
