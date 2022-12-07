@@ -150,18 +150,17 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
           return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
-    func filterContentForSearchText(searchText: String, scopeButton: String = "All") {
+    func filterContentForSearchText(searchText: String) {
+        if collects.isEmpty {
+            let alert = UIAlertController(title: "Alert", message: "You haven't liked anything yet!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert,animated:true)
+        }
         if isFiltering {
             filteredCollects = collects.filter {
                 collect in
-                if isSearchBarEmpty {
-                    let scopeMatch = (scopeButton == "All" || collect.category.lowercased().contains(scopeButton.lowercased()))
-                    return scopeMatch
-                } else {
-                    let scopeMatch = (scopeButton == "All" || collect.category.lowercased().contains(scopeButton.lowercased()))
                     let searchTextMatch = collect.title.lowercased().contains(searchText.lowercased())
-                    return scopeMatch && searchTextMatch
-                }
+                return searchTextMatch
             }
         } else {
             filteredCollects = collects
@@ -244,9 +243,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
 extension CollectVC: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
       let searchBar = searchController.searchBar
-      let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
       let searchText = searchBar.text!
-      filterContentForSearchText(searchText: searchText, scopeButton: scopeButton)
+      filterContentForSearchText(searchText: searchText)
   }
 }
 
