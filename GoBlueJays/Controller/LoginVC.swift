@@ -27,7 +27,6 @@ class LoginVC: UIViewController {
             next.modalPresentationStyle = .fullScreen
             self.present(next, animated: true, completion: nil)
         }
-        //TODO: Store the loginName so that it can be used elsewhere
     }
     
     

@@ -54,7 +54,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         
         let db = Firestore.firestore()
-        db.collection("activity").getDocuments(){ [self]
+        //db.collection("activity").getDocuments(){ [self]
+        db.collection(CurrentLoginName.name).document("activity").collection("act").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -173,7 +174,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         for (index, activity) in self.collects.enumerated() {
             if activity.id == actID {
                 if activity.likes == false {
-                    db.collection("activity").document(actID).setData([
+                    //db.collection("activity").document(actID).setData([
+                    db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).setData([
                         "category": activity.category,
                         "image": activity.image,
                         "imageLink": "",
@@ -193,7 +195,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                     }
                     // self.collect_ids.append(actID)
                 } else {
-                    db.collection("activity").document(actID).delete() { err in
+                    //db.collection("activity").document(actID).delete() { err in
+                    db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {
