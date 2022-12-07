@@ -96,7 +96,9 @@ class AllDayViewModel {
     func addEvent(event:AllDayEvent){
         
         events.append(event)
-        db.collection("scheduleDayEvents").document(event.id).setData([
+        
+        //db.collection("scheduleDayEvents").document(event.id).setData([
+        db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events").document(event.id).setData([
             "id":event.id,
             "title": event.title,
             "startDate": event.startDate,
@@ -117,7 +119,8 @@ class AllDayViewModel {
     
     public func initiateEvents(completion: @escaping ((_ events:[AllDayEvent]) -> Void)) {
         var myevents:[AllDayEvent] = []
-        let collection = db.collection("scheduleDayEvents")
+        //let collection = db.collection("scheduleDayEvents")
+        let collection = db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events")
         
         collection.getDocuments() {[self] (querySnapshot, err) in
             if let doc = querySnapshot {
