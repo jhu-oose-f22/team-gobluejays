@@ -34,9 +34,11 @@ class ActivityVC: UIViewController{
     var collect_ids: [String] = []
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
+//    var filteredActivitiesPrep: [Activity] = []
     var filterInfo = [String]()
     var sortedActivites: [Activity] = []
     var sortedAct2: [Activity] = []
+    var searchKeyword = ""
     
     var allCategories: [String] = []
     var currentFilterCategory = "Choose a category"
@@ -169,6 +171,7 @@ class ActivityVC: UIViewController{
                 self.allCategories = self.allCategories.sorted { $0.lowercased() < $1.lowercased() }
                 self.allCategories.insert("All Category", at: 0)
                 self.filteredActivities = self.activities
+//                self.filteredActivitiesPrep = self.filteredActivities
                 self.setBuildingLocations()
                 self.activity_recommendation()
                 group.leave()
@@ -454,7 +457,7 @@ class ActivityVC: UIViewController{
     }
 }
 
-// Filter effect
+// MARK: Filter effect
 extension ActivityVC: userFilterDelegate {
     func returnFilter(category: String, rank: String) {
         if category == "reset" && rank == "reset" {
@@ -475,6 +478,13 @@ extension ActivityVC: userFilterDelegate {
             }
             if category != "All Category" {
                 filteredActivities = filteredActivities.filter { $0.category==category }
+            }
+            
+            if self.searchKeyword != "" {
+                filteredActivities = filteredActivities.filter { (activity: Activity) -> Bool in
+                    let searchTextMatch = activity.title.lowercased().contains(self.searchKeyword.lowercased())
+                    return searchTextMatch
+                }
             }
             self.reloadData()
         }
@@ -845,12 +855,27 @@ extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
     
     func filterContentForSearchText(searchText: String) {
         if !isSearchBarEmpty {
-            filteredActivities = activities.filter { (activity: Activity) -> Bool in
+            filteredActivities = filteredActivities.filter { (activity: Activity) -> Bool in
                 let searchTextMatch = activity.title.lowercased().contains(searchText.lowercased())
                 return searchTextMatch
             }
+            self.searchKeyword = searchText
         } else {
-            filteredActivities = activities
+            if currentFilterCategory == "Choose a category" && currentFilterRank == "Rank by ..." {
+                filteredActivities = activities
+            } else {
+                if currentFilterRank == "Upcoming" {
+                    sort_by_time()
+                    filteredActivities = sortedAct2
+                } else {
+                    sort_by_dist()
+                    filteredActivities = sortedActivites
+                }
+                if currentFilterCategory != "All Category" {
+                    filteredActivities = filteredActivities.filter { $0.category==currentFilterCategory }
+                }
+            }
+            self.searchKeyword = ""
         }
         self.reloadData()
     }

@@ -151,12 +151,12 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
 
     func filterContentForSearchText(searchText: String) {
-        if collects.isEmpty {
-            let alert = UIAlertController(title: "Alert", message: "You haven't liked anything yet!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(alert,animated:true)
-        }
         if isFiltering {
+            if collects.isEmpty {
+                let alert = UIAlertController(title: "Alert", message: "You haven't liked anything yet!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                present(alert,animated:true)
+            }
             filteredCollects = collects.filter {
                 collect in
                     let searchTextMatch = collect.title.lowercased().contains(searchText.lowercased())
