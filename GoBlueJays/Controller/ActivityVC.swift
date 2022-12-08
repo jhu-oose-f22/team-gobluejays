@@ -11,6 +11,7 @@ import FirebaseFirestore
 import CoreLocation
 import SwiftUI
 import Kingfisher
+import SwiftSoup
 
 protocol activityTableDelegate: AnyObject {
     func cellButtonPressed(actID: String)
@@ -55,6 +56,11 @@ class ActivityVC: UIViewController{
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 39.0;
     var longitude: CLLocationDegrees = -76.0;
+    var default_images = [
+        "https://static1.campusgroups.com/upload/jhu/2022/r3_image_upload_1382318_gilman360x240jpg_62919654.jpeg",
+        "https://static1.campusgroups.com/upload/jhu/2020/r2_image_upload_1367200_JHU_Frontjpg_7162189.jpeg",
+        "https://static1.campusgroups.com/upload/jhu/2021/r3_image_upload_1918390_Apple_thumbnail_117213433.png"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +116,7 @@ class ActivityVC: UIViewController{
                             var cost = "Free"
                             var host = ""
                             var detail = ""
+                            var image_url = ""
                             for property in properties {
                                 let equality = property.split(separator: ":")
                                 if equality.isEmpty {
@@ -132,6 +139,9 @@ class ActivityVC: UIViewController{
                                 }
                                 if equality[0].lowercased() == "uid" {
                                     id = String(equality[1])
+                                }
+                                if equality[0].lowercased() == "url" {
+                                    image_url = String(equality[1] + ":" + equality[2]);
                                 }
                                 if equality[0].lowercased() == "description" {
                                     detail = equality[1].replacingOccurrences(of: "\\n---\\nEvent Details", with: "", options: NSString.CompareOptions.literal, range: nil)
@@ -161,7 +171,7 @@ class ActivityVC: UIViewController{
                                 if (self.collect_ids.contains(id) == true) {
                                     likes = true
                                 }
-                                self.activities.append(Activity(title: title, time: timestp, location: location, image: "", likes: likes, id: id, category: category, host: host, cost: cost, detail: detail))
+                                self.activities.append(Activity(title: title, time: timestp, location: location, image: image_url, likes: likes, id: id, category: category, host: host, cost: cost, detail: detail))
                                 if (self.allCategories.contains(category) == false) {
                                     self.allCategories.append(category)
                                 }
@@ -273,6 +283,7 @@ class ActivityVC: UIViewController{
                         var time = ""
                         var location = ""
                         var category = ""
+                        var url = ""
                         for property in properties {
                             let equality = property.split(separator: ":")
                             if equality.isEmpty {
@@ -293,9 +304,12 @@ class ActivityVC: UIViewController{
                             if equality[0].lowercased() == "location" {
                                 location = String(equality[1])
                             }
+                            if equality[0].lowercased() == "url" {
+                                url = String(equality[1] + ":" + equality[2])
+                            }
                         }
                         // print("append!", title, location, category)
-                        self.activities.append(Activity(title: title, time: "time", location: location, image: "", likes: false, id: "", category: category, host:"", cost: "", detail:""))
+                        self.activities.append(Activity(title: title, time: "time", location: location, image: url, likes: false, id: "", category: category, host:"", cost: "", detail:""))
                     }
                     // print(self.activities)
                 }
@@ -502,6 +516,29 @@ extension ActivityVC {
         let dist_count = min(activityRecommend_dist_max, recommendActivities_dist.count)
         if (dist_count-1) >= 0 {
             for i in 0...dist_count-1 {
+                let url = URL(string: recommendActivities_dist[i].image)
+                if let url = url {
+                    let task = URLSession.shared.dataTask(with: url) {
+                        (data, response, error) in
+                        if let data = data {
+                            do {
+                                let data = String(data: data, encoding: .utf8)
+                                let doc = try SwiftSoup.parse(data!)
+                                let image_url = try
+                                doc.getElementsByClass("img-responsive").first()
+                                if let image_url = image_url {
+                                    try self.recommendActivities_dist[i].image = image_url.attr("src")
+                                } else {
+                                    self.recommendActivities_dist[i].image = self.default_images[Int.random(in: 0..<3)]
+                                }
+                            } catch {}
+                        }
+                    }
+                    task.resume()
+                } else {
+                    self.recommendActivities_dist[i].image = self.default_images[Int.random(in: 0..<3)]
+                }
+                
                 recact.append(recommendActivities_dist[i])
                 recact_slogan.append("Near you!")
             }
@@ -521,6 +558,30 @@ extension ActivityVC {
                     let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
                     recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
                     continue
+                }
+                let url = URL(string: recommendActivities_dist[i].image)
+                if let url = url {
+                    let task = URLSession.shared.dataTask(with: url) {
+                        (data, response, error) in
+                        if let data = data {
+                            do {
+                                let data = String(data: data, encoding: .utf8)
+                                let doc = try SwiftSoup.parse(data!)
+                                // print("DOC: ", try doc.getElementsByClass("img-responsive"))
+                                let image_url = try
+                                doc.getElementsByClass("img-responsive").first()
+                                // print("DOC: ", image_url)
+                                if let image_url = image_url {
+                                    try self.recommendActivities_type[i].image = image_url.attr("src")
+                                } else {
+                                    self.recommendActivities_type[i].image = self.default_images[Int.random(in: 0..<3)]
+                                }
+                            } catch {}
+                        }
+                    }
+                    task.resume()
+                } else {
+                    self.recommendActivities_type[i].image = self.default_images[Int.random(in: 0..<3)]
                 }
                 recact.append(recommendActivities_type[i])
                 recact_slogan.append("You might like!")
