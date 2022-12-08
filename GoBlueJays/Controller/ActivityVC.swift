@@ -808,6 +808,35 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.time.text = filteredActivities[ind1].time
         // cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
         // cell.loadImageFrom(urlAddress: filteredActivities[ind1].image, right: true)
+            let url = URL(string: filteredActivities[ind1].image)
+            if let url = url {
+                let group = DispatchGroup()
+                group.enter()
+                let task = URLSession.shared.dataTask(with: url) {
+                    (data, response, error) in
+                    if let data = data {
+                        do {
+                            let data = String(data: data, encoding: .utf8)
+                            let doc = try SwiftSoup.parse(data!)
+                            let image_url = try
+                            doc.getElementsByClass("img-responsive").first()
+                            if let image_url = image_url {
+                                try self.filteredActivities[ind1].image = image_url.attr("src")
+                            } else {
+                                self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
+                            }
+                        } catch {}
+                        group.leave()
+                    }
+                }
+                DispatchQueue.global().async {
+                    task.resume()
+                }
+                group.wait()
+                delete group
+            } else {
+                self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
+            }
         let url1 = URL(string: filteredActivities[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
@@ -816,6 +845,8 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         if (ind2 <= filteredActivities.count-1) {
             let url = URL(string: filteredActivities[ind2].image)
             if let url = url {
+                let group = DispatchGroup()
+                group.enter()
                 let task = URLSession.shared.dataTask(with: url) {
                     (data, response, error) in
                     if let data = data {
@@ -830,9 +861,13 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
                                 self.filteredActivities[ind2].image = self.default_images[Int.random(in: 0..<3)]
                             }
                         } catch {}
+                        group.leave()
                     }
                 }
-                task.resume()
+                DispatchQueue.global().async {
+                    task.resume()
+                }
+                group.wait()
             } else {
                 self.filteredActivities[ind2].image = self.default_images[Int.random(in: 0..<3)]
             }
@@ -953,7 +988,36 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.time.text = recact[index].time
         // cell.image.image = UIImage(named: recact[index].image)
         let url = URL(string: recact[index].image)
-        cell.image.kf.setImage(with: url)
+        if let url = url {
+            let group = DispatchGroup()
+            group.enter()
+            let task = URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                if let data = data {
+                    do {
+                        let data = String(data: data, encoding: .utf8)
+                        let doc = try SwiftSoup.parse(data!)
+                        let image_url = try
+                        doc.getElementsByClass("img-responsive").first()
+                        if let image_url = image_url {
+                            try self.recact[index].image = image_url.attr("src")
+                        } else {
+                            self.recact[index].image = self.default_images[Int.random(in: 0..<3)]
+                        }
+                    } catch {}
+                    group.leave()
+                }
+            }
+            DispatchQueue.global().async {
+                task.resume()
+            }
+            group.wait()
+        } else {
+            recact[index].image = self.default_images[Int.random(in: 0..<3)]
+        }
+        
+        let image_url = URL(string: recact[index].image)
+        cell.image.kf.setImage(with: image_url)
         cell.rectext.text = recact_slogan[index]
         
         cell.assign_ID(id: recact[index].id)
