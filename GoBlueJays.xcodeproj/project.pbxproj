@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02F6F937C3008B1DEF84ED4E /* Pods_GoBlueJaysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5CD29367936CE686960A7 /* Pods_GoBlueJaysTests.framework */; };
+		083235D1294291780087F5C1 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 083235D0294291780087F5C1 /* SwiftSoup */; };
 		087FC7952909915C005A582E /* BuildingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087FC7942909915C005A582E /* BuildingLocation.swift */; };
 		087FC7972909B3E8005A582E /* sortActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087FC7962909B3E8005A582E /* sortActivity.swift */; };
 		087FC79B2909CBFE005A582E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 087FC79A2909CBFE005A582E /* FirebaseAnalytics */; };
@@ -337,6 +338,7 @@
 				087FC7C72909CBFE005A582E /* FirebasePerformance in Frameworks */,
 				08C1483628F8459400A493B2 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				087FC7C12909CBFE005A582E /* FirebaseInstallations in Frameworks */,
+				083235D1294291780087F5C1 /* SwiftSoup in Frameworks */,
 				08C1483428F8459400A493B2 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				08C1482428F8459400A493B2 /* FirebaseCrashlytics in Frameworks */,
 				087FC7B52909CBFE005A582E /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -680,6 +682,7 @@
 				087FC7CE2909CBFE005A582E /* FirebaseStorageCombine-Community */,
 				08D82EC9291AE8AF00B7C7A5 /* PythonKit */,
 				C9FB3EBA293995DC00AD376B /* JZCalendarWeekView */,
+				083235D0294291780087F5C1 /* SwiftSoup */,
 			);
 			productName = GoBlueJays;
 			productReference = 2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */;
@@ -760,6 +763,7 @@
 				08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				08D82EC8291AE8AF00B7C7A5 /* XCRemoteSwiftPackageReference "PythonKit" */,
 				C9FB3EB9293995DC00AD376B /* XCRemoteSwiftPackageReference "jzAdvancedCalendarView" */,
+				083235CF294291780087F5C1 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 2CE7909B289F72BE00C3BB2B /* Products */;
 			projectDirPath = "";
@@ -1374,6 +1378,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		083235CF294291780087F5C1 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1401,6 +1413,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		083235D0294291780087F5C1 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 083235CF294291780087F5C1 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
 		087FC79A2909CBFE005A582E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 08C1481228F8459400A493B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
