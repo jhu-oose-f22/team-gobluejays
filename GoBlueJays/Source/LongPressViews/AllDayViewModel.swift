@@ -126,7 +126,7 @@ class AllDayViewModel {
             if let doc = querySnapshot {
                 for document in doc.documents {
                     let data = document.data()
-                    let event:AllDayEvent = AllDayEvent(id: data["id"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: data["location"] as! String, isAllDay: data["isAllDay"] as! Bool, completed: data["completed"] as! Bool, note: data["note"] as! String,type:0)
+                    let event:AllDayEvent = AllDayEvent(id: data["id"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: data["location"] as! String, isAllDay: data["isAllDay"] as! Bool, completed: data["completed"] as! Bool, note: data["note"] as! String,type:0, department: [])
                     myevents.append(event)
                     
                 }
@@ -166,8 +166,6 @@ extension AllDayViewModel{
             if let doc = querySnapshot {
                 for document in doc.documents {
                     let data = document.data()
-//                    let course:AllDayEvent = AllDayEvent(id: data["uuid"] as! String, title: data["title"] as! String, startDate: (data["startDate"] as! Timestamp).dateValue(), endDate: (data["endDate"] as! Timestamp).dateValue(), location: "", isAllDay:true, completed: false, note: data["note"] as! String,type:1)
-                    
                     let sem = document.data()["Term"] as? String
                     let cn = document.data()["CourseNumber"] as? String
                     let s = document.data()["Section"] as? String
@@ -236,7 +234,7 @@ extension AllDayViewModel{
                                 var startEndDate:Date = formatter.date(from: "\(periodStart) \(timeEnd)") ?? Date()
                                 let endDate: Date = formatter.date(from: "\(periodEnd) \(timeEnd)") ?? Date()
                                 
-                                let myCourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1)
+                                let myCourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1, department: [])
                                 courses.append(myCourse)
                                 var date = startDate   // "Jun 30, 2020 at 12:00 PM"
                                 let weekdays = self.parseDOW(DOW: detail.SectionDetails[0].Meetings[0].DOW)
@@ -245,7 +243,7 @@ extension AllDayViewModel{
                                         startDate = Calendar.current.nextDate(after: startDate, matching: DateComponents(hour:startDate.hour(),minute: startDate.minute(),weekday:weekday), matchingPolicy: .previousTimePreservingSmallerComponents)!
                                         startEndDate = Calendar.current.nextDate(after: startEndDate, matching: DateComponents(hour:startEndDate.hour(),minute: startEndDate.minute(),weekday:weekday), matchingPolicy: .previousTimePreservingSmallerComponents)!
                                         print(startDate.description(with: .current), startDate.monthSymbol())
-                                        let mycourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1)
+                                        let mycourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1, department: ["\(detail.Term_JSS)","\(detail.SectionName)","\(detail.OfferingName)"])
                                         courses.append(mycourse)
                                         
                                     }

@@ -9,6 +9,34 @@
 import UIKit
 import JZCalendarWeekView
 
+func getCourses(semester:String,courseNumber:String,section:String, completion: @escaping (_ json: [CourseDetails]?, _ error: Error?)->()) {
+        var booooks:[CourseDetails] = []
+        
+            let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
+            let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
+                if let error = error {
+                    print("hi im thomas")
+                } else {
+                    if let response = response as? HTTPURLResponse {
+                        print("statusCode: \(response.statusCode)")
+                    }
+                    if let data = data {
+                        
+                        if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
+                            //print(books)
+                            booooks.append(contentsOf: books)
+                        } else {
+                            print("Invalid Response")
+                        }
+                    }
+                }
+                completion(booooks, nil)
+            }
+            task.resume()
+    }
+
+var currentWeekCourses:[CourseDetails] = []
+
 // From JZiOSFramework
 open class ToastUtil {
 
@@ -27,7 +55,6 @@ open class ToastUtil {
     static private var toastView: UIView!
     static private var toastLabel: UILabel!
     
-    
     public static func addDetailPage(cell:JZBaseEvent? = nil){
         guard let currentscene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate, toastView == nil else { return }
         guard let currentWindow = currentscene.window else { return }
@@ -40,16 +67,28 @@ open class ToastUtil {
                 currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
                 controller.event = allDayCell
                 (((currentWindow.rootViewController?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).present(controller, animated: true)
-            case 1: // course
                 break
             default:
+                var semester = allDayCell.department[0]
+                var semester_formatted = String(semester.prefix(4) + "%20" + semester.suffix(4))
+                var number = allDayCell.department[2]
+                var number_formatted = String(number.filter { !". \n\t\r".contains($0) })
+                let group = DispatchGroup()
+                                    group.enter()
+                                    getCourses(semester: semester_formatted, courseNumber: number_formatted, section: allDayCell.department[1]){ json, error in
+                                        currentWeekCourses = json ?? []
+                                        group.leave()
+                                    }
+                                    group.wait()
+                let controller =
+                currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
+                controller.course = currentWeekCourses[0]
+                (((currentWindow.rootViewController?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).present(controller, animated: true)
                 break
             }
             
             
         }
-        
-//        currentWindow.rootViewController?.performSegue(withIdentifier: "showEventDetail", sender: currentWindow.rootViewController)
         
     }
     
