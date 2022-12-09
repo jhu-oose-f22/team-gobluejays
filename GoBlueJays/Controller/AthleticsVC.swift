@@ -29,6 +29,7 @@ class AthleticsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return tabs.count
     }
 
+    // information list
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell
         cell.label.text = tabs[indexPath.row].title
@@ -36,6 +37,7 @@ class AthleticsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    // popup window, handle row selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let urlString = tabs[indexPath.row].link
         if (urlString == "https://hopkinssports.com/index.aspx") {

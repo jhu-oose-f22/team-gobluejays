@@ -26,6 +26,7 @@ class EditProfileVC: UIViewController {
         super.viewDidLoad()
     }
     
+    // save profile info
     func saveText() {
         let nameText = self.nameField.text!
         let jhedText = self.jhedField.text!

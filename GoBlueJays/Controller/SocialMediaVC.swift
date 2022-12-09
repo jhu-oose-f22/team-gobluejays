@@ -35,6 +35,7 @@ class SocialMediaVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    // handle row selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let urlString = tabs[indexPath.row].link
         let webView:WebViewVC = WebViewVC()

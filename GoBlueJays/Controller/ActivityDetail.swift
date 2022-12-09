@@ -24,6 +24,7 @@ class ActivityDetail: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // fill data to storyboard
         name.text = activity.title
         date.text = date.text! + activity.date
         time.text = time.text! + activity.time

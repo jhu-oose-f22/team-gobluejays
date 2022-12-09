@@ -30,8 +30,9 @@ class ViewController: UIViewController {
     lazy var course = CourseDetails(TermStartDate: "1", SchoolName: "1", Meetings: "1", OfferingName: "1", SectionName: "1", Title: "1", Credits: "1", Level: "1", Areas: "1", Building: "1", Term_JSS: "1", SectionDetails: fakeSectionDetail)
     
     
-    
+    // fill info in view course detail page
     override func viewDidLoad() {
+        // course object comes in with true data when load
         level.text = level.text! + course.Level
         credits.text = credits.text! + course.Credits
         courseNumber.text = course.OfferingName
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
         area.text = area.text! + course.Areas
         details.text =  course.SectionDetails[0].Description
         
+        // append data to the end of string
         for i in 0...(course.SectionDetails[0].Meetings.count - 1) {
             let lecture = course.SectionDetails[0].Meetings[i]
             location.text = location.text! + lecture.Building

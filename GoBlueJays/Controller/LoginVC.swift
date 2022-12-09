@@ -23,6 +23,7 @@ class LoginVC: UIViewController {
         if (loginName != "") {
             db.collection(loginName).document("Profile").setData(["Login": "Yes"])
             CurrentLoginName.name = loginName
+            // display main screen after user log in
             let next = self.storyboard?.instantiateViewController(withIdentifier: "MainScreen") as! CustomTabBarController
             next.modalPresentationStyle = .fullScreen
             self.present(next, animated: true, completion: nil)

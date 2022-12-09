@@ -31,12 +31,14 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var currentCategoryMessage = "Choose a category"
     var currentRankMessage = "Rank by ..."
     
+    // reset filter
     @IBAction func resetClick(_ sender: Any) {
         delegate?.returnFilter(category: "reset", rank: "reset")
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
+    // select and apply filter
     @IBAction func applyClick(_ sender: Any) {
         if categoryField.text == "Choose a category" || rankField.text == "Rank by ..." {
             showAlert(message: "Please fulfill filter options")
@@ -47,9 +49,12 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
     
+    // filter by category pick
     @IBAction func popCatPickUp(_ sender: Any) {
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
+        
+        // set category picker
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -60,6 +65,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
         pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
         
+        // set alert
         let alert = UIAlertController(title: "Select Activity Category", message: "", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.sourceView = pickerView
         alert.popoverPresentationController?.sourceRect = pickerView.bounds
@@ -77,10 +83,12 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         categoryField.inputView = pickerView
     }
     
-    
+    // filter by ordering
     @IBAction func popRankPickUp(_ sender: Any) {
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
+        
+        // set order picker
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -91,6 +99,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
         pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
         
+        // set alert
         let alert = UIAlertController(title: "Select Rank Basis", message: "", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.sourceView = pickerView
         alert.popoverPresentationController?.sourceRect = pickerView.bounds
@@ -108,6 +117,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         rankField.inputView = pickerView
     }
     
+    // two filter standard
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonConfig()
@@ -146,6 +156,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         rankField.text = currentRankMessage
     }
     
+    // button style
     func buttonConfig() {
         let config = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "chevron.down.circle", withConfiguration: config)
@@ -177,6 +188,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     
+    // return result count
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
             return category_list.count
@@ -190,6 +202,7 @@ class filterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         return 60
     }
 
+    // list by filter condition
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
             return category_list[row]

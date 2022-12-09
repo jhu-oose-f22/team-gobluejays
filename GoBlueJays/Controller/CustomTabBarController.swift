@@ -4,6 +4,7 @@ class CustomTabBarController: UITabBarController
 {
     @IBInspectable var initialIndex: Int = 0
     
+    // tab bar style
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedIndex = initialIndex

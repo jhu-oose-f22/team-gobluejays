@@ -75,6 +75,7 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     }
     
+    // reload course list with data from database
     func reload() {
         let db = Firestore.firestore()
         let user = CurrentLoginName.name
@@ -84,6 +85,7 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 print("Error getting documents: \(err)")
             } else {
                 self.tabs = []
+                // extract useful data and store as struct
                 for document in QuerySnapshot!.documents {
                     let cn = document.data()["CourseNumber"] as? String
                     let s = document.data()["Section"] as? String

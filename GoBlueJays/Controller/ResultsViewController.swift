@@ -16,6 +16,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     weak var delegate: ResultsViewControllerDelegate?
     
+    // create a list (tableview)
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "searchResult")
@@ -37,6 +38,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.frame = view.bounds
     }
     
+    // update view with place info
     public func update(with places: [Place]) {
         self.tableView.isHidden = false
         self.places = places
@@ -49,10 +51,12 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    // return number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
     }
     
+    // handle row selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.isHidden = true

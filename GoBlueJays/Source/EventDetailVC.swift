@@ -81,7 +81,6 @@ class EventDetailVC: UIViewController {
         
         
         self.dismiss(animated: true)
-//        _ = navigationController?.popViewController(animated: true)
         
     }
 

@@ -17,9 +17,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // user log in front page
     @IBAction func loginPressed(_ sender: Any) {
         let loginName = loginName.text!
         if (loginName != "") {
+            // update user status
             db.collection(loginName).document("Profile").setData(["Login": "Yes"])
             CurrentLoginName.name = loginName
             let next = self.storyboard?.instantiateViewController(withIdentifier: "MainScreen") as! CustomTabBarController

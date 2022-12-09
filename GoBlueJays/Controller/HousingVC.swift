@@ -10,7 +10,7 @@ import UIKit
 
 class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    // housing options
     @IBOutlet weak var tableView: UITableView!
     var tabs: [Detail] = [
         Detail(title: "On-Campus Housing", link: "https://studentaffairs.jhu.edu/community-living/university-housing/", icon: "studenthousing"),
@@ -32,6 +32,7 @@ class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return tabs.count
     }
 
+    // set housing button
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell
         cell.label.text = tabs[indexPath.row].title
@@ -39,6 +40,7 @@ class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // handle row selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let urlString = tabs[indexPath.row].link
         let webView:WebViewVC = WebViewVC()

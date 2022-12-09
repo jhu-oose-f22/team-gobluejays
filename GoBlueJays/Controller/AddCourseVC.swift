@@ -30,7 +30,10 @@ class AddCourseVC: UIViewController {
         let db = Firestore.firestore()
         let uuid = NSUUID().uuidString
         print("uuid: " + uuid)
+        
+        // current user logged in
         let user = CurrentLoginName.name
+        
         db.collection(user).document("scheduleCourses").collection("courses").document(uuid).setData(["Term": registeredCourse1.semester, "CourseNumber": registeredCourse1.courseNumber, "Section": registeredCourse1.section, "uuid": uuid])
         
         
@@ -51,6 +54,7 @@ extension UIView {
         guard let window = UIApplication.shared.keyWindow else {
             return
         }
+        // toast button styling
         let toastLbl = UILabel()
         toastLbl.text = message
         toastLbl.textAlignment = .center
@@ -59,6 +63,7 @@ extension UIView {
         toastLbl.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLbl.numberOfLines = 0
         
+        // adjust to suitable text display
         let textSize = toastLbl.intrinsicContentSize
         let labelHeight = ( textSize.width / window.frame.width ) * 30
         let labelWidth = min(textSize.width, window.frame.width - 40)
@@ -69,6 +74,7 @@ extension UIView {
         toastLbl.layer.cornerRadius = 10
         toastLbl.layer.masksToBounds = true
         
+        // add view to schedule
         window.addSubview(toastLbl)
         
         UIView.animate(withDuration: 2.0, animations: {
@@ -80,6 +86,7 @@ extension UIView {
 }
 
 extension UIViewController {
+    // hide keyboard when tap around
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
