@@ -78,7 +78,6 @@
 		2CB79C9828A9E43900744FF8 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79C9628A9E43900744FF8 /* IconCell.swift */; };
 		2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB79C9728A9E43900744FF8 /* IconCell.xib */; };
 		2CB9247028E49EB80006967C /* SupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9246F28E49EB80006967C /* SupportVC.swift */; };
-		2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */; };
 		2CD2536828ED2AF8004C03A6 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */; };
 		2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9277528A1D59000C45293 /* ResultsViewController.swift */; };
 		2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */; };
@@ -203,7 +202,6 @@
 		2CB79C9628A9E43900744FF8 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		2CB79C9728A9E43900744FF8 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		2CB9246F28E49EB80006967C /* SupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportVC.swift; sourceTree = SOURCE_ROOT; };
-		2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		2CD9277528A1D59000C45293 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoBlueJays.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,7 +477,6 @@
 				2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */,
 				2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */,
 				2CB79C9128A9E2F800744FF8 /* Views */,
-				2CC9F07228A22BE300E337CA /* GooglePlacesManager.swift */,
 				2CB79C9328A9E38500744FF8 /* Controller */,
 				2CB79C8E28A9D9FA00744FF8 /* Models */,
 				2CE790A6289F72BF00C3BB2B /* Assets.xcassets */,
@@ -940,7 +937,6 @@
 				087FC7952909915C005A582E /* BuildingLocation.swift in Sources */,
 				4FED0F6328F002C4003265A1 /* SocialMediaVC.swift in Sources */,
 				C9CF1C26293586B30038E4CA /* AllDayEvent.swift in Sources */,
-				2CC9F07328A22BE300E337CA /* GooglePlacesManager.swift in Sources */,
 				40A89A1528F75FE800E3CE60 /* (null) in Sources */,
 				C9CF1C2D293586B30038E4CA /* ToastUtil.swift in Sources */,
 				C9CF1C21293586B30038E4CA /* EditEventViewController.swift in Sources */,
