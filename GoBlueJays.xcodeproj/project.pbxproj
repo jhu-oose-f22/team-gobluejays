@@ -136,7 +136,6 @@
 		C9CF1C26293586B30038E4CA /* AllDayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C02293586B30038E4CA /* AllDayEvent.swift */; };
 		C9CF1C27293586B30038E4CA /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C03293586B30038E4CA /* EventCell.swift */; };
 		C9CF1C28293586B30038E4CA /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9CF1C04293586B30038E4CA /* EventCell.xib */; };
-		C9CF1C29293586B30038E4CA /* RootNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C05293586B30038E4CA /* RootNavigationVC.swift */; };
 		C9CF1C2A293586B30038E4CA /* DefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C06293586B30038E4CA /* DefaultViewModel.swift */; };
 		C9CF1C2B293586B30038E4CA /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C07293586B30038E4CA /* DefaultViewController.swift */; };
 		C9CF1C2C293586B30038E4CA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1C09293586B30038E4CA /* Extensions.swift */; };
@@ -269,7 +268,6 @@
 		C9CF1C02293586B30038E4CA /* AllDayEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDayEvent.swift; sourceTree = "<group>"; };
 		C9CF1C03293586B30038E4CA /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		C9CF1C04293586B30038E4CA /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
-		C9CF1C05293586B30038E4CA /* RootNavigationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootNavigationVC.swift; sourceTree = "<group>"; };
 		C9CF1C06293586B30038E4CA /* DefaultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewModel.swift; sourceTree = "<group>"; };
 		C9CF1C07293586B30038E4CA /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		C9CF1C09293586B30038E4CA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 				C9CF1BF8293586B30038E4CA /* LongPressViews */,
 				C9CF1C03293586B30038E4CA /* EventCell.swift */,
 				C9CF1C04293586B30038E4CA /* EventCell.xib */,
-				C9CF1C05293586B30038E4CA /* RootNavigationVC.swift */,
 				C9CF1C06293586B30038E4CA /* DefaultViewModel.swift */,
 				C9CF1C07293586B30038E4CA /* DefaultViewController.swift */,
 				C9CF1C08293586B30038E4CA /* Utils */,
@@ -970,7 +967,6 @@
 				4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */,
 				C9CF1C25293586B30038E4CA /* LongPressViewController.swift in Sources */,
 				40923DAC28FE33AF003B15B5 /* ActivityCell.swift in Sources */,
-				C9CF1C29293586B30038E4CA /* RootNavigationVC.swift in Sources */,
 				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
 				C9CF1C24293586B30038E4CA /* AllDayViewModel.swift in Sources */,
 				C9CF1C23293586B30038E4CA /* LongPressEventCell.swift in Sources */,

@@ -45,7 +45,7 @@ class EventDetailVC: UIViewController {
         }
     }
     
-
+    // tab button to edit current event
     @IBAction func EditEvent(_ sender: UIButton) {
         let controller = EditEventViewController()
         controller.cell = self.event
@@ -61,9 +61,10 @@ class EventDetailVC: UIViewController {
             
         }
     }
+    
+    // tap button to delete current event
     @IBAction func deleteEvent(_ sender: UIButton) {
         let curEvent = db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events").document(event.id)
-        //let curEvent = db.collection("scheduleDayEvents").document(event.id)
         curEvent.delete { err in
             if let err = err {
                 print("Error removing document: \(err)")
@@ -87,8 +88,9 @@ class EventDetailVC: UIViewController {
 
     
     @IBAction func markComplete(_ sender: UIButton) {
+        // get current evenet from database stored
         let curEvent = db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events").document(event.id)
-        //let curEvent = db.collection("scheduleDayEvents").document(event.id)
+
         curEvent.updateData(["completed":!event.completed]){
             err in
                 if let err = err {

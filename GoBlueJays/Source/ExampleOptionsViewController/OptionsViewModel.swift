@@ -9,6 +9,7 @@ class ExpandableData {
     var isExpanded: Bool = false
     var selectedValue: Any!
 
+    // return the index of item selected
     var selectedIndex: Int {
         guard let cate = categories else { fatalError() }
         switch subject {
@@ -27,6 +28,7 @@ class ExpandableData {
         self.categories = categories
     }
 
+    // get category in string format
     func getCategoriesInString() -> [String] {
         guard let cate = categories else { return [] }
         switch subject {
@@ -68,6 +70,7 @@ struct OptionsSelectedData {
     var hourGridDivision: JZHourGridDivision
     var scrollableRange: (startDate: Date?, endDate: Date?)
 
+    // initialize schedule page setting
     init(viewType: ViewType, date: Date, numOfDays: Int, scrollType: JZScrollType, firstDayOfWeek: DayOfWeek?, hourGridDivision: JZHourGridDivision, scrollableRange: (Date?, Date?)) {
         self.viewType = viewType
         self.date = date
@@ -82,9 +85,11 @@ struct OptionsSelectedData {
 class OptionsViewModel: NSObject {
 
     let dateFormatter = DateFormatter()
+    
+    // set data type
     var optionsData: [ExpandableData] = {
         let hourDivisionCategories: [JZHourGridDivision] = [.noneDiv, .minutes_5, .minutes_10, .minutes_15, .minutes_20, .minutes_30]
-//        let viewTypeCategories: [ViewType] = [.defaultView, .customView, .longPressView]
+
         let viewTypeCategories: [ViewType] = [.longPressView]
         return [
             ExpandableData(subject: .viewType, categories: viewTypeCategories),
@@ -98,6 +103,7 @@ class OptionsViewModel: NSObject {
     }()
     let perviousSelectedData: OptionsSelectedData
 
+    // set info types on schedule setting page
     init(selectedData: OptionsSelectedData) {
         self.perviousSelectedData = selectedData
         super.init()
@@ -115,6 +121,7 @@ class OptionsViewModel: NSObject {
         dateFormatter.dateFormat = "YYYY-MM-dd"
     }
 
+    // return header view subtitle
     func getHeaderViewSubtitle(_ section: Int) -> String {
         let data = optionsData[section]
         var subtitle: String?
@@ -142,6 +149,7 @@ class OptionsViewModel: NSObject {
         return subtitle ?? ""
     }
 
+    // return Scrollable Range SubTitle
     func getScrollableRangeSubTitle(_ date: Date?) -> String {
         var str = "nil"
         if let date = date {
@@ -150,12 +158,14 @@ class OptionsViewModel: NSObject {
         return str
     }
 
+    // insert day of week to data
     func insertDayOfWeekToData(firstDayOfWeek: DayOfWeek) {
         let dayOfWeekData = ExpandableData(subject: .firstDayOfWeek, categories: DayOfWeek.dayOfWeekList)
         dayOfWeekData.selectedValue = firstDayOfWeek
         optionsData.insert(dayOfWeekData, at: 3)
     }
 
+    // remove day of week
     func removeDayOfWeekInData() {
         if optionsData[3].subject == .firstDayOfWeek {
             optionsData.remove(at: 3)

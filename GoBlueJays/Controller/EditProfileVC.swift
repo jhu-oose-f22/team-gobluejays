@@ -28,7 +28,7 @@ class EditProfileVC: UIViewController {
     
     // save profile info
     func saveText() {
-        let nameText = self.nameField.text!
+        let nameText = CurrentLoginName.name
         let jhedText = self.jhedField.text!
         let emailText = self.emailField.text!
         let phoneText = self.phoneField.text!

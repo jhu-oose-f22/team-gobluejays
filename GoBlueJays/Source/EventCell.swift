@@ -17,6 +17,7 @@ class EventCell: UICollectionViewCell {
         setupBasic()
     }
     
+    // set up cell styling
     func setupBasic() {
         self.clipsToBounds = true
         layer.shadowColor = UIColor.black.cgColor
@@ -29,6 +30,7 @@ class EventCell: UICollectionViewCell {
         borderView.backgroundColor = borderColor
     }
     
+    // configure cell info
     func configureCell(event: DefaultEvent) {
         self.event = event
         locationLabel.text = event.location

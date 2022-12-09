@@ -14,7 +14,7 @@ class EditEventViewController: UIViewController {
     let db = Firestore.firestore()
     var cell:AllDayEvent!
 
-    
+    // current VC view
     lazy var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
     
     lazy var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
@@ -39,7 +39,7 @@ class EditEventViewController: UIViewController {
         
     }
     
-    /// Set up navigation bar
+    // Set up navigation bar
     func setupBasic() {
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -52,8 +52,6 @@ class EditEventViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .systemGray
         
         let playButtonConstraints = [
-//            doneBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
-//            doneBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
             doneBtn.widthAnchor.constraint(equalToConstant: 100)
         ]
         NSLayoutConstraint.activate(playButtonConstraints)
@@ -68,8 +66,10 @@ class EditEventViewController: UIViewController {
     
     @objc func onBtnDoneTapped(){
         if let event:AllDayEvent = self.cell{
+            // extract from database
             let curEvent = self.db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events").document(event.id)
-            //let curEvent = self.db.collection("scheduleDayEvents").document(event.id)
+            
+            // save event info to struct
             let keyedValues:[String:Any] = ["title":event.title,
                                             "completed":event.completed,
                                             "startDate":event.startDate,
@@ -78,7 +78,7 @@ class EditEventViewController: UIViewController {
                                             "isAllDay":false,
                                             "note":event.note]
             
-            
+            // update event data
             curEvent.updateData(keyedValues){err in
                     if let err = err {
                         print("Error updating document: \(err)")
@@ -87,7 +87,6 @@ class EditEventViewController: UIViewController {
                         self.viewModel.events[self.viewModel.events.firstIndex(where: {$0.id == event.id})!] = event.copy() as! AllDayEvent
                         self.viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents:  self.viewModel.events)
                         self.calendarWeekView!.forceReload(reloadEvents: self.viewModel.eventsByDate)
-//                        let _ = AllDayViewModel()
                     }
             }
             
@@ -104,13 +103,13 @@ class EditEventViewController: UIViewController {
 }
 
 extension EditEventViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    // number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    
-   
-    
+    // tableview display height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 4{
             return 100
@@ -122,6 +121,7 @@ extension EditEventViewController:UITableViewDelegate,UITableViewDataSource{
                 return UITableViewCell()
             }
         
+        // handle event detail variable
         switch indexPath.row{
         case 0:
             cell.updateCell(title: "Title", textField: self.cell?.title ?? "Undefined", cell: self.cell!)

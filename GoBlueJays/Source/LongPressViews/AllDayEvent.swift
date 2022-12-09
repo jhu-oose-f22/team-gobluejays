@@ -28,8 +28,7 @@ class AllDayEvent: JZAllDayEvent {
         super.init(id: id, startDate: startDate, endDate: endDate, completed:completed, isAllDay: isAllDay, title: title)
     }
     
- 
-
+    // make a copy of current object
     override func copy(with zone: NSZone?) -> Any {
         return AllDayEvent(id: id, title: title, startDate: startDate, endDate: endDate, location: location, isAllDay: isAllDay,completed: completed, note: note, type: type, department: department)
     }

@@ -18,7 +18,7 @@ class ExampleOptionsViewController: UIViewController {
         setupTableView()
     }
     
-    /// Set up navigation bar
+    // Set up navigation bar
     func setupBasic() {
         self.automaticallyAdjustsScrollViewInsets = false
         view.backgroundColor = UIColor.white
@@ -26,7 +26,7 @@ class ExampleOptionsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onBtnDoneTapped))
     }
     
-    /// Set up Table view layout and register table view cells
+    // Set up Table view layout and register table view cells
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self

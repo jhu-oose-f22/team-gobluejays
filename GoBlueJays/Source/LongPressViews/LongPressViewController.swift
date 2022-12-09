@@ -159,6 +159,7 @@ extension LongPressViewController: OptionsViewDelegate {
         self.present(navigationVC, animated: true, completion: nil)
     }
 
+    // get selected data
     private func getSelectedData() -> OptionsSelectedData {
         let numOfDays = calendarWeekView.numOfDays!
         let firstDayOfWeek = numOfDays == 7 ? calendarWeekView.firstDayOfWeek : nil

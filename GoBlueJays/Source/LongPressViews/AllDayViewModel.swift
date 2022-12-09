@@ -1,11 +1,3 @@
-//
-//  AllDayViewModel.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 30/5/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import Foundation
 import JZCalendarWeekView
 import FirebaseCore
@@ -14,7 +6,6 @@ import SwiftUI
 
 class AllDayViewModel {
     init(){
-//        self.addEvent(event: defaultEvent) //add Default to initialize DB
         if #available(iOS 16.0, *) {
             reloadData()
         } else {
@@ -28,8 +19,6 @@ class AllDayViewModel {
     private let firstDate = Date().add(component: .hour, value: 1)
     private let secondDate = Date().add(component: .day, value: 1)
     private let thirdDate = Date().add(component: .day, value: 2)
-    
-//    let defaultEvent = AllDayEvent(id: "0", title: "One", startDate: Date(), endDate: Date(), location: "Melbourne", isAllDay: false,completed: false)
     
     open var events:[AllDayEvent] = []
     
@@ -45,10 +34,14 @@ class AllDayViewModel {
     @available(iOS 16.0, *)
     func reloadData(){
         self.events = []
+        
+        // schedule page init
         initiateEvents(){
             (events) in
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
+            
+            // schedule vc in different mode
             if let vc = (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0]{
                 switch vc{
                 case is LongPressViewController:
@@ -68,6 +61,7 @@ class AllDayViewModel {
             
         }
         
+        // load registered course to view controller
         initCourse(){(events) in
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
@@ -89,13 +83,12 @@ class AllDayViewModel {
                 
             }
         }
-        print(events)
     }
     func addEvent(event:AllDayEvent){
         
         events.append(event)
         
-        //db.collection("scheduleDayEvents").document(event.id).setData([
+        
         db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events").document(event.id).setData([
             "id":event.id,
             "title": event.title,
@@ -115,7 +108,7 @@ class AllDayViewModel {
     
     public func initiateEvents(completion: @escaping ((_ events:[AllDayEvent]) -> Void)) {
         var myevents:[AllDayEvent] = []
-        //let collection = db.collection("scheduleDayEvents")
+
         let collection = db.collection(CurrentLoginName.name).document("scheduleDayEvents").collection("events")
         
         collection.getDocuments() {[self] (querySnapshot, err) in
@@ -139,10 +132,7 @@ class AllDayViewModel {
         
         
         completion([])
-        
-//        self.events = myevents
-
-//        return myevents
+    
     }
     
    
@@ -158,6 +148,7 @@ extension AllDayViewModel{
         let user = CurrentLoginName.name
         let courseCollection = db.collection(user).document("scheduleCourses").collection("courses")
         
+        // retrieve data from database on scheduleCourses
         courseCollection.getDocuments() {[self] (querySnapshot, err) in
             if let doc = querySnapshot {
                 for document in doc.documents {
@@ -166,8 +157,12 @@ extension AllDayViewModel{
                     let cn = document.data()["CourseNumber"] as? String
                     let s = document.data()["Section"] as? String
                     let uuid = document.data()["uuid"] as? String
+                    
+                    // save in RegisteredCourse object
                     let course:RegisteredCourse = RegisteredCourse(semester: sem!, courseNumber: cn!, section: s!, uuid: uuid!)
                     registeredCourses.append(course)
+                    
+                    // handle ascyn function
                     let group = DispatchGroup()
                     group.enter()
                     getCourses(course:course)
@@ -193,20 +188,27 @@ extension AllDayViewModel{
         }
     }
     
+    
+    // get course detail from api
     func getCourses(course:RegisteredCourse, completion: @escaping (_ json: [AllDayEvent]?, _ error: Error?)->()) {
         var courses:[AllDayEvent] = []
         let semester:String = course.semester
         let courseNumber:String = course.courseNumber
         let section:String = course.section
         
+            // sis api call to extract course detailed info
             let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=\(semester)&CourseNumber=\(courseNumber)\(section)"
             let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
+                
+                // connection error
                 if let error = error {
                     print("error connecting to SIS\(error)")
                 } else {
                     if let response = response as? HTTPURLResponse {
                         print("statusCode: \(response.statusCode)")
                     }
+                    
+                    // data retrieved success
                     if let data = data {
 
                         if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
@@ -220,25 +222,32 @@ extension AllDayViewModel{
                                     return formatter
                                 }()
                                 
+                                // parse raw data
                                 let period:String = detail.SectionDetails[0].Meetings[0].Dates
                                 let periodStart = period.components(separatedBy: " to ")[0]
                                 let periodEnd = period.components(separatedBy: " to ")[1]
                                 let timeStart = detail.SectionDetails[0].Meetings[0].Times.components(separatedBy: " - ")[0]
                                 let timeEnd = detail.SectionDetails[0].Meetings[0].Times.components(separatedBy: " - ")[1]
                                 
+                                // parse date
                                 var startDate:Date = formatter.date(from:"\(periodStart) \(timeStart)") ?? Date()
                                 var startEndDate:Date = formatter.date(from: "\(periodStart) \(timeEnd)") ?? Date()
                                 let endDate: Date = formatter.date(from: "\(periodEnd) \(timeEnd)") ?? Date()
                                 
                                 let myCourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1, department: [])
                                 courses.append(myCourse)
-                                var date = startDate   // "Jun 30, 2020 at 12:00 PM"
+                                // date format: "Jun 30, 2020 at 12:00 PM"
+                                var date = startDate
                                 let weekdays = self.parseDOW(DOW: detail.SectionDetails[0].Meetings[0].DOW)
+                                
+                                // get all courses within selected range
                                 repeat {
                                     for weekday in weekdays {
                                         startDate = Calendar.current.nextDate(after: startDate, matching: DateComponents(hour:startDate.hour(),minute: startDate.minute(),weekday:weekday), matchingPolicy: .previousTimePreservingSmallerComponents)!
                                         startEndDate = Calendar.current.nextDate(after: startEndDate, matching: DateComponents(hour:startEndDate.hour(),minute: startEndDate.minute(),weekday:weekday), matchingPolicy: .previousTimePreservingSmallerComponents)!
                                         print(startDate.description(with: .current), startDate.monthSymbol())
+                                        
+                                        // store retrieved course data in AllDayEvent object
                                         let mycourse:AllDayEvent = AllDayEvent(id: course.uuid, title: "\(detail.OfferingName):\(detail.Title)", startDate: startDate, endDate: startEndDate, location: "\(detail.SectionDetails[0].Meetings[0].Location)  \(detail.SectionDetails[0].Meetings[0].Building)  \(detail.SectionDetails[0].Meetings[0].Room)", isAllDay: false, completed: false, note: "", type: 1, department: ["\(detail.Term_JSS)","\(detail.SectionName)","\(detail.OfferingName)"])
                                         courses.append(mycourse)
                                         
@@ -247,7 +256,6 @@ extension AllDayViewModel{
                                 
                             }
                             
-
                         } else {
                             print("Invalid Response")
                         }
@@ -258,6 +266,7 @@ extension AllDayViewModel{
             task.resume()
     }
 
+    // parse weekday from number representation
     func parseDOW(DOW:String)->[Int]{
         var weekdays:[Int] = []
         for i in DOW{
@@ -279,6 +288,7 @@ extension AllDayViewModel{
     }
 }
 
+// date struct to handle time operation
 public extension Date {
     func noon(using calendar: Calendar = .current) -> Date {
         calendar.date(bySettingHour: 12, minute: 0, second: 0, of: self)!

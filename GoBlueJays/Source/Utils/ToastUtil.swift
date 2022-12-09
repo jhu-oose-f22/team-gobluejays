@@ -2,28 +2,28 @@ import UIKit
 import JZCalendarWeekView
 
 func getCourses(semester:String,courseNumber:String,section:String, completion: @escaping (_ json: [CourseDetails]?, _ error: Error?)->()) {
-        var booooks:[CourseDetails] = []
-        
-            let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
-            let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
-                if let error = error {
+    
+        var courses:[CourseDetails] = []
+            // retrieve course detail from sis api
+        let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
+        let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
+            if let error = error {
                     print("error getting courses")
-                } else {
-                    if let response = response as? HTTPURLResponse {
-                        print("statusCode: \(response.statusCode)")
-                    }
-                    if let data = data {
-                        
-                        if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
-                            booooks.append(contentsOf: books)
-                        } else {
+            } else {
+                if let response = response as? HTTPURLResponse {
+                    print("statusCode: \(response.statusCode)")
+                }
+                if let data = data {
+                      if let course = try? JSONDecoder().decode([CourseDetails].self, from: data) {
+                            courses.append(contentsOf: course)
+                    } else {
                             print("Invalid Response")
-                        }
                     }
                 }
-                completion(booooks, nil)
             }
-            task.resume()
+            completion(courses, nil)
+        }
+        task.resume()
     }
 
 var currentWeekCourses:[CourseDetails] = []
@@ -47,30 +47,36 @@ open class ToastUtil {
     static private var toastLabel: UILabel!
     
     public static func addDetailPage(cell:JZBaseEvent? = nil){
+        
+        // get current view controller
         guard let currentscene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate, toastView == nil else { return }
         guard let currentWindow = currentscene.window else { return }
 
         if let allday = cell?.isKind(of: AllDayEvent.self){
             let allDayCell = cell as! AllDayEvent
             switch allDayCell.type{
-            case 0: // event
+            case 0:
+                // event
                 let controller =
                 currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "EventDetailStoryboard") as! EventDetailVC
                 controller.event = allDayCell
                 (((currentWindow.rootViewController?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).present(controller, animated: true)
                 break
             default:
+                // course
                 var semester = allDayCell.department[0]
                 var semester_formatted = String(semester.prefix(4) + "%20" + semester.suffix(4))
                 var number = allDayCell.department[2]
                 var number_formatted = String(number.filter { !". \n\t\r".contains($0) })
                 let group = DispatchGroup()
-                                    group.enter()
-                                    getCourses(semester: semester_formatted, courseNumber: number_formatted, section: allDayCell.department[1]){ json, error in
-                                        currentWeekCourses = json ?? []
-                                        group.leave()
-                                    }
-                                    group.wait()
+                group.enter()
+                getCourses(semester: semester_formatted, courseNumber: number_formatted, section: allDayCell.department[1]){ json, error in
+                    currentWeekCourses = json ?? []
+                    group.leave()
+                }
+                group.wait()
+                
+                // when on click, pop up view course detail UI
                 let controller =
                 currentWindow.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "ViewEventStoryboard") as! ViewController
                 controller.course = currentWeekCourses[0]
@@ -107,6 +113,7 @@ open class ToastUtil {
         toastView.setAnchorCenterHorizontallyTo(view: currentWindow, heightAnchor: defaultMidHeight, bottomAnchor: (bottomYAnchor, -defaultMidToBottom))
         toastView.widthAnchor.constraint(greaterThanOrEqualToConstant: defaultMidMinWidth).isActive = true
 
+        // handle delay
         let delay = existTime ?? defaultExistTime
         UIView.animate(withDuration: defaultShowTime, delay: 0, options: .curveEaseInOut, animations: {
             toastView.alpha = 1
@@ -123,7 +130,7 @@ open class ToastUtil {
         })
     }
     
-    
+    // add label styling
     private static func addToastLabel(message: String) {
         toastLabel = UILabel()
         toastLabel.text = message

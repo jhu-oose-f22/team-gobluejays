@@ -1,11 +1,3 @@
-//
-//  LongPressWeekView.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 30/4/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 
@@ -18,19 +10,18 @@ class LongPressWeekView: JZLongPressWeekView {
         self.collectionView.register(UINib(nibName: LongPressEventCell.className, bundle: nil), forCellWithReuseIdentifier: LongPressEventCell.className)
     }
 
+    // collectionView init
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LongPressEventCell.className, for: indexPath) as? LongPressEventCell,
             let event = getCurrentEvent(with: indexPath) as? AllDayEvent {
             cell.configureCell(event: event)
-//            if event.completed {
-//                cell.contentView.backgroundColor = UIColor(hex: 0xfff1ee)
-//            }
             
             return cell
         }
         preconditionFailure("LongPressEventCell and AllDayEvent should be casted")
     }
 
+    // UICollectionView
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == JZSupplementaryViewKinds.allDayHeader {
             guard let alldayHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as? JZAllDayHeader else {
@@ -45,6 +36,7 @@ class LongPressWeekView: JZLongPressWeekView {
         return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
     }
 
+    // project AllDayHeaderViews object to UI
     private func getAllDayHeaderViews(allDayEvents: [AllDayEvent]) -> [UIView] {
         var allDayViews = [UIView]()
         for event in allDayEvents {

@@ -76,6 +76,7 @@ extension DefaultViewController: OptionsViewDelegate {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionsButton)
     }
 
+    // present option view
     @objc func presentOptionsVC() {
         guard let optionsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OptionsViewController") as? ExampleOptionsViewController else {
             return
@@ -88,6 +89,7 @@ extension DefaultViewController: OptionsViewDelegate {
         
     }
 
+    // get selected data based on number of days in setting
     private func getSelectedData() -> OptionsSelectedData {
         let numOfDays = calendarWeekView.numOfDays!
         let firstDayOfWeek = numOfDays == 7 ? calendarWeekView.firstDayOfWeek : nil

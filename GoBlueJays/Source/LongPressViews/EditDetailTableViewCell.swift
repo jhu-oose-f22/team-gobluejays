@@ -92,9 +92,9 @@ class EditDetailTableViewCell: UITableViewCell {
     
     func setupBasic() {
         self.contentView.backgroundColor = .white
-//        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(headerViewTapped)))
     }
     
+    // update cell based on title state
     func updateCell(title: String, textField: String, cell:AllDayEvent) {
         self.label.text = title
         self.textField.text = textField

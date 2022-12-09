@@ -1,11 +1,3 @@
-//
-//  LongPressEventCell.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 2/5/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 
@@ -27,6 +19,7 @@ class LongPressEventCell: JZLongPressEventCell {
         self.contentView.backgroundColor = contentColor
     }
 
+    // basic UI styling
     func setupBasic() {
         self.clipsToBounds = true
         layer.shadowColor = UIColor.black.cgColor
@@ -38,12 +31,14 @@ class LongPressEventCell: JZLongPressEventCell {
         borderView.backgroundColor = borderColor
     }
 
+    // schedule event/course info display styling
     func configureCell(event: AllDayEvent, isAllDay: Bool = false) {
         self.event = event
         locationLabel.text = event.location
         titleLabel.text = event.title
         locationLabel.isHidden = isAllDay
-        if event.type == 1{ // Course
+        // Course
+        if event.type == 1{
             contentColor = UIColor(hex: 0xDEF5E5)
             borderColor = UIColor(hex: 0x8EC3B0)
             borderView.backgroundColor = borderColor
@@ -51,7 +46,8 @@ class LongPressEventCell: JZLongPressEventCell {
             titleLabel.font = UIFont.systemFont(ofSize: 8, weight: .medium)
             locationLabel.font = UIFont.systemFont(ofSize: 8, weight: .light)
         }
-        else if event.completed { //Events
+        //Events
+        else if event.completed {
             
             contentColor = UIColor(hex: 0xfff1ee)
             borderColor = UIColor(hex: 0xe06560)
