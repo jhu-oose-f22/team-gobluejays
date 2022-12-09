@@ -1,11 +1,3 @@
-//
-//  CurrentTimelineAll.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 28/8/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 
 class CurrentTimelineAll: UICollectionReusableView {

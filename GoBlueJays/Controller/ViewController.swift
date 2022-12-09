@@ -32,7 +32,6 @@ class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        print(course.Title)
         level.text = level.text! + course.Level
         credits.text = credits.text! + course.Credits
         courseNumber.text = course.OfferingName

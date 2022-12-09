@@ -533,19 +533,6 @@ extension ActivityVC {
         }
         
         var returnLocation = CLLocationCoordinate2D()
-        // request to Google Map: payment method needed
-        /*
-        let request =  URL(string:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=\(name)&inputtype=textquery&fields=geometry&key=AIzaSyDmH0diWsSMIhNsb3G2HIEG8g4p62rCgCI")!
-        
-        
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else { return }
-            let f = JSONSerialization.jsonObject(with: data)
-            returnLocation.latitude = f["candidates"]["geometry"]["location"]["lat"]
-            returnLocation.longitude = f["candidates"]["geometry"]["location"]["lng"]}
-        
-        task.resume()
-         */
         return returnLocation
     }
     
@@ -563,7 +550,7 @@ extension ActivityVC {
         _ manager: CLLocationManager,
         didFailWithError error: Error
     ) {
-        print("Failed to get location")
+        // Failed to get location
         latitude = -1.0
         longitude = -1.0
     }
@@ -582,8 +569,10 @@ extension ActivityVC: collectToMainDelegate {
                 if activity.likes == false {
                     self.collect_ids.append(actID)
                 } else {
+                    // delete
                     self.collect_ids = collect_ids.filter {$0 != actID}
                 }
+                // update
                 self.activities[index].likes = !self.activities[index].likes
             }
         }
@@ -606,6 +595,7 @@ extension ActivityVC: collectToMainDelegate {
 
 // Detail Delegate
 extension ActivityVC: activityTableDelegate {
+
     func cellTapped(act: ActivityDetailModel, actID: String) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
         var actdetail = act
@@ -701,6 +691,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
+
         let url = URL(string: filteredActivities[ind1].image)
         if let url = url {
             let group = DispatchGroup()
@@ -791,6 +782,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+
     }
 }
 

@@ -35,7 +35,6 @@ class LongPressEventCell: JZLongPressEventCell {
         layer.shadowOpacity = 0
         locationLabel.font = UIFont.systemFont(ofSize: 12)
         titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-//        print("basic")
         borderView.backgroundColor = borderColor
     }
 

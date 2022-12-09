@@ -19,7 +19,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
 
     let searchController = UISearchController(searchResultsController: nil)
     weak var delegate: collectToMainDelegate?
-
     
     @IBOutlet weak var tableView: UITableView!
     var collects: [Activity] = []
@@ -40,6 +39,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
+
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         
@@ -196,7 +196,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
     
     func cellTapped(act: ActivityDetailModel, actID: String) {
-        print("got to here")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
         
         var actdetail = act

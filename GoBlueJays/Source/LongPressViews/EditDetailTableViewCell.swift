@@ -52,7 +52,7 @@ class EditDetailTableViewCell: UITableViewCell {
         case "Note":
             self.cell.note = textField.text ?? "undefined"
         default:
-            print(textField.text)
+            break
         }
         
     }

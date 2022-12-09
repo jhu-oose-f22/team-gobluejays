@@ -2,14 +2,11 @@ import Foundation
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
-//import EventKitUI
-//import EventKit
 import JZCalendarWeekView
 
 
 class EventDetailVC: UIViewController {
     let db = Firestore.firestore()
-//    lazy var eventstore: EKEventStore = EKEventStore()
     private let firstDate = Date().add(component: .hour, value: 1)
     private let secondDate = Date().add(component: .day, value: 1)
     private let thirdDate = Date().add(component: .day, value: 2)
@@ -101,17 +98,12 @@ class EventDetailVC: UIViewController {
                     print("Document successfully updated")
                 }
         }
-//        _ = navigationController?.popViewController(animated: true)
         
         event.completed = !event.completed
 
         
         calendarWeekView!.forceReload(reloadEvents: viewModel.eventsByDate)
-        
-//        calendarWeekView!.refreshWeekView()
-//        for i in viewModel.events{
-//            print("\(i.title) -- \(i.completed)")
-//        }
+
         self.dismiss(animated: true)
     }
     

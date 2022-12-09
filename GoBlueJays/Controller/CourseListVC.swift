@@ -87,7 +87,6 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 for document in QuerySnapshot!.documents {
                     let cn = document.data()["CourseNumber"] as? String
                     let s = document.data()["Section"] as? String
-                    //self.tabs.append(cn! + "." + s! + "     (Delete)")
                     let name = cn! + "." + s! + "     (Delete)"
                     let uuid = document.data()["uuid"] as? String
                     self.tabs.append(courseListCourse(name: name, uuid: uuid!))

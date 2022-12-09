@@ -26,11 +26,11 @@ class RecomCell: UICollectionViewCell {
     
     @IBAction func likes_click(_ sender: UIButton) {
         if collect.tag == 0 {
+            // liked
             button_configure(likes: true)
-            print("liked")
         } else {
+            // unliked
             button_configure(likes: false)
-            print("unliked")
         }
         delegate?.cellButtonPressed(actID: activityID)
     }

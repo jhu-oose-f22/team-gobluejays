@@ -1,15 +1,7 @@
-//
-//  CustomWeekView.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 23/4/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 
-/// Custom grid line and row header & Not All Day
+// Custom grid line and row header & Not All Day
 class CustomWeekView: JZBaseWeekView {
 
     override func registerViewClasses() {

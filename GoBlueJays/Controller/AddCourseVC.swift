@@ -35,8 +35,6 @@ class AddCourseVC: UIViewController {
         
         
         self.view.showToast(message: "Course Added!")
-//        lazy var calendarWeekView = ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).calendarWeekView
-        
         
         if #available(iOS 16.0, *) {
             var viewModel =  ((((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] as! LongPressViewController).viewModel
@@ -44,55 +42,7 @@ class AddCourseVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-
-        
-        /*
-        var booooks:[CourseDetails] = []
-        let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
-            if let error = error {
-                print("error: \(error)")
-                print("hi im thomasss")
-                //create toast saying "could not find course, please try again"
-                self.view.showToast(message: "Could not find course, please try again.")
-                
-            } else{
-                if let response = response as? HTTPURLResponse {
-                    print("statusCode: \(response.statusCode)")
-                    if (self.isDuplicateCourse(courseNumber: "")) {
-                        //break out of this whole thing
-                        self.view.showToast(message: "Course already added.")
-                    } else {
-                        //toast saying "course added!"
-                        self.view.showToast(message: "Course added!")
-                    }
-                }
-                if let data = data {
-                    
-                    if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
-                        //print(books)
-                        booooks.append(contentsOf: books)
-
-                        
-                    } else {
-                        print("Invalid Response")
-                    }
-                }
-            }
-            print("did i make it here")
-            //completion(booooks, nil)
-        }
-         */
     }
-    /*
-    func isDuplicateCourse(courseNumber: String) -> Bool {
-        for course in ScheduleVC.registeredCourses {
-            if (course.courseNumber == courseNumber) {
-                return true
-            }
-        }
-        return false
-    }
-    */
 }
 
 

@@ -1,11 +1,3 @@
-//
-//  ToastUtil.swift
-//  JZiOSFramework
-//
-//  Created by Jeff Zhang on 22/3/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 
@@ -15,7 +7,7 @@ func getCourses(semester:String,courseNumber:String,section:String, completion: 
             let url = "https://sis.jhu.edu/api/classes?key=IwMTzqj8K5swInud8F5s7cAsxPRHOCtZ&Term=" + semester + "&CourseNumber=" + courseNumber + section;
             let task = URLSession.shared.dataTask(with: URL(string:url)!) { (data, response, error) in
                 if let error = error {
-                    print("hi im thomas")
+                    print("error getting courses")
                 } else {
                     if let response = response as? HTTPURLResponse {
                         print("statusCode: \(response.statusCode)")
@@ -23,7 +15,6 @@ func getCourses(semester:String,courseNumber:String,section:String, completion: 
                     if let data = data {
                         
                         if let books = try? JSONDecoder().decode([CourseDetails].self, from: data) {
-                            //print(books)
                             booooks.append(contentsOf: books)
                         } else {
                             print("Invalid Response")

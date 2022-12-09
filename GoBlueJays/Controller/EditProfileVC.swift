@@ -40,7 +40,6 @@ class EditProfileVC: UIViewController {
                     "Phone": phoneText,
                     "School": SchoolText,
                     "Bio": bioText]
-        //db.collection("Profile").addDocument(data: dict)
         db.collection(CurrentLoginName.name).document("Profile").collection("profile").addDocument(data: dict)
     }
 }

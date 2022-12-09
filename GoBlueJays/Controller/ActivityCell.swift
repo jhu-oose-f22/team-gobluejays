@@ -35,8 +35,6 @@ class ActivityCell: UITableViewCell{
     var activityID: [String] = []
     
     @IBAction func cell1_tap(_ sender: UIButton) {
-        print("HERE!!!")
-        print(activityID)
         var act = ActivityDetailModel(title: Title.text ?? "No Title", date: "Temp", time: "No Time", location: location.text ?? "No Location", host: "Temp", cost: "Temp", detail: "Temp", image: ActivityImage.asImage())
         self.delegate!.cellTapped(act: act, actID: activityID[0])
     }
@@ -47,14 +45,13 @@ class ActivityCell: UITableViewCell{
     }
     
     @IBAction func likes_click(_ sender: UIButton) {
-        print(activityID)
         let db = Firestore.firestore()
         if collect.tag == 0 {
+            // liked
             button_configure(likes: true, but: 1)
-            print("liked")
         } else {
+            // unliked
             button_configure(likes: false, but: 1)
-            print("unliked")
         }
         delegate?.cellButtonPressed(actID: activityID[0])
     }
