@@ -40,10 +40,8 @@ class HousingVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        print(indexPath.row)
         let urlString = tabs[indexPath.row].link
         let webView:WebViewVC = WebViewVC()
-        //webView.modalPresentationStyle = .fullScreen
         webView.link = urlString
         self.present(webView, animated: true, completion: nil)
     }

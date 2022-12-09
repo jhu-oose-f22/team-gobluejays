@@ -1,11 +1,3 @@
-//
-//  CustomViewController.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 1/5/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 
@@ -46,7 +38,7 @@ class CustomViewController: UIViewController {
         }
     }
 
-    /// For example only
+    // For example only
     private func setupCalendarViewWithSelectedData() {
         guard let selectedData = viewModel.currentSelectedData else { return }
 

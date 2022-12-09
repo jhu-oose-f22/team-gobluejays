@@ -12,11 +12,6 @@ class LongPressViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
-//        viewModel.events = viewModel.initiateEvents()
-//        print(viewModel.events)
-//        print(viewModel.eventsByDate)
-//        print("appear")
-
     }
     
     override func viewDidLoad() {
@@ -39,9 +34,6 @@ class LongPressViewController: UIViewController {
         if viewModel.currentSelectedData != nil {
             // For example only
             setupCalendarViewWithSelectedData()
-//            print("setupCalendar")
-//            print(viewModel.events)
-//            print(viewModel.eventsByDate)
         } else {
             calendarWeekView.setupCalendar(numOfDays: 3,
                                            setDate: Date(),
@@ -60,7 +52,7 @@ class LongPressViewController: UIViewController {
         calendarWeekView.moveTimeMinInterval = 15
     }
 
-    /// For example only
+    // For example only
     private func setupCalendarViewWithSelectedData() {
         guard let selectedData = viewModel.currentSelectedData else { return }
         calendarWeekView.setupCalendar(numOfDays: selectedData.numOfDays,
@@ -93,8 +85,8 @@ extension LongPressViewController: JZLongPressViewDelegate, JZLongPressViewDataS
         weekView.forceReload(reloadEvents: viewModel.eventsByDate)
     }
     
+    // event edit
     func weekView(_ weekView: JZLongPressWeekView, editingEvent: JZBaseEvent, didEndMoveLongPressAt startDate: Date) {
-//        print("editing")
         guard let event = editingEvent as? AllDayEvent else { return }
         let duration = Calendar.current.dateComponents([.minute], from: event.startDate, to: event.endDate).minute!
         let selectedIndex = viewModel.events.firstIndex(where: { $0.id == event.id })!

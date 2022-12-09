@@ -35,7 +35,6 @@ class ActivityVC: UIViewController{
     var collect_ids: [String] = []
     var activities: [Activity] = []
     var filteredActivities: [Activity] = []
-//    var filteredActivitiesPrep: [Activity] = []
     var filterInfo = [String]()
     var sortedActivites: [Activity] = []
     var sortedAct2: [Activity] = []
@@ -74,7 +73,6 @@ class ActivityVC: UIViewController{
         rec_config()
 
         let db = Firestore.firestore()
-        //db.collection("activity").getDocuments(){ [self]
         db.collection(CurrentLoginName.name).document("activity").collection("act").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
@@ -181,7 +179,6 @@ class ActivityVC: UIViewController{
                 self.allCategories = self.allCategories.sorted { $0.lowercased() < $1.lowercased() }
                 self.allCategories.insert("All Category", at: 0)
                 self.filteredActivities = self.activities
-//                self.filteredActivitiesPrep = self.filteredActivities
                 self.setBuildingLocations()
                 self.activity_recommendation()
                 group.leave()
@@ -266,8 +263,6 @@ class ActivityVC: UIViewController{
     }
 
     func getActivities() {
-        // setenv("PYTHON_LIBRARY", "/Users/murphycheng/opt/anaconda3/bin/python/", 1)
-        // print("get activities")
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
         let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
@@ -308,14 +303,11 @@ class ActivityVC: UIViewController{
                                 url = String(equality[1] + ":" + equality[2])
                             }
                         }
-                        // print("append!", title, location, category)
                         self.activities.append(Activity(title: title, time: "time", location: location, image: url, likes: false, id: "", category: category, host:"", cost: "", detail:""))
                     }
-                    // print(self.activities)
                 }
         }
         task.resume()
-        //let g = String.init(requests.get("https://jhu.campusgroups.com/ical/ical_jhu.ics").content)
         
     }
     
@@ -437,8 +429,6 @@ class ActivityVC: UIViewController{
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
-//        searchController.searchBar.showsScopeBar = true
-//        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
         definesPresentationContext = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -565,13 +555,6 @@ extension ActivityVC {
                 val += pow(Double(v!),Double(v!))
                 common_info.append(info)
             }
-//            for t in act.tags {
-//                if likes_tags.contains(t) {
-//                    let v = wgts[t]
-//                    val += pow(Double(v!),Double(v!))
-//                }
-//            }
-//            weights.append(val/Double(act.tags.count))
             weights.append(val)
         }
         
@@ -629,19 +612,6 @@ extension ActivityVC {
         }
         
         var returnLocation = CLLocationCoordinate2D()
-        // request to Google Map: payment method needed
-        /*
-        let request =  URL(string:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=\(name)&inputtype=textquery&fields=geometry&key=AIzaSyDmH0diWsSMIhNsb3G2HIEG8g4p62rCgCI")!
-        
-        
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else { return }
-            let f = JSONSerialization.jsonObject(with: data)
-            returnLocation.latitude = f["candidates"]["geometry"]["location"]["lat"]
-            returnLocation.longitude = f["candidates"]["geometry"]["location"]["lng"]}
-        
-        task.resume()
-         */
         return returnLocation
     }
     
@@ -659,7 +629,7 @@ extension ActivityVC {
         _ manager: CLLocationManager,
         didFailWithError error: Error
     ) {
-        print("Failed to get location")
+        // Failed to get location
         latitude = -1.0
         longitude = -1.0
     }
@@ -676,10 +646,10 @@ extension ActivityVC: collectToMainDelegate {
                 if activity.likes == false {
                     self.collect_ids.append(actID)
                 } else {
-                    print("deleting!")
+                    // delete
                     self.collect_ids = collect_ids.filter {$0 != actID}
                 }
-                print("updating!")
+                // update
                 self.activities[index].likes = !self.activities[index].likes
             }
         }
@@ -701,15 +671,8 @@ extension ActivityVC: collectToMainDelegate {
 }
 
 extension ActivityVC: activityTableDelegate {
-//    func cellTapped(act: ActivityDetailModel) {
-//        print("got to here")
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-//        vc.activity = act
-//        self.present(vc, animated: true, completion: nil)
-//    }
     
     func cellTapped(act: ActivityDetailModel, actID: String) {
-        print("got to here")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
         
         var actdetail = act
@@ -734,7 +697,6 @@ extension ActivityVC: activityTableDelegate {
         for (index, activity) in self.activities.enumerated() {
             if activity.id == actID {
                 if activity.likes == false {
-                    //db.collection("activity").document(actID).setData([
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).setData([
                         "category": activity.category,
                         "image": activity.image,
@@ -806,8 +768,6 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
-        // cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
-        // cell.loadImageFrom(urlAddress: filteredActivities[ind1].image, right: true)
             let url = URL(string: filteredActivities[ind1].image)
             if let url = url {
                 let group = DispatchGroup()
@@ -833,7 +793,6 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
                     task.resume()
                 }
                 group.wait()
-                delete group
             } else {
                 self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
             }
@@ -876,8 +835,6 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             cell.location2.text = filteredActivities[ind2].location
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
-            // cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
-            // cell.loadImageFrom(urlAddress: filteredActivities[ind2].image, right: false)
             let url2 = URL(string: filteredActivities[ind2].image)
             cell.ActivityImage2.kf.setImage(with: url2)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
@@ -892,11 +849,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        //let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
-        
-        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        //vc.activity = act
-        //self.present(vc, animated: true, completion: nil)
+
     }
     
 }
@@ -986,7 +939,6 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.location.text = recact[index].location
         cell.title.text = recact[index].title
         cell.time.text = recact[index].time
-        // cell.image.image = UIImage(named: recact[index].image)
         let url = URL(string: recact[index].image)
         if let url = url {
             let group = DispatchGroup()

@@ -1,11 +1,3 @@
-//
-//  DefaultEvent.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 30/5/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import Foundation
 import JZCalendarWeekView
 

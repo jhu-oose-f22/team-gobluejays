@@ -1,11 +1,3 @@
-//
-//  EventCell.swift
-//  timegenii
-//
-//  Created by Jeff Zhang on 14/9/17.
-//  Copyright © 2017 unimelb. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 

@@ -12,10 +12,10 @@ class SupportVC: UIViewController, MFMailComposeViewControllerDelegate, UITextFi
     
     @IBOutlet weak var issueInput: UITextView!
     
+    // view setup
     override func viewDidLoad() {
         super.viewDidLoad()
         issueInput.delegate = self
-        // Do view setup here.
     }
     
     @IBAction func submit(_ sender: Any) {

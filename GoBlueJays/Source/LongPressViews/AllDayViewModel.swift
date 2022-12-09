@@ -50,7 +50,6 @@ class AllDayViewModel {
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
             if let vc = (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0]{
-//                print("reloading")
                 switch vc{
                 case is LongPressViewController:
                     let calendarWeekView = (vc as! LongPressViewController).calendarWeekView
@@ -73,7 +72,6 @@ class AllDayViewModel {
             self.events.append(contentsOf: events)
             self.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.events)
             if let vc = (((UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? UIViewController)?.presentedViewController as? UITabBarController)?.viewControllers![1] as? UINavigationController)?.viewControllers[0] {
-//                print("reloading")
                 switch vc{
                 case is LongPressViewController:
                     let calendarWeekView = (vc as! LongPressViewController).calendarWeekView
@@ -111,8 +109,6 @@ class AllDayViewModel {
             err in
             if let err = err {
                 print("Error adding document: \(err)")
-            } else {
-//                print("Document added with ID:\(event.id)")
             }
         }
     }

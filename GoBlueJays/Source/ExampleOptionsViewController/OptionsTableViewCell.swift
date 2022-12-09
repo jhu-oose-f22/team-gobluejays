@@ -1,11 +1,3 @@
-//
-//  OptionsTableViewCell.swift
-//  JZCalendarViewExample
-//
-//  Created by Jeff Zhang on 12/4/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 
 protocol OptionsCellDelegate: class {
