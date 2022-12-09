@@ -41,9 +41,6 @@ class EventCell: UICollectionViewCell {
         self.event = event
         locationLabel.text = event.location
         titleLabel.text = event.title
-        print("configure")
-        print(event.title)
-        print(event.completed)
         if event.completed {
             contentColor = UIColor(hex: 0xfff1ee)
             borderColor = UIColor(hex: 0xe06560)

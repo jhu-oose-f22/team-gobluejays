@@ -1,11 +1,3 @@
-//
-//  LongPressViewController.swift
-//  JZCalendarWeekViewExample
-//
-//  Created by Jeff Zhang on 30/4/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
-//
-
 import UIKit
 import JZCalendarWeekView
 import FirebaseCore
@@ -91,7 +83,7 @@ extension LongPressViewController: JZLongPressViewDelegate, JZLongPressViewDataS
 
     func weekView(_ weekView: JZLongPressWeekView, didEndAddNewLongPressAt startDate: Date) {
         let newEvent = AllDayEvent(id: UUID().uuidString, title: "New Event", startDate: startDate, endDate: startDate.add(component: .hour, value: weekView.addNewDurationMins/60),
-                                   location: "Melbourne", isAllDay: false,completed: false, note:"", type: 0)
+                                   location: "Melbourne", isAllDay: false,completed: false, note:"", type: 0, department: [])
 
         if viewModel.eventsByDate[startDate.startOfDay] == nil {
             viewModel.eventsByDate[startDate.startOfDay] = [AllDayEvent]()

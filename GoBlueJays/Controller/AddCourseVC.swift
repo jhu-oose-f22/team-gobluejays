@@ -21,21 +21,16 @@ class AddCourseVC: UIViewController {
         self.hideKeyboardWhenTappedAround()
     
     }
-    //need to implement dropdown for term and section later...
     
     @IBAction func addCourse(_ sender: UIButton) {
-        
-        
-        //This works! the course is added to the array in ScheduleVC, but the views don't immediately update at the moment...
     
         let registeredCourse1: RegisteredCourse = RegisteredCourse(semester: term.text ?? "", courseNumber: courseNumber.text ?? "", section: section.text ?? "", uuid: "");
-        //ScheduleVC.registeredCourses.append(registeredCourse1)
-        //clear database and push to there here***
+        
+        //clear database and push to there here
         let db = Firestore.firestore()
         let uuid = NSUUID().uuidString
         print("uuid: " + uuid)
         let user = CurrentLoginName.name
-        //let loginName = "thomas"
         db.collection(user).document("scheduleCourses").collection("courses").document(uuid).setData(["Term": registeredCourse1.semester, "CourseNumber": registeredCourse1.courseNumber, "Section": registeredCourse1.section, "uuid": uuid])
         
         

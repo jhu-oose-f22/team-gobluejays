@@ -14,7 +14,7 @@ class EventDetailVC: UIViewController {
     private let secondDate = Date().add(component: .day, value: 1)
     private let thirdDate = Date().add(component: .day, value: 2)
     
-    lazy var event = AllDayEvent(id: "0", title: "One", startDate: firstDate, endDate: firstDate.add(component: .hour, value: 1), location: "Melbourne", isAllDay: false,completed: false,note:"None", type: 0)
+    lazy var event = AllDayEvent(id: "0", title: "One", startDate: firstDate, endDate: firstDate.add(component: .hour, value: 1), location: "Melbourne", isAllDay: false,completed: false,note:"None", type: 0, department: [])
 
   
     @IBOutlet weak var name: UILabel!

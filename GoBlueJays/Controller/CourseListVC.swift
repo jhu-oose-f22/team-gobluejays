@@ -47,7 +47,6 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             let db = Firestore.firestore()
             let user = CurrentLoginName.name
-            //let loginName = "thomas"
             db.collection(user).document("scheduleCourses").collection("courses").document(self.tabs[indexPath.row].uuid).delete {
                 err in
                     if let err = err {
@@ -79,7 +78,6 @@ class CourseListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func reload() {
         let db = Firestore.firestore()
         let user = CurrentLoginName.name
-        //let loginName = "thomas"
         db.collection(user).document("scheduleCourses").collection("courses").getDocuments() {
             (QuerySnapshot, err) in
             if let err = err {

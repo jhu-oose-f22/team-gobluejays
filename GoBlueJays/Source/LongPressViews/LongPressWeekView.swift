@@ -9,7 +9,7 @@
 import UIKit
 import JZCalendarWeekView
 
-/// All-Day & Long Press
+// All-Day & Long Press
 class LongPressWeekView: JZLongPressWeekView {
     
     override func registerViewClasses() {
@@ -59,10 +59,8 @@ class LongPressWeekView: JZLongPressWeekView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Call when select specific items
         if let selectedEvent = getCurrentEvent(with: indexPath) as? AllDayEvent {
-            if selectedEvent.type == 0{
+            if selectedEvent.type == 0 || selectedEvent.type == 1{
                 ToastUtil.addDetailPage(cell: selectedEvent)
-            } else{
-                ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title.components(separatedBy: ":")[1])
             }
             self.updateFocusIfNeeded()
            
