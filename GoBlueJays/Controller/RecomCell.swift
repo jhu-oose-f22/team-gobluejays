@@ -35,10 +35,12 @@ class RecomCell: UICollectionViewCell {
         delegate?.cellButtonPressed(actID: activityID)
     }
     
+    // return activityID
     func assign_ID(id: String) {
         activityID = id
     }
     
+    // recommendation cell styling
     func configure() {
         background.layer.cornerRadius = 5
         background.clipsToBounds = true
@@ -49,6 +51,7 @@ class RecomCell: UICollectionViewCell {
         collect.imageView?.contentMode = .scaleAspectFit
     }
     
+    // recommendation button UI
     func button_configure(likes: Bool) {
         if likes == true {
             let config = UIImage.SymbolConfiguration(scale: .small)

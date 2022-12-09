@@ -17,6 +17,7 @@ protocol collectToMainDelegate: AnyObject {
 
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
+    // setup search result vc
     let searchController = UISearchController(searchResultsController: nil)
     weak var delegate: collectToMainDelegate?
     
@@ -83,6 +84,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         }
     }
     
+    // selected cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ActivityCell", for:indexPath) as! ActivityCell
         cell.delegate = self
@@ -91,6 +93,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         let ind2 = indexPath.row * 2 + 1
         var ids : [String] = []
 
+        // fill data
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
@@ -99,6 +102,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.button_configure(likes: filteredCollects[ind1].likes, but: 1)
         ids.append(filteredCollects[ind1].id)
         
+        // assign value if within range
         if (ind2 <= filteredCollects.count-1) {
             cell.img2.isHidden = false
             cell.whiteback2.isHidden = false
@@ -120,16 +124,19 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         return cell
     }
 
+    // search bar empty
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
 
+    // return filter status
     var isFiltering: Bool {
         let searchBarScopeIsFiltering =
             searchController.searchBar.selectedScopeButtonIndex != 0
           return (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
 
+    // reload result when search
     func filterContentForSearchText(searchText: String) {
         if isFiltering {
             if collects.isEmpty {
@@ -148,13 +155,13 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         self.tableView.reloadData()
     }
     
+    // view activity info when press on cell
     func cellButtonPressed(actID: String) {
         delegate?.uncollect(actID: actID)
         let db = Firestore.firestore()
         for (index, activity) in self.collects.enumerated() {
             if activity.id == actID {
                 if activity.likes == false {
-                    //db.collection("activity").document(actID).setData([
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).setData([
                         "category": activity.category,
                         "image": activity.image,
@@ -186,6 +193,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             }
         }
         
+        // reload add num
         for (index, activity) in self.filteredCollects.enumerated() {
             if activity.id == actID {
                 self.filteredCollects[index].likes = !self.filteredCollects[index].likes
@@ -195,6 +203,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         self.tableView.reloadData()
     }
     
+    // tap cell reaction
     func cellTapped(act: ActivityDetailModel, actID: String) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
         
@@ -216,6 +225,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     }
 
 }
+
+// handle search result update
 extension CollectVC: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
       let searchBar = searchController.searchBar
