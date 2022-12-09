@@ -79,7 +79,6 @@
 		2CB79C9928A9E43900744FF8 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB79C9728A9E43900744FF8 /* IconCell.xib */; };
 		2CB9247028E49EB80006967C /* SupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9246F28E49EB80006967C /* SupportVC.swift */; };
 		2CD2536828ED2AF8004C03A6 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */; };
-		2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9277528A1D59000C45293 /* ResultsViewController.swift */; };
 		2CE7909E289F72BE00C3BB2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */; };
 		2CE790A0289F72BE00C3BB2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */; };
 		2CE790A2289F72BE00C3BB2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE790A1289F72BE00C3BB2B /* ViewController.swift */; };
@@ -203,7 +202,6 @@
 		2CB79C9728A9E43900744FF8 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		2CB9246F28E49EB80006967C /* SupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportVC.swift; sourceTree = SOURCE_ROOT; };
 		2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
-		2CD9277528A1D59000C45293 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		2CE7909A289F72BE00C3BB2B /* GoBlueJays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoBlueJays.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE7909D289F72BE00C3BB2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE7909F289F72BE00C3BB2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -422,7 +420,6 @@
 				408D837D2913009D003C034C /* ActivityDetailVC.swift */,
 				2CD2536728ED2AF8004C03A6 /* AddEventViewController.swift */,
 				2CB9246F28E49EB80006967C /* SupportVC.swift */,
-				2CD9277528A1D59000C45293 /* ResultsViewController.swift */,
 				4F8369E72921DA7C00C01550 /* AddCourseVC.swift */,
 				4F8369E52921D58D00C01550 /* CourseListVC.swift */,
 				2CE790CD289F7D8E00C3BB2B /* CustomTabBarController.swift */,
@@ -959,14 +956,12 @@
 				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
 				63C8F3DD291592EA00E9EF2F /* ProfileVC.swift in Sources */,
 				087FC7972909B3E8005A582E /* sortActivity.swift in Sources */,
-				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				4F98422828FE204B009990D4 /* WebViewVC.swift in Sources */,
 				C9CF1C25293586B30038E4CA /* LongPressViewController.swift in Sources */,
 				40923DAC28FE33AF003B15B5 /* ActivityCell.swift in Sources */,
 				40A89A1628F75FE800E3CE60 /* (null) in Sources */,
 				C9CF1C24293586B30038E4CA /* AllDayViewModel.swift in Sources */,
 				C9CF1C23293586B30038E4CA /* LongPressEventCell.swift in Sources */,
-				2CD9277628A1D59000C45293 /* ResultsViewController.swift in Sources */,
 				40D07823293CF4E600EA0B6D /* filterVC.swift in Sources */,
 				40923DB128FE33CC003B15B5 /* Activity.swift in Sources */,
 				C9CF1C27293586B30038E4CA /* EventCell.swift in Sources */,

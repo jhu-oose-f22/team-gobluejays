@@ -103,6 +103,39 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
+        let url = URL(string: filteredCollects[ind1].image)
+        if let url = url {
+            let group = DispatchGroup()
+            group.enter()
+            let task = URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                if let data = data {
+                    do {
+                        let data = String(data: data, encoding: .utf8)
+                        if let data = data {
+                            let doc = try SwiftSoup.parse(data)
+                            let image_url = try
+                            doc.getElementsByClass("img-responsive").first()
+                            if let image_url = image_url {
+                                try self.filteredCollects[ind1].image = image_url.attr("src")
+                            } else {
+                                self.filteredCollects[ind1].image = self.default_images[Int.random(in: 0..<3)]
+                            }
+                        } else {
+                            self.filteredCollects[ind1].image = self.default_images[Int.random(in: 0..<3)]
+                        }
+                    } catch {}
+                    group.leave()
+                }
+            }
+            DispatchQueue.global().async {
+                task.resume()
+            }
+            group.wait()
+        } else {
+            self.filteredCollects[ind1].image = self.default_images[Int.random(in: 0..<3)]
+        }
+        
         let url1 = URL(string: filteredCollects[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredCollects[ind1].likes, but: 1)

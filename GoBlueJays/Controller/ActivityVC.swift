@@ -854,9 +854,11 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-
+        
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! RecomCell
         let act = recact[indexPath.row]
-        let actdetail = ActivityDetailModel(title: act.title, date: act.time, time: act.time, location: act.location, host: act.host, cost: act.cost, detail: act.detail, image: UIImage())
+        let tarr = act.time.components(separatedBy: " ")
+        let actdetail = ActivityDetailModel(title: act.title, date: tarr[0], time: tarr[1], location: act.location, host: act.host, cost: act.cost, detail: act.detail, image: selectedCell.image.asImage())
         vc.activity = actdetail
         
         self.present(vc, animated: true, completion: nil)
