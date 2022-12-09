@@ -18,7 +18,6 @@ protocol collectToMainDelegate: AnyObject {
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
     let searchController = UISearchController(searchResultsController: nil)
-    
     weak var delegate: collectToMainDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -54,10 +53,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-
                 for document in QuerySnapshot!.documents {
                     let data = document.data()
-
                     if (data["likes"] as! Bool == true) && (document.documentID.count > 6){
                         let act:Activity = Activity(title: data["title"] as! String,
                                                     time: data["timestamp"] as! String,
@@ -176,9 +173,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                             print("Document successfully written!")
                         }
                     }
-                    // self.collect_ids.append(actID)
                 } else {
-                    //db.collection("activity").document(actID).delete() { err in
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
@@ -186,7 +181,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                             print("Document successfully removed!")
                         }
                     }
-                    //self.collect_ids = collect_ids.filter {$0 != actID}
                 }
                 self.collects[index].likes = !self.collects[index].likes
             }

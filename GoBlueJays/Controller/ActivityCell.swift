@@ -150,7 +150,6 @@ class ActivityCell: UITableViewCell{
 }
 
 extension UIView {
-
     // Using a function since `var image` might conflict with an existing variable
     // (like on `UIImageView`)
     func asImage() -> UIImage {
