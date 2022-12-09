@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
-
+import SwiftSoup
 
 protocol collectToMainDelegate: AnyObject {
     func uncollect(actID: String)
@@ -25,6 +25,12 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
     var collects: [Activity] = []
     var filteredCollects: [Activity] = []
     
+    var default_images = [
+        "https://static1.campusgroups.com/upload/jhu/2022/r3_image_upload_1382318_gilman360x240jpg_62919654.jpeg",
+        "https://static1.campusgroups.com/upload/jhu/2020/r2_image_upload_1367200_JHU_Frontjpg_7162189.jpeg",
+        "https://static1.campusgroups.com/upload/jhu/2021/r3_image_upload_1918390_Apple_thumbnail_117213433.png"
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,6 +110,38 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         
         // assign value if within range
         if (ind2 <= filteredCollects.count-1) {
+            let url = URL(string: filteredCollects[ind2].image)
+            if let url = url {
+                let group = DispatchGroup()
+                group.enter()
+                let task = URLSession.shared.dataTask(with: url) {
+                    (data, response, error) in
+                    if let data = data {
+                        do {
+                            let data = String(data: data, encoding: .utf8)
+                            if let data = data {
+                                let doc = try SwiftSoup.parse(data)
+                                let image_url = try
+                                doc.getElementsByClass("img-responsive").first()
+                                if let image_url = image_url {
+                                    try self.filteredCollects[ind2].image = image_url.attr("src")
+                                } else {
+                                    self.filteredCollects[ind2].image = self.default_images[Int.random(in: 0..<3)]
+                                }
+                            } else {
+                                self.filteredCollects[ind2].image = self.default_images[Int.random(in: 0..<3)]
+                            }
+                        } catch {}
+                        group.leave()
+                    }
+                }
+                DispatchQueue.global().async {
+                    task.resume()
+                }
+                group.wait()
+            } else {
+                self.filteredCollects[ind2].image = self.default_images[Int.random(in: 0..<3)]
+            }
             cell.img2.isHidden = false
             cell.whiteback2.isHidden = false
             cell.location2.text = filteredCollects[ind2].location
