@@ -51,11 +51,9 @@ class ActivityCell: UITableViewCell{
         let db = Firestore.firestore()
         if collect.tag == 0 {
             button_configure(likes: true, but: 1)
-            // db.collection("activity").document(activityID[0]).updateData(["likes" : true])
             print("liked")
         } else {
             button_configure(likes: false, but: 1)
-            // db.collection("activity").document(activityID[0]).updateData(["likes" : false])
             print("unliked")
         }
         delegate?.cellButtonPressed(actID: activityID[0])
@@ -65,10 +63,8 @@ class ActivityCell: UITableViewCell{
         let db = Firestore.firestore()
         if collect2.tag == 0 {
             button_configure(likes: true, but: 2)
-            // db.collection("activity").document(activityID[1]).updateData(["likes" : true])
         } else {
             button_configure(likes: false, but: 2)
-            // db.collection("activity").document(activityID[1]).updateData(["likes" : false])
         }
         delegate?.cellButtonPressed(actID: activityID[1])
     }
@@ -157,7 +153,6 @@ class ActivityCell: UITableViewCell{
 }
 
 extension UIView {
-
     // Using a function since `var image` might conflict with an existing variable
     // (like on `UIImageView`)
     func asImage() -> UIImage {
