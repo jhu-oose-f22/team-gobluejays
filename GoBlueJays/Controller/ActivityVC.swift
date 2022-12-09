@@ -2,7 +2,7 @@
 //  ActivityVC.swift
 //  GoBlueJays
 //
-//  Created by 刘忻岩 on 10/7/22.
+//  Created by Heed Liu on 10/7/22.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ protocol activityTableDelegate: AnyObject {
 }
 
 class ActivityVC: UIViewController{
+    // Interface variables
     @IBOutlet weak var category_btn: UIButton!
     @IBOutlet weak var nearby: UIButton!
     @IBOutlet weak var upcoming: UIButton!
@@ -28,31 +29,10 @@ class ActivityVC: UIViewController{
     @IBOutlet weak var top_btn: UIButton!
     @IBOutlet weak var filter_btn: UIButton!
     
+    // General variables
     let searchController = UISearchController(searchResultsController: nil)
     var timer = Timer()
     var counter = 0
-
-    var collect_ids: [String] = []
-    var activities: [Activity] = []
-    var filteredActivities: [Activity] = []
-//    var filteredActivitiesPrep: [Activity] = []
-    var filterInfo = [String]()
-    var sortedActivites: [Activity] = []
-    var sortedAct2: [Activity] = []
-    var searchKeyword = ""
-    
-    var allCategories: [String] = []
-    var currentFilterCategory = "Choose a category"
-    var currentFilterRank = "Rank by ..."
-    
-    var recact: [Activity] = []
-    var recact_slogan: [String] = []
-    let activityRecommend_dist_max: Int = 3;
-    var recommendActivities_dist: [Activity] = []
-    let activityRecommend_type_max: Int = 3;
-    var recommendActivities_type: [Activity] = []
-    var likes_tags: [String] = []
-    
     var buildingLocations: [BuildingLocation] = []
     var latitude: CLLocationDegrees = 39.0;
     var longitude: CLLocationDegrees = -76.0;
@@ -62,19 +42,44 @@ class ActivityVC: UIViewController{
         "https://static1.campusgroups.com/upload/jhu/2021/r3_image_upload_1918390_Apple_thumbnail_117213433.png"
     ]
 
+    // Display and search variables
+    var collect_ids: [String] = []
+    var activities: [Activity] = []
+    var filteredActivities: [Activity] = []
+    var filterInfo = [String]()
+    var searchKeyword = ""
+    
+    // Filter variables
+    var allCategories: [String] = []
+    var currentFilterCategory = "Choose a category"
+    var currentFilterRank = "Rank by ..."
+    var sortedActivites: [Activity] = []
+    var sortedAct2: [Activity] = []
+    
+    // Recommendation variables
+    var recact: [Activity] = []
+    var recact_slogan: [String] = []
+    let activityRecommend_dist_max: Int = 3;
+    var recommendActivities_dist: [Activity] = []
+    let activityRecommend_type_max: Int = 3;
+    var recommendActivities_type: [Activity] = []
+    var likes_tags: [String] = []
+    
+    
+    // Load page
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Explore"
 
-        sort_config()
+        // Interface set up
         top_config()
         filter_config()
         table_config()
         search_bar_config()
         rec_config()
 
+        // Pull activities from database
         let db = Firestore.firestore()
-        //db.collection("activity").getDocuments(){ [self]
         db.collection(CurrentLoginName.name).document("activity").collection("act").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
@@ -97,7 +102,6 @@ class ActivityVC: UIViewController{
             let now = Date()
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy/MM/dd HH:mm"
-            
             let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
             let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
                     if let data = data {
@@ -136,6 +140,9 @@ class ActivityVC: UIViewController{
                                 }
                                 if equality[0].lowercased() == "location" {
                                     location = String(equality[1])
+                                    if location == " Sign in to download the location" {
+                                        location = "TBD"
+                                    }
                                 }
                                 if equality[0].lowercased() == "uid" {
                                     id = String(equality[1])
@@ -178,10 +185,10 @@ class ActivityVC: UIViewController{
                             }
                         }
                     }
+                // Activity Loaded, initialize variables
                 self.allCategories = self.allCategories.sorted { $0.lowercased() < $1.lowercased() }
                 self.allCategories.insert("All Category", at: 0)
                 self.filteredActivities = self.activities
-//                self.filteredActivitiesPrep = self.filteredActivities
                 self.setBuildingLocations()
                 self.activity_recommendation()
                 group.leave()
@@ -198,16 +205,19 @@ class ActivityVC: UIViewController{
         
     }
     
+    // Segue to Collection page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? CollectVC {
             destination.delegate = self
         }
     }
     
+    // Button: go back to top table view
     @IBAction func clickTop(_ sender: Any) {
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
     }
     
+    // Button: filter effect
     @IBAction func clickFilter(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "filter") as? filterVC {
             vc.delegate = self
@@ -218,114 +228,15 @@ class ActivityVC: UIViewController{
        }
     }
     
-    // MARK: Click Category
-    @IBAction func clickCategory(_ sender: Any) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "category") as? activityFilter {
-                 //informs the Juice ViewController that the restaurant is the delegate
-                   vc.delegate = self
-                   self.navigationController?.pushViewController(vc, animated: true)
-               }
-    }
-    
-    @IBAction func click(_ sender: Any) {
-        if nearby.tag == 0 {
-            sort_by_dist()
-            filteredActivities = sortedActivites
-            self.reloadData()
-            nearby.tag = 1
-            nearby.setTitleColor(UIColor.link, for: .normal)
-            if upcoming.tag == 1 {
-                upcoming.tag = 0
-                upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
-            }
-        } else {
-            filteredActivities = activities
-            self.reloadData()
-            nearby.tag = 0
-            nearby.setTitleColor(UIColor.systemGray3, for: .normal)
-        }
-    }
-    
-    @IBAction func click2(_ sender: Any) {
-        if upcoming.tag == 0 {
-            sort_by_time()
-            filteredActivities = sortedAct2
-            self.reloadData()
-            upcoming.tag = 1
-            upcoming.setTitleColor(UIColor.link, for: .normal)
-            if nearby.tag == 1 {
-                nearby.tag = 0
-                nearby.setTitleColor(UIColor.systemGray3, for: .normal)
-            }
-        } else {
-            filteredActivities = activities
-            self.reloadData()
-            upcoming.tag = 0
-            upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
-        }
-    }
-
-    func getActivities() {
-        // setenv("PYTHON_LIBRARY", "/Users/murphycheng/opt/anaconda3/bin/python/", 1)
-        // print("get activities")
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
-        let url = URL(string: "https://jhu.campusgroups.com/ical/ical_jhu.ics")
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                if let data = data {
-                    let g = String(data: data, encoding: .utf8)
-                    self.activities = []
-                    // parse manually
-                    let components = g!.components(separatedBy: "\r\n\r\n")
-                    for component in components {
-                        let properties = component.components(separatedBy: "\r\n")
-                        var title = ""
-                        var time = ""
-                        var location = ""
-                        var category = ""
-                        var url = ""
-                        for property in properties {
-                            let equality = property.split(separator: ":")
-                            if equality.isEmpty {
-                                break
-                            }
-                            if equality[0] == "BEGIN" && equality[1] != "VEVENT" {
-                                continue
-                            }
-                            if equality[0].lowercased() == "summary;encoding=quoted-printable" {
-                                title = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "dtstart" {
-                                time = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "categories;x-cg-category=event_type" {
-                                category = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "location" {
-                                location = String(equality[1])
-                            }
-                            if equality[0].lowercased() == "url" {
-                                url = String(equality[1] + ":" + equality[2])
-                            }
-                        }
-                        // print("append!", title, location, category)
-                        self.activities.append(Activity(title: title, time: "time", location: location, image: url, likes: false, id: "", category: category, host:"", cost: "", detail:""))
-                    }
-                    // print(self.activities)
-                }
-        }
-        task.resume()
-        //let g = String.init(requests.get("https://jhu.campusgroups.com/ical/ical_jhu.ics").content)
-        
-    }
-    
+    // sort all activities by distance
     func sort_by_dist() {
+        // reinitialize activities
         sortedActivites = []
         recommendActivities_dist = []
         
+        // obtain user location
         if !CLLocationManager.headingAvailable() {
             print("Warning: Location is not available")
-            //return
         } else {
             let locationManager = CLLocationManagerCreator.getLocationManager()
             locationManager.requestWhenInUseAuthorization()
@@ -338,11 +249,12 @@ class ActivityVC: UIViewController{
         for activity in activities {
             filtered_activities.append(sortActivity(activity: activity, location: getPlaceLocationFromName(place: activity.location)))
         }
-        
+        // sort by distance
         filtered_activities = filtered_activities.sorted(by: {
             return distance(lo: $0.location.longitude, la: $0.location.latitude) < distance(lo: $1.location.longitude, la: $1.location.longitude)
         })
         
+        // Extract recommended activites from sort result
         var common_info: [String] = []
         let currentDate = Date()
         var dateComponent = DateComponents()
@@ -356,6 +268,7 @@ class ActivityVC: UIViewController{
             if activity.location.latitude != 0.0 && activity.location.longitude != 0.0 {
                 let info = activity.activity.title + activity.activity.location
                 let t = formatter.date(from: activity.activity.time)!
+                // exclude if time far or similar activity already recommended
                 if (common_info.contains(info) == false) && (t<futureDate) {
                     recommendActivities_dist.append(activity.activity)
                     common_info.append(info)
@@ -364,6 +277,7 @@ class ActivityVC: UIViewController{
         }
     }
     
+    // sort all activities by time
     func sort_by_time() {
         var times: [Date] = []
         let now = Date()
@@ -375,7 +289,7 @@ class ActivityVC: UIViewController{
                 times.append(timestp)
             }
         }
-        
+    
         sortedAct2 = activities
         let combined = zip(times, sortedAct2).sorted {$0.0 < $1.0}
         let aftertimes = combined.filter {$0.0 > now}
@@ -387,34 +301,22 @@ class ActivityVC: UIViewController{
         self.tableView.reloadData()
         self.recomCollection.reloadData()
     }
-    
+}
+
+// Interface Configuration
+extension ActivityVC {
+    // filter button
     func filter_config() {
         filter_btn.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
         filter_btn.setTitle("Filter", for: .normal)
         filter_btn.setTitleColor(UIColor.systemGray3, for: .normal)
-    }
-    
-    func sort_config() {
-        nearby.tag = 0
-        upcoming.tag = 0
-        category_btn.tag = 0
-        nearby.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
-        nearby.setTitle("Nearby", for: .normal)
-        nearby.setTitleColor(UIColor.systemGray3, for: .normal)
-        
-        upcoming.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
-        upcoming.setTitle("Upcoming", for: .normal)
-        upcoming.setTitleColor(UIColor.systemGray3, for: .normal)
-        
-        category_btn.titleLabel?.font = UIFont.systemFont(ofSize: 10.0)
-        category_btn.setTitle("Category", for: .normal)
-        category_btn.setTitleColor(UIColor.systemGray3, for: .normal)
         
         category_btn.isHidden = true
         nearby.isHidden = true
         upcoming.isHidden = true
     }
     
+    // top button
     func top_config() {
         let config = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "arrow.up", withConfiguration: config)
@@ -424,6 +326,7 @@ class ActivityVC: UIViewController{
         top_btn.tintColor = .systemGray3
     }
     
+    // tableview
     func table_config() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -431,20 +334,20 @@ class ActivityVC: UIViewController{
         tableView.separatorStyle = .none
     }
     
+    // search bar
     func search_bar_config() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
-//        searchController.searchBar.showsScopeBar = true
-//        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
         definesPresentationContext = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.sizeToFit()
     }
     
+    // carousel
     func rec_config() {
         recomCollection.delegate = self
         recomCollection.dataSource = self
@@ -471,10 +374,12 @@ class ActivityVC: UIViewController{
     }
 }
 
-// MARK: Filter effect
+// Filter effect
 extension ActivityVC: userFilterDelegate {
+    // get filter result from filter page
     func returnFilter(category: String, rank: String) {
         if category == "reset" && rank == "reset" {
+            // set to default value
             currentFilterCategory = "Choose a category"
             currentFilterRank = "Rank by ..."
             filteredActivities = activities
@@ -490,10 +395,12 @@ extension ActivityVC: userFilterDelegate {
                 sort_by_dist()
                 filteredActivities = sortedActivites
             }
+            // filter by category
             if category != "All Category" {
                 filteredActivities = filteredActivities.filter { $0.category==category }
             }
             
+            // sync with ongoing search
             if self.searchKeyword != "" {
                 filteredActivities = filteredActivities.filter { (activity: Activity) -> Bool in
                     let searchTextMatch = activity.title.lowercased().contains(self.searchKeyword.lowercased())
@@ -531,6 +438,7 @@ extension ActivityVC {
                 if collect_ids.contains(new_id) {
                     continue
                 }
+                // if an activity is recommended by both distance and preference
                 if in_actid.contains(new_id) {
                     let index = in_actid.firstIndex(of: recommendActivities_type[i].id)
                     recact_slogan[index!] = recact_slogan[index!].replacingOccurrences(of: "!", with: "", options: NSString.CompareOptions.literal, range:nil) + " and you might like!"
@@ -542,6 +450,7 @@ extension ActivityVC {
         }
     }
     
+    // recommend by event type
     func activity_rec_by_type() {
         let currentDate = Date()
         var dateComponent = DateComponents()
@@ -560,18 +469,13 @@ extension ActivityVC {
             let t = act.category
             let time = formatter.date(from: act.time)!
             let info = act.title + act.location
+            // exclude if time far or similar already recommended
             if likes_tags.contains(t) && time < futureDate && common_info.contains(info) == false {
                 let v = wgts[t]
+                // weighting algorithm
                 val += pow(Double(v!),Double(v!))
                 common_info.append(info)
             }
-//            for t in act.tags {
-//                if likes_tags.contains(t) {
-//                    let v = wgts[t]
-//                    val += pow(Double(v!),Double(v!))
-//                }
-//            }
-//            weights.append(val/Double(act.tags.count))
             weights.append(val)
         }
         
@@ -669,17 +573,17 @@ extension ActivityVC {
     }
 }
 
+// Activity & Collect Page Delegate
 extension ActivityVC: collectToMainDelegate {
+    // if uncollect from collect page
     func uncollect(actID: String) {
         for (index, activity) in self.activities.enumerated() {
             if activity.id == actID {
                 if activity.likes == false {
                     self.collect_ids.append(actID)
                 } else {
-                    print("deleting!")
                     self.collect_ids = collect_ids.filter {$0 != actID}
                 }
-                print("updating!")
                 self.activities[index].likes = !self.activities[index].likes
             }
         }
@@ -700,18 +604,10 @@ extension ActivityVC: collectToMainDelegate {
     }
 }
 
+// Detail Delegate
 extension ActivityVC: activityTableDelegate {
-//    func cellTapped(act: ActivityDetailModel) {
-//        print("got to here")
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-//        vc.activity = act
-//        self.present(vc, animated: true, completion: nil)
-//    }
-    
     func cellTapped(act: ActivityDetailModel, actID: String) {
-        print("got to here")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        
         var actdetail = act
         for a in self.activities {
             if a.id == actID {
@@ -734,7 +630,6 @@ extension ActivityVC: activityTableDelegate {
         for (index, activity) in self.activities.enumerated() {
             if activity.id == actID {
                 if activity.likes == false {
-                    //db.collection("activity").document(actID).setData([
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).setData([
                         "category": activity.category,
                         "image": activity.image,
@@ -755,7 +650,6 @@ extension ActivityVC: activityTableDelegate {
                     }
                     self.collect_ids.append(actID)
                 } else {
-                    //db.collection("activity").document(actID).delete() { err in
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
@@ -786,6 +680,7 @@ extension ActivityVC: activityTableDelegate {
     }
 }
 
+// Table View
 extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (filteredActivities.count % 2 == 0){
@@ -806,18 +701,17 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.location.text = filteredActivities[ind1].location
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
-        // cell.ActivityImage.image = UIImage(named: filteredActivities[ind1].image)
-        // cell.loadImageFrom(urlAddress: filteredActivities[ind1].image, right: true)
-            let url = URL(string: filteredActivities[ind1].image)
-            if let url = url {
-                let group = DispatchGroup()
-                group.enter()
-                let task = URLSession.shared.dataTask(with: url) {
-                    (data, response, error) in
-                    if let data = data {
-                        do {
-                            let data = String(data: data, encoding: .utf8)
-                            let doc = try SwiftSoup.parse(data!)
+        let url = URL(string: filteredActivities[ind1].image)
+        if let url = url {
+            let group = DispatchGroup()
+            group.enter()
+            let task = URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                if let data = data {
+                    do {
+                        let data = String(data: data, encoding: .utf8)
+                        if let data = data {
+                            let doc = try SwiftSoup.parse(data)
                             let image_url = try
                             doc.getElementsByClass("img-responsive").first()
                             if let image_url = image_url {
@@ -825,23 +719,26 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
                             } else {
                                 self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
                             }
-                        } catch {}
-                        group.leave()
-                    }
+                        } else {
+                            self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
+                        }
+                    } catch {}
+                    group.leave()
                 }
-                DispatchQueue.global().async {
-                    task.resume()
-                }
-                group.wait()
-                delete group
-            } else {
-                self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
             }
+            DispatchQueue.global().async {
+                task.resume()
+            }
+            group.wait()
+        } else {
+            self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
+        }
         let url1 = URL(string: filteredActivities[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
         ids.append(filteredActivities[ind1].id)
         
+        // second column in table view
         if (ind2 <= filteredActivities.count-1) {
             let url = URL(string: filteredActivities[ind2].image)
             if let url = url {
@@ -852,11 +749,15 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
                     if let data = data {
                         do {
                             let data = String(data: data, encoding: .utf8)
-                            let doc = try SwiftSoup.parse(data!)
-                            let image_url = try
-                            doc.getElementsByClass("img-responsive").first()
-                            if let image_url = image_url {
-                                try self.filteredActivities[ind2].image = image_url.attr("src")
+                            if let data = data {
+                                let doc = try SwiftSoup.parse(data)
+                                let image_url = try
+                                doc.getElementsByClass("img-responsive").first()
+                                if let image_url = image_url {
+                                    try self.filteredActivities[ind2].image = image_url.attr("src")
+                                } else {
+                                    self.filteredActivities[ind2].image = self.default_images[Int.random(in: 0..<3)]
+                                }
                             } else {
                                 self.filteredActivities[ind2].image = self.default_images[Int.random(in: 0..<3)]
                             }
@@ -876,8 +777,6 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             cell.location2.text = filteredActivities[ind2].location
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
-            // cell.ActivityImage2.image = UIImage(named: filteredActivities[ind2].image)
-            // cell.loadImageFrom(urlAddress: filteredActivities[ind2].image, right: false)
             let url2 = URL(string: filteredActivities[ind2].image)
             cell.ActivityImage2.kf.setImage(with: url2)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
@@ -892,16 +791,10 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        //let act = ActivityDetailModel(title: "Temp", date: "Temp", time: "Temp", location: "Temp", host: "Temp", cost: "Temp", detail: "Temp", id: "Temp")
-        
-        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivityDetailView") as! ActivityDetail
-        //vc.activity = act
-        //self.present(vc, animated: true, completion: nil)
     }
-    
 }
 
-// MARK: - Zaiwei
+// Search bar
 extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -951,6 +844,7 @@ extension ActivityVC: UISearchBarDelegate, userDidFilterDelegate {
         self.reloadData()
     }
 }
+
 extension ActivityVC: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
       let searchBar = searchController.searchBar
@@ -959,6 +853,7 @@ extension ActivityVC: UISearchResultsUpdating {
   }
 }
 
+// CollectionView
 extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recact.count
@@ -986,7 +881,6 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.location.text = recact[index].location
         cell.title.text = recact[index].title
         cell.time.text = recact[index].time
-        // cell.image.image = UIImage(named: recact[index].image)
         let url = URL(string: recact[index].image)
         if let url = url {
             let group = DispatchGroup()
@@ -996,11 +890,15 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
                 if let data = data {
                     do {
                         let data = String(data: data, encoding: .utf8)
-                        let doc = try SwiftSoup.parse(data!)
-                        let image_url = try
-                        doc.getElementsByClass("img-responsive").first()
-                        if let image_url = image_url {
-                            try self.recact[index].image = image_url.attr("src")
+                        if let data = data {
+                            let doc = try SwiftSoup.parse(data)
+                            let image_url = try
+                            doc.getElementsByClass("img-responsive").first()
+                            if let image_url = image_url {
+                                try self.recact[index].image = image_url.attr("src")
+                            } else {
+                                self.recact[index].image = self.default_images[Int.random(in: 0..<3)]
+                            }
                         } else {
                             self.recact[index].image = self.default_images[Int.random(in: 0..<3)]
                         }
@@ -1025,6 +923,7 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
+// CollectionView
 extension ActivityVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

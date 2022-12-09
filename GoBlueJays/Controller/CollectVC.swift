@@ -18,10 +18,8 @@ protocol collectToMainDelegate: AnyObject {
 class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, activityTableDelegate {
 
     let searchController = UISearchController(searchResultsController: nil)
-    
     weak var delegate: collectToMainDelegate?
-    
-//    static weak var shared: CollectVC?
+
     
     @IBOutlet weak var tableView: UITableView!
     var collects: [Activity] = []
@@ -42,32 +40,21 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .none
-//        searchController.searchBar.showsScopeBar = true
-//        searchController.searchBar.scopeButtonTitles = ["All", "Sports", "Academics", "Life"]
         searchController.searchBar.delegate = self
         definesPresentationContext = true
-        // searchBar.delegate = self
-
-        //navigationController?.navigationBar.tintColor = .accentColor
         
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         
         let db = Firestore.firestore()
-        //db.collection("activity").getDocuments(){ [self]
         db.collection(CurrentLoginName.name).document("activity").collection("act").getDocuments(){ [self]
             (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-//                let formatter = DateFormatter()
-//                formatter.dateFormat = "EEE MMM dd, yyyy hh:mm a"
                 for document in QuerySnapshot!.documents {
                     let data = document.data()
-//                    let timep = data["timestamp"] as! String
-//                    let timec = formatter.date(from: timep) as! Date
-                    
                     if (data["likes"] as! Bool == true) && (document.documentID.count > 6){
                         let act:Activity = Activity(title: data["title"] as! String,
                                                     time: data["timestamp"] as! String,
@@ -79,7 +66,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                                                     host: data["host"] as! String,
                                                     cost: data["cost"] as! String,
                                                     detail: data["detail"] as! String)
-//                        tags: (data["tags"] as! NSArray) as! [String]
                         self.collects.append(act)
                     }
                 }
@@ -108,11 +94,8 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
-        // cell.ActivityImage.image = UIImage(named: filteredCollects[ind1].image)
-        // cell.loadImageFrom(urlAddress: filteredCollects[ind1].image, right: true)
         let url1 = URL(string: filteredCollects[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
-//        cell.collect.isHidden = true
         cell.button_configure(likes: filteredCollects[ind1].likes, but: 1)
         ids.append(filteredCollects[ind1].id)
         
@@ -122,13 +105,10 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             cell.location2.text = filteredCollects[ind2].location
             cell.Title2.text = filteredCollects[ind2].title
             cell.time2.text = filteredCollects[ind2].time
-            // cell.ActivityImage2.image = UIImage(named: filteredCollects[ind2].image)
-            // cell.loadImageFrom(urlAddress: filteredCollects[ind2].image, right: false)
             let url2 = URL(string: filteredCollects[ind2].image)
             cell.ActivityImage2.kf.setImage(with: url2)
             ids.append(filteredCollects[ind2].id)
             cell.button_configure(likes: filteredCollects[ind2].likes, but: 2)
-//            cell.collect2.isHidden = true
         }
         else {
             cell.img2.isHidden = true
@@ -193,9 +173,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                             print("Document successfully written!")
                         }
                     }
-                    // self.collect_ids.append(actID)
                 } else {
-                    //db.collection("activity").document(actID).delete() { err in
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
@@ -203,7 +181,6 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                             print("Document successfully removed!")
                         }
                     }
-                    //self.collect_ids = collect_ids.filter {$0 != actID}
                 }
                 self.collects[index].likes = !self.collects[index].likes
             }
