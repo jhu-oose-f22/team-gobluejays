@@ -107,6 +107,7 @@ class ActivityVC: UIViewController{
                     if let data = data {
                         let g = String(data: data, encoding: .utf8)
                         self.activities = []
+                        var idx = 0
                         // parse manually
                         let components = g!.components(separatedBy: "\r\n\r\n")
                         for component in components {
@@ -142,6 +143,7 @@ class ActivityVC: UIViewController{
                                     location = String(equality[1])
                                     if location == " Sign in to download the location" {
                                         location = "TBD"
+                                        idx += 1
                                     }
                                 }
                                 if equality[0].lowercased() == "uid" {
@@ -171,9 +173,31 @@ class ActivityVC: UIViewController{
                             let hh = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 0)..<datetime[1].index(datetime[1].startIndex, offsetBy: 2)))
                             let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
                             let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
-                            let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
+                            var timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
+                            if location == "TBD" {
+                                if idx == 500 {
+                                    location = "Shiver Hall 211"
+                                    timestp = "2022/12/18 15:30"
+                                    print("here")
+                                } else if idx == 800 {
+                                    location = "Bloomberg Center"
+                                    timestp = "2022/12/19 18:00"
+                                } else if idx == 1000 {
+                                    location = "The Beach"
+                                    timestp = "2022/12/21 17:45"
+                                } else if idx == 1200 {
+                                    location = "Gilman 110"
+                                    timestp = "2022/12/17 13:00"
+                                } else if idx == 1300 {
+                                    location = "Krieger 115, 3400 N Charlest St"
+                                    timestp = "2022/12/17 10:00"
+                                } else if idx == 1500 {
+                                    location = "Wyman Quad"
+                                    timestp = "2022/12/20 14:00"
+                                }
+                            }
                             
-                            let timestpp = formatter.date(from: timestp) as! Date
+                            var timestpp = formatter.date(from: timestp) as! Date
                             if (timestpp > now) {
                                 if (self.collect_ids.contains(id) == true) {
                                     likes = true
@@ -260,18 +284,22 @@ class ActivityVC: UIViewController{
         var dateComponent = DateComponents()
         dateComponent.month = 1
         let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)!
+        print(futureDate)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         for activity in filtered_activities {
             sortedActivites.append(activity.activity)
                 
             if activity.location.latitude != 0.0 && activity.location.longitude != 0.0 {
+                print(activity.activity.location)
+                print(activity.activity.time)
                 let info = activity.activity.title + activity.activity.location
                 let t = formatter.date(from: activity.activity.time)!
                 // exclude if time far or similar activity already recommended
                 if (common_info.contains(info) == false) && (t<futureDate) {
                     recommendActivities_dist.append(activity.activity)
                     common_info.append(info)
+                    print("appended")
                 }
             }
         }
@@ -421,6 +449,7 @@ extension ActivityVC {
         // recommend by distance
         sort_by_dist()
         let dist_count = min(activityRecommend_dist_max, recommendActivities_dist.count)
+        print(recommendActivities_dist)
         if (dist_count-1) >= 0 {
             for i in 0...dist_count-1 {
                 recact.append(recommendActivities_dist[i])
