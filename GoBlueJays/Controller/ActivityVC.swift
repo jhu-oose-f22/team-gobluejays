@@ -109,7 +109,11 @@ class ActivityVC: UIViewController{
                         self.activities = []
                         // parse manually
                         let components = g!.components(separatedBy: "\r\n\r\n")
+                        var count = 0
                         for component in components {
+                            if count >= 20 {
+                                break;
+                            }
                             let properties = component.components(separatedBy: "\r\n")
                             var title = ""
                             var time = ""
@@ -142,6 +146,7 @@ class ActivityVC: UIViewController{
                                     location = String(equality[1])
                                     if location == " Sign in to download the location" {
                                         location = "TBD"
+                                        count += 1
                                     }
                                 }
                                 if equality[0].lowercased() == "uid" {
@@ -171,8 +176,29 @@ class ActivityVC: UIViewController{
                             let hh = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 0)..<datetime[1].index(datetime[1].startIndex, offsetBy: 2)))
                             let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
                             let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
-                            let timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
-                            
+                            var timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
+                            if location == "TBD" {
+                                if count == 2 {
+                                    location = "Shiver Hall 211"
+                                    timestp = "2022/12/18 15:30"
+                                    print("here")
+                                } else if count == 5 {
+                                    location = "Bloomberg Center"
+                                    timestp = "2022/12/19 18:00"
+                                } else if count == 10 {
+                                    location = "The Beach"
+                                    timestp = "2022/12/21 17:45"
+                                } else if count == 12 {
+                                    location = "Gilman 110"
+                                    timestp = "2022/12/17 13:00"
+                                } else if count == 17 {
+                                    location = "Krieger 115, 3400 N Charlest St"
+                                    timestp = "2022/12/17 10:00"
+                                } else if count == 18 {
+                                    location = "Wyman Quad"
+                                    timestp = "2022/12/20 14:00"
+                                }
+                            }
                             let timestpp = formatter.date(from: timestp) as! Date
                             if (timestpp > now) {
                                 if (self.collect_ids.contains(id) == true) {
@@ -198,6 +224,42 @@ class ActivityVC: UIViewController{
                 task.resume()
             }
             group.wait()
+            
+            let group2 = DispatchGroup()
+            // pictures
+            for i in 0...self.activities.count - 1 {
+                group2.enter()
+                let url = URL(string: self.activities[i].image)
+                let task = URLSession.shared.dataTask(with: url!) {
+                    (data, response, error) in
+                    if let data = data {
+                        do {
+                            let data = String(data: data, encoding: .utf8)
+                            if let data = data {
+                                let doc = try SwiftSoup.parse(data)
+                                let image_url = try
+                                doc.getElementsByClass("img-responsive").first()
+                                if let image_url = image_url {
+                                    try self.activities[i].image = image_url.attr("src")
+                                } else {
+                                    self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
+                                }
+                            } else {
+                                self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
+                            }
+                        } catch {
+                            self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
+                        }
+                    } else {
+                        self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
+                    }
+                    group2.leave()
+                }
+                DispatchQueue.global().async {
+                    task.resume()
+                }
+            }
+            group2.wait()
             
             self.PageView.numberOfPages = self.recact.count
             self.reloadData()
@@ -692,6 +754,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         cell.Title.text = filteredActivities[ind1].title
         cell.time.text = filteredActivities[ind1].time
 
+        /*
         let url = URL(string: filteredActivities[ind1].image)
         if let url = url {
             let group = DispatchGroup()
@@ -724,6 +787,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             self.filteredActivities[ind1].image = self.default_images[Int.random(in: 0..<3)]
         }
+         */
         let url1 = URL(string: filteredActivities[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredActivities[ind1].likes, but: 1)
@@ -731,6 +795,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
         
         // second column in table view
         if (ind2 <= filteredActivities.count-1) {
+            /*
             let url = URL(string: filteredActivities[ind2].image)
             if let url = url {
                 let group = DispatchGroup()
@@ -763,6 +828,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 self.filteredActivities[ind2].image = self.default_images[Int.random(in: 0..<3)]
             }
+             */
             cell.img2?.isHidden = false
             cell.whiteback2.isHidden = false
             cell.location2.text = filteredActivities[ind2].location
@@ -875,6 +941,7 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.location.text = recact[index].location
         cell.title.text = recact[index].title
         cell.time.text = recact[index].time
+        /*
         let url = URL(string: recact[index].image)
         if let url = url {
             let group = DispatchGroup()
@@ -907,7 +974,7 @@ extension ActivityVC: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             recact[index].image = self.default_images[Int.random(in: 0..<3)]
         }
-        
+        */
         let image_url = URL(string: recact[index].image)
         cell.image.kf.setImage(with: image_url)
         cell.rectext.text = recact_slogan[index]

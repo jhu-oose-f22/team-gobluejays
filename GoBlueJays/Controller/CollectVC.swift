@@ -103,6 +103,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         cell.location.text = filteredCollects[ind1].location
         cell.Title.text = filteredCollects[ind1].title
         cell.time.text = filteredCollects[ind1].time
+        /*
         let url = URL(string: filteredCollects[ind1].image)
         if let url = url {
             let group = DispatchGroup()
@@ -135,7 +136,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         } else {
             self.filteredCollects[ind1].image = self.default_images[Int.random(in: 0..<3)]
         }
-        
+        */
         let url1 = URL(string: filteredCollects[ind1].image)
         cell.ActivityImage.kf.setImage(with: url1)
         cell.button_configure(likes: filteredCollects[ind1].likes, but: 1)
@@ -143,6 +144,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
         
         // assign value if within range
         if (ind2 <= filteredCollects.count-1) {
+            /*
             let url = URL(string: filteredCollects[ind2].image)
             if let url = url {
                 let group = DispatchGroup()
@@ -175,6 +177,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
             } else {
                 self.filteredCollects[ind2].image = self.default_images[Int.random(in: 0..<3)]
             }
+             */
             cell.img2.isHidden = false
             cell.whiteback2.isHidden = false
             cell.location2.text = filteredCollects[ind2].location
