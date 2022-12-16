@@ -66,7 +66,7 @@ class CollectVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UIT
                         let act:Activity = Activity(title: data["title"] as! String,
                                                     time: data["timestamp"] as! String,
                                                     location: data["location"] as! String,
-                                                    image: data["imageLink"] as! String,
+                                                    image: data["image"] as! String,
                                                     likes: data["likes"] as! Bool,
                                                     id: document.documentID,
                                                     category: data["category"] as! String,

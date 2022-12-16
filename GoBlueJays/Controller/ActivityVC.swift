@@ -111,7 +111,7 @@ class ActivityVC: UIViewController{
                         let components = g!.components(separatedBy: "\r\n\r\n")
                         var count = 0
                         for component in components {
-                            if count >= 20 {
+                            if count >= 50 {
                                 break;
                             }
                             let properties = component.components(separatedBy: "\r\n")
@@ -251,7 +251,6 @@ class ActivityVC: UIViewController{
                     } else {
                         self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
                     }
-                    print("URL ", self.activities[i].image)
                     group2.leave()
                 }
                 DispatchQueue.global().async {
@@ -838,7 +837,6 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
             let url2 = URL(string: filteredActivities[ind2].image)
-            print("URL2, ", url2)
             cell.ActivityImage2.kf.setImage(with: url2)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
