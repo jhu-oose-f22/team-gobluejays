@@ -146,7 +146,7 @@ class ActivityVC: UIViewController{
                                     location = String(equality[1])
                                     if location == " Sign in to download the location" {
                                         location = "TBD"
-                                        count += 1
+                                        
                                     }
                                 }
                                 if equality[0].lowercased() == "uid" {
@@ -177,7 +177,7 @@ class ActivityVC: UIViewController{
                             let mi = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 2)..<datetime[1].index(datetime[1].startIndex, offsetBy: 4)))
                             let ss = String(datetime[1].substring(with: datetime[1].index(datetime[1].startIndex, offsetBy: 4)..<datetime[1].index(datetime[1].startIndex, offsetBy: 6)))
                             var timestp = yyyy + "/" + mo + "/" + dd + " " + hh + ":" + mi
-                            if location == "TBD" {
+                            if true {
                                 if count == 2 {
                                     location = "Shiver Hall 211"
                                     timestp = "2022/12/18 15:30"
@@ -201,6 +201,7 @@ class ActivityVC: UIViewController{
                             }
                             let timestpp = formatter.date(from: timestp) as! Date
                             if (timestpp > now) {
+                                count += 1
                                 if (self.collect_ids.contains(id) == true) {
                                     likes = true
                                 }
@@ -214,9 +215,6 @@ class ActivityVC: UIViewController{
                 // Activity Loaded, initialize variables
                 self.allCategories = self.allCategories.sorted { $0.lowercased() < $1.lowercased() }
                 self.allCategories.insert("All Category", at: 0)
-                self.filteredActivities = self.activities
-                self.setBuildingLocations()
-                self.activity_recommendation()
                 group.leave()
             }
             
@@ -253,6 +251,7 @@ class ActivityVC: UIViewController{
                     } else {
                         self.activities[i].image = self.default_images[Int.random(in: 0..<3)]
                     }
+                    print("URL ", self.activities[i].image)
                     group2.leave()
                 }
                 DispatchQueue.global().async {
@@ -260,6 +259,10 @@ class ActivityVC: UIViewController{
                 }
             }
             group2.wait()
+            
+            self.filteredActivities = self.activities
+            self.setBuildingLocations()
+            self.activity_recommendation()
             
             self.PageView.numberOfPages = self.recact.count
             self.reloadData()
@@ -685,7 +688,7 @@ extension ActivityVC: activityTableDelegate {
                     db.collection(CurrentLoginName.name).document("activity").collection("act").document(actID).setData([
                         "category": activity.category,
                         "image": activity.image,
-                        "imageLink": "",
+                        "imageLink": activity.image,
                         "likes": true,
                         "location":activity.location,
                         "timestamp":activity.time,
@@ -835,6 +838,7 @@ extension ActivityVC: UITableViewDelegate, UITableViewDataSource {
             cell.Title2.text = filteredActivities[ind2].title
             cell.time2.text = filteredActivities[ind2].time
             let url2 = URL(string: filteredActivities[ind2].image)
+            print("URL2, ", url2)
             cell.ActivityImage2.kf.setImage(with: url2)
             cell.button_configure(likes: filteredActivities[ind2].likes, but: 2)
             ids.append(filteredActivities[ind2].id)
